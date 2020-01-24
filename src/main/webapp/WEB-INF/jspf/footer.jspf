@@ -1,0 +1,11 @@
+<%--=========================================================================== 
+Footer (bottom area). 
+===========================================================================--%> 
+
+<div id="footer">
+	<div class="container">
+		<div class="row centered">
+			Armadio (Final project, EPAM-KNURE Java Training), 2019
+		</div>
+	</div>
+</div>
