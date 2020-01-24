@@ -18,6 +18,7 @@ public class CommandContainer {
       //  commands.put("viewSettings", new ViewSettingsCommand());
         commands.put("noCommand", new NoCommand());
         commands.put("listProducts", new ProductsCommand());
+        commands.put("itemProducts", new ItemProductsCommand());
 
         // client commands
       //  commands.put("listMenu", new ListMenuCommand());

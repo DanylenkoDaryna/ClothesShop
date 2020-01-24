@@ -14,7 +14,7 @@ public class CatalogueDao implements IDao {
     private ConnectionFactory connectionFactory;
 
     private Connection createConnection() throws DBException {
-        connectionFactory =new ConnectionFactory();
+        connectionFactory = new ConnectionFactory();
         return ConnectionFactory.getInstance().getConnection();
     }
 

@@ -100,6 +100,7 @@ CREATE TABLE statuses(
 INSERT INTO statuses VALUES(0, 'registered');
 INSERT INTO statuses VALUES(1, 'paid');
 INSERT INTO statuses VALUES(2, 'canceled');
+INSERT INTO statuses VALUES(3, 'nonregistered');
 
 
 -- --------------------------------------------------------------
@@ -129,24 +130,24 @@ CREATE TABLE categories(
 -- FOR WOMEN
 -- --------------------------------------------------------------
 
-INSERT INTO categories VALUES(DEFAULT, 1, 'Coats and Jackets'); -- Пальто и куртки
+INSERT INTO categories VALUES(DEFAULT, 1, 'Jackets'); -- куртки
 INSERT INTO categories VALUES(DEFAULT, 1, 'Dresses'); -- Платья
-INSERT INTO categories VALUES(DEFAULT, 1, 'Hoodies and Sweatshirts'); -- Толстовки и Кофты
-INSERT INTO categories VALUES(DEFAULT, 1, 'Jumpers and Cardigans'); -- Джемперы и кардиганы
+INSERT INTO categories VALUES(DEFAULT, 1, 'Sweatshirts'); -- Кофты
+INSERT INTO categories VALUES(DEFAULT, 1, 'Cardigans'); -- кардиганы
 INSERT INTO categories VALUES(DEFAULT, 1, 'Jumpsuits'); -- Комбинезоны
-INSERT INTO categories VALUES(DEFAULT, 1, 'Lingerie and Nightwear'); -- Белье и пижамы
-INSERT INTO categories VALUES(DEFAULT, 1, 'Socks and Tights'); -- Носки и колготки
+INSERT INTO categories VALUES(DEFAULT, 1, 'Lingerie'); -- Белье
+INSERT INTO categories VALUES(DEFAULT, 1, 'Tights'); -- колготки
 
 
 -- FOR MEN
 -- --------------------------------------------------------------
 
-INSERT INTO categories VALUES(DEFAULT, 2, 'Coats and Jackets'); -- Пальто и куртки
-INSERT INTO categories VALUES(DEFAULT, 2, 'Hoodies and Sweatshirts'); -- Толстовки и Кофты
+INSERT INTO categories VALUES(DEFAULT, 2, 'Jackets'); -- куртки
+INSERT INTO categories VALUES(DEFAULT, 2, 'Hoodies'); -- Толстовки
 INSERT INTO categories VALUES(DEFAULT, 2, 'Cardigans'); -- Кардиганы
 INSERT INTO categories VALUES(DEFAULT, 2, 'Jumpers'); -- Джемперы
 INSERT INTO categories VALUES(DEFAULT, 2, 'Socks'); -- Носки
-INSERT INTO categories VALUES(DEFAULT, 2, 'T-Shirts and Polos'); -- Футболки и поло
+INSERT INTO categories VALUES(DEFAULT, 2, 'Polos'); -- Поло
 
 
 -- FOR GIRLS
