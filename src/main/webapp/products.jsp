@@ -91,7 +91,9 @@
                         <div class="card-body text-center">
                             <h5>
                                 <strong>
-                            <a href="controller?command=itemProducts&itemContainer=${product1.getContainer()}" class="dark-grey-text">
+                                    <!--      request.setAttribute("itemContainer",product1.getContainer())
+                            ##<a href="./currentItem.jsp" class="dark-grey-text"> -->
+                            <a href="controller?command=ItemProducts&ItemId=${product1.getId()}" class="dark-grey-text">
                                     ${product1}
                             </a>
                                 </strong>

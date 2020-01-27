@@ -191,9 +191,21 @@ CREATE TABLE items(
 	);
 
 -- --------------------------------------------------------------
-INSERT INTO items VALUES(DEFAULT, 'Бомбер For Friends', 222.44, current_date,'For Friends', 1);
-INSERT INTO items VALUES(DEFAULT, 'Бомбер Licolle', 500.99, current_date,'Licolle', 1);
-INSERT INTO items VALUES(DEFAULT, 'Штаны Moscino', 40.00 , current_date,'Moscino', 4);
+INSERT INTO items VALUES(DEFAULT, 'Bomber For Friends', 222.44, current_date,'For Friends', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Licolle', 500.99, current_date,'Licolle', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket D&G', 59.99, current_date,'D&G', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket D&G', 1059.99, current_date,'D&G', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Gucci', 128.99, current_date,'Gucci', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Moscino', 360.99, current_date,'Moscino', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Drupal', 359.99, current_date,'Drupal', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Programmer', 102.99, current_date,'Programmer', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket ItGuru', 100.99, current_date,'ItGuru', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Summertime', 1030.99, current_date,'Summertime', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Lano', 1500.99, current_date,'Lano', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Cinderella', 600.99, current_date,'Cinderella', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Dunder Mifflin', 400.99, current_date,'DM', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Office', 880.99, current_date,'Office', 1);
+INSERT INTO items VALUES(DEFAULT, 'Shirts Moscino', 40.00 , current_date,'Moscino', 4);
 
 
 -- --------------------------------------------------------------

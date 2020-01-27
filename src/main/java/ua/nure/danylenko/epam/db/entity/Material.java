@@ -19,7 +19,7 @@ public class Material extends Entity{
 
     @Override
     public String toString() {
-        return name + " - " + percent + System.lineSeparator();
+        return name + " - " + percent + "%" + System.lineSeparator();
     }
 
     public String getName() {

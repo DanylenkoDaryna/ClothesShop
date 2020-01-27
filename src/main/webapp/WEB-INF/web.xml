@@ -45,6 +45,22 @@
     <servlet-name>ShowCatalogue</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.gif</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpeg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.png</url-pattern>
+  </servlet-mapping>
 
 
   <!--============================================================
@@ -92,7 +108,7 @@
     </init-param>
     <init-param>
       <param-name>out-of-control</param-name>
-      <param-value>login listProducts</param-value>
+      <param-value>login listProducts ItemProducts</param-value>
     </init-param>
   </filter>
 

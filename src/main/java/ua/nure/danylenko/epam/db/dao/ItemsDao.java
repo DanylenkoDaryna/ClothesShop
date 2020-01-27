@@ -27,6 +27,8 @@ public class ItemsDao implements IDao {
             "(SELECT id FROM categories WHERE name=? and catalogue_id=?);";
     private static final String SQL_FIND_PRODUCTS_BY_ITEM =
             "SELECT * FROM products WHERE item_id=?";
+    private static final String SQL_FIND_PRODUCTS_BY_ITEMID =
+            "SELECT * FROM products WHERE item_id=?";
     private static final String SQL_FIND_MATERIALS_BY_PRODUCT =
             "SELECT * FROM materials WHERE product_id=?";
 
@@ -81,6 +83,34 @@ public class ItemsDao implements IDao {
         }
 
         return items;
+    }
+
+    public List<Product> getProductsByItemId(int itemId) throws DBException {
+        List <Product> products = new ArrayList<>();
+        ResultSet rs = null;
+        Connection con = null;
+
+        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_PRODUCTS_BY_ITEMID)){
+            con = this.createConnection();
+            pstmt.setLong(1, itemId);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Product product = extractProduct(rs);
+                getMaterialsByProduct(con, product);
+                products.add(product);
+            }
+
+        }catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            LOG.error("bbbbbbbb", ex);
+            throw new DBException("bbbbbbbb", ex);
+        }catch (DBException dbex) {
+            LOG.error("bbbbbbbbc", dbex);
+            throw new DBException("bbbbbbbbc", dbex);
+        }finally {
+            ConnectionFactory.close(rs);
+        }
+        return products;
     }
 
     private void getProductsByItem(Connection con, List<Item> items) throws DBException {

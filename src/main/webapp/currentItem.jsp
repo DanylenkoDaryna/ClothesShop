@@ -63,28 +63,79 @@
     </nav>
 </div>
 
-    <c:forEach items="${catalogue.container.keySet()}" var="entry">
-        <div class="dropdown">
-            <button class="dropbtn">${entry}</button>
-            <div class="dropdown-content">
-                <c:forEach items="${catalogue.container.get(entry)}" var="linker">
-                    <a href="controller?command=listProducts&catId=${linker.getCatalogueId()}&clothes=${linker.getName()}">
-                            ${linker.getName()}</a>
-                </c:forEach>
+
+
+<main>
+    <div class="container">
+        <section class="text-center mb-4">
+            <div class="row wow fadeIn">
+                <h1>${sessionScope.ItemsContainer2.get(0)}</h1>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 ">
+                        <img src="img/jacket1.jpg" class="img-fluid" alt="Bomber-img">
+                    </div>
+                    <div class="col-lg-6 col-md-6 ">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Product description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="active">
+                                <td>Brand</td><td>${sessionScope.items.get(0).getBrand()}</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>Price</td><td>${sessionScope.items.get(0).getPrice()} $</td>
+                            </tr>
+                            <tr class="active">
+                                <td>Available items</td>
+                                <td>
+                                <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
+                                    ${ItemProduct.getAvailable()}<t>
+                                </c:forEach>
+                                </td>
+                            </tr>
+                            <tr class="success">
+                                <td>Available size</td>
+                                <td>
+                                    <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
+                                    ${ItemProduct.getBodySize()}<t>
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                            <tr class="info">
+                                <td>Colours</td>
+                                <td>
+                                    <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
+                                        ${ItemProduct.getColour()}
+                                        <t>
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                            <tr class="warning">
+                                <td>Materials</td>
+                                <td>
+                                    <c:forEach items="${sessionScope.ItemsContainer2.get(0).getMaterials()}" var="material">
+                                        ${material.toString()}<t>
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                            <tr class="active">
+                                <td>Release Date</td>
+                                <td> ${sessionScope.items.get(0).getReleaseDate()}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
             </div>
-        </div>
-    </c:forEach>
-    <br>
 
-
-<h1>Item Products</h1>
-<div class="row">
-    <c:forEach items="${sessionScope.itemsContainer}" var="ItemProduct">
-        <div class="col-lg-8">
-                ${ItemProduct.getName()}
-        </div>
-    </c:forEach>
-</div>
+        </section>
+    </div>
+</main>
 
 <!-- footer -->
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
