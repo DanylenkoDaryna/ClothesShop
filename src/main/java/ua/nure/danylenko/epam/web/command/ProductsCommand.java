@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ProductsCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
@@ -40,6 +43,21 @@ public class ProductsCommand extends Command {
             forward = Path.PAGE_ERROR_PAGE;
         }
         session.setAttribute("items", items);
+
+        Map<String,List> filterParameters = itemsService.getDao().getSizesColoursBrands();
+        if (filterParameters == null) {
+            forward = Path.PAGE_ERROR_PAGE;
+        }
+
+        Set<String> colorSorted = new TreeSet<>();
+        colorSorted.addAll(filterParameters.get("colours"));
+        Set<String> brandSorted = new TreeSet<>();
+        brandSorted.addAll(filterParameters.get("brands"));
+
+        session.setAttribute("filterColours", colorSorted);
+        session.setAttribute("filterBrands", brandSorted);
+        session.setAttribute("filterSizes", filterParameters.get("sizes"));
+
         return forward;
     }
 

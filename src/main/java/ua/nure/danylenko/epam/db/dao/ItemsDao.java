@@ -6,13 +6,13 @@ import ua.nure.danylenko.epam.db.entity.Item;
 import ua.nure.danylenko.epam.db.entity.Material;
 import ua.nure.danylenko.epam.db.entity.Product;
 import ua.nure.danylenko.epam.exception.DBException;
+import ua.nure.danylenko.epam.exception.Messages;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ItemsDao implements IDao {
     private ConnectionFactory connectionFactory;
@@ -31,6 +31,9 @@ public class ItemsDao implements IDao {
             "SELECT * FROM products WHERE item_id=?";
     private static final String SQL_FIND_MATERIALS_BY_PRODUCT =
             "SELECT * FROM materials WHERE product_id=?";
+    private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM products";
+    private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
+    private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
 
 
     @Override
@@ -84,6 +87,8 @@ public class ItemsDao implements IDao {
 
         return items;
     }
+
+
 
     public List<Product> getProductsByItemId(int itemId) throws DBException {
         List <Product> products = new ArrayList<>();
@@ -154,6 +159,54 @@ public class ItemsDao implements IDao {
         }
     }
 
+
+    public Map<String,List> getSizesColoursBrands() throws DBException {
+        List<String> colours = new ArrayList<>();
+        List<String> sizes = new ArrayList<>();
+        List<String> brands = new ArrayList<>();
+        Map<String,List> result = new TreeMap<>();
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try{
+            con = this.createConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL_FIND_All_COLOURS);
+            while (rs.next()) {
+                String colour = rs.getString(Fields.PRODUCT_COLOUR);
+                colours.add(colour);
+            }
+            result.put("colours",colours);
+            rs = stmt.executeQuery(SQL_FIND_All_BRANDS);
+            while (rs.next()) {
+                String brand = rs.getString(Fields.ITEM_BRAND);
+                brands.add(brand);
+            }
+            result.put("brands",brands);
+            rs = stmt.executeQuery(SQL_FIND_All_SIZES);
+            while (rs.next()) {
+                String size = rs.getString(Fields.PRODUCT_SIZE);
+                sizes.add(size);
+            }
+            result.put("sizes",sizes);
+            con.commit();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_LOGIN, ex);
+        } finally {
+            ConnectionFactory.close(con, stmt, rs);
+        }
+
+        return result;
+    }
+
+    public List<Product> getCategorySizes(String categoryType, int catalogId){
+        return null;
+    }
+
+    public List<Product> getCategoryBrands(String categoryType, int catalogId){
+        return null;
+    }
 
     private static Item extractItem(ResultSet rs) throws SQLException {
         Item item = new Item();

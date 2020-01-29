@@ -14,8 +14,9 @@
         <%@include file="./css/bootstrap.min.css"%>
         <%@include file="./css/fontawesome.min.css"%>
         <%@include file="./css/main.css"%>
+        <%@include file="./font-awesome-4.7.0/css/font-awesome.min.css"%>
     </style>
-
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
     <title>ARMADIO-shop</title>
 
 </head>
@@ -62,21 +63,65 @@
             </form>
         </div>
     </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+        <a role="button" class="btn btn-outline-primary"
+           href="controller?command=SimpleFilter&filtration=FromAToZ">AZ</a>
+        <a role="button" class="btn btn-outline-secondary"
+           href="controller?command=SimpleFilter&filtration=FromZToA">ZA</a>
+        <a role="button" class="btn btn-outline-success"
+           href="controller?command=SimpleFilter&filtration=LowPriceFirst">$ up</a>
+        <a role="button" class="btn btn-outline-danger"
+           href="controller?command=SimpleFilter&filtration=HighPriceFirst">$ down</a>
+        <a role="button" class="btn btn-outline-warning"
+           href="controller?command=SimpleFilter&filtration=oldFirst">Old collection</a>
+        <a role="button" class="btn btn-outline-info"
+           href="controller?command=SimpleFilter&filtration=newFirst">New collection</a>
+    </nav>
 
-    <h1>Products</h1>
-    <div class="row">
-    <c:forEach items="${sessionScope.items}" var="product">
-    <div class="col-lg-8">
-            ${product}
-            </div>
-    </c:forEach>
-    </div>
-
-</div>
 
 <main>
+    <div class="row">
+        <div class="col-lg-2 col-md-3 ">
+            <section class="text-left">
+                <form>
+                    <div class="form-group">
+                        <h6>Price</h6>
+                        from:
+                        <input type="number" class="form-control-sm" id="InputPriceFrom" placeholder="$">
+                        to:
+                        <input type="number" class="form-control-sm" id="InputPriceTo" placeholder="$">
+                        <br>
+                    </div>
+                    <h6>Size:</h6>
+                    <c:forEach items="${sessionScope.filterSizes}" var="filterSize">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="${filterSize}">
+                            <label class="custom-control-label" for="${filterSize}"> ${filterSize}</label>
+                        </div>
+                    </c:forEach>
+                    <h6>Brand:</h6>
+                    <c:forEach items="${sessionScope.filterBrands}" var="filterBrand">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="${filterBrand}">
+                            <label class="custom-control-label" for="${filterBrand}"> ${filterBrand}</label>
+                        </div>
+                        <br>
+                    </c:forEach>
+                    <h6>Colour:</h6>
+                    <c:forEach items="${sessionScope.filterColours}" var="filterColour">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="${filterColour}">
+                            <label class="custom-control-label" for="${filterColour}"> ${filterColour}</label>
+                        </div>
+                    </c:forEach>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Sort</button>
+                </form>
+            </section>
+         </div>
     <div class="container">
-        <section class="text-center mb-4">
+       <section class="text-center">
+            <h1>Products</h1>
             <div class="row wow fadeIn">
                 <c:forEach items="${sessionScope.items}" var="product1">
                 <div class="col-lg-3 col-md-6">
@@ -98,6 +143,10 @@
                             </a>
                                 </strong>
                             </h5>
+                            <h6 class="font-weight-bold blue-text">
+                                <strong>${product1.getPrice()} $</strong>
+                            </h6>
+                            <h6>Release: ${product1.getReleaseDate()}</h6>
                         </div>
                     </div>
                 </div>
@@ -105,6 +154,7 @@
             </div>
         </section>
     </div>
+</div>
 </main>
 
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
