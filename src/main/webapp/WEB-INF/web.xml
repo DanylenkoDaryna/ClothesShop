@@ -33,6 +33,12 @@
   <servlet>
   <servlet-name>ShowCatalogue</servlet-name>
   <servlet-class>ua.nure.danylenko.epam.web.servlets.ShowCatalogue</servlet-class>
+  <load-on-startup>0</load-on-startup>
+  </servlet>
+
+  <servlet>
+  <servlet-name>HardFilterServlet</servlet-name>
+  <servlet-class>ua.nure.danylenko.epam.web.servlets.HardFilterServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
   </servlet>
 
@@ -45,6 +51,12 @@
     <servlet-name>ShowCatalogue</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>HardFilterServlet</servlet-name>
+    <url-pattern>/HardFilterServlet</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.gif</url-pattern>

@@ -53,10 +53,12 @@ public class ProductsCommand extends Command {
         colorSorted.addAll(filterParameters.get("colours"));
         Set<String> brandSorted = new TreeSet<>();
         brandSorted.addAll(filterParameters.get("brands"));
+        Set<String> sizeSorted = new TreeSet<>();
+        sizeSorted.addAll(filterParameters.get("sizes"));
 
         session.setAttribute("filterColours", colorSorted);
         session.setAttribute("filterBrands", brandSorted);
-        session.setAttribute("filterSizes", filterParameters.get("sizes"));
+        session.setAttribute("filterSizes", sizeSorted);
 
         return forward;
     }

@@ -65,17 +65,17 @@
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
         <a role="button" class="btn btn-outline-primary"
-           href="controller?command=SimpleFilter&filtration=FromAToZ">AZ</a>
+           href="controller?command=SimpleFilter&filtration=FromAToZ&page=products">AZ</a>
         <a role="button" class="btn btn-outline-secondary"
-           href="controller?command=SimpleFilter&filtration=FromZToA">ZA</a>
+           href="controller?command=SimpleFilter&filtration=FromZToA&page=products">ZA</a>
         <a role="button" class="btn btn-outline-success"
-           href="controller?command=SimpleFilter&filtration=LowPriceFirst">$ up</a>
+           href="controller?command=SimpleFilter&filtration=LowPriceFirst&page=products">$ from max</a>
         <a role="button" class="btn btn-outline-danger"
-           href="controller?command=SimpleFilter&filtration=HighPriceFirst">$ down</a>
+           href="controller?command=SimpleFilter&filtration=HighPriceFirst&page=products">$ from min</a>
         <a role="button" class="btn btn-outline-warning"
-           href="controller?command=SimpleFilter&filtration=oldFirst">Old collection</a>
+           href="controller?command=SimpleFilter&filtration=oldFirst&page=products">Old collection</a>
         <a role="button" class="btn btn-outline-info"
-           href="controller?command=SimpleFilter&filtration=newFirst">New collection</a>
+           href="controller?command=SimpleFilter&filtration=newFirst&page=products">New collection</a>
     </nav>
 
 
@@ -83,26 +83,28 @@
     <div class="row">
         <div class="col-lg-2 col-md-3 ">
             <section class="text-left">
-                <form>
+                <form action="HardFilterServlet" method="post">
                     <div class="form-group">
                         <h6>Price</h6>
                         from:
-                        <input type="number" class="form-control-sm" id="InputPriceFrom" placeholder="$">
+                        <input type="number" class="form-control-sm" name="InputPriceFrom" placeholder="$" min=40>
                         to:
-                        <input type="number" class="form-control-sm" id="InputPriceTo" placeholder="$">
+                        <input type="number" class="form-control-sm" name="InputPriceTo" placeholder="$" min=500>
                         <br>
                     </div>
                     <h6>Size:</h6>
                     <c:forEach items="${sessionScope.filterSizes}" var="filterSize">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="${filterSize}">
+                            <input type="checkbox" name="sizes" class="custom-control-input" value="${filterSize}"
+                                   id="${filterSize}">
                             <label class="custom-control-label" for="${filterSize}"> ${filterSize}</label>
                         </div>
                     </c:forEach>
                     <h6>Brand:</h6>
                     <c:forEach items="${sessionScope.filterBrands}" var="filterBrand">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="${filterBrand}">
+                            <input type="checkbox" name="brands" class="custom-control-input"  value="${filterBrand}"
+                                   id="${filterBrand}">
                             <label class="custom-control-label" for="${filterBrand}"> ${filterBrand}</label>
                         </div>
                         <br>
@@ -110,7 +112,8 @@
                     <h6>Colour:</h6>
                     <c:forEach items="${sessionScope.filterColours}" var="filterColour">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="${filterColour}">
+                            <input type="checkbox" name="colours" class="custom-control-input" value="${filterColour}"
+                                   id="${filterColour}">
                             <label class="custom-control-label" for="${filterColour}"> ${filterColour}</label>
                         </div>
                     </c:forEach>

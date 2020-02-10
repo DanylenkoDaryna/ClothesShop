@@ -70,24 +70,13 @@
     <%-- HEADER --%>
     <%-- <%@ include file="/WEB-INF/jspf/header.jspf"%>
    HEADER --%>
-
-    <tr> <p>Welcome to Armadio Internet-shop!</p></tr>
-
-
-    <c:forEach items="${catalogue.container.keySet()}" var="entry">
-        <div class="dropdown">
-            <button class="dropbtn">${entry}</button>
-            <div class="dropdown-content">
-                <c:forEach items="${catalogue.container.get(entry)}" var="linker">
-                    <a href="controller?command=listProducts&catId=${linker.getCatalogueId()}&clothes=${linker.getName()}">
-                            ${linker.getName()}</a>
-                </c:forEach>
+        <main>
+            <div class="row">
+                    <section class="text-center">
+                        <h1>Welcome to Armadio Internet-shop!</h1>
+                    </section>
             </div>
-        </div>
-    </c:forEach>
-    <br>
-
-
+        </main>
 
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 

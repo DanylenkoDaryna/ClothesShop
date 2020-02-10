@@ -4,10 +4,10 @@
 
 SET NAMES utf8;
 
-DROP DATABASE IF EXISTS marketdb;
-CREATE DATABASE marketdb CHARACTER SET utf8 COLLATE utf8_bin;
+DROP DATABASE IF EXISTS armadiodb;
+CREATE DATABASE armadiodb CHARACTER SET utf8 COLLATE utf8_bin;
 
-USE marketdb;
+USE armadiodb;
 -- --------------------------------------------------------------
 -- ROLES
 -- users roles
@@ -222,7 +222,7 @@ CREATE TABLE products(
 
 	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'),
 
-	colour ENUM('red','green','blue', 'white', 'black', 'yellow', 'pink'),
+	colour ENUM('RED','GREEN','BLUE', 'WHITE', 'BLACK', 'YELLOW', 'PINK'),
 
 
 	item_id INTEGER NOT NULL REFERENCES items(id)
@@ -231,9 +231,26 @@ CREATE TABLE products(
 	);
 
 -- --------------------------------------------------------------
-INSERT INTO products VALUES(DEFAULT,'Бомбер For Friends весна', 3, 'L', 'black',1);
-INSERT INTO products VALUES(DEFAULT,'Бомбер For Friends осень', 1, 'S', 'pink', 1);
-INSERT INTO products VALUES(DEFAULT,'Штаны For Friends', 2, 'XL', 'blue', 2);
+INSERT INTO products VALUES(DEFAULT,'Bomber For Friends весна', 3, 'L', 'BLACK',1);
+INSERT INTO products VALUES(DEFAULT,'Bomber For Friends осень', 1, 'S', 'PINK', 1);
+INSERT INTO products VALUES(DEFAULT,'Bomber Licolle Prestigue', 2, 'XL', 'BLUE', 2);
+INSERT INTO products VALUES(DEFAULT,'Jacket D&G classic black', 1, 'L', 'GREEN',3);
+INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'XL', 'PINK', 3);
+INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'L', 'BLUE', 4);
+INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXXL', 'BLACK',5);
+INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXL', 'BLACK',5);
+INSERT INTO products VALUES(DEFAULT,'Bomber Moscino Emo Autumn', 1, 'S', 'PINK', 6);
+INSERT INTO products VALUES(DEFAULT,'Jacket Drupal Selestia', 1, 'XL', 'BLUE', 7);
+INSERT INTO products VALUES(DEFAULT,'Bomber Programmer IT', 1, 'L', 'BLACK',8);
+INSERT INTO products VALUES(DEFAULT,'Jacket ItGuru Junior', 1, 'S', 'PINK', 9);
+INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL', 'YELLOW', 10);
+INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL', 'BLACK', 10);
+INSERT INTO products VALUES(DEFAULT,'Jacket Lano Bo Banano', 1, 'L', 'BLACK',11);
+INSERT INTO products VALUES(DEFAULT,'Bomber Cinderella For Parties', 1, 'L', 'YELLOW', 12);
+INSERT INTO products VALUES(DEFAULT,'Bomber Dunder Mifflin Jim+Pam', 1, 'XL', 'BLUE', 13);
+INSERT INTO products VALUES(DEFAULT,'Jacket Office s3', 1, 'L', 'GREEN',14);
+INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari autumn', 1, 'XXS', 'RED', 16);
+INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari winter is coming', 1, 'XL', 'WHITE', 17);
 
 
 -- --------------------------------------------------------------
@@ -257,6 +274,27 @@ INSERT INTO materials VALUES(DEFAULT, 'cotton', 75, 1);
 INSERT INTO materials VALUES(DEFAULT, 'silk', 25, 1);
 INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 2);
 INSERT INTO materials VALUES(DEFAULT, 'silk',98, 3);
+INSERT INTO materials VALUES(DEFAULT, 'cotton', 75, 3);
+INSERT INTO materials VALUES(DEFAULT, 'silk', 25, 3);
+INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 4);
+INSERT INTO materials VALUES(DEFAULT, 'corduroy',100, 5);
+INSERT INTO materials VALUES(DEFAULT, 'velvet', 65, 6);
+INSERT INTO materials VALUES(DEFAULT, 'silk', 35, 6);
+INSERT INTO materials VALUES(DEFAULT, 'leather ', 100, 7);
+INSERT INTO materials VALUES(DEFAULT, 'denim',100, 8);
+INSERT INTO materials VALUES(DEFAULT, 'linen', 50, 9);
+INSERT INTO materials VALUES(DEFAULT, 'suede', 50, 9);
+INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 10);
+INSERT INTO materials VALUES(DEFAULT, 'silk',100, 11);
+INSERT INTO materials VALUES(DEFAULT, 'cotton', 70, 12);
+INSERT INTO materials VALUES(DEFAULT, 'corduroy', 30, 12);
+INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 13);
+INSERT INTO materials VALUES(DEFAULT, 'velvet', 80, 14);
+INSERT INTO materials VALUES(DEFAULT, 'silk', 20, 14);
+INSERT INTO materials VALUES(DEFAULT, 'linen', 50, 16);
+INSERT INTO materials VALUES(DEFAULT, 'leather', 25, 16);
+INSERT INTO materials VALUES(DEFAULT, 'cotton', 25, 16);
+INSERT INTO materials VALUES(DEFAULT, 'silk',100, 17);
 
 -- --------------------------------------------------------------
 -- test database:

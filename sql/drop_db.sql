@@ -1,1 +1,1 @@
-drop database marketdb;
+drop database armadiodb;
