@@ -43,6 +43,7 @@ public class ProductsCommand extends Command {
             forward = Path.PAGE_ERROR_PAGE;
         }
         session.setAttribute("items", items);
+        //((Product) items.get(1).getContainer().get(0)).getImages().get(0);
 
         Map<String,List> filterParameters = itemsService.getDao().getSizesColoursBrands();
         if (filterParameters == null) {

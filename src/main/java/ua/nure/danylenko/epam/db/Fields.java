@@ -32,7 +32,7 @@ public class Fields {
     public static final String MAERIAL_NAME = "material";
     public static final String MAERIAL_PERCENT = "percent";
 
-
+    public static final String IMAGE_NAME = "img_name";
 
     public static final String MENU_ITEM_PRICE = "price";
     public static final String MENU_ITEM_NAME = "name";

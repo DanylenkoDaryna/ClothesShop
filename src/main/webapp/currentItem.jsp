@@ -18,7 +18,7 @@
         <%@include file="./css/main.css"%>
     </style>
 
-    <title>ARMADIO-shop</title>
+    <title>${sessionScope.ItemsContainer2.get(0)}</title>
 
 </head>
 <body>
@@ -72,7 +72,12 @@
                 <h1>${sessionScope.ItemsContainer2.get(0)}</h1>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 ">
-                        <img src="img/jacket1.jpg" class="img-fluid" alt="Bomber-img">
+                        <c:forEach items="${sessionScope.ItemsContainer2}" var="product">
+                            <c:forEach items="${product.getImages()}" var="img">
+                                <img src="img/${img}.jpg" class="img-fluid" alt="clothes img">
+                            </c:forEach>
+                        </c:forEach>
+
                     </div>
                     <div class="col-lg-6 col-md-6 ">
                         <table class="table">

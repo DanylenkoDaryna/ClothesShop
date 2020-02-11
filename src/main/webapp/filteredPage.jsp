@@ -137,7 +137,8 @@
                             <div class="col-lg-3 col-md-6">
                                 <div class="card">
                                     <div class="view overlay">
-                                        <img class="card-img-top" src="jacket2.jpg" alt="img 1">
+                                        <img class="card-img-top"
+                                             src="img/${(product1.getContainer().get(0)).getImages().get(0)}.jpg" alt="clothes img">
                                         <a href="#">
                                             <div class="mask rgba-white-slight"></div>
                                         </a>

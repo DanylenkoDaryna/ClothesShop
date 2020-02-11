@@ -16,11 +16,14 @@ public class Product extends Entity{
 
     private List<Material> materials;
 
+    private List<String> images;
+
 
     public Product(){
         colour=Colour.WHITE;
         bodySize=BodySize.S;
         materials=new ArrayList<>();
+        images = new ArrayList<>();
     }
 
     @Override
@@ -68,6 +71,14 @@ public class Product extends Entity{
         this.materials = materials;
     }
 
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
     public void extractSizeValue(String value){
         if(BodySize.valueOf(value.toUpperCase())!=null){
             BodySize bs = BodySize.valueOf(value.toUpperCase());
@@ -80,4 +91,5 @@ public class Product extends Entity{
             setColour(cl);
         }
     }
+
 }

@@ -126,11 +126,12 @@
        <section class="text-center">
             <h1>Products</h1>
             <div class="row wow fadeIn">
-                <c:forEach items="${sessionScope.items}" var="product1">
+                <c:forEach items="${sessionScope.items}" var="item1">
                 <div class="col-lg-3 col-md-6">
                     <div class="card">
                         <div class="view overlay">
-                            <img class="card-img-top" src="jacket2.jpg" alt="img 1">
+                            <img class="card-img-top"
+                                 src="img/${(item1.getContainer().get(0)).getImages().get(0)}.jpg" alt="clothes img">
                             <a href="#">
                                 <div class="mask rgba-white-slight"></div>
                             </a>
@@ -141,15 +142,15 @@
                                 <strong>
                                     <!--      request.setAttribute("itemContainer",product1.getContainer())
                             ##<a href="./currentItem.jsp" class="dark-grey-text"> -->
-                            <a href="controller?command=ItemProducts&ItemId=${product1.getId()}" class="dark-grey-text">
-                                    ${product1}
+                            <a href="controller?command=ItemProducts&ItemId=${item1.getId()}" class="dark-grey-text">
+                                    ${item1}
                             </a>
                                 </strong>
                             </h5>
                             <h6 class="font-weight-bold blue-text">
-                                <strong>${product1.getPrice()} $</strong>
+                                <strong>${item1.getPrice()} $</strong>
                             </h6>
-                            <h6>Release: ${product1.getReleaseDate()}</h6>
+                            <h6>Release: ${item1.getReleaseDate()}</h6>
                         </div>
                     </div>
                 </div>

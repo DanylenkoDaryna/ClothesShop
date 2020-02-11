@@ -297,8 +297,43 @@ INSERT INTO materials VALUES(DEFAULT, 'cotton', 25, 16);
 INSERT INTO materials VALUES(DEFAULT, 'silk',100, 17);
 
 -- --------------------------------------------------------------
--- test database:
+-- IMAGES
 -- --------------------------------------------------------------
+CREATE TABLE images(
+
+	id INTEGER NOT NULL auto_increment PRIMARY KEY,
+	img_name VARCHAR(35) NOT NULL UNIQUE,
+    product_id INTEGER NOT NULL REFERENCES armadiodb.products(id)
+    ON DELETE CASCADE
+	ON UPDATE RESTRICT
+);
+
+
+-- --------------------------------------------------------------
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_for_friends_blk',1);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_for_friends_pink',2);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_licolle_prestigue_bl',3);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_cb_grn',4);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_cb_pink',5);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_vip_bl',6);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_gucci_pride_blk',7);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_moscino_ea_pink',9);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_drupal_selestia_bl',10);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_programmer_it_bl',11);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_itguru_junior_pink',12);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_summertime_ld_yell',13);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_summertime_ld_blk',14);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_lano_bb_blk',15);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_cinderella_fp_yell',16);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dm_jp_bl',17);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_office_s3_grn',18);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_autumn_red',19);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_wic_wh',20);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'cardigan_moscino_es_red',21);
+
+
+-- --------------------------------------------------------------
+
 
 SELECT * FROM users;
 SELECT * FROM roles;

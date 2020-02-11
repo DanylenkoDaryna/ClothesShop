@@ -27,13 +27,14 @@ public class ItemsDao implements IDao {
             "(SELECT id FROM categories WHERE name=? and catalogue_id=?);";
     private static final String SQL_FIND_PRODUCTS_BY_ITEM =
             "SELECT * FROM products WHERE item_id=?";
-    private static final String SQL_FIND_PRODUCTS_BY_ITEMID =
-            "SELECT * FROM products WHERE item_id=?";
+    private static final String SQL_FIND_PRODUCTS_BY_ITEMID ="SELECT * FROM products WHERE item_id=?";
     private static final String SQL_FIND_MATERIALS_BY_PRODUCT =
             "SELECT * FROM materials WHERE product_id=?";
     private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM products";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
+    private static final String SQL_FIND_IMAGES_BY_PRODUCT_ID =
+            "SELECT img_name FROM images WHERE product_id=?";
 
 
     @Override
@@ -69,6 +70,7 @@ public class ItemsDao implements IDao {
             pstmt.setInt(2,catalogId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
+
                 items.add(extractItem(rs));
 
             }
@@ -125,9 +127,11 @@ public class ItemsDao implements IDao {
                 pstmt.setLong(1, item.getId());
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
+
                     Product product = extractProduct(rs);
                     item.getContainer().add(product);
                     getMaterialsByProduct(con, product);
+                    getProductImages(con,product);
                 }
             }
         }catch (SQLException ex) {
@@ -140,6 +144,23 @@ public class ItemsDao implements IDao {
         }finally {
             ConnectionFactory.close(rs);
         }
+    }
+
+    private void getProductImages(Connection con, Product product)throws DBException {
+            ResultSet rs = null;
+            try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_IMAGES_BY_PRODUCT_ID)) {
+                pstmt.setLong(1, product.getId());
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    product.getImages().add(rs.getString(Fields.IMAGE_NAME));
+                }
+            }catch (SQLException ex) {
+                ConnectionFactory.rollback(con);
+                LOG.error("getProductImages", ex);
+                throw new DBException("getProductImages", ex);
+            }finally {
+                ConnectionFactory.close(rs);
+            }
     }
 
     private void getMaterialsByProduct(Connection con, Product product) throws DBException {
