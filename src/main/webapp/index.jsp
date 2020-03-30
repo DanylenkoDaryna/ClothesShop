@@ -26,7 +26,8 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
         <a href="./index.jsp" class="navbar-brand">ARMADIO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -57,11 +58,15 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <li class="nav-item" >
+                    <a class="nav-link" href="./login.jsp">Log in</a>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+
         </div>
     </nav>
 </div>
@@ -73,7 +78,7 @@
         <main>
             <div class="row">
                     <section class="text-center">
-                        <h1>Welcome to Armadio Internet-shop!</h1>
+                        <hi:Greetings/>
                     </section>
             </div>
         </main>

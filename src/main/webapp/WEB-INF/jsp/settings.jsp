@@ -8,13 +8,10 @@
 
 <body>
 	<table id="main-container">
-
 		<%@ include file="/WEB-INF/jspf/header.jspf" %>
-
-		<tr>
-			<td class="content">
+			<tr>
+				<td class="content">
 				<%-- CONTENT --%>
-
 				<form id="settings_form" action="controller" method="post">
 					<input type="hidden" name="command" value="updateSettings" />
 
@@ -37,14 +34,10 @@
 					</div>
 					
 					<input type="submit" value="Update"><br/>
-				</form> 
-				
-				<%-- CONTENT --%>
+				</form>
 			</td>
 		</tr>
-
-		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
-		
 	</table>
+	<%@ include file="/WEB-INF/jspf/footer.jspf" %>
 </body>
 </html>

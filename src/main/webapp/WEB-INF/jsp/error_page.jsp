@@ -50,8 +50,9 @@
 			</td>
 		</tr>
 
-		<%@ include file="/WEB-INF/jspf/footer.jspf"%>
+
 		
 	</table>
+	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </body>
 </html>

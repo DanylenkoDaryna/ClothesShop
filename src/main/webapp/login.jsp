@@ -5,10 +5,29 @@
   Time: 12:19
   To change this template use File | Settings | File Templates.
 --%>
+<!doctype html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
-<html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <style>
+        <%@include file="./css/bootstrap-grid.min.css"%>
+        <%@include file="./css/bootstrap-reboot.min.css"%>
+        <%@include file="./css/bootstrap.min.css"%>
+        <%@include file="./css/fontawesome.min.css"%>
+        <%@include file="./css/main.css"%>
+    </style>
+
+    <title>ARMADIO Login</title>
+
+</head>
 
 <c:set var="title" value="Login" />
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
@@ -67,9 +86,18 @@ Class page corresponds to the '.page' element in included CSS document.
         </td>
     </tr>
 
-    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+        <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 
 </table>
+
+<!-- Bootstrap -->
+<script type="text/javascript">
+    <%@include file="./js/jquery-3.4.1.min.js"%>
+    <%@include file="./js/popper.min.js"%>
+    <%@include file="./js/bootstrap.bundle.min.js"%>
+    <%@include file="./js/bootstrap.min.js"%>
+</script>
+
 </body>
 </html>
 

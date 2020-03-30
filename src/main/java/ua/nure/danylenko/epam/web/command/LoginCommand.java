@@ -46,7 +46,7 @@ public class LoginCommand extends Command {
         Role userRole = Role.getRole(user);
         LOG.info("userRole --> " + userRole);
 
-        String forward = Path.PAGE_ERROR_PAGE;
+        String forward = Path.PAGE_GOOD;
 
 //        if (userRole == Role.ADMIN) {
 //            forward = Path.COMMAND_LIST_ORDERS;

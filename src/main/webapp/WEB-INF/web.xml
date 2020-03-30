@@ -42,6 +42,18 @@
   <load-on-startup>1</load-on-startup>
   </servlet>
 
+  <servlet>
+  <servlet-name>BasketServlet</servlet-name>
+  <servlet-class>ua.nure.danylenko.epam.web.servlets.BasketServlet</servlet-class>
+  <load-on-startup>0</load-on-startup>
+  </servlet>
+
+  <servlet>
+  <servlet-name>BasketCleanerServlet</servlet-name>
+  <servlet-class>ua.nure.danylenko.epam.web.servlets.BasketCleanerServlet</servlet-class>
+  <load-on-startup>0</load-on-startup>
+  </servlet>
+
     <servlet-mapping>
     <servlet-name>Controller</servlet-name>
     <url-pattern>/controller</url-pattern>
@@ -55,6 +67,16 @@
   <servlet-mapping>
     <servlet-name>HardFilterServlet</servlet-name>
     <url-pattern>/HardFilterServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BasketServlet</servlet-name>
+    <url-pattern>/basketServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BasketCleanerServlet</servlet-name>
+    <url-pattern>/basketCleanerServlet</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -76,6 +98,10 @@
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.png</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
   </servlet-mapping>
 
 

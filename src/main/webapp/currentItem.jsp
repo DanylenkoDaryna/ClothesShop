@@ -19,7 +19,13 @@
     </style>
 
     <title>${sessionScope.ItemsContainer2.get(0)}</title>
-
+    <style>
+        .btn {
+            background: coral; /* Синий цвет фона */
+            color: black; /* Белые буквы */
+            font-size: 9pt; /* Размер шрифта в пунктах */
+        }
+    </style>
 </head>
 <body>
 
@@ -53,12 +59,15 @@
                         </div>
                     </li>
                 </c:forEach>
-
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <li class="nav-item" >
+                    <a class="nav-link" href="./login.jsp">Log in</a>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+
         </div>
     </nav>
 </div>
@@ -132,8 +141,11 @@
                             </tr>
                             </tbody>
                         </table>
-
-
+                        <form action="basketServlet" method="post" >
+                            <button type="submit" name="ClothesIdToBasket"
+                                    value="${sessionScope.items.get(0).getId()}"
+                                    class="btn" >To Basket</button>
+                        </form>
                     </div>
                 </div>
             </div>

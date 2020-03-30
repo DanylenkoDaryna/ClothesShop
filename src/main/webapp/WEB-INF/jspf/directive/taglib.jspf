@@ -7,3 +7,7 @@ JSTL core tag library.
 JSTL functions tag library.
 ===========================================================================--%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%--===========================================================================
+JSTL my tag library. 20/03/2020
+==========================================================================--%>
+<%@ taglib uri="/WEB-INF/Greeting" prefix="hi" %>

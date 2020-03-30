@@ -12,11 +12,12 @@
         <%@include file="./css/bootstrap-grid.min.css"%>
         <%@include file="./css/bootstrap-reboot.min.css"%>
         <%@include file="./css/bootstrap.min.css"%>
-        <%@include file="./css/fontawesome.min.css"%>
         <%@include file="./css/main.css"%>
+        <%@include file="./css/styles.css"%>
+        <%@include file="./css/fontawesome.min.css"%>
         <%@include file="./font-awesome-4.7.0/css/font-awesome.min.css"%>
     </style>
-    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+
     <title>ARMADIO-shop</title>
 
 </head>
@@ -56,11 +57,28 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <li class="nav-item active">
+                    <c:if test="${empty sessionScope.itemsInBasket}">
+                        <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
+                            Basket(0)
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </c:if>
+                    <c:if test="${not empty sessionScope.itemsInBasket}">
+                        <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
+                            Basket(${sessionScope.itemsInBasket.size()})
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </c:if>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="./login.jsp">Log in</a>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
@@ -151,6 +169,11 @@
                                 <strong>${item1.getPrice()} $</strong>
                             </h6>
                             <h6>Release: ${item1.getReleaseDate()}</h6>
+
+                            <form action="basketServlet" method="post">
+                            <button type="submit" name="ClothesIdToBasket" value="${item1.getId()}"
+                                    class="btn btn-default btn-xs">To Basket</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -160,6 +183,52 @@
     </div>
 </div>
 </main>
+<!--role="document" - элем. содерж. связанную инфу, которая может выступать как контент документа.
+    role="dialog" - элем. выступающий в роли диалога (с целью запроса у пользователя информацию
+    или требующей от него ответа
+    aria-labelledby - предназначен для идентификации элемента (или элементов), который содержат
+    краткое название текущего элемента.
+    aria-describedby - предназначен для идентификации элемента (или элементов), который содержит
+    подробное описание текущего объекта.
+    aria-hidden="true" - указывает, что элемент и все его потомки не видимы пользователю.-->
+    <div class="modal fade" id="basketModal" tabindex="-1" role="dialog"
+        aria-labelledby="basketModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="basketModalLabel">Your Basket</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&rotimes;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="basket_table">
+                        <div class="basket_row">
+                            <div class="basket_col">Product</div>
+                            <div class="basket_col2">Description</div>
+                        </div>
+                        <c:if test="${not empty sessionScope.itemsInBasket}" >
+                        <c:forEach items="${sessionScope.itemsInBasket}" var="itemInBasket">
+                            <div class="basket_row">
+                                <div class="basket_col">${itemInBasket.getProductName()}</div>
+                                <div class="basket_col2">${itemInBasket.getBrand()},
+                                        ${itemInBasket.getPrice()}</div>
+                                <form action="basketCleanerServlet" method="post">
+
+          <button type="submit" name="IdDeleteFromBasket" value="${itemInBasket.getId()}">
+              Remove</button>
+                                </form>
+                            </div>
+                        </c:forEach>
+                        </c:if>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">To order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 <!-- Bootstrap -->

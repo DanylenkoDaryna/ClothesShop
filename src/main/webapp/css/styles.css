@@ -3,6 +3,11 @@ table {
     border-collapse:collapse;
 }
 
+#basket_btn{
+    background-color: sandybrown;
+    text-decoration-color: white;
+
+}
 
 .dropbtn {
     background-color: #b77916;
@@ -34,6 +39,38 @@ table {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+}
+
+.basket_table {
+    display: table;
+    text-align: center;
+    border: black;
+    width: auto;
+}
+
+.basket_row{
+    display: table-row;
+    text-align: center;
+    border: black;
+}
+
+.basket_col{
+    display: table-cell;
+    padding: 20px;
+    border: orange;
+    text-align: center;
+}
+
+.basket_col2{
+    display: table-cell;
+    padding: 20px;
+    border: orange;
+    text-align: center;
+}
+
+.nav-item {
+    text-align: right;
+    right: 0;
 }
 
 /* Change color of dropdown links on hover */

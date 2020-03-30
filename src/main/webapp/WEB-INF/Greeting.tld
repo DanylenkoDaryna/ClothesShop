@@ -1,0 +1,15 @@
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+    <tlib-version>1.0</tlib-version>
+    <short-name>hi</short-name>
+    <uri>/WEB-INF/Greeting</uri>
+    <tag>
+        <description>Greeting tag for new customers on site</description>
+        <name>Greetings</name>
+        <tag-class>ua.nure.danylenko.epam.web.jstl.Greeting</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+</taglib>
