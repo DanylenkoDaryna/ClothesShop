@@ -18,7 +18,7 @@ public class ShowCatalogue extends HttpServlet {
         ServletContext context = getServletContext();
 
         CatalogueService catalogueService = new CatalogueService();
-        String forward = Path.PAGE_GOOD;
+        String forward = Path.PAGE_HEAD;
         //Catalogue catalogue = manager.getCatalogue();
         Catalogue catalogue = null;
         try {

@@ -27,7 +27,8 @@ public class BasketCleanerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String forward = Path.PAGE_PRODUCTS;
+        //String forward = Path.PAGE_PRODUCTS;
+        String forward = req.getParameter("pageBack");
         HttpSession session = req.getSession();
 
         List<Item> basket = (List<Item>)session.getAttribute("itemsInBasket");

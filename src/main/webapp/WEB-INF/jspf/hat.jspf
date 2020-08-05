@@ -1,0 +1,61 @@
+
+<div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+        <a href="index.jsp" class="navbar-brand">ARMADIO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav nav-tabs">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <c:forEach items="${catalogue.container.keySet()}" var="entry1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${entry1}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <c:forEach items="${catalogue.container.get(entry1)}" var="linker1">
+                                <a href="controller?command=listProducts&catId=${linker1.getCatalogueId()}&clothes=${linker1.getName()}"
+                                   class="dropdown-item">
+                                        ${linker1.getName()}</a>
+                                <div class="dropdown-divider"></div>
+                            </c:forEach>
+
+                        </div>
+                    </li>
+                </c:forEach>
+
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <li class="nav-item active">
+                    <c:if test="${empty sessionScope.itemsInBasket}">
+                        <a class="nav-link disabled" >
+                            Basket(0)
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </c:if>
+                    <c:if test="${not empty sessionScope.itemsInBasket}">
+                        <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
+                            Basket(${sessionScope.itemsInBasket.size()})
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </c:if>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="login.jsp">Log in</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

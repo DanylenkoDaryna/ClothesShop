@@ -1,13 +1,21 @@
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 <head>
-    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <script src="./js/bootstrap.js"></script>
-		<title>
-			Armadio shop
-		</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<style>
+		<%@include file="/css/bootstrap-grid.min.css"%>
+		<%@include file="/css/bootstrap-reboot.min.css"%>
+		<%@include file="/css/bootstrap.min.css"%>
+		<%@include file="/css/main.css"%>
+		<%@include file="/css/styles.css"%>
+		<%@include file="/css/fontawesome.min.css"%>
+		<%@include file="/font-awesome-4.7.0/css/font-awesome.min.css"%>
+	</style>
+    <script type="text/javascript" src="js/jquery-3.5.0.js"></script>
+	<title>ARMADIO-shop</title>
 
 </head>

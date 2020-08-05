@@ -26,7 +26,6 @@ public class SimpleFilterCommand extends Command {
         HttpSession session = request.getSession();
         String filterType = request.getParameter("filtration");
         String pageToReturn = request.getParameter("page");
-
         List<Item> items = new ArrayList<>();
         if(session.getAttribute("filteredItems")!=null&&"filteredPage".equals(pageToReturn)){
             items = (List<Item>)session.getAttribute("filteredItems");

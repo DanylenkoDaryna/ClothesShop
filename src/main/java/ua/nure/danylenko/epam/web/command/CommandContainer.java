@@ -9,7 +9,7 @@ public class CommandContainer {
 
     private static final Logger LOG = Logger.getLogger("servlets");
 
-    private static Map<String, Command> commands = new TreeMap<String, Command>();
+    private static Map<String, Command> commands = new TreeMap<>();
 
     static {
         // common commands

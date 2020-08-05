@@ -120,7 +120,7 @@ public class DBManager {
             con.commit();
         } catch (SQLException ex) {
             rollback(con);
-            throw new DBException("getCatalogue beee", ex);
+            throw new DBException("getCatalogue failed", ex);
         } finally {
             close(con, stmt, rs);
         }
@@ -138,7 +138,7 @@ public class DBManager {
                 clothes.add(rs.getString(Fields.CATEGORY_NAME));
             }
         } catch (SQLException ex) {
-            throw new DBException("getCategories beee", ex);
+            throw new DBException("getCategories failed", ex);
         } finally {
             if(rs!=null){
                 rs.close();

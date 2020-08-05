@@ -28,9 +28,10 @@ public class BasketServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String forward = Path.PAGE_PRODUCTS;
+        //String forward = Path.PAGE_PRODUCTS;
         HttpSession session = req.getSession();
         List<Item> container = new ArrayList<>();
+        String forward = req.getParameter("page");
 
         if(session.getAttribute("items")!=null){
             container = (List<Item>)session.getAttribute("items");

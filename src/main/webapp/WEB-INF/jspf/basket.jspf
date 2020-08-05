@@ -1,0 +1,46 @@
+<!--role="document" - элем. содерж. связанную инфу, которая может выступать как контент документа.
+role="dialog" - элем. выступающий в роли диалога (с целью запроса у пользователя информацию
+или требующей от него ответа
+aria-labelledby - предназначен для идентификации элемента (или элементов), который содержат
+краткое название текущего элемента.
+aria-describedby - предназначен для идентификации элемента (или элементов), который содержит
+подробное описание текущего объекта.
+aria-hidden="true" - указывает, что элемент и все его потомки не видимы пользователю.-->
+<div class="modal fade" id="basketModal" tabindex="-1" role="dialog"
+     aria-labelledby="basketModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="basketModalLabel">Your Basket</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&rotimes;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="basket_table">
+                    <div class="basket_row">
+                        <div class="basket_col">Product</div>
+                        <div class="basket_col2">Description</div>
+                    </div>
+                    <c:if test="${not empty sessionScope.itemsInBasket}" >
+                        <c:forEach items="${sessionScope.itemsInBasket}" var="itemInBasket">
+                            <div class="basket_row">
+                                <div class="basket_col">${itemInBasket.getProductName()}</div>
+                                <div class="basket_col2">${itemInBasket.getBrand()},
+                                        ${itemInBasket.getPrice()}</div>
+                                <form action="basketCleanerServlet" method="post">
+                                    <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
+                                    <button type="submit" name="IdDeleteFromBasket" value="${itemInBasket.getId()}">
+                                        Remove</button>
+                                </form>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">To order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
