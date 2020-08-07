@@ -1,6 +1,8 @@
 package ua.nure.danylenko.epam.web.command;
 
 import org.apache.log4j.Logger;
+import ua.nure.danylenko.epam.web.command.admin.UpdatingUPOCommand;
+import ua.nure.danylenko.epam.web.command.client.GetMyCabinetCommand;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -21,11 +23,11 @@ public class CommandContainer {
         commands.put("ItemProducts", new ItemProductsCommand());
         commands.put("SimpleFilter", new SimpleFilterCommand());
 
-        // client commands
-      //  commands.put("listMenu", new ListMenuCommand());
+         //client commands
+        commands.put("getMyCabinet", new GetMyCabinetCommand());
 
-        // admin commands
-      //  commands.put("listOrders", new ListOrdersCommand());
+         //admin commands
+        commands.put("updatingUPO", new UpdatingUPOCommand());
 
         LOG.debug("Command container was successfully initialized");
         LOG.debug("Number of commands --> " + commands.size());

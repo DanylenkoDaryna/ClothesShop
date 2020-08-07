@@ -138,11 +138,11 @@
     <filter-class>ua.nure.danylenko.epam.web.filter.CommandAccessFilter</filter-class>
     <init-param>
       <param-name>admin</param-name>
-      <param-value>listOrders</param-value>
+      <param-value>updatingUPO</param-value>
     </init-param>
     <init-param>
       <param-name>client</param-name>
-      <param-value>listMenu</param-value>
+      <param-value>getMyCabinet</param-value>
     </init-param>
     <init-param>
       <param-name>common</param-name>

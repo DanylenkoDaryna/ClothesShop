@@ -22,12 +22,12 @@ public class LoginCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, AppException {
-        LOG.info("Command starts");
+        LOG.info("LoginCommand starts");
 
         HttpSession session = request.getSession();
 
         // obtain login and password from a request
-        DBManager manager = DBManager.getInstance();
+
         String login = request.getParameter("login");
         LOG.info("Request parameter: login --> " + login);
 
@@ -36,11 +36,14 @@ public class LoginCommand extends Command {
             throw new AppException("Login/password cannot be empty");
         }
 
+        DBManager manager = DBManager.getInstance();
         User user = manager.findUserByLogin(login);
         LOG.info("Found in DB: user --> " + user);
 
-        if (user == null || !password.equals(user.getPassword())) {
-            throw new AppException("Cannot find user with such login/password");
+        if (user == null) {
+            throw new AppException("Cannot find user with such login");
+        }else if(!password.equals(user.getPassword())){
+            throw new AppException("Incorrect password. Please try again ");
         }
 
         Role userRole = Role.getRole(user);
@@ -48,13 +51,14 @@ public class LoginCommand extends Command {
 
         String forward = Path.PAGE_GOOD;
 
-//        if (userRole == Role.ADMIN) {
-//            forward = Path.COMMAND_LIST_ORDERS;
-//        }
-//
-//        if (userRole == Role.CLIENT) {
-//            forward = Path.COMMAND_LIST_MENU;
-//        }
+        if (userRole == Role.ADMIN) {
+            //COMMAND_UPDATING_UPO - adding, removing, editing users, products, orders
+            forward = Path.COMMAND_UPDATING_UPO;
+        }
+
+        if (userRole == Role.CLIENT) {
+            forward = Path.COMMAND_CABINET_ORDERS;
+        }
 
         session.setAttribute("user", user);
         LOG.debug("Set the session attribute: user --> " + user);

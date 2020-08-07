@@ -10,4 +10,7 @@ public class Path {
     public static final String PAGE_ITEM_PRODUCTS = "/currentItem.jsp";
     public static final String PAGE_ERROR_PAGE = "/WEB-INF/jsp/error_page.jsp";
 
+    // commands
+    public static final String COMMAND_UPDATING_UPO = "/controller?command=updatingUPO";
+    public static final String COMMAND_CABINET_ORDERS = "/controller?command=getMyCabinet";
 }

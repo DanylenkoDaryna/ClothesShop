@@ -43,11 +43,7 @@ Class page corresponds to the '.page' element in included CSS document.
     <div class="container-fluid">
         <section class="text-center mb-4">
             <hi:Greetings/>
-            <div class="row wow fadeIn">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 ">
                         <table class="table">
-
                             <tbody>
             <%--===========================================================================
             This is the CONTENT, containing the main part of the page.
@@ -79,25 +75,20 @@ Class page corresponds to the '.page' element in included CSS document.
 
                         <input type="submit" value="Login" >
                     </form>
-
-                    <%-- CONTENT --%>
-
                 </td>
             </tr>
             <tr>
                 <td class="content center">
-                <%-- FOOTER --%>
-                <%@ include file="/WEB-INF/jspf/footer.jspf"%>
-                <%-- FOOTER --%>
+                    <%-- FOOTER --%>
+                    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+                    <%-- FOOTER --%>
                 </td>
             </tr>
                             </tbody>
-        </table>
-                    </div>
-                </div>
-            </div>
+                        </table>
         </section>
     </div>
+
 </main>
 <!-- Bootstrap -->
 <script type="text/javascript">
