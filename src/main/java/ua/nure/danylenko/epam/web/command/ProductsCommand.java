@@ -19,7 +19,8 @@ import java.util.TreeSet;
 public class ProductsCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger LOG = Logger.getLogger("web");
+    private static final Logger DB_LOG = Logger.getLogger("database");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -29,10 +30,12 @@ public class ProductsCommand extends Command {
         HttpSession session = request.getSession();
         String categoryType = request.getParameter("clothes");
         int catalogId = Integer.parseInt(request.getParameter("catId"));
-        LOG.debug("Request parameter: forWho --> " + categoryType);
-
+        DB_LOG.debug("ProductsCommand request from db parameter: forWho --> " + categoryType);
+        DB_LOG.error("ProductsCommand request from db parameter: forWho -->");
         if (categoryType == null || categoryType.isEmpty()){
+            DB_LOG.error("categoryType cannot be empty");
             throw new AppException("categoryType cannot be empty");
+
         }
         String forward = Path.PAGE_PRODUCTS;
 

@@ -1,6 +1,7 @@
 package ua.nure.danylenko.epam.web.command.client;
 
 import org.apache.log4j.Logger;
+import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
 
@@ -13,12 +14,14 @@ public class GetMyCabinetCommand extends Command {
 
     private static final long serialVersionUID = 7732286214029478505L;
 
-    private static final Logger LOG = Logger.getLogger(GetMyCabinetCommand.class);
+    private static final Logger LOG = Logger.getLogger("web");
+    private static final Logger APP_LOG = Logger.getLogger("application");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
 
-        LOG.debug("Command starts");
+        LOG.debug("GetMyCabinetCommand starts");
+        APP_LOG.info("GetMyCabinetCommand starts in app");
 //
 //        // get menu items list
 //        List<MenuItem> menuItems = DBManager.getInstance().findMenuItems();
@@ -36,7 +39,7 @@ public class GetMyCabinetCommand extends Command {
 //        LOG.trace("Set the request attribute: menuItems --> " + menuItems);
 //
 //        LOG.debug("Command finished");
-//        return Path.PAGE_LIST_MENU;
-        return null;
+        return Path.PAGE_PERSONAL_CABINET;
+       // return null;
     }
 }
