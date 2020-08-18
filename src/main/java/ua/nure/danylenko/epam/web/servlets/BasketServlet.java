@@ -16,7 +16,7 @@ import java.util.List;
 
 public class BasketServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,7 +37,7 @@ public class BasketServlet extends HttpServlet {
             container = (List<Item>)session.getAttribute("items");
         }else{
             forward = Path.PAGE_ERROR_PAGE;
-            LOG.error("ERROR: BasketServlet doPost() -> items container is empty");
+            WEB_LOG.error("ERROR: BasketServlet doPost() -> items container is empty");
         }
 
         long idToBasket=Long.parseLong(req.getParameter("ClothesIdToBasket"));

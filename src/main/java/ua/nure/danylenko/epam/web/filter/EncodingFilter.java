@@ -8,39 +8,39 @@ import java.io.IOException;
 
 public class EncodingFilter implements Filter {
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     private String encoding;
 
     public void destroy() {
-        LOG.debug("Filter destruction starts");
+        WEB_LOG.info("Filter destruction starts");
         // no op
-        LOG.debug("Filter destruction finished");
+        WEB_LOG.info("Filter destruction finished");
     }
 
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
 
-        LOG.debug("Filter starts");
+        WEB_LOG.info("Filter starts");
 
         HttpServletRequest httpRequest = (HttpServletRequest)request;
-        LOG.debug("Request uri --> " + httpRequest.getRequestURI());
+        WEB_LOG.info("Request uri --> " + httpRequest.getRequestURI());
 
         String requestEncoding = request.getCharacterEncoding();
         if (requestEncoding == null) {
-            LOG.debug("Request encoding = null, set encoding --> " + encoding);
+            WEB_LOG.error("Request encoding = null, set encoding --> " + encoding);
             request.setCharacterEncoding(encoding);
         }
 
-        LOG.debug("Filter finished");
+        WEB_LOG.info("Filter finished");
         chain.doFilter(request, response);
     }
 
     public void init(FilterConfig fConfig) throws ServletException {
-        //LOG.debug("Filter initialization starts");
+        WEB_LOG.info("Filter initialization starts");
         encoding = fConfig.getInitParameter("encoding");
-       // LOG.trace("Encoding from web.xml --> " + encoding);
-       // LOG.debug("Filter initialization finished");
+        WEB_LOG.trace("Encoding from web.xml --> " + encoding);
+        WEB_LOG.info("Filter initialization finished");
     }
 
 }

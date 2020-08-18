@@ -11,18 +11,18 @@ public class LogoutCommand extends Command {
 
     private static final long serialVersionUID = -2785976616686657267L;
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        LOG.debug("Command starts");
+        WEB_LOG.info("Command starts");
 
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
 
-        LOG.debug("Command finished");
+        WEB_LOG.info("Command finished");
         return Path.PAGE_LOGIN;
     }
 

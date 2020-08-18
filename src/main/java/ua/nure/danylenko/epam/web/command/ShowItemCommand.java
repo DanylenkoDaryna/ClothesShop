@@ -15,16 +15,16 @@ import java.util.List;
 
 public class ShowItemCommand extends Command {
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-        LOG.debug("ShowItemCommand starts");
+        WEB_LOG.info("ShowItemCommand starts");
 
         HttpSession session = request.getSession();
         String categoryType = request.getParameter("clothes");
         int catalogId = Integer.parseInt(request.getParameter("catId"));
-        LOG.debug("Request parameter: forWho --> " + categoryType);
+        WEB_LOG.info("Request parameter: forWho --> " + categoryType);
 
         if (categoryType == null || categoryType.isEmpty()){
             throw new AppException("categoryType cannot be empty");

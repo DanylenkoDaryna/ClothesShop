@@ -15,12 +15,12 @@ import java.io.IOException;
 public class ShowCatalogueCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         HttpSession session = request.getSession();
-        LOG.debug("Command starts");
+        WEB_LOG.info("Command starts");
         CatalogueService catalogueService = new CatalogueService();
         String forward = Path.PAGE_GOOD;
         Catalogue catalogue = catalogueService.getDao().read();
@@ -29,9 +29,9 @@ public class ShowCatalogueCommand extends Command {
         }
 
         session.setAttribute("catalogue", catalogue);
-        LOG.debug("Set the session attribute: catalogue --> " + catalogue);
+        WEB_LOG.info("Set the session attribute: catalogue --> " + catalogue);
 
-        LOG.debug("Command finished");
+        WEB_LOG.info("Command finished");
         return forward;
     }
 }

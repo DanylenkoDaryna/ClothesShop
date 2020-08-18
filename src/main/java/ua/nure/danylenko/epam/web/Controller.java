@@ -16,7 +16,7 @@ public class Controller extends HttpServlet {
 
     private static final long serialVersionUID = 2423353715955164816L;
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
@@ -34,15 +34,15 @@ public class Controller extends HttpServlet {
     private void process(HttpServletRequest request,
                          HttpServletResponse response) throws IOException, ServletException {
 
-        LOG.debug("Controller starts");
+        WEB_LOG.info("Controller starts");
 
         // extract command name from the request
         String commandName = request.getParameter("command");
-        LOG.debug("Request parameter: command --> " + commandName);
+        WEB_LOG.info("Request parameter: command --> " + commandName);
 
         // obtain command object by its name
         Command command = CommandContainer.get(commandName);
-        LOG.debug("Obtained command --> " + command);
+        WEB_LOG.info("Obtained command --> " + command);
 
         // execute command and get forward address
         String forward = Path.PAGE_ERROR_PAGE;
@@ -51,9 +51,9 @@ public class Controller extends HttpServlet {
         } catch (AppException ex) {
             request.setAttribute("errorMessage", ex.getMessage());
         }
-        LOG.debug("Forward address --> " + forward);
+        WEB_LOG.info("Forward address --> " + forward);
 
-        LOG.debug("Controller finished, now go to forward address --> " + forward);
+        WEB_LOG.info("Controller finished, now go to forward address --> " + forward);
 
         // go to forward
         request.getRequestDispatcher(forward).forward(request, response);

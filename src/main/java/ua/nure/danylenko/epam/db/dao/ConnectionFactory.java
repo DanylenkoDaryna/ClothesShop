@@ -24,7 +24,7 @@ public class ConnectionFactory {
         return instance;
     }
     //////
-    private static final Logger DBLOG = Logger.getLogger("jdbc");
+    private static final Logger DB_LOG = Logger.getLogger("jdbc");
     private DataSource dataSource;
 
     public ConnectionFactory() throws DBException {
@@ -33,9 +33,9 @@ public class ConnectionFactory {
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             // ST4DB - the name of data source
             dataSource = (DataSource) envContext.lookup("jdbc/MARKET");
-            DBLOG.info("Data source ==> " + dataSource);
+            DB_LOG.info("Data source ==> " + dataSource);
         } catch (NamingException ex) {
-            DBLOG.error(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
         }
     }
@@ -52,7 +52,7 @@ public class ConnectionFactory {
         try {
             con = dataSource.getConnection();
         } catch (SQLException ex) {
-            DBLOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
         }
         return con;
@@ -69,7 +69,7 @@ public class ConnectionFactory {
             try {
                 con.close();
             } catch (SQLException ex) {
-                DBLOG.error(Messages.ERR_CANNOT_CLOSE_CONNECTION, ex);
+                DB_LOG.error(Messages.ERR_CANNOT_CLOSE_CONNECTION, ex);
             }
         }
     }
@@ -82,7 +82,7 @@ public class ConnectionFactory {
             try {
                 stmt.close();
             } catch (SQLException ex) {
-                DBLOG.error(Messages.ERR_CANNOT_CLOSE_STATEMENT, ex);
+                DB_LOG.error(Messages.ERR_CANNOT_CLOSE_STATEMENT, ex);
             }
         }
     }
@@ -95,7 +95,7 @@ public class ConnectionFactory {
             try {
                 rs.close();
             } catch (SQLException ex) {
-                DBLOG.error(Messages.ERR_CANNOT_CLOSE_RESULTSET, ex);
+                DB_LOG.error(Messages.ERR_CANNOT_CLOSE_RESULTSET, ex);
             }
         }
     }
@@ -120,7 +120,7 @@ public class ConnectionFactory {
             try {
                 con.rollback();
             } catch (SQLException ex) {
-                DBLOG.error("Cannot rollback transaction", ex);
+                DB_LOG.error("Cannot rollback transaction", ex);
             }
         }
     }

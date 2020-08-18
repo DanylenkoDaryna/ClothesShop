@@ -16,7 +16,7 @@ import java.util.TreeMap;
 
 public class ItemsDao implements IDao {
     private ConnectionFactory connectionFactory;
-    private static final Logger LOG = Logger.getLogger("jdbc");
+    private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
     private Connection createConnection() throws DBException {
         this.connectionFactory = new ConnectionFactory();
@@ -78,10 +78,10 @@ public class ItemsDao implements IDao {
             con.commit();
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            LOG.error("aaaaaaaaba", ex);
+            DB_LOG.error("aaaaaaaaba", ex);
             throw new DBException("aaaaaaaaba", ex);
         }catch (DBException dbex) {
-            LOG.error("aaaaaaaab", dbex);
+            DB_LOG.error("aaaaaaaab", dbex);
             throw new DBException("aaaaaaaab", dbex);
         } finally {
             ConnectionFactory.close(con, pstmt, rs);
@@ -109,10 +109,10 @@ public class ItemsDao implements IDao {
 
         }catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            LOG.error("bbbbbbbb", ex);
+            DB_LOG.error("bbbbbbbb", ex);
             throw new DBException("bbbbbbbb", ex);
         }catch (DBException dbex) {
-            LOG.error("bbbbbbbbc", dbex);
+            DB_LOG.error("bbbbbbbbc", dbex);
             throw new DBException("bbbbbbbbc", dbex);
         }finally {
             ConnectionFactory.close(rs);
@@ -136,10 +136,10 @@ public class ItemsDao implements IDao {
             }
         }catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            LOG.error("bbbbbbbb", ex);
+            DB_LOG.error("bbbbbbbb", ex);
             throw new DBException("bbbbbbbb", ex);
         }catch (DBException dbex) {
-            LOG.error("bbbbbbbbc", dbex);
+            DB_LOG.error("bbbbbbbbc", dbex);
             throw new DBException("bbbbbbbbc", dbex);
         }finally {
             ConnectionFactory.close(rs);
@@ -156,7 +156,7 @@ public class ItemsDao implements IDao {
                 }
             }catch (SQLException ex) {
                 ConnectionFactory.rollback(con);
-                LOG.error("getProductImages", ex);
+                DB_LOG.error("getProductImages", ex);
                 throw new DBException("getProductImages", ex);
             }finally {
                 ConnectionFactory.close(rs);
@@ -173,7 +173,7 @@ public class ItemsDao implements IDao {
             }
         }catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            LOG.error("cccccc", ex);
+            DB_LOG.error("cccccc", ex);
             throw new DBException("cccccc", ex);
         }finally {
             ConnectionFactory.close(rs);

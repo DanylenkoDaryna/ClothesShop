@@ -14,14 +14,14 @@ public class GetMyCabinetCommand extends Command {
 
     private static final long serialVersionUID = 7732286214029478505L;
 
-    private static final Logger LOG = Logger.getLogger("web");
-    private static final Logger APP_LOG = Logger.getLogger("application");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
+    private static final Logger APP_LOG = Logger.getLogger("armadio");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
 
-        LOG.debug("GetMyCabinetCommand starts");
-        APP_LOG.info("GetMyCabinetCommand starts in app");
+        WEB_LOG.info("GetMyCabinetCommand starts");
+        APP_LOG.debug("GetMyCabinetCommand starts in app");
 //
 //        // get menu items list
 //        List<MenuItem> menuItems = DBManager.getInstance().findMenuItems();

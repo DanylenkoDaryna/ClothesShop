@@ -17,19 +17,20 @@ public class LoginCommand extends Command {
 
     private static final long serialVersionUID = -3071536593627692473L;
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger DB_LOG = Logger.getLogger("jdbc");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, AppException {
-        LOG.info("LoginCommand starts");
+        WEB_LOG.info("LoginCommand starts");
 
         HttpSession session = request.getSession();
 
         // obtain login and password from a request
 
         String login = request.getParameter("login");
-        LOG.info("Request parameter: login --> " + login);
+        DB_LOG.info("Request parameter: login --> " + login);
 
         String password = request.getParameter("password");
         if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
@@ -38,7 +39,7 @@ public class LoginCommand extends Command {
 
         DBManager manager = DBManager.getInstance();
         User user = manager.findUserByLogin(login);
-        LOG.info("Found in DB: user --> " + user);
+        DB_LOG.info("Found in DB: user --> " + user);
 
         if (user == null) {
             throw new AppException("Cannot find user with such login");
@@ -47,7 +48,7 @@ public class LoginCommand extends Command {
         }
 
         Role userRole = Role.getRole(user);
-        LOG.info("userRole --> " + userRole);
+        WEB_LOG.info("userRole --> " + userRole);
 
         String forward = Path.PAGE_GOOD;
 
@@ -61,14 +62,14 @@ public class LoginCommand extends Command {
         }
 
         session.setAttribute("user", user);
-        LOG.debug("Set the session attribute: user --> " + user);
+        WEB_LOG.info("Set the session attribute: user --> " + user);
 
         session.setAttribute("userRole", userRole);
-        LOG.debug("Set the session attribute: userRole --> " + userRole);
+        WEB_LOG.info("Set the session attribute: userRole --> " + userRole);
 
-        LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
+        WEB_LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
 
-        LOG.debug("Command finished");
+        WEB_LOG.info("Command finished");
         return forward;
     }
 

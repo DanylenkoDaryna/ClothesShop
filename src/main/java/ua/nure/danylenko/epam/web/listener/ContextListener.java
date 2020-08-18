@@ -9,22 +9,22 @@ import javax.servlet.ServletContextListener;
 
 public class ContextListener implements ServletContextListener {
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     public void contextDestroyed(ServletContextEvent event) {
-        log("Servlet context destruction starts");
+        WEB_LOG.info("Servlet context destruction starts");
         // no op
-        log("Servlet context destruction finished");
+        WEB_LOG.info("Servlet context destruction finished");
     }
 
     public void contextInitialized(ServletContextEvent event) {
-        log("Servlet context initialization starts");
+        WEB_LOG.info("Servlet context initialization starts");
 
         ServletContext servletContext = event.getServletContext();
         initLog4J(servletContext);
         initCommandContainer();
 
-        log("Servlet context initialization finished");
+        WEB_LOG.info("Servlet context initialization finished");
     }
 
     /**
@@ -33,16 +33,16 @@ public class ContextListener implements ServletContextListener {
      * @param servletContext
      */
     private void initLog4J(ServletContext servletContext) {
-        log("Log4J initialization started");
+        WEB_LOG.info("Log4J initialization started");
         try {
             DOMConfigurator.configure(
                     servletContext.getRealPath("log4j2.xml"));
-            LOG.debug("Log4j has been initialized");
+            WEB_LOG.info("Log4j has been initialized");
         } catch (Exception ex) {
-            log("Cannot configure Log4j");
+            WEB_LOG.error("Cannot configure Log4j");
             ex.printStackTrace();
         }
-        log("Log4J initialization finished");
+        WEB_LOG.info("Log4J initialization finished");
     }
 
     /**
@@ -58,9 +58,5 @@ public class ContextListener implements ServletContextListener {
         } catch (ClassNotFoundException ex) {
             throw new IllegalStateException("Cannot initialize Command Container");
         }
-    }
-
-    private void log(String msg) {
-        System.out.println("[ContextListener] " + msg);
     }
 }

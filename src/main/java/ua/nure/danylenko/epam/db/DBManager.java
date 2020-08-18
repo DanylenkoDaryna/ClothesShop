@@ -1,5 +1,6 @@
 package ua.nure.danylenko.epam.db;
 
+import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.entity.Catalogue;
 import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.exception.DBException;
@@ -27,6 +28,8 @@ public class DBManager {
     }
     // //////////////////////////////////////////////////////////
 
+    private static final Logger DB_LOG = Logger.getLogger("jdbc");
+
     private DataSource ds;
 
     private DBManager() throws DBException {
@@ -35,9 +38,8 @@ public class DBManager {
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             // ST4DB - the name of data source
             ds = (DataSource) envContext.lookup("jdbc/MARKET");
-           // DBLOG.info("Data source ==> " + ds);
         } catch (NamingException ex) {
-           // DBLOG.error(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
         }
     }
@@ -66,7 +68,7 @@ public class DBManager {
         try {
             con = ds.getConnection();
         } catch (SQLException ex) {
-            //DBLOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
         }
         return con;
@@ -182,7 +184,7 @@ public class DBManager {
             try {
                 con.close();
             } catch (SQLException ex) {
-               // DBLOG.error(Messages.ERR_CANNOT_CLOSE_CONNECTION, ex);
+                DB_LOG.error(Messages.ERR_CANNOT_CLOSE_CONNECTION, ex);
             }
         }
     }
@@ -195,7 +197,7 @@ public class DBManager {
             try {
                 stmt.close();
             } catch (SQLException ex) {
-               // DBLOG.error(Messages.ERR_CANNOT_CLOSE_STATEMENT, ex);
+                DB_LOG.error(Messages.ERR_CANNOT_CLOSE_STATEMENT, ex);
             }
         }
     }
@@ -208,7 +210,7 @@ public class DBManager {
             try {
                 rs.close();
             } catch (SQLException ex) {
-                //DBLOG.error(Messages.ERR_CANNOT_CLOSE_RESULTSET, ex);
+                DB_LOG.error(Messages.ERR_CANNOT_CLOSE_RESULTSET, ex);
             }
         }
     }
@@ -233,7 +235,7 @@ public class DBManager {
             try {
                 con.rollback();
             } catch (SQLException ex) {
-                //DBLOG.error("Cannot rollback transaction", ex);
+                DB_LOG.error("Cannot rollback transaction", ex);
             }
         }
     }

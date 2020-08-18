@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class CommandContainer {
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     private static Map<String, Command> commands = new TreeMap<>();
 
@@ -29,8 +29,8 @@ public class CommandContainer {
          //admin commands
         commands.put("updatingUPO", new UpdatingUPOCommand());
 
-        LOG.debug("Command container was successfully initialized");
-        LOG.debug("Number of commands --> " + commands.size());
+        WEB_LOG.info("Command container was successfully initialized");
+        WEB_LOG.info("Number of commands --> " + commands.size());
     }
 
     /**
@@ -42,7 +42,7 @@ public class CommandContainer {
      */
     public static Command get(String commandName) {
         if (commandName == null || !commands.containsKey(commandName)) {
-            //LOG.trace("Command not found, name --> " + commandName);
+            WEB_LOG.trace("Command not found, name --> " + commandName);
             return commands.get("noCommand");
         }
 

@@ -15,15 +15,15 @@ import java.util.List;
 public class ItemProductsCommand extends Command{
     private static final long serialVersionUID = -3071536593627692473L;
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-        LOG.debug("ItemProductsCommand starts");
+        WEB_LOG.info("ItemProductsCommand starts");
 
         HttpSession session = request.getSession();
         int itemId = Integer.parseInt(request.getParameter("ItemId"));
-        LOG.debug("Request parameter: ItemId --> " + itemId);
+        WEB_LOG.info("Request parameter: ItemId --> " + itemId);
 
         String forward = Path.PAGE_ITEM_PRODUCTS;
 

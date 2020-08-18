@@ -12,7 +12,7 @@ import java.util.*;
 
 public class CommandAccessFilter implements Filter {
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     // commands access
     private Map<Role, List<String>> accessMap = new HashMap<Role, List<String>>();
@@ -20,22 +20,22 @@ public class CommandAccessFilter implements Filter {
     private List<String> outOfControl = new ArrayList<String>();
 
     public void destroy() {
-        LOG.debug("Filter destruction starts");
+        WEB_LOG.info("Filter destruction starts");
         // do nothing
-        LOG.debug("Filter destruction finished");
+        WEB_LOG.info("Filter destruction finished");
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        LOG.debug("Filter starts");
+        WEB_LOG.info("Filter starts");
 
         if (accessAllowed(request)) {
-            LOG.debug("Filter finished");
+            WEB_LOG.info("Filter finished");
             chain.doFilter(request, response);
         } else {
             String errorMessasge = "You do not have permission to access the requested resource";
 
             request.setAttribute("errorMessage", errorMessasge);
-            LOG.debug("Set the request attribute: errorMessage --> " + errorMessasge);
+            WEB_LOG.info("Set the request attribute: errorMessage --> " + errorMessasge);
 
             request.getRequestDispatcher(Path.PAGE_ERROR_PAGE)
                     .forward(request, response);
@@ -70,22 +70,22 @@ public class CommandAccessFilter implements Filter {
     }
 
     public void init(FilterConfig fConfig) throws ServletException {
-        LOG.debug("Filter initialization starts");
+        WEB_LOG.info("Filter initialization starts");
 
         // roles
         accessMap.put(Role.ADMIN, asList(fConfig.getInitParameter("admin")));
         accessMap.put(Role.CLIENT, asList(fConfig.getInitParameter("client")));
-        LOG.debug("Access map --> " + accessMap);
+        WEB_LOG.info("Access map --> " + accessMap);
 
         // commons
         commons = asList(fConfig.getInitParameter("common"));
-        LOG.debug("Common commands --> " + commons);
+        WEB_LOG.info("Common commands --> " + commons);
 
         // out of control
         outOfControl = asList(fConfig.getInitParameter("out-of-control"));
-        LOG.debug("Out of control commands --> " + outOfControl);
+        WEB_LOG.info("Out of control commands --> " + outOfControl);
 
-        LOG.debug("Filter initialization finished");
+        WEB_LOG.info("Filter initialization finished");
     }
 
     /**

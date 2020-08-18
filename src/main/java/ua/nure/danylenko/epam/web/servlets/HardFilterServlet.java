@@ -17,7 +17,7 @@ import java.util.List;
 
 public class HardFilterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class HardFilterServlet extends HttpServlet {
             container = (List<Item>)session.getAttribute("items");
         }else{
             forward = Path.PAGE_ERROR_PAGE;
-            LOG.error("ERROR WHEN HARD FILTER PRODUCTS: empty List<Items> in sessionScope...");
+            WEB_LOG.error("ERROR WHEN HARD FILTER PRODUCTS: empty List<Items> in sessionScope...");
         }
 
 

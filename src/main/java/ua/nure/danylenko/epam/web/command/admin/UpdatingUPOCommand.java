@@ -13,7 +13,7 @@ public class UpdatingUPOCommand extends Command {
 
     private static final long serialVersionUID = 1863978254689586513L;
 
-    private static final Logger LOG = Logger.getLogger(UpdatingUPOCommand.class);
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     /**
      * Serializable comparator used with TreeMap container. When the servlet
@@ -40,7 +40,7 @@ public class UpdatingUPOCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
 
-        LOG.debug("Commands starts");
+        WEB_LOG.debug("Commands starts");
 
 //        List<UserOrderBean> userOrderBeanList = DBManager.getInstance().getUserOrderBeans();
 //        LOG.trace("Found in DB: userOrderBeanList --> " + userOrderBeanList);

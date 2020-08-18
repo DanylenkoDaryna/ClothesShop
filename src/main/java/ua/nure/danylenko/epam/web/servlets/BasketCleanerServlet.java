@@ -15,7 +15,7 @@ import java.util.List;
 
 public class BasketCleanerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +36,7 @@ public class BasketCleanerServlet extends HttpServlet {
 
         if(basket==null){
             forward = Path.PAGE_ERROR_PAGE;
-            LOG.error("ERROR: BasketCleanerServlet doPost() -> itemsInBasket container is empty");
+            WEB_LOG.error("ERROR: BasketCleanerServlet doPost() -> itemsInBasket container is empty");
         }
 
         try {
@@ -48,7 +48,7 @@ public class BasketCleanerServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            LOG.error(" in BasketCleanerServlet 27.06.2020");
+            WEB_LOG.error(" in BasketCleanerServlet 27.06.2020");
         }
         RequestDispatcher rd = req.getRequestDispatcher(forward);
         rd.forward(req, resp);

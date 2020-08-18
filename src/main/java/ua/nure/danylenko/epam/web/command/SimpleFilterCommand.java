@@ -17,11 +17,12 @@ import java.util.List;
 public class SimpleFilterCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 
-    private static final Logger LOG = Logger.getLogger("servlets");
+    private static final Logger WEB_LOG = Logger.getLogger("servlets");
+    private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-        LOG.debug("SimpleFilterCommand starts");
+        WEB_LOG.info("SimpleFilterCommand starts");
 
         HttpSession session = request.getSession();
         String filterType = request.getParameter("filtration");
@@ -33,8 +34,8 @@ public class SimpleFilterCommand extends Command {
             items = (List<Item>)session.getAttribute("items");
         }
 
-        LOG.debug("Request parameters: filtration --> " + filterType);
-        LOG.debug("Request parameters: items --> " + items);
+        DB_LOG.info("Request parameters: filtration --> " + filterType);
+        DB_LOG.info("Request parameters: items --> " + items);
 
         if (items == null || items.isEmpty()){
             throw new AppException("items cannot be empty");
