@@ -79,6 +79,16 @@ Class page corresponds to the '.page' element in included CSS document.
             </tr>
             <tr>
                 <td class="content center">
+                    <%-- REGISTERING --%>
+                    <h1>First time here? Then
+                        <a href="registering.jsp">
+                            Register
+                        </a>
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <td class="content center">
                     <%-- FOOTER --%>
                     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
                     <%-- FOOTER --%>
