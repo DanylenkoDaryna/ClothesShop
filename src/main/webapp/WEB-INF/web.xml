@@ -150,7 +150,7 @@
     </init-param>
     <init-param>
       <param-name>out-of-control</param-name>
-      <param-value>login listProducts ItemProducts SimpleFilter</param-value>
+      <param-value>login listProducts ItemProducts SimpleFilter register</param-value>
     </init-param>
   </filter>
 

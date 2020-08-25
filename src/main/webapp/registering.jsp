@@ -62,34 +62,43 @@ Class page corresponds to the '.page' element in included CSS document.
                             The purpose of this to define the command name, which have to be executed
                             after you submit current form.
                             ===========================================================================--%>
-                            <input type="hidden" name="command" value="login"/>
+                            <input type="hidden" name="command" value="register"/>
 
                             <fieldset>
                                 <legend>First name</legend>
-                                <input name="First name"/><br/>
+                                <input name="first name"/><br/>
                             </fieldset><br/>
                                 <fieldset>
                                     <legend>Last name</legend>
-                                    <input name="Last name"/><br/>
+                                    <input name="last name"/><br/>
                                 </fieldset><br/>
                                 <fieldset>
-                                    <legend>Country</legend>
-                                    <input name="Country"/><br/>
+                                    <label for="country">Country</label>
+                                    <select id="country" name="country">
+                                        <option value="volvo">Ukraine</option>
+                                        <option value="saab">Great Britain</option>
+                                    </select>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Date of Birth</legend>
-                                    <input name="Date of Birth"/><br/>
+                                    <input name="birthday" type="date"/><br/>
                                 </fieldset><br/>
                                 <fieldset>
-                                    <legend>Login</legend>
-                                    <input name="login"/><br/>
+                                    <legend>Email</legend>
+                                    <input type="email" name="email"/><br/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Password</legend>
                                     <input type="password" name="password"/>
                                 </fieldset><br/>
+                                <fieldset>
+                                    <legend>Phone number</legend>
+                                    <input type="tel" name="telephone" pattern="+38 (0[0-9]{2})[0-9]{3}-[0-9]{2}-[0-9]{2}"/>
+                                </fieldset><br/>
 
-                            <input type="submit" value="Login" >
+                            <input type="submit" value="Register" >
+                                <input type="reset">
+
                         </form>
                     </td>
                 </tr>
