@@ -15,11 +15,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class ItemsDao implements IDao {
-    private ConnectionFactory connectionFactory;
+
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
     private Connection createConnection() throws DBException {
-        this.connectionFactory = new ConnectionFactory();
+
         return ConnectionFactory.getInstance().getConnection();
     }
 

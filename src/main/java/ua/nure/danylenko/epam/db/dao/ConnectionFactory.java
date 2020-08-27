@@ -110,6 +110,14 @@ public class ConnectionFactory {
     }
 
     /**
+     * Closes resources.
+     */
+    protected static void close(Connection con, Statement stmt) {
+        close(stmt);
+        close(con);
+    }
+
+    /**
      * Rollbacks a connection.
      *
      * @param con

@@ -64,11 +64,37 @@ CREATE TABLE users(
 );
 
 -- id = 1
-INSERT INTO users VALUES(DEFAULT, 'admin', 'admin', 'Ivan', 'Ivanov',  0);
+INSERT INTO users VALUES(DEFAULT, 'admin', 'admin', 'Ivan', 'Ivanov', 0);
 -- id = 2
-INSERT INTO users VALUES(DEFAULT, 'client', 'client', 'Petr', 'Petrov', 1);
+INSERT INTO users VALUES(DEFAULT, 'client', 'client', 'Petr', 'Petrov',  1);
 -- id = 3
 INSERT INTO users VALUES(DEFAULT, 'петров', 'петров', 'Иван', 'Петров', 1);
+
+
+-- --------------------------------------------------------------
+-- USER INFO
+-- --------------------------------------------------------------
+CREATE TABLE user_info(
+
+	id INTEGER NOT NULL auto_increment PRIMARY KEY,
+
+	country VARCHAR(20),
+	birthday DATE,
+	email VARCHAR(15),
+	telephone VARCHAR(14),
+
+	user_id INTEGER NOT NULL REFERENCES users(id)
+
+		ON DELETE CASCADE
+		ON UPDATE RESTRICT
+);
+
+-- id = 2
+INSERT INTO user_info VALUES(DEFAULT, 'Ukraine',
+'1995-07-05', 'client@i.ua', '+380994516667', 2);
+-- id = 3
+INSERT INTO user_info VALUES(DEFAULT, 'Ukraine',
+'1990-08-10', 'петров@i.ua', '+380974533337', 3);
 
 -- --------------------------------------------------------------
 -- GUESTS

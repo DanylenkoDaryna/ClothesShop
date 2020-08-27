@@ -1,13 +1,15 @@
 package ua.nure.danylenko.epam.db.service;
 
-import ua.nure.danylenko.epam.db.dao.ItemsDao;
+
+import ua.nure.danylenko.epam.db.dao.UserDao;
 import ua.nure.danylenko.epam.exception.DBException;
 
-public class ItemsService implements IService {
+public class UserService implements IService{
+
 
     @Override
-    public ItemsDao getDao() {
-        return new ItemsDao();
+    public UserDao getDao() {
+        return new UserDao();
     }
 
     @Override

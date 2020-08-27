@@ -2,7 +2,8 @@ package ua.nure.danylenko.epam.web.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
-import ua.nure.danylenko.epam.db.DBManager;
+import ua.nure.danylenko.epam.db.entity.User;
+import ua.nure.danylenko.epam.db.service.UserService;
 import ua.nure.danylenko.epam.exception.AppException;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegisterCommand extends Command {
 
@@ -28,7 +32,15 @@ public class RegisterCommand extends Command {
         String firstName = request.getParameter("first name");
         String lastName = request.getParameter("last name");
         String country = request.getParameter("country");
-        String birthday = request.getParameter("birthday");
+        SimpleDateFormat formatter = new SimpleDateFormat();
+        Date birthday = new Date(12,14,1999);
+        try {
+            birthday = formatter.parse(request.getParameter("birthday"));
+            WEB_LOG.info(request.getParameter("birthday"));
+            WEB_LOG.info(birthday);
+        } catch (ParseException e) {
+            WEB_LOG.error(e.getStackTrace());
+        }
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String telephone = request.getParameter("telephone");
@@ -47,7 +59,19 @@ public class RegisterCommand extends Command {
             throw new AppException("email/password cannot be empty");
         }
 
-        DBManager manager = DBManager.getInstance();
+        User newUser=new User();
+        newUser.setFirstName(firstName);
+        newUser.setLastName(lastName);
+        newUser.setLogin(email);
+        newUser.setPassword(password);
+        newUser.setEmail(email);
+        newUser.setTelephone(telephone);
+        newUser.setBirthday(birthday);
+        newUser.setCountry(country);
+        UserService userService=new UserService();
+        userService.getDao().create(newUser);
+        //DBManager manager = DBManager.getInstance();
+
 //        User user = manager.findUserByLogin(login);
 //        DB_LOG.info("Found in DB: user --> " + user);
 //

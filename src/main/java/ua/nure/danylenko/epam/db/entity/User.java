@@ -1,5 +1,7 @@
 package ua.nure.danylenko.epam.db.entity;
 
+import java.util.Date;
+
 public class User extends Entity {
 
     private static final long serialVersionUID = -6889036256149495388L;
@@ -11,6 +13,14 @@ public class User extends Entity {
     private String firstName;
 
     private String lastName;
+
+    private String country;
+
+    private Date birthday;
+
+    private String email;
+
+    private String telephone;
 
     private int roleId;
 
@@ -62,4 +72,35 @@ public class User extends Entity {
                 + ", roleId=" + roleId + "]";
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 }

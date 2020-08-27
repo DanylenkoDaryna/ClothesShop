@@ -66,34 +66,35 @@ Class page corresponds to the '.page' element in included CSS document.
 
                             <fieldset>
                                 <legend>First name</legend>
-                                <input name="first name"/><br/>
+                                <input name="first name" required/><br/>
                             </fieldset><br/>
                                 <fieldset>
                                     <legend>Last name</legend>
-                                    <input name="last name"/><br/>
+                                    <input name="last name" required/><br/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <label for="country">Country</label>
-                                    <select id="country" name="country">
+                                    <select id="country" name="country" required>
                                         <option value="volvo">Ukraine</option>
                                         <option value="saab">Great Britain</option>
                                     </select>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Date of Birth</legend>
-                                    <input name="birthday" type="date"/><br/>
+                                    <input name="birthday" type="date" required/><br/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Email</legend>
-                                    <input type="email" name="email"/><br/>
+                                    <input type="email" name="email" required/><br/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Password</legend>
-                                    <input type="password" name="password"/>
+                                    <input type="password" name="password" required/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Phone number</legend>
-                                    <input type="tel" name="telephone" pattern="+38 (0[0-9]{2})[0-9]{3}-[0-9]{2}-[0-9]{2}"/>
+                                    <input type="tel" name="telephone"
+                                           pattern="+38 (0[0-9]{2})[0-9]{3}-[0-9]{2}-[0-9]{2}" required/>
                                 </fieldset><br/>
 
                             <input type="submit" value="Register" >

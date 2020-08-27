@@ -1,14 +1,13 @@
 package ua.nure.danylenko.epam.db.service;
 
 import ua.nure.danylenko.epam.db.dao.IDao;
-import ua.nure.danylenko.epam.db.entity.Catalogue;
 import ua.nure.danylenko.epam.exception.DBException;
 
-public interface ICatalogueService {
+public interface IService <T> {
 
-    IDao<Catalogue> getDao();
+    IDao<T> getDao();
 
-    default Catalogue read() throws DBException {
+    default T read() throws DBException {
         return getDao().read();
     }
 

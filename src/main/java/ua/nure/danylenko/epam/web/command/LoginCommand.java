@@ -2,9 +2,9 @@ package ua.nure.danylenko.epam.web.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
-import ua.nure.danylenko.epam.db.DBManager;
 import ua.nure.danylenko.epam.db.Role;
 import ua.nure.danylenko.epam.db.entity.User;
+import ua.nure.danylenko.epam.db.service.UserService;
 import ua.nure.danylenko.epam.exception.AppException;
 
 import javax.servlet.ServletException;
@@ -37,9 +37,11 @@ public class LoginCommand extends Command {
             throw new AppException("Login/password cannot be empty");
         }
 
-        DBManager manager = DBManager.getInstance();
-        User user = manager.findUserByLogin(login);
-        DB_LOG.info("Found in DB: user --> " + user);
+        //DBManager manager = DBManager.getInstance();
+        //User user = manager.findUserByLogin(login);
+        UserService userService= new UserService();
+        User user = userService.getDao().findUserByLogin(login);
+        DB_LOG.info("Found in DB: user --> " + user.getFirstName());
 
         if (user == null) {
             throw new AppException("Cannot find user with such login");
