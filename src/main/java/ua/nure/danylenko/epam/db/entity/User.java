@@ -1,6 +1,6 @@
 package ua.nure.danylenko.epam.db.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class User extends Entity {
 
@@ -16,7 +16,7 @@ public class User extends Entity {
 
     private String country;
 
-    private Date birthday;
+    private LocalDate birthday;
 
     private String email;
 
@@ -80,11 +80,11 @@ public class User extends Entity {
         this.country = country;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

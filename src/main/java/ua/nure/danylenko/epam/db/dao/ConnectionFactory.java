@@ -48,9 +48,10 @@ public class ConnectionFactory {
      * @return DB connection.
      */
     public Connection getConnection() throws DBException {
-        Connection con = null;
+        Connection con;
         try {
             con = dataSource.getConnection();
+            DB_LOG.info("CONNECTION - "+con);
         } catch (SQLException ex) {
             DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);

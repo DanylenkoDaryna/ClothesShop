@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class RegisterCommand extends Command {
 
@@ -33,14 +32,9 @@ public class RegisterCommand extends Command {
         String lastName = request.getParameter("last name");
         String country = request.getParameter("country");
         SimpleDateFormat formatter = new SimpleDateFormat();
-        Date birthday = new Date(12,14,1999);
-        try {
-            birthday = formatter.parse(request.getParameter("birthday"));
-            WEB_LOG.info(request.getParameter("birthday"));
-            WEB_LOG.info(birthday);
-        } catch (ParseException e) {
-            WEB_LOG.error(e.getStackTrace());
-        }
+        LocalDate birthday = LocalDate.parse(request.getParameter("birthday"));
+        WEB_LOG.info(birthday);
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String telephone = request.getParameter("telephone");
@@ -70,34 +64,10 @@ public class RegisterCommand extends Command {
         newUser.setCountry(country);
         UserService userService=new UserService();
         userService.getDao().create(newUser);
-        //DBManager manager = DBManager.getInstance();
-
-//        User user = manager.findUserByLogin(login);
-//        DB_LOG.info("Found in DB: user --> " + user);
-//
-//        if (user == null) {
-//            throw new AppException("Cannot find user with such login");
-//        }else if(!password.equals(user.getPassword())){
-//            throw new AppException("Incorrect password. Please try again ");
-//        }
-//
-//        Role userRole = Role.getRole(user);
-//        WEB_LOG.info("userRole --> " + userRole);
-//
-//        String forward = Path.PAGE_GOOD;
-//
-//        if (userRole == Role.ADMIN) {
-//            //COMMAND_UPDATING_UPO - adding, removing, editing users, products, orders
-//            forward = Path.COMMAND_UPDATING_UPO;
-//        }
-
-//        if (userRole == Role.CLIENT) {
-//            forward = Path.COMMAND_CABINET_ORDERS;
-//        }
 
         String forward = Path.COMMAND_CABINET_ORDERS;
-//        session.setAttribute("user", user);
-//        WEB_LOG.info("Set the session attribute: user --> " + user);
+        session.setAttribute("sessionUser", newUser);
+        WEB_LOG.info("Set the session attribute: sessionUser --> " + newUser);
 //
 //        session.setAttribute("userRole", userRole);
 //        WEB_LOG.info("Set the session attribute: userRole --> " + userRole);

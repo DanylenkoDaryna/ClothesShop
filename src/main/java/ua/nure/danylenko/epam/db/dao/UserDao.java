@@ -6,10 +6,7 @@ import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.exception.DBException;
 import ua.nure.danylenko.epam.exception.Messages;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDao implements IDao {
 
@@ -27,7 +24,8 @@ public class UserDao implements IDao {
     private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
 
     private static final String SQL_UPDATE_USER = "UPDATE users SET password=?, first_name=?, last_name=?";
-    private static final String SQL_CREATE_USER = "INSERT INTO users VALUES(DEFAULT, login=?, password=?, first_name=?, last_name=?, role_id=?)";
+    private static final String SQL_CREATE_USER = "INSERT INTO armadiodb.users (id, login, password, first_name, last_name, role_id) values (DEFAULT,?, ?, ?, ?, ?)";
+    private static final String SQL_ADD_USER_INFO_BY_ID = "INSERT INTO armadiodb.user_info values (DEFAULT, country=?, birthday=?, email=?, telephone=?, user_id=?)";
     private static final String SQL_FIND_USER_ID = "SELECT id FROM users";
     private static final String SQL_FIND_FULL_CATALOGUE = "SELECT * FROM catalogue";
 
@@ -39,10 +37,9 @@ public class UserDao implements IDao {
     @Override
     public void create(Object entity) {
         User user=(User)entity;
-        DB_LOG.info(user.getFirstName());
-        DB_LOG.info(user.getBirthday());
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        Statement stmt = null;
+        ResultSet rs;
         Connection con = null;
         try {
             con = getConnection();
@@ -56,10 +53,13 @@ public class UserDao implements IDao {
             //pstmt.executeQuery();executes the select query. It returns an instance of ResultSet.
 
             //executes the query. It is used for create, drop, insert, update, delete etc.
-            pstmt.executeUpdate();
+            pstmt.execute();
+
 
             //executes the select query. It returns an instance of ResultSet.
-            rs = pstmt.executeQuery("SELECT last_insert_id()");
+            stmt=con.createStatement();
+            rs = stmt.executeQuery("SELECT last_insert_id()");
+
             if (rs.next()){
                 user.setId(rs.getLong(1));
                 DB_LOG.info("key="+rs.getLong(1));
@@ -68,8 +68,9 @@ public class UserDao implements IDao {
                 DB_LOG.info("Error getting key");
             }
 
-            //setUserInfo(con, user);
-            //con.commit();
+            setUserInfo(con, user);
+            con.commit();
+
         } catch (DBException e) {
 
             DB_LOG.error(e.getStackTrace());
@@ -78,8 +79,9 @@ public class UserDao implements IDao {
         } catch (SQLException e) {
             DB_LOG.error(e);
             DB_LOG.info("trouble with commit");
+            ConnectionFactory.rollback(con);
         } finally {
-            ConnectionFactory.close(con, pstmt, rs);
+            ConnectionFactory.close(con, pstmt);
         }
 
     }
@@ -130,25 +132,24 @@ public class UserDao implements IDao {
         return user;
     }
 
-//    private void setUserInfo(Connection con, User user){
-//        ResultSet rs = null;
-//        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_USER_ID)){
-//
-//                pstmt.setLong(1, item.getId());
-//                rs = pstmt.executeQuery();
-//                while (rs.next()) {
-//
-//                    Product product = extractProduct(rs);
-//                    item.getContainer().add(product);
-//                    getMaterialsByProduct(con, product);
-//                    getProductImages(con,product);
-//                }
-//            }
-//
-//        }finally {
-//            ConnectionFactory.close(rs);
-//        }
-//    }
+    private void setUserInfo(Connection con, User user){
+
+        try(PreparedStatement ps = con.prepareStatement(SQL_ADD_USER_INFO_BY_ID)){
+
+                ps.setString(1, user.getCountry());
+                ps.setDate(2, Date.valueOf(user.getBirthday()));
+                ps.setString(3, user.getEmail());
+                ps.setString(4, user.getTelephone());
+                ps.setLong(5, user.getId());
+                ps.execute();
+
+        } catch (SQLException e) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("UserDao.java in setUserInfo() ", e);
+        }
+
+    }
+
     /**
      * Extracts a user entity from the result set.
      *

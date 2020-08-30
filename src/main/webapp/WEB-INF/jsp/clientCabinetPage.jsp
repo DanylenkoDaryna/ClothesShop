@@ -56,9 +56,15 @@ Class page corresponds to the '.page' element in included CSS document.
                             <tbody>
                             <tr class="active">
                                 <td>NAME</td>
+                                <td>${sessionScope.sessionUser.getFirstName()}</td>
                             </tr>
                             <tr class="danger">
-                                <td>SECOND NAME</td><td>ffaasdfdf</td>
+                                <td>SECOND NAME</td>
+                                <td>${sessionScope.sessionUser.getLastName()}</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>SECOND NAME</td>
+                                <td>${sessionScope.sessionUser.getBirthday()}</td>
                             </tr>
                             </tbody>
                         </table>

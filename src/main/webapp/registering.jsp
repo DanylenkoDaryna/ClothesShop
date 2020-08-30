@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!doctype html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%!private String pageJspName="/registering.jsp";%>
 <html lang="en">
 
@@ -75,8 +74,8 @@ Class page corresponds to the '.page' element in included CSS document.
                                 <fieldset>
                                     <label for="country">Country</label>
                                     <select id="country" name="country" required>
-                                        <option value="volvo">Ukraine</option>
-                                        <option value="saab">Great Britain</option>
+                                        <option value="Ukraine">Ukraine</option>
+                                        <option value="Great Britain">Great Britain</option>
                                     </select>
                                 </fieldset><br/>
                                 <fieldset>
@@ -93,8 +92,8 @@ Class page corresponds to the '.page' element in included CSS document.
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Phone number</legend>
-                                    <input type="tel" name="telephone"
-                                           pattern="+38 (0[0-9]{2})[0-9]{3}-[0-9]{2}-[0-9]{2}" required/>
+                                    <input type="tel" name="telephone"required/>
+                                           <!--pattern="+[0-9]{5}[0-9]{3}-[0-9]{2}-[0-9]{2}" required/>-->
                                 </fieldset><br/>
 
                             <input type="submit" value="Register" >
