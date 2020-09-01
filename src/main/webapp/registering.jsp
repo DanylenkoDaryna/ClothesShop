@@ -83,6 +83,7 @@ Class page corresponds to the '.page' element in included CSS document.
                                     <input name="birthday" type="date" required/><br/>
                                 </fieldset><br/>
                                 <fieldset>
+                                    <!--це заглушка для логіна, бо логін має бути унікальним, а емейли унікальні-->
                                     <legend>Email</legend>
                                     <input type="email" name="email" required/><br/>
                                 </fieldset><br/>

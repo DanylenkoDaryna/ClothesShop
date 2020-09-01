@@ -48,24 +48,36 @@ Class page corresponds to the '.page' element in included CSS document.
                     <div class="col-lg-6 col-md-6 ">
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th><h1>PERSONAL INFORMATION
-                                    </h1></th>
-                            </tr>
+                                <th><h2>PERSONAL INFORMATION
+                                    </h2></th>
+
                             </thead>
                             <tbody>
                             <tr class="active">
                                 <td>NAME</td>
-                                <td>${sessionScope.sessionUser.getFirstName()}</td>
+                                <td>${sessionScope.clientUser.getFirstName()}</td>
                             </tr>
                             <tr class="danger">
                                 <td>SECOND NAME</td>
-                                <td>${sessionScope.sessionUser.getLastName()}</td>
+                                <td>${sessionScope.clientUser.getLastName()}</td>
                             </tr>
                             <tr class="danger">
-                                <td>SECOND NAME</td>
-                                <td>${sessionScope.sessionUser.getBirthday()}</td>
+                                <td>BDAY</td>
+                                <td>${sessionScope.clientUser.getBirthday()}</td>
                             </tr>
+                            <tr class="danger">
+                                <td>COUNTRY</td>
+                                <td>${sessionScope.clientUser.getCountry()}</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>EMAIL</td>
+                                <td>${sessionScope.clientUser.getEmail()}</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>TEL</td>
+                                <td>${sessionScope.clientUser.getTelephone()}</td>
+                            </tr>
+                            <th><h2>ORDERS</h2></th>
                             </tbody>
                         </table>
                     </div>

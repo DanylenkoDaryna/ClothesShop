@@ -2,12 +2,15 @@ package ua.nure.danylenko.epam.web.command.client;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
+import ua.nure.danylenko.epam.db.entity.User;
+import ua.nure.danylenko.epam.db.service.UserService;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class GetMyCabinetCommand extends Command {
@@ -22,24 +25,15 @@ public class GetMyCabinetCommand extends Command {
 
         WEB_LOG.info("GetMyCabinetCommand starts");
         APP_LOG.debug("GetMyCabinetCommand starts in app");
-//
-//        // get menu items list
-//        List<MenuItem> menuItems = DBManager.getInstance().findMenuItems();
-//        LOG.trace("Found in DB: menuItemsList --> " + menuItems);
-//
-//        // sort menu by category
-//        Collections.sort(menuItems, new Comparator<MenuItem>() {
-//            public int compare(MenuItem o1, MenuItem o2) {
-//                return (int)(o1.getCategoryId() - o2.getCategoryId());
-//            }
-//        });
-//
-//        // put menu items list to the request
-//        request.setAttribute("menuItems", menuItems);
-//        LOG.trace("Set the request attribute: menuItems --> " + menuItems);
-//
-//        LOG.debug("Command finished");
+
+
+        UserService userService=new UserService();
+        User newUser = (User)userService.getDao().read();
+        //String forward = Path.COMMAND_CABINET_ORDERS;
+        HttpSession session = request.getSession();
+        //session.setAttribute("clientUser", newUser);
+
         return Path.PAGE_PERSONAL_CABINET;
-       // return null;
+
     }
 }

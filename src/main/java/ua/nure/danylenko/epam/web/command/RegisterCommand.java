@@ -33,8 +33,6 @@ public class RegisterCommand extends Command {
         String country = request.getParameter("country");
         SimpleDateFormat formatter = new SimpleDateFormat();
         LocalDate birthday = LocalDate.parse(request.getParameter("birthday"));
-        WEB_LOG.info(birthday);
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String telephone = request.getParameter("telephone");
@@ -62,12 +60,13 @@ public class RegisterCommand extends Command {
         newUser.setTelephone(telephone);
         newUser.setBirthday(birthday);
         newUser.setCountry(country);
+
         UserService userService=new UserService();
         userService.getDao().create(newUser);
 
-        String forward = Path.COMMAND_CABINET_ORDERS;
-        session.setAttribute("sessionUser", newUser);
-        WEB_LOG.info("Set the session attribute: sessionUser --> " + newUser);
+        String forward = Path.PAGE_PERSONAL_CABINET;
+        session.setAttribute("clientUser", newUser);
+        WEB_LOG.info("Set the session attribute: clientUser --> " + newUser);
 //
 //        session.setAttribute("userRole", userRole);
 //        WEB_LOG.info("Set the session attribute: userRole --> " + userRole);

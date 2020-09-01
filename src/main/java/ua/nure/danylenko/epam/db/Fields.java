@@ -9,6 +9,11 @@ public class Fields {
     public static final String USER_FIRST_NAME = "first_name";
     public static final String USER_LAST_NAME = "last_name";
     public static final String USER_ROLE_ID = "role_id";
+    public static final String USER_INFO_COUNTRY = "country";
+    public static final String USER_INFO_BDAY = "birthday";
+    public static final String USER_INFO_TEL = "telephone";
+    public static final String USER_INFO_EMAIL="email";
+
 
     public static final String ORDER_BILL = "bill";
     public static final String ORDER_USER_ID = "user_id";
