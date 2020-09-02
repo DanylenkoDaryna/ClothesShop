@@ -31,13 +31,11 @@
                     </li>
                 </c:forEach>
 
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <%--<form class="form-inline my-2 my-lg-0">--%>
+                    <%--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--%>
+                    <%--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
+                <%--</form>--%>
+
                 <li class="nav-item active">
                     <c:if test="${empty sessionScope.itemsInBasket}">
                         <a class="nav-link disabled" >
@@ -52,9 +50,41 @@
                         </a>
                     </c:if>
                 </li>
-                <li class="nav-item" >
-                    <a class="nav-link" href="login.jsp">Log in</a>
-                </li>
+                    <c:choose>
+                    <c:when test="${not empty sessionScope.clientUser}">
+                        <%--<a class="nav-link" href="logout.jsp">Logout</a>--%>
+                        <%--<a class="nav-link" href="clientCabinetPage.jsp">MyCabinet</a>--%>
+                        <%----%>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="controller?command=logout">Logout</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="clientCabinetPage.jsp">MyCabinet</a>
+                        </li>
+                    </c:when>
+
+                    <c:when test="${not empty sessionScope.adminUser}">
+                        <%--<a class="nav-link" href="logout.jsp">Logout</a>--%>
+                        <%--<a class="nav-link" href="administrationPage.jsp">Administration</a>--%>
+                        <%----%>
+                        <li class="nav-item" >
+                        <a class="nav-link" href="controller?command=logout">Logout</a>
+                        </li>
+                        <li class="nav-item" >
+                        <a class="nav-link" href="">Administration</a>
+                        </li>
+                    </c:when>
+
+                    <c:otherwise>
+                        <li class="nav-item" >
+                        <a class="nav-link" href="login.jsp">Log in</a>
+                        </li>
+                    </c:otherwise>
+
+                    </c:choose>
+
+
+
             </ul>
         </div>
     </nav>

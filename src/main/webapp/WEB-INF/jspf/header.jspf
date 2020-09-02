@@ -67,11 +67,11 @@ Type link to logout
 </div>
 </c:if>
 
-<c:if test="${empty user and title ne 'Login'}">
-	<div id="rightHeader">
-		<a href="login.jsp">Login</a>
-	</div>
-</c:if>
+<%--<c:if test="${empty user and title ne 'Login'}">--%>
+	<%--<div id="rightHeader">--%>
+		<%--<a href="login.jsp">Login</a>--%>
+	<%--</div>--%>
+<%--</c:if>--%>
 
 	</td>
 </tr>

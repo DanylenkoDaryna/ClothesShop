@@ -7,7 +7,7 @@
 --%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%!private String pageJspName="/jsp/clientCabinetPage.jsp";%>
+<%!private String pageJspName="clientCabinetPage.jsp";%>
 <html lang="en">
 
 
