@@ -3,7 +3,7 @@ package ua.nure.danylenko.epam.db;
 import ua.nure.danylenko.epam.db.entity.User;
 
 public enum Role {
-    ADMIN, CLIENT, GUEST;
+    ADMIN, CLIENT;
 
     public static Role getRole(User user) {
         int roleId = user.getRoleId();

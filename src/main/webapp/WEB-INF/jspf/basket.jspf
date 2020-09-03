@@ -38,7 +38,10 @@ aria-hidden="true" - указывает, что элемент и все его 
                     </c:if>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary">To order</button>
+                        <form action="controller" method="post">
+                            <input type="hidden" name="command" value="login"/>
+                        <button type="submit" value="To order">To order</button>
+                    </form>
                 </div>
             </div>
         </div>

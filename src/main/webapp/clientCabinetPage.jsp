@@ -55,27 +55,27 @@ Class page corresponds to the '.page' element in included CSS document.
                             <tbody>
                             <tr class="active">
                                 <td>NAME</td>
-                                <td>${sessionScope.clientUser.getFirstName()}</td>
+                                <td>${sessionScope.sessionUser.getFirstName()}</td>
                             </tr>
                             <tr class="danger">
                                 <td>SECOND NAME</td>
-                                <td>${sessionScope.clientUser.getLastName()}</td>
+                                <td>${sessionScope.sessionUser.getLastName()}</td>
                             </tr>
                             <tr class="danger">
                                 <td>BDAY</td>
-                                <td>${sessionScope.clientUser.getBirthday()}</td>
+                                <td>${sessionScope.sessionUser.getBirthday()}</td>
                             </tr>
                             <tr class="danger">
                                 <td>COUNTRY</td>
-                                <td>${sessionScope.clientUser.getCountry()}</td>
+                                <td>${sessionScope.sessionUser.getCountry()}</td>
                             </tr>
                             <tr class="danger">
                                 <td>EMAIL</td>
-                                <td>${sessionScope.clientUser.getEmail()}</td>
+                                <td>${sessionScope.sessionUser.getEmail()}</td>
                             </tr>
                             <tr class="danger">
                                 <td>TEL</td>
-                                <td>${sessionScope.clientUser.getTelephone()}</td>
+                                <td>${sessionScope.sessionUser.getTelephone()}</td>
                             </tr>
                             <th><h2>ORDERS</h2></th>
                             </tbody>

@@ -54,16 +54,16 @@ public class LoginCommand extends Command {
 
         String forward = Path.PAGE_GOOD;
 
+        session.setAttribute("sessionUser", user);
+
         if (userRole == Role.ADMIN) {
             //COMMAND_UPDATING_UPO - adding, removing, editing users, products, orders
             forward = Path.COMMAND_UPDATING_UPO;
-            session.setAttribute("adminUser", user);
             WEB_LOG.info("Set the session attribute: adminUser --> " + user);
         }
 
         if (userRole == Role.CLIENT) {
-            forward = Path.COMMAND_CABINET_ORDERS;
-            session.setAttribute("clientUser", user);
+            forward = Path.PAGE_PERSONAL_CABINET;
             WEB_LOG.info("Set the session attribute: clientUser --> " + user);
         }
 

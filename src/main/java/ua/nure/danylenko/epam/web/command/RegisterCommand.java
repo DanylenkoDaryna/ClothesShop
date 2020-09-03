@@ -2,6 +2,7 @@ package ua.nure.danylenko.epam.web.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
+import ua.nure.danylenko.epam.db.Role;
 import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.db.service.UserService;
 import ua.nure.danylenko.epam.exception.AppException;
@@ -65,9 +66,14 @@ public class RegisterCommand extends Command {
         userService.getDao().create(newUser);
 
         String forward = Path.PAGE_PERSONAL_CABINET;
-        session.setAttribute("clientUser", newUser);
+        session.setAttribute("sessionUser", newUser);
+
         WEB_LOG.info("Set the session attribute: clientUser --> " + newUser);
-//
+
+        session.setAttribute("userRole", Role.CLIENT);
+        WEB_LOG.info("Set the session attribute: userRole --> " + Role.CLIENT);
+
+        //
 //        session.setAttribute("userRole", userRole);
 //        WEB_LOG.info("Set the session attribute: userRole --> " + userRole);
 //

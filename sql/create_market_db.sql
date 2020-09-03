@@ -30,7 +30,6 @@ CREATE TABLE roles(
 -- --------------------------------------------------------------
 INSERT INTO roles VALUES(0, 'admin');
 INSERT INTO roles VALUES(1, 'client');
-INSERT INTO roles VALUES(2, 'guest');
 
 -- --------------------------------------------------------------
 -- USERS
