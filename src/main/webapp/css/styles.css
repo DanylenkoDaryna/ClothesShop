@@ -68,9 +68,27 @@ table {
     text-align: center;
 }
 
+/*.nav-item {*/
+    /*text-align: right;*/
+    /*right: 0;*/
+/*}*/
+
 .nav-item {
-    text-align: right;
-    right: 0;
+    display:table;
+    width:fit-content;
+    margin:auto;
+    padding: 50px;
+    font-size: 50px;
+}
+.nav-item > li {
+    float:none;
+    display:table-cell;
+    text-align:center;
+}
+
+#cabinetTable{
+    margin: auto;
+    width:50%;
 }
 
 /* Change color of dropdown links on hover */

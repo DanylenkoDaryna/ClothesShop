@@ -2,6 +2,8 @@ package ua.nure.danylenko.epam.web.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.web.command.admin.UpdatingUPOCommand;
+import ua.nure.danylenko.epam.web.command.client.DeleteAccountCommand;
+import ua.nure.danylenko.epam.web.command.client.EditAccountCommand;
 import ua.nure.danylenko.epam.web.command.client.GetMyCabinetCommand;
 
 import java.util.Map;
@@ -26,6 +28,8 @@ public class CommandContainer {
 
          //client commands
         commands.put("getMyCabinet", new GetMyCabinetCommand());
+        commands.put("deleteAccount", new DeleteAccountCommand());
+        commands.put("editAccount", new EditAccountCommand());
 
          //admin commands
         commands.put("updatingUPO", new UpdatingUPOCommand());

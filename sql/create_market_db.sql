@@ -82,7 +82,9 @@ CREATE TABLE user_info(
 	email VARCHAR(15),
 	telephone VARCHAR(14),
 
-	user_id INTEGER NOT NULL REFERENCES users(id)
+	user_id INTEGER NOT NULL,
+
+	FOREIGN KEY (user_id) REFERENCES users(id)
 
 		ON DELETE CASCADE
 		ON UPDATE RESTRICT

@@ -11,3 +11,19 @@ body{
 .nav>.active>a{
     background-color: sandybrown;
 }
+
+.container-fluid {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.nav-item {
+    display:table;
+    width:100%;
+    margin: 0;
+}
+.nav-item > li {
+    float:none;
+    display:table-cell;
+    text-align:center;
+}

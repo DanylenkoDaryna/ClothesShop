@@ -11,6 +11,7 @@
 <html lang="en">
 
 
+
 <%-- HEAD --%>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <%-- HEAD --%>
@@ -41,15 +42,12 @@ Class page corresponds to the '.page' element in included CSS document.
 
 <main>
     <div class="container-fluid">
-        <section class="text-center mb-4">
+        <section class="text-center">
             <hi:Greetings/>
-            <div class="row wow fadeIn">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 ">
-                        <table class="table">
+                        <section class="table mb-lg-2">
+                        <table class="table" id="cabinetTable">
                             <thead>
-                                <th><h2>PERSONAL INFORMATION
-                                    </h2></th>
+                                <h3>PERSONAL INFORMATION</h3>
 
                             </thead>
                             <tbody>
@@ -77,18 +75,60 @@ Class page corresponds to the '.page' element in included CSS document.
                                 <td>TEL</td>
                                 <td>${sessionScope.sessionUser.getTelephone()}</td>
                             </tr>
-                            <th><h2>ORDERS</h2></th>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                            <tr class="danger">
+                                <td colspan="2">
+                                    <h3>ORDERS</h3>
+                                    sadfasfasfsadfsafasfdasf<br>
+                                    asdfasfd<br>
+                                    asdfaf<br>
+                                </td>
+                            </tr>
+                            <tr title="Editing" class="danger">
+                                <td colspan="2">
+                                    <c:set var="editButton" scope="session" value="false" />
 
-            <table class="table">
-                <tbody>
-                <%--===========================================================================
-                This is the CONTENT, containing the main part of the page.
-                ===========================================================================--%>
+                                    <h3>EDITING</h3>
+
+                                    <button name="editInfo"  value="Edit my information" onclick="Button1_Click()">
+                                        Edit my information
+                                    </button>
+
+                                    <script>
+                                        function Button1_Click() {
+                                            ${editButton} set(true);
+                                        }
+                                    </script>
+
+                                    <c:if test="${editButton == true}">
+
+                                            <%-- EDIT --%>
+                                            <%@ include file="/WEB-INF/jspf/editAccount.jspf"%>;
+                                            <%-- EDIT --%>
+                                    </c:if>
+
+                                        </td>
+                                    </tr>
+                                    <tr class="danger">
+                                        <td colspan="2">
+                                        <h3>DELETE ACCOUNT AND EXIT</h3>
+                                            <input type="button" name="deleteAccount" value="Delete this Account"
+                                                   onclick="confirmRemoveAccount()"
+                                                  >
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                                </section>
+                            </div>
+
+
+                    <table class="table">
+                        <tbody>
+                        <%--===========================================================================
+                        This is the CONTENT, containing the main part of the page.
+                        ===========================================================================--%>
                 <tr>
                     <td class="content center">
                         <%-- FOOTER --%>
@@ -98,8 +138,32 @@ Class page corresponds to the '.page' element in included CSS document.
                 </tr>
                 </tbody>
             </table>
-        </section>
-    </div>
+
+    <%--===========================================================================
+     This is the SCRIPT, containing the main functions of the page.
+    ===========================================================================--%>
+    <script>
+        function confirmRemoveAccount(){
+            if(show_confirm()){
+                window.location = "controller?command=deleteAccount";
+                this.hide();
+            }
+            else{
+                this.hide();
+            }
+        }
+        function show_confirm()
+        {
+            return confirm("Are you sure you want to do this?");
+        }
+        function editAccount(){
+            <!-- BASKET -->
+            <%@ include file="/WEB-INF/jspf/basket.jspf"%>
+            <!-- BASKET -->
+
+        }
+    </script>
+    <%--==========================================================================--%>
 
 </main>
 <!-- Bootstrap -->

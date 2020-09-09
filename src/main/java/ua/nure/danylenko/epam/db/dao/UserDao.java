@@ -22,6 +22,7 @@ public class UserDao implements IDao {
     private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login=?";
     private static final String SQL_GET_USER_INFO_BY_ID = "SELECT * FROM user_info WHERE user_id=?";
     private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
+    private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM users WHERE id=?";
 
     private static final String SQL_UPDATE_USER = "UPDATE users SET password=?, first_name=?, last_name=?";
     private static final String SQL_CREATE_USER = "INSERT INTO armadiodb.users (id, login, password, first_name, last_name, role_id) values (DEFAULT,?, ?, ?, ?, ?)";
@@ -99,7 +100,30 @@ public class UserDao implements IDao {
 
     @Override
     public void delete(long id) {
+        PreparedStatement pstmt = null;
+        Connection con = null;
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(SQL_DELETE_USER_BY_ID);
+            pstmt.setLong(1,id);
 
+            //executes the query. It is used for create, drop, insert, update, delete etc.
+            pstmt.execute();
+
+            con.commit();
+
+        } catch (DBException e) {
+
+            DB_LOG.error(e.getStackTrace());
+            DB_LOG.info("trouble with connection");
+
+        } catch (SQLException e) {
+            DB_LOG.error(e.getStackTrace());
+            DB_LOG.info("trouble with commit");
+            ConnectionFactory.rollback(con);
+        } finally {
+            ConnectionFactory.close(con, pstmt);
+        }
     }
 
     /**
