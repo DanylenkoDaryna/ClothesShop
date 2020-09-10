@@ -29,16 +29,13 @@ Class page corresponds to the '.page' element in included CSS document.
         header.jspf contains all necessary functionality for it.
         Just included it in this JSP document.
 ===========================================================================--%>
-<%@ include file="/WEB-INF/jspf/header.jspf"%>
+<%--<%@ include file="/WEB-INF/jspf/header.jspf"%>--%>
 <%-- HEADER --%>
 
-<%-- HAT --%>
-<%@ include file="/WEB-INF/jspf/hat.jspf"%>
-<%-- HAT --%>
+<%-- MAIN_MENU --%>
+<%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
+<%-- MAIN_MENU --%>
 
-<!-- BASKET -->
-<%@ include file="/WEB-INF/jspf/basket.jspf"%>
-<!-- BASKET -->
 
 <main>
     <div class="container-fluid">
@@ -85,26 +82,12 @@ Class page corresponds to the '.page' element in included CSS document.
                             </tr>
                             <tr title="Editing" class="danger">
                                 <td colspan="2">
-                                    <c:set var="editButton" scope="session" value="false" />
 
                                     <h3>EDITING</h3>
 
-                                    <button name="editInfo"  value="Edit my information" onclick="Button1_Click()">
-                                        Edit my information
+                                    <button name="editInfo">
+                                    <a href="jsp/editAccount.jsp"> Edit my information</a>
                                     </button>
-
-                                    <script>
-                                        function Button1_Click() {
-                                            ${editButton} set(true);
-                                        }
-                                    </script>
-
-                                    <c:if test="${editButton == true}">
-
-                                            <%-- EDIT --%>
-                                            <%@ include file="/WEB-INF/jspf/editAccount.jspf"%>;
-                                            <%-- EDIT --%>
-                                    </c:if>
 
                                         </td>
                                     </tr>
@@ -155,12 +138,6 @@ Class page corresponds to the '.page' element in included CSS document.
         function show_confirm()
         {
             return confirm("Are you sure you want to do this?");
-        }
-        function editAccount(){
-            <!-- BASKET -->
-            <%@ include file="/WEB-INF/jspf/basket.jspf"%>
-            <!-- BASKET -->
-
         }
     </script>
     <%--==========================================================================--%>

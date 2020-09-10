@@ -28,7 +28,10 @@
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/jspf/hat.jspf"%>
+
+<%-- MAIN_MENU --%>
+<%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
+<%-- MAIN_MENU --%>
 <main>
     <div class="container">
         <section class="text-center mb-4">
@@ -109,8 +112,7 @@
         </section>
     </div>
 </main>
-<!-- basket -->
-<%@ include file="/WEB-INF/jspf/basket.jspf"%>
+
 <!-- footer -->
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 

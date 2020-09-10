@@ -26,16 +26,10 @@ Class page corresponds to the '.page' element in included CSS document.
         header.jspf contains all necessary functionality for it.
         Just included it in this JSP document.
 ===========================================================================--%>
-<%@ include file="/WEB-INF/jspf/header.jspf"%>
-<%-- HEADER --%>
 
-<%-- HAT --%>
-<%@ include file="/WEB-INF/jspf/hat.jspf"%>
-<%-- HAT --%>
-
-<!-- BASKET -->
-<%@ include file="/WEB-INF/jspf/basket.jspf"%>
-<!-- BASKET -->
+<%-- MAIN_MENU --%>
+<%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
+<%-- MAIN_MENU --%>
 
 <main>
     <div class="container-fluid">

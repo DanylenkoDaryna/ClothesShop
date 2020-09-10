@@ -14,7 +14,11 @@
 
 </head>
 <body>
-<%@ include file="/WEB-INF/jspf/hat.jspf"%>
+
+<%-- MAIN_MENU --%>
+<%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
+<%-- MAIN_MENU --%>
+
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
         <a role="button" class="btn btn-outline-primary"
@@ -83,8 +87,6 @@
         </div>
     </main>
 </div>
-    <!-- basket -->
-    <%@ include file="/WEB-INF/jspf/basket.jspf"%>
     <!-- footer -->
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
     <!-- Bootstrap -->
