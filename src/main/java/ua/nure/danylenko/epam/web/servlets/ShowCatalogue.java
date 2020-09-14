@@ -18,8 +18,7 @@ public class ShowCatalogue extends HttpServlet {
         ServletContext context = getServletContext();
 
         CatalogueService catalogueService = new CatalogueService();
-        String forward = Path.PAGE_HEAD;
-        //Catalogue catalogue = manager.getCatalogue();
+        String forward = Path.PAGE_GOOD;
         Catalogue catalogue = null;
         try {
             catalogue = catalogueService.getDao().read();
@@ -36,8 +35,7 @@ public class ShowCatalogue extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //HttpSession session = request.getSession();
-        //session.setAttribute("userRole", Role.GUEST);
+
         request.getRequestDispatcher("index.jsp")
                 .forward(request, response);
     }

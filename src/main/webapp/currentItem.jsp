@@ -118,10 +118,10 @@
 
 <!-- Bootstrap -->
 <script type="text/javascript">
-    <%@include file="./js/jquery-3.4.1.min.js"%>
-    <%@include file="./js/popper.min.js"%>
-    <%@include file="./js/bootstrap.bundle.min.js"%>
-    <%@include file="./js/bootstrap.min.js"%>
+    <%@include file="js/jquery-3.4.1.min.js"%>
+    <%@include file="js/popper.min.js"%>
+    <%@include file="js/bootstrap.bundle.min.js"%>
+    <%@include file="js/bootstrap.min.js"%>
 </script>
 
 </body>

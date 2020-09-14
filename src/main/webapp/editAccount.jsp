@@ -7,7 +7,7 @@
 --%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%!private String pageJspName="jsp/editAccount.jsp";%>
+<%!private String pageJspName="/editAccount.jsp";%>
 <html lang="en">
 
 <%-- HEAD --%>
@@ -46,7 +46,7 @@
                     </fieldset>
                     <fieldset >
                         <label for="country">Country</label>
-                        <select id="country" name="country"  value="${sessionScope.sessionUser.getFirstName()}" >
+                        <select id="country" name="country">
                             <c:if test="${sessionScope.sessionUser.getCountry() eq 'Ukraine' }">
                             <option selected value="Ukraine" >Ukraine</option>
                             <option value="Great Britain">Great Britain</option>

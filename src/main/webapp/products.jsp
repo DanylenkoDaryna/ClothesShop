@@ -30,7 +30,7 @@
 <main>
     <div class="row">
         <div class="col-lg-2 col-md-3 ">
-            <section class="text-left">
+            <section class="text-left" id="filterProductsSection">
                 <%@ include file="/WEB-INF/jspf/hardFilter.jspf" %>
             </section>
          </div>
@@ -86,10 +86,10 @@
 
 <!-- Bootstrap -->
 <script type="text/javascript">
-    <%@include file="./js/jquery-3.4.1.min.js"%>
-    <%@include file="./js/popper.min.js"%>
-    <%@include file="./js/bootstrap.bundle.min.js"%>
-    <%@include file="./js/bootstrap.min.js"%>
+    <%@include file="js/jquery-3.4.1.min.js"%>
+    <%@include file="js/popper.min.js"%>
+    <%@include file="js/bootstrap.bundle.min.js"%>
+    <%@include file="js/bootstrap.min.js"%>
 </script>
 </body>
 </html>

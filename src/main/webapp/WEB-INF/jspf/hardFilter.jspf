@@ -1,5 +1,5 @@
 <form action="HardFilterServlet" method="post">
-    <div class="form-group">
+    <div class="form-group" id="filterProductsDiv">
         <h6>Price</h6>
         from:
         <input type="number" class="form-control-sm" name="InputPriceFrom" placeholder="$" min=40>
@@ -9,7 +9,7 @@
     </div>
     <h6>Size:</h6>
     <c:forEach items="${sessionScope.filterSizes}" var="filterSize">
-        <div class="custom-control custom-checkbox custom-control-inline">
+        <div class="custom-control custom-checkbox custom-control-inline" id="filterProductsDiv">
             <input type="checkbox" name="sizes" class="custom-control-input" value="${filterSize}"
                    id="${filterSize}">
             <label class="custom-control-label" for="${filterSize}"> ${filterSize}</label>
@@ -17,7 +17,7 @@
     </c:forEach>
     <h6>Brand:</h6>
     <c:forEach items="${sessionScope.filterBrands}" var="filterBrand">
-        <div class="custom-control custom-checkbox custom-control-inline">
+        <div class="custom-control custom-checkbox custom-control-inline" id="filterProductsDiv">
             <input type="checkbox" name="brands" class="custom-control-input"  value="${filterBrand}"
                    id="${filterBrand}">
             <label class="custom-control-label" for="${filterBrand}"> ${filterBrand}</label>
@@ -26,7 +26,7 @@
     </c:forEach>
     <h6>Colour:</h6>
     <c:forEach items="${sessionScope.filterColours}" var="filterColour">
-        <div class="custom-control custom-checkbox custom-control-inline">
+        <div class="custom-control custom-checkbox custom-control-inline" id="filterProductsDiv">
             <input type="checkbox" name="colours" class="custom-control-input" value="${filterColour}"
                    id="${filterColour}">
             <label class="custom-control-label" for="${filterColour}"> ${filterColour}</label>

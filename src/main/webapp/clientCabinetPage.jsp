@@ -7,7 +7,7 @@
 --%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%!private String pageJspName="clientCabinetPage.jsp";%>
+<%!private String pageJspName="/clientCabinetPage.jsp";%>
 <html lang="en">
 
 
@@ -86,7 +86,7 @@ Class page corresponds to the '.page' element in included CSS document.
                                     <h3>EDITING</h3>
 
                                     <button name="editInfo">
-                                    <a href="jsp/editAccount.jsp"> Edit my information</a>
+                                    <a href="editAccount.jsp"> Edit my information</a>
                                     </button>
 
                                         </td>

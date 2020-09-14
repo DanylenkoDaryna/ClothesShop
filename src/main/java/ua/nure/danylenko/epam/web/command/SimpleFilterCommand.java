@@ -42,7 +42,7 @@ public class SimpleFilterCommand extends Command {
         }else if(filterType.isEmpty()){
             throw new AppException("filterType cannot be empty");
         }
-        String forward = "/"+pageToReturn+".jsp";
+        String forward = pageToReturn+".jsp";
 
         switch (filterType){
             case "FromAToZ": {

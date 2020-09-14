@@ -2,7 +2,7 @@
 <html lang="en">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
-<%!private String pageJspName="/index.jsp";%>
+<%!private String pageJspName="index.jsp";%>
 </head>
 
 
@@ -28,10 +28,10 @@
 
 <!-- Bootstrap -->
 <script type="text/javascript">
-    <%@include file="./js/jquery-3.4.1.min.js"%>
-    <%@include file="./js/popper.min.js"%>
-    <%@include file="./js/bootstrap.bundle.min.js"%>
-    <%@include file="./js/bootstrap.min.js"%>
+    <%@include file="js/jquery-3.4.1.min.js"%>
+    <%@include file="js/popper.min.js"%>
+    <%@include file="js/bootstrap.bundle.min.js"%>
+    <%@include file="js/bootstrap.min.js"%>
 </script>
 
 </body>
