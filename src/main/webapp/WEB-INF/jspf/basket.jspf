@@ -1,3 +1,4 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--role="document" - элем. содерж. связанную инфу, которая может выступать как контент документа.
 role="dialog" - элем. выступающий в роли диалога (с целью запроса у пользователя информацию
 или требующей от него ответа
@@ -38,10 +39,16 @@ aria-hidden="true" - указывает, что элемент и все его 
                     </c:if>
                 </div>
                 <div class="modal-footer">
-                        <form action="controller" method="post">
-                            <input type="hidden" name="command" value="login"/>
-                        <button type="submit" value="To order">To order</button>
-                    </form>
+                    <c:choose>
+                    <c:when test="${sessionScope.userRole.getName() eq 'client'}">
+                        <input name="OrderFromBasket1" type="button" onclick="location.href='clientCabinetPage.jsp';"
+                               value="To order" />
+                    </c:when>
+                        <c:otherwise>
+                            <input name="OrderFromBasket2" type="button" onclick="location.href='login.jsp';"
+                                   value="To order" />
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

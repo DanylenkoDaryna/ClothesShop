@@ -200,7 +200,7 @@ public class UserDao implements IDao {
             pstmt.execute();
 
         } catch (SQLException e) {
-            //ConnectionFactory.rollback(con);
+
             DB_LOG.error("UserDao.java in setUserInfo() ", e);
             ConnectionFactory.close(con,pstmt);
         }finally {
