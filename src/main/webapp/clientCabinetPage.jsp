@@ -75,9 +75,15 @@ Class page corresponds to the '.page' element in included CSS document.
                             <tr class="danger">
                                 <td colspan="2">
                                     <h3>ORDERS</h3>
-                                    sadfasfasfsadfsafasfdasf<br>
-                                    asdfasfd<br>
-                                    asdfaf<br>
+                                    <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
+                                        ${itemToOrder.getProductName()}
+                                        <form action="basketCleanerServlet" method="post">
+                                            <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
+                                            <button type="submit" name="IdDeleteFromBasket" value="${itemToOrder.getId()}">
+                                                Remove</button>
+                                        </form>
+                                        <br>
+                                    </c:forEach>
                                 </td>
                             </tr>
                             <tr title="Editing" class="danger">
