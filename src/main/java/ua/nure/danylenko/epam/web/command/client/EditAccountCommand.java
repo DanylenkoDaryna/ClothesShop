@@ -35,7 +35,7 @@ public class EditAccountCommand extends Command {
             sessionUser.setFirstName(request.getParameter("first name"));
             sessionUser.setLastName(request.getParameter("last name"));
             sessionUser.setLogin(request.getParameter("email"));
-            sessionUser.setPassword(request.getParameter("password"));
+            sessionUser.setPassword(request.getParameter("password2"));
             sessionUser.setEmail(request.getParameter("email"));
             sessionUser.setTelephone(request.getParameter("telephone"));
             sessionUser.setBirthday(LocalDate.parse(request.getParameter("birthday")));

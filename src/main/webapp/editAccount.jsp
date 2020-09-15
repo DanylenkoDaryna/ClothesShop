@@ -90,14 +90,14 @@
                     <fieldset>
                         <label for="pa1">
                         <span>New Password</span>
-                            <input type="password" id="pa1"
+                            <input type="password" id="pa1" name="password1"
                                maxlength="10" disabled minlength="7" required>
                             <br>
                     </label>
                         <br/>
                     <label for="pa2">
                         <span>Repeat Password</span>
-                        <input type="password" id="pa2" disabled maxlength="10" minlength="7" required>
+                        <input type="password" id="pa2" name="password2" disabled maxlength="10" minlength="7" required>
                     </label>
                     <br>
                     </fieldset>
@@ -129,43 +129,11 @@
 
         }
 
-        var p1 = document.getElementById("pa1");
-        var p2 = document.getElementById("pa2");
-
-        p1.addEventListener("input", function (event) {
-            if (document.getElementById("pa1").validity.valueMissing) {
-                document.getElementById("pa1").setCustomValidity('Password must not be empty');
-            } else if(document.getElementById("pa1").validity.rangeUnderflow){
-                document.getElementById("pa1").setCustomValidity('Password must have 7 and more characters.');
-            }else if(document.getElementById("pa1").validity.rangeOverflow){
-                document.getElementById("pa1").setCustomValidity('Password must have 10 or less characters.');
-            }
-        });
-
-        p2.addEventListener("input", function (event) {
-            if (document.getElementById("pa2").validity.valueMissing) {
-                document.getElementById("pa2").setCustomValidity('Password must not be empty!!!');
-            } else if(document.getElementById("pa2").validity.rangeUnderflow){
-                document.getElementById("pa2").setCustomValidity('Password must have 7 and more characters!!!');
-            }else if(document.getElementById("pa2").validity.rangeOverflow){
-                document.getElementById("pa2").setCustomValidity('Password must have 10 or less characters!!!');
-
-            }
-        });
-
         function equalPasswords(){
-            // if(p1.value !== p2.value){
-            //     p2.setCustomValidity("Passwords are not equal!");
-            //     p1.innerHTML = "Passwords are not equal!";
-            //     p1.className = "Passwords are not equal!";
-            //
-            //     p2.innerHTML = "Passwords are not equal!";
-            //     p2.className = "Passwords are not equal!";
-            //     event.preventDefault();
-            // }
+
             if (document.getElementById('pa1').value != document.getElementById('pa2').value) {
                 document.getElementById('pa2').setCustomValidity('Passwords must match.');
-            } else {
+            }else {
                 document.getElementById('pa2').setCustomValidity('');
             }
         }

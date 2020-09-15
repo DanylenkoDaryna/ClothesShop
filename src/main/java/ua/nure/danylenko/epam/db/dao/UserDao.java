@@ -23,10 +23,12 @@ public class UserDao implements IDao {
     private static final String SQL_GET_USER_INFO_BY_ID = "SELECT * FROM user_info WHERE user_id=?";
     private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM users WHERE id=?";
+    private static final String SQL_UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, first_name=?, last_name=? WHERE users.id=?";
 
-    private static final String SQL_UPDATE_USER = "UPDATE users SET password=?, first_name=?, last_name=?";
+
     private static final String SQL_CREATE_USER = "INSERT INTO armadiodb.users (id, login, password, first_name, last_name, role_id) values (DEFAULT,?, ?, ?, ?, ?)";
     private static final String SQL_ADD_USER_INFO_BY_ID = "INSERT INTO armadiodb.user_info (id, country, birthday, email, telephone, user_id) values (DEFAULT,?,?,?,?,?)";
+    private static final String SQL_UPDATE_USER_INFO_BY_ID = "UPDATE armadiodb.user_info SET country=?, birthday=?, email=?, telephone=? WHERE user_id=?";
     private static final String SQL_FIND_USER_ID = "SELECT id FROM users";
     private static final String SQL_FIND_FULL_CATALOGUE = "SELECT * FROM catalogue";
 
@@ -95,7 +97,33 @@ public class UserDao implements IDao {
 
     @Override
     public void update(Object entity) {
+        User user = (User)entity;
+        PreparedStatement ps = null;
+        Connection con = null;
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(SQL_UPDATE_USER_BY_ID);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getFirstName());
+            ps.setString(4, user.getLastName());
+            ps.setLong(5,user.getId());
+            //executes the query. It is used for create, drop, insert, update, delete etc.
+            boolean updateRes = ps.execute();
+            DB_LOG.info("update() is well done is false. Now updateRes = " + updateRes);
+            updateUserInfo(con, ps, user);
+            con.commit();
+        } catch (DBException e) {
+            DB_LOG.error(e.getStackTrace());
+            DB_LOG.info("update() - trouble with connection");
 
+        } catch (SQLException e) {
+            DB_LOG.error(e.getStackTrace());
+            DB_LOG.info("update() - trouble with commit");
+            ConnectionFactory.rollback(con);
+        } finally {
+            ConnectionFactory.close(con);
+        }
     }
 
     @Override
@@ -175,6 +203,29 @@ public class UserDao implements IDao {
             //ConnectionFactory.rollback(con);
             DB_LOG.error("UserDao.java in setUserInfo() ", e);
             ConnectionFactory.close(con,pstmt);
+        }finally {
+            ConnectionFactory.close(pstmt);
+        }
+
+    }
+
+    private void updateUserInfo(Connection con, PreparedStatement ps, User user){
+
+        try{
+            ps = con.prepareStatement(SQL_UPDATE_USER_INFO_BY_ID);
+            ps.setString(1, user.getCountry());
+            ps.setDate(2, Date.valueOf(user.getBirthday()));
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getTelephone());
+            ps.setLong(5, user.getId());
+            ps.execute();
+            DB_LOG.info("updateUserInfo() finished");
+
+        } catch (SQLException e) {
+            DB_LOG.error("UserDao.java in setUserInfo() ", e);
+            ConnectionFactory.close(con,ps);
+        }finally {
+            ConnectionFactory.close(ps);
         }
 
     }
