@@ -43,11 +43,12 @@ public class LoginCommand extends Command {
         User user = userService.getDao().findUserByLogin(login);
         DB_LOG.info("Found in DB: user --> " + user.getFirstName());
 
-        if (user == null) {
-            throw new AppException("Cannot find user with such login");
-        }else if(!password.equals(user.getPassword())){
-            return request.getParameter("pageBack");
-            //throw new AppException("Incorrect password. Please try again ");
+//        if (user == null) {
+//            throw new AppException("Cannot find user with such login");
+//        }else
+        if(!password.equals(user.getPassword())){
+
+            throw new AppException("Incorrect password. Please try again ");
         }
 
         Role userRole = Role.getRole(user);
@@ -58,7 +59,7 @@ public class LoginCommand extends Command {
 
         if (userRole == Role.ADMIN) {
             //COMMAND_UPDATING_UPO - adding, removing, editing users, products, orders
-            forward = Path.COMMAND_UPDATING_UPO;
+            forward = Path.PAGE_ADMIN_CABINET;
             WEB_LOG.info("Set the session attribute: adminUser --> " + user);
         }
 
