@@ -60,11 +60,11 @@ Class page corresponds to the '.page' element in included CSS document.
 
                         <fieldset>
                             <legend>Login</legend>
-                            <input name="login"/><br/>
+                            <input name="login" required /><br/>
                         </fieldset><br/>
                         <fieldset>
                             <legend>Password</legend>
-                            <input type="password" name="password"/>
+                            <input type="password" required name="password" maxlength="10"  minlength="7"/>
                         </fieldset><br/>
 
                         <input type="submit" value="Login" >

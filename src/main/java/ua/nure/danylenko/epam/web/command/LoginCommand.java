@@ -24,7 +24,7 @@ public class LoginCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, AppException {
         WEB_LOG.info("LoginCommand starts");
-
+        String forward = Path.PAGE_GOOD;
         HttpSession session = request.getSession();
 
         // obtain login and password from a request
@@ -46,13 +46,13 @@ public class LoginCommand extends Command {
         if (user == null) {
             throw new AppException("Cannot find user with such login");
         }else if(!password.equals(user.getPassword())){
-            throw new AppException("Incorrect password. Please try again ");
+            return request.getParameter("pageBack");
+            //throw new AppException("Incorrect password. Please try again ");
         }
 
         Role userRole = Role.getRole(user);
         WEB_LOG.info("userRole --> " + userRole);
 
-        String forward = Path.PAGE_GOOD;
 
         session.setAttribute("sessionUser", user);
 

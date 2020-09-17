@@ -83,7 +83,11 @@ Class page corresponds to the '.page' element in included CSS document.
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Password</legend>
-                                    <input type="password" name="password" required/>
+                                    <input type="password" id="first_pass" name="password" maxlength="10"  minlength="7" required/>
+                                </fieldset><br/>
+                                <fieldset>
+                                    <legend>Repeat Password</legend>
+                                <input type="password" id="second_pass"  name="password2" maxlength="10"  minlength="7" required>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Phone number</legend>
@@ -91,7 +95,7 @@ Class page corresponds to the '.page' element in included CSS document.
                                            <!--pattern="+[0-9]{5}[0-9]{3}-[0-9]{2}-[0-9]{2}" required/>-->
                                 </fieldset><br/>
 
-                            <input type="submit" value="Register" >
+                            <input type="submit" value="Register" onclick="equalPass()">
                                 <input type="reset">
 
                         </form>
@@ -110,6 +114,22 @@ Class page corresponds to the '.page' element in included CSS document.
     </div>
 
 </main>
+
+===========================================================================--%>
+<script>
+
+    function equalPass(){
+
+        if (document.getElementById('first_pass').value != document.getElementById('second_pass').value) {
+            document.getElementById('second_pass').setCustomValidity('Passwords must match.');
+        }else {
+            document.getElementById('second_pass').setCustomValidity('');
+        }
+    }
+
+</script>
+<%--==========================================================================--%>
+
 <!-- Bootstrap -->
 <script type="text/javascript">
     <%@include file="/js/jquery-3.4.1.min.js"%>
