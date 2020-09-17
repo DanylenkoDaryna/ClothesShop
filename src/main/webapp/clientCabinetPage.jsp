@@ -41,83 +41,102 @@ Class page corresponds to the '.page' element in included CSS document.
     <div class="container-fluid">
         <section class="text-center">
             <hi:Greetings/>
-                        <section class="table mb-lg-2">
-                        <table class="table" id="cabinetTable">
-                            <thead>
-                                <h3>PERSONAL INFORMATION</h3>
+                <section class="table mb-lg-2">
+                    <table class="table" id="cabinetTable">
+                        <thead>
+                        <h3>PERSONAL INFORMATION</h3>
 
-                            </thead>
-                            <tbody>
-                            <tr class="active">
-                                <td>NAME</td>
-                                <td>${sessionScope.sessionUser.getFirstName()}</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>SECOND NAME</td>
-                                <td>${sessionScope.sessionUser.getLastName()}</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>BDAY</td>
-                                <td>${sessionScope.sessionUser.getBirthday()}</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>COUNTRY</td>
-                                <td>${sessionScope.sessionUser.getCountry()}</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>EMAIL</td>
-                                <td>${sessionScope.sessionUser.getEmail()}</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>TEL</td>
-                                <td>${sessionScope.sessionUser.getTelephone()}</td>
-                            </tr>
-                            <tr class="danger">
-                                <td colspan="2">
-                                    <h3>ORDERS</h3>
-                                    <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
-                                        ${itemToOrder.getProductName()}
-                                        <form action="basketCleanerServlet" method="post">
-                                            <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
-                                            <button type="submit" name="IdDeleteFromBasket" value="${itemToOrder.getId()}">
-                                                Remove</button>
-                                        </form>
-                                        <br>
-                                    </c:forEach>
-                                </td>
-                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="active">
+                            <td>NAME</td>
+                            <td>${sessionScope.sessionUser.getFirstName()}</td>
+                        </tr>
+                        <tr class="danger">
+                            <td>SECOND NAME</td>
+                            <td>${sessionScope.sessionUser.getLastName()}</td>
+                        </tr>
+                        <tr class="danger">
+                            <td>BDAY</td>
+                            <td>${sessionScope.sessionUser.getBirthday()}</td>
+                        </tr>
+                        <tr class="danger">
+                            <td>COUNTRY</td>
+                            <td>${sessionScope.sessionUser.getCountry()}</td>
+                        </tr>
+                        <tr class="danger">
+                            <td>EMAIL</td>
+                            <td>${sessionScope.sessionUser.getEmail()}</td>
+                        </tr>
+                        <tr class="danger">
+                            <td>TEL</td>
+                            <td>${sessionScope.sessionUser.getTelephone()}</td>
+                        </tr>
+                        <tr class="danger">
+                            <td colspan="2">
+                                <h3>LIST OF PRODUCTS</h3>
+                            </td>
+                        </tr>
+
+                                <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
+                        <tr>
+                            <td>
+                                    ${itemToOrder.getProductName()}
+                            </td>
+                            <td>
+                                <form action="basketCleanerServlet" method="post">
+                                    <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
+                                    <button type="submit" name="IdDeleteFromBasket" value="${itemToOrder.getId()}">
+                                        Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                                </c:forEach>
+                        <tr>
+                            <td colspan="2">
+                                <form id="order_form" action="controller" method="post">
+                                    <input type="hidden" name="command" value="register"/>
+                                    <input type="submit" name="orderProducts" value="To order">
+                                </form>
+                            </td>
+                        </tr>
+
+
+                        <tr class="danger">
+                            <td colspan="2">
+                                <h3>LIST OF MY ORDERS</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>NAME OF ORDER</td>
+                            <td>STATUS</td>
+                        </tr>
                             <tr title="Editing" class="danger">
                                 <td colspan="2">
-
                                     <h3>EDITING</h3>
-
                                     <button name="editInfo">
-                                    <a href="editAccount.jsp"> Edit my information</a>
+                                        <a href="editAccount.jsp"> Edit my information</a>
                                     </button>
-
-                                        </td>
-                                    </tr>
-                                    <tr class="danger">
-                                        <td colspan="2">
-                                        <h3>DELETE ACCOUNT AND EXIT</h3>
-                                            <input type="button" name="deleteAccount" value="Delete this Account"
-                                                   onclick="confirmRemoveAccount()"
-                                                  >
-                                        </td>
-                                    </tr>
-
-                                    </tbody>
-
-                                </table>
-                                </section>
-                            </div>
-
-
-                    <table class="table">
-                        <tbody>
-                        <%--===========================================================================
-                        This is the CONTENT, containing the main part of the page.
-                        ===========================================================================--%>
+                                </td>
+                            </tr>
+                            <tr class="danger">
+                                <td colspan="2">
+                                    <h3>DELETE ACCOUNT AND EXIT</h3>
+                                    <input type="button" name="deleteAccount" value="Delete this Account"
+                                           onclick="confirmRemoveAccount()"
+                                    >
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+            </section>
+        </div>
+                <table class="table">
+                            <tbody>
+                            <%--===========================================================================
+                            This is the CONTENT, containing the main part of the page.
+                            ===========================================================================--%>
                 <tr>
                     <td class="content center">
                         <%-- FOOTER --%>
