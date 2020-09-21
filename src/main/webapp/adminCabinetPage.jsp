@@ -42,16 +42,234 @@ Class page corresponds to the '.page' element in included CSS document.
         <section class="text-center">
             <hi:Greetings/>
             <section class="table mb-lg-2">
-                <table class="table" id="cabinetTable">
-                    <thead>
-                    <h3>PERSONAL INFORMATION</h3>
 
-                    </thead>
-                    <tbody>
-                    <tr class="active">
-                        <td>NAME</td>
-                        <td>${sessionScope.sessionUser.getFirstName()}</td>
-                    </tr>
+
+
+                <ul class="nav nav-tabs">
+                    <!-- Первая вкладка (активная) -->
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#description">Personal info</a>
+                    </li>
+                    <!-- Вторая вкладка -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#updatingUsers">Updating Users</a>
+                    </li><!-- 3 вкладка -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#updatingData">Updating Catalogue Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#updatingOrders">Updating Orders</a>
+                    </li>
+                </ul>
+
+
+                <!-- Блоки с контентом -->
+                <div class="tab-content">
+                    <!-- Первый блок (он отображается по умолчанию, т.к. имеет классы show и active) -->
+                    <div class="tab-pane fade show active" id="description">
+
+                        <table class="table" id="cabinetTable">
+                            <tbody>
+                            <tr class="active">
+                                <td>NAME</td>
+                                <td>${sessionScope.sessionUser.getFirstName()}</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>SECOND NAME</td>
+                                <td>${sessionScope.sessionUser.getLastName()}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Второй блок -->
+                    <div class="tab-pane fade" id="updatingUsers">
+
+
+                        <form id="editAccount_form" action="controller" method="post">
+                            <%--===========================================================================
+                            Hidden field. In the query it will act as command=login.
+                            The purpose of this to define the command name, which have to be executed
+                            after you submit current form.
+                            ===========================================================================--%>
+                            <input type="hidden" name="command" value="editAccount"/>
+                            <fieldset>
+                                <label>First name
+                                    <input name="first name" value="${sessionScope.sessionUser.getFirstName()}" />
+                                </label>
+                            </fieldset>
+                            <fieldset>
+                                <label>Last name
+                                    <input name="last name" value="${sessionScope.sessionUser.getLastName()}" />
+                                </label>
+                            </fieldset>
+                            <fieldset >
+                                <label for="country">Country</label>
+                                <select id="country" name="country">
+                                    <c:if test="${sessionScope.sessionUser.getCountry() eq 'Ukraine' }">
+                                        <option selected value="Ukraine" >Ukraine</option>
+                                        <option value="Great Britain">Great Britain</option>
+                                    </c:if>
+                                    <c:if test="${sessionScope.sessionUser.getCountry() eq 'Great Britain' }">
+                                        <option value="Ukraine">Ukraine</option>
+                                        <option selected value="Great Britain">Great Britain</option>
+                                    </c:if>
+                                </select>
+                            </fieldset>
+                            <fieldset>
+                                <label>Date of Birth
+                                    <input name="birthday" type="date" value="${sessionScope.sessionUser.getBirthday()}" />
+                                </label>
+                            </fieldset>
+                            <fieldset>
+                                <!--це заглушка для логіна, бо логін має бути унікальним, а емейли унікальні-->
+                                <label>Email
+                                    <input type="email" name="email" value="${sessionScope.sessionUser.getEmail()}" />
+                                </label>
+                            </fieldset>
+
+                            <%--<label>Password--%>
+                            <%--<input type="password" name="old pass" value="${sessionScope.sessionUser.getPassword()}"/>--%>
+                            <%--<input type="button" value="Change password?" onclick="enableChangePass()">--%>
+                            <%--<br/>--%>
+                            <%--<input type="password" id="pa1" name="password1" minlength="7" maxlength="10" disabled required />--%>
+                            <%--<br/>--%>
+                            <%--<input type="password" id="pa2" name="password2" minlength="7" maxlength="10" disabled required />--%>
+                            <%--&lt;%&ndash;oninput ="equalPasswords(password1, password2)"&ndash;%&gt;--%>
+                            <%--</label>--%>
+                            <fieldset>
+                                <label for="old pass">
+                                    <span>Old Password</span>
+
+                                    <input type="password" id="old pass" name="old pass" value="${sessionScope.sessionUser.getPassword()}"/>
+                                    <input type="button" value="Change password?" onclick="enableChangePass()">
+                                    <br>
+                                </label>
+                            </fieldset>
+                            <fieldset>
+                                <label for="pa1">
+                                    <span>New Password</span>
+                                    <input type="password" id="pa1" name="password1"
+                                           maxlength="10" disabled minlength="7" required>
+                                    <br>
+                                </label>
+                                <br/>
+                                <label for="pa2">
+                                    <span>Repeat Password</span>
+                                    <input type="password" id="pa2" name="password2" disabled maxlength="10" minlength="7" required>
+                                </label>
+                                <br>
+                            </fieldset>
+
+                            <fieldset>
+                                <label>Phone number
+                                    <input type="tel" name="telephone" value="${sessionScope.sessionUser.getTelephone()}"/>
+                                </label>
+                                <!--pattern="+[0-9]{5}[0-9]{3}-[0-9]{2}-[0-9]{2}" required/>-->
+                            </fieldset>
+
+
+                            <input type="reset">
+                            <input type="submit" value="Save changes" onclick="equalPasswords()" >
+                        </form>
+                    </div>
+
+                    <!-- 3 блок -->
+                    <div class="tab-pane fade" id="updatingData">
+                        <h4>Here you can choose what you want to update(add new/delete/edit) -
+                            catalogue, category, products?</h4>
+                        <ul class="nav nav-tabs">
+                            <!-- Первая вкладка (активная) -->
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#catalogueUpdate">Catalogue update</a>
+                            </li>
+                            <!-- 2 вкладка -->
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#categoriesUpdate">Categories update</a>
+                            </li><!-- 3 вкладка -->
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#productsUpdate">Products update</a>
+                            </li>
+                        </ul>
+                        <!-- Блоки с контентом -->
+                        <div class="tab-content">
+                            <!-- Первый блок (он отображается по умолчанию, т.к. имеет классы show и active) -->
+                            <div class="tab-pane fade show active" id="catalogueUpdate">
+                                <section class="text-center">
+                                <table class="admin_data_table">
+                                    <tbody>
+                                    <tr class="active">
+                                        <td>CATALOGUE ITEMS</td>
+                                        <td>DELETE</td>
+                                        <td>EDIT</td>
+                                    </tr>
+                                    <c:forEach items="${catalogue.container.keySet()}" var="entry1">
+                                        <tr>
+                                            <td>${entry1}</td>
+                                            <td><button>Delete</button></td>
+                                            <td><button>Edit</button></td>
+                                        </tr>
+                                    </c:forEach>
+                                    <tr>
+                                        <td colspan="3"><button>Add New Item</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </section>
+                            </div>
+                            <div class="tab-pane fade" id="categoriesUpdate">
+                                <table class="admin_data_table">
+                                    <tbody >
+                                    <tr class="active">
+                                        <td>CATEGORIES</td>
+                                        <td>DELETE/EDIT</td>
+                                        <td>ADD NEW</td>
+                                    </tr>
+
+
+                                    <c:forEach items="${catalogue.container.keySet()}" var="entry1">
+                                    <tr>
+                                        <td>${entry1}</td>
+                                        <td>
+                                        <c:forEach items="${catalogue.container.get(entry1)}" var="linker1">
+                                            ${linker1.getName()}
+                                            <button>Delete</button>
+                                            <button>Edit</button>
+                                            <br>
+                                        </c:forEach>
+                                        </td>
+                                        <td colspan="3"><button>Add New Item</button></td>
+                                    </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="productsUpdate">
+                            </div>
+
+
+                    </div>
+                    <!-- 4 блок -->
+                    <div class="tab-pane fade" id="updatingOrders">
+
+                    </div>
+
+                </div>
+                </div>
+            </section>
+        </section>
+    </div>
+
+
+                <%--<table class="table" id="cabinetTable">--%>
+                    <%--<thead>--%>
+                    <%--<h3>PERSONAL INFORMATION</h3>--%>
+
+                    <%--</thead>--%>
+                    <%--<tbody>--%>
+                    <%--<tr class="active">--%>
+                        <%--<td>NAME</td>--%>
+                        <%--<td>${sessionScope.sessionUser.getFirstName()}</td>--%>
+                    <%--</tr>--%>
                     <%--<tr class="danger">--%>
                         <%--<td>SECOND NAME</td>--%>
                         <%--<td>${sessionScope.sessionUser.getLastName()}</td>--%>
@@ -128,7 +346,7 @@ Class page corresponds to the '.page' element in included CSS document.
                         <%--</td>--%>
                     <%--</tr>--%>
                     <%--</tbody>--%>
-                </table>
+                <%--</table>--%>
             <%--</section>--%>
         <%--</section>--%>
     <%--</div>--%>

@@ -65,7 +65,7 @@
                         <a class="nav-link" href="controller?command=logout">Logout</a>
                         </li>
                         <li class="nav-item" >
-                        <a class="nav-link" href="">Administration</a>
+                        <a class="nav-link" href="adminCabinetPage.jsp">Administration</a>
                         </li>
                     </c:when>
 
