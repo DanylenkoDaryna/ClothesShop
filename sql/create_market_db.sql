@@ -135,15 +135,15 @@ INSERT INTO statuses VALUES(3, 'nonregistered');
 -- catalogue names of menu
 -- --------------------------------------------------------------
 CREATE TABLE catalogue(
-	id INTEGER NOT NULL PRIMARY KEY,
-	name VARCHAR(10) NOT NULL UNIQUE
+	id INTEGER NOT NULL auto_increment PRIMARY KEY,
+	name VARCHAR(20) NOT NULL UNIQUE
 );
 
-INSERT INTO catalogue VALUES(1, 'For Women'); -- женская одежда
-INSERT INTO catalogue VALUES(2, 'For Men'); -- мужская одежда
-INSERT INTO catalogue VALUES(3, 'For Girls'); -- детская одежда для девочек
-INSERT INTO catalogue VALUES(4, 'For Boys'); -- детская одежда для мальчиков
-
+INSERT INTO catalogue VALUES(DEFAULT, 'For Women'); -- женская одежда
+INSERT INTO catalogue VALUES(DEFAULT, 'For Men'); -- мужская одежда
+INSERT INTO catalogue VALUES(DEFAULT, 'For Girls'); -- детская одежда для девочек
+INSERT INTO catalogue VALUES(DEFAULT, 'For Boys'); -- детская одежда для мальчиков
+--INSERT INTO armadiodb.catalogue (id, name) values (DEFAULT,'For santa');
 -- --------------------------------------------------------------
 -- CATEGORIES
 -- categories names of catalogue

@@ -23,7 +23,7 @@ public class ShowCatalogueCommand extends Command {
         WEB_LOG.info("Command starts");
         CatalogueService catalogueService = new CatalogueService();
         String forward = Path.PAGE_GOOD;
-        Catalogue catalogue = catalogueService.getDao().read();
+        Catalogue catalogue = (Catalogue)catalogueService.getDao().read();
         if (catalogue == null) {
             forward = Path.PAGE_ERROR_PAGE;
         }

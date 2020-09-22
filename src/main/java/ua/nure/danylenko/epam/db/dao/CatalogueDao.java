@@ -1,5 +1,6 @@
 package ua.nure.danylenko.epam.db.dao;
 
+import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.Fields;
 import ua.nure.danylenko.epam.db.entity.Catalogue;
 import ua.nure.danylenko.epam.db.entity.Category;
@@ -11,16 +12,14 @@ import java.util.*;
 
 public class CatalogueDao implements IDao {
 
-    private ConnectionFactory connectionFactory;
-
-    private Connection createConnection() throws DBException {
-        connectionFactory = new ConnectionFactory();
+    private static final Logger DB_LOG = Logger.getLogger("jdbc");
+    private Connection getConnection() throws DBException {
         return ConnectionFactory.getInstance().getConnection();
     }
 
     private static final String SQL_FIND_FULL_CATALOGUE = "SELECT * FROM catalogue";
     private static final String SQL_FIND_CATEGORIES_BY_ID = "SELECT * FROM categories WHERE catalogue_id=?";
-
+    private static final String SQL_ADD_NEW_CATALOGUE_ITEM = "INSERT INTO armadiodb.catalogue (id, name) values (DEFAULT,?)";
 
 
     @Override
@@ -35,7 +34,7 @@ public class CatalogueDao implements IDao {
         ResultSet rs = null;
         Connection con = null;
         try{
-            con = this.createConnection();
+            con = getConnection();
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL_FIND_FULL_CATALOGUE);
             while (rs.next()) {
@@ -75,6 +74,27 @@ public class CatalogueDao implements IDao {
         return clothes;
     }
 
+    public void addItem(String itemName) {
+
+        Connection con = null;
+        PreparedStatement  ps = null;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_ADD_NEW_CATALOGUE_ITEM);
+            DB_LOG.info(SQL_ADD_NEW_CATALOGUE_ITEM);
+            DB_LOG.info(itemName);
+            ps.setString(1,itemName);
+            ps.execute();
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in addItem() for Catalogue", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error(e);
+        } finally {
+            ConnectionFactory.close(con, ps);
+        }
+    }
 
     @Override
     public void update(Object entity) {

@@ -21,9 +21,10 @@ public class ShowCatalogue extends HttpServlet {
         String forward = Path.PAGE_GOOD;
         Catalogue catalogue = null;
         try {
-            catalogue = catalogueService.getDao().read();
+            catalogue = (Catalogue)catalogueService.getDao().read();
         } catch (DBException e) {
             e.printStackTrace();
+
         }
         if (catalogue == null) {
             forward = Path.PAGE_ERROR_PAGE;

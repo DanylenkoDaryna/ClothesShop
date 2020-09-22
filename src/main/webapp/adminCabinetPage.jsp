@@ -205,17 +205,31 @@ Class page corresponds to the '.page' element in included CSS document.
                                     <c:forEach items="${catalogue.container.keySet()}" var="entry1">
                                         <tr>
                                             <td>${entry1}</td>
-                                            <td><button>Delete</button></td>
-                                            <td><button>Edit</button></td>
+                                            <td><button type="submit" formmethod="post" name="deleteCatalogue${entry1}">
+                                                Delete
+                                            </button></td>
+                                            <td><button type="submit" formmethod="post" name="editCatalogue${entry1}">
+                                                Edit
+                                            </button></td>
                                         </tr>
                                     </c:forEach>
                                     <tr>
-                                        <td colspan="3"><button>Add New Item</button></td>
+                                        <td colspan="3">
+                                        <form method="post" id="edit_catalogue_form" action="controller">
+                                            <input type="hidden" name="command" value="updateCatalogue"/>
+                                            <input type="hidden" name="updateCatalogueType" value="add"/>
+                                            <label>New Catalogue Item name
+                                                <input name="catalogueName" maxlength="30" value="Enter name">
+                                            </label>
+                                            <input type="submit" value="Add New Item">
+                                        </form>
+
                                     </tr>
                                     </tbody>
                                 </table>
                                 </section>
                             </div>
+                            <!-- 2 блок  -->
                             <div class="tab-pane fade" id="categoriesUpdate">
                                 <table class="admin_data_table">
                                     <tbody >
@@ -244,9 +258,8 @@ Class page corresponds to the '.page' element in included CSS document.
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="productsUpdate">
+
                             </div>
-
-
                     </div>
                     <!-- 4 блок -->
                     <div class="tab-pane fade" id="updatingOrders">
