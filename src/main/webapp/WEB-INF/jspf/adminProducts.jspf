@@ -9,7 +9,7 @@
             <div class="card-body text-center">
                 <h5>
                     <strong>
-                        <a href="index.jsp"
+                        <a href="addNewProduct.jsp"
                            class="dark-grey-text">
                             Add new Product
                         </a>

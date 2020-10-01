@@ -185,9 +185,6 @@ Class page corresponds to the '.page' element in included CSS document.
                             <!-- 2 вкладка -->
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#categoriesUpdate">Categories update</a>
-                            </li><!-- 3 вкладка -->
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#productsUpdate">Products update</a>
                             </li>
                         </ul>
                         <!-- Блоки с контентом -->

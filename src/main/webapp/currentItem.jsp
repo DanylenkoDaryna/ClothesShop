@@ -19,13 +19,6 @@
         <%@include file="/font-awesome-4.7.0/css/font-awesome.min.css"%>
     </style>
     <title>${sessionScope.ItemsContainer2.get(0)}</title>
-    <style>
-        .btn {
-            background: coral; /* Синий цвет фона */
-            color: black; /* Белые буквы */
-            font-size: 9pt; /* Размер шрифта в пунктах */
-        }
-    </style>
 </head>
 <body>
 
