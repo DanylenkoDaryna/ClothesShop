@@ -205,17 +205,31 @@ Class page corresponds to the '.page' element in included CSS document.
                                     <c:forEach items="${catalogue.container.keySet()}" var="entry1">
                                         <tr>
                                             <td>${entry1}</td>
-                                            <td><button type="submit" formmethod="post" name="deleteCatalogue${entry1}">
-                                                Delete
-                                            </button></td>
-                                            <td><button type="submit" formmethod="post" name="editCatalogue${entry1}">
-                                                Edit
-                                            </button></td>
+                                            <td>
+                                                <form method="post" id="delete_catalogue_form" action="controller">
+                                                    <input type="hidden" name="command" value="updateCatalogue"/>
+                                                    <input type="hidden" name="updateCatalogueType" value="delete"/>
+                                                    <input type="hidden" name="itemToDelete" value="${entry1}"/>
+                                                    <input type="submit" value="Delete">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" id="edit_catalogue_form" action="controller">
+                                                    <input type="hidden" name="command" value="updateCatalogue"/>
+                                                    <input type="hidden" name="updateCatalogueType" value="edit"/>
+                                                    <input type="hidden" name="itemToEdit" value="${entry1}"/>
+                                                    <label>New name
+                                                        <input name="editedItem"/>
+                                                    </label>
+                                                    <input type="submit" value="Save">
+                                                </form>
+
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     <tr>
                                         <td colspan="3">
-                                        <form method="post" id="edit_catalogue_form" action="controller">
+                                        <form method="post" id="add_catalogue_form" action="controller">
                                             <input type="hidden" name="command" value="updateCatalogue"/>
                                             <input type="hidden" name="updateCatalogueType" value="add"/>
                                             <label>New Catalogue Item name
@@ -234,24 +248,49 @@ Class page corresponds to the '.page' element in included CSS document.
                                 <table class="admin_data_table">
                                     <tbody >
                                     <tr class="active">
-                                        <td>CATEGORIES</td>
-                                        <td>DELETE/EDIT</td>
-                                        <td>ADD NEW</td>
+                                        <td>CATALOGUE ITEMS</td>
+                                        <td>DELETE/EDIT/ADD NEW</td>
                                     </tr>
-
 
                                     <c:forEach items="${catalogue.container.keySet()}" var="entry1">
                                     <tr>
                                         <td>${entry1}</td>
+
                                         <td>
                                         <c:forEach items="${catalogue.container.get(entry1)}" var="linker1">
+
                                             ${linker1.getName()}
-                                            <button>Delete</button>
-                                            <button>Edit</button>
-                                            <br>
+
+                                            <form method="post" id="delete_category_form" action="controller">
+                                                   <input type="hidden" name="command" value="updateCatalogue"/>
+                                                   <input type="hidden" name="updateCatalogueType" value="deleteCategory"/>
+                                                   <input type="hidden" name="CatalogueToDeleteFrom" value="${entry1}"/>
+                                                   <input type="hidden" name="itemToDelete" value="${linker1.getName()}"/>
+                                                   <input type="submit" value="Delete">
+                                            </form>
+
+                                           <form method="post" id="edit_category_form" action="controller">
+                                               <input type="hidden" name="command" value="updateCatalogue"/>
+                                               <input type="hidden" name="updateCatalogueType" value="editCategory"/>
+                                               <input type="hidden" name="CatalogueToEditFrom" value="${entry1}"/>
+                                               <input type="hidden" name="itemToEdit" value="${linker1.getName()}"/>
+                                               <input name="editedCategory"/>
+                                               <input type="submit" value="Save">
+                                           </form>
+
                                         </c:forEach>
+                                            <form method="post" id="add_category_form" action="controller">
+                                                <input type="hidden" name="command" value="updateCatalogue"/>
+                                                <input type="hidden" name="updateCatalogueType" value="addCategory"/>
+                                                <input type="hidden" name="CatalogueToAddTo" value="${entry1}"/>
+                                                <label>New Category
+                                                    <input name="categoryName" maxlength="30" required>
+                                                </label>
+                                                <input type="submit" value="Add">
+                                            </form>
                                         </td>
-                                        <td colspan="3"><button>Add New Item</button></td>
+
+
                                     </tr>
                                     </c:forEach>
                                     </tbody>
@@ -261,7 +300,7 @@ Class page corresponds to the '.page' element in included CSS document.
 
                             </div>
                     </div>
-                    <!-- 4 блок -->
+                    <!-- 3 блок -->
                     <div class="tab-pane fade" id="updatingOrders">
 
                     </div>
@@ -363,20 +402,11 @@ Class page corresponds to the '.page' element in included CSS document.
             <%--</section>--%>
         <%--</section>--%>
     <%--</div>--%>
-    <table class="table">
-        <tbody>
-        <%--===========================================================================
-        This is the CONTENT, containing the main part of the page.
-        ===========================================================================--%>
-        <tr>
-            <td class="content center">
-                <%-- FOOTER --%>
-                <%@ include file="/WEB-INF/jspf/footer.jspf"%>
-                <%-- FOOTER --%>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+    <%-- FOOTER --%>
+    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+    <%-- FOOTER --%>
+
 
     <%--===========================================================================
      This is the SCRIPT, containing the main functions of the page.

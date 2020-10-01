@@ -20,12 +20,11 @@
                     </section>
                     <!-- basket -->
                     <%@ include file="/WEB-INF/jspf/basket.jspf"%>
-                    <!-- footer -->
-                    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
                 </section>
             </div>
         </main>
-
+<!-- footer -->
+<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 <!-- Bootstrap -->
 <script type="text/javascript">
     <%@include file="js/jquery-3.4.1.min.js"%>

@@ -1,7 +1,11 @@
 <%--=========================================================================== 
 Footer (bottom area). 
-===========================================================================--%> 
+===========================================================================--%>
+<div class="container-fluid">
+	<section class="text-center mb-4">
+		Armadio (Final project, EPAM-KNURE Java Training), 2019
+	</section>
+</div>
 
 
 
-	Armadio (Final project, EPAM-KNURE Java Training), 2019

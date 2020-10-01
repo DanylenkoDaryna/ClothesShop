@@ -20,7 +20,12 @@ public class CatalogueDao implements IDao {
     private static final String SQL_FIND_FULL_CATALOGUE = "SELECT * FROM catalogue";
     private static final String SQL_FIND_CATEGORIES_BY_ID = "SELECT * FROM categories WHERE catalogue_id=?";
     private static final String SQL_ADD_NEW_CATALOGUE_ITEM = "INSERT INTO armadiodb.catalogue (id, name) values (DEFAULT,?)";
-
+    private static final String SQL_REMOVE_CATALOGUE_ITEM = "DELETE FROM armadiodb.catalogue WHERE name=?;";
+    private static final String SQL_RENAME_CATALOGUE_ITEM = "UPDATE armadiodb.catalogue SET name=? WHERE name=?;";
+    private static final String SQL_ADD_NEW_CATEGORY = "INSERT INTO armadiodb.categories (id, catalogue_id, name) values (DEFAULT,?,?)";
+    private static final String SQL_REMOVE_CATEGORY = "DELETE FROM armadiodb.categories WHERE catalogue_id=? AND name=?";
+    private static final String SQL_RENAME_CATEGORY = "UPDATE armadiodb.categories SET name=? WHERE catalogue_id=? AND name=?";
+    private static final String SQL_GET_CATALOGUE_ID_BY_NAME = "SELECT id FROM armadiodb.catalogue WHERE name=?";
 
     @Override
     public void create(Object entity) {
@@ -90,6 +95,143 @@ public class CatalogueDao implements IDao {
             DB_LOG.error("SQLException in addItem() for Catalogue", ex);
             ConnectionFactory.rollback(con);
         } catch (DBException e) {
+            DB_LOG.error(e);
+        } finally {
+            ConnectionFactory.close(con, ps);
+        }
+    }
+
+
+
+    public void removeCatalogueItem(String itemToDelete) {
+
+        Connection con = null;
+        PreparedStatement  ps = null;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_REMOVE_CATALOGUE_ITEM);
+            ps.setString(1,itemToDelete);
+            ps.execute();
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in removeCatalogueItem() for Catalogue", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error("DBException in removeCatalogueItem() for Catalogue", e);
+            DB_LOG.error(e);
+        } finally {
+            ConnectionFactory.close(con, ps);
+        }
+    }
+
+
+    public void renameCatalogueItem(String oldName,String newName) {
+
+        Connection con = null;
+        PreparedStatement  ps = null;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_RENAME_CATALOGUE_ITEM);
+            ps.setString(1,newName);
+            ps.setString(2,oldName);
+            ps.execute();
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in renameCatalogueItem() for Catalogue", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error("DBException in renameCatalogueItem() for Catalogue", e);
+            DB_LOG.error(e);
+        } finally {
+            ConnectionFactory.close(con, ps);
+        }
+    }
+
+    public void addCategory(String catalogue, String itemName) {
+
+        Connection con = null;
+        PreparedStatement  ps = null;
+        ResultSet rs = null;
+        long id=0;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_GET_CATALOGUE_ID_BY_NAME);
+            ps.setString(1,catalogue);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+               id=rs.getInt(Fields.ENTITY_ID);
+            }
+            ps = con.prepareStatement(SQL_ADD_NEW_CATEGORY);
+            ps.setLong(1,id);
+            ps.setString(2,itemName);
+            ps.execute();
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in addCategory() for Catalogue", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error(e);
+        } finally {
+            ConnectionFactory.close(con, ps);
+        }
+    }
+
+    public void removeCategory(String catalogue, String itemToDelete) {
+
+        Connection con = null;
+        PreparedStatement  ps = null;
+        ResultSet rs = null;
+        long id=0;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_GET_CATALOGUE_ID_BY_NAME);
+            ps.setString(1,catalogue);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                id=rs.getInt(Fields.ENTITY_ID);
+            }
+            ps = con.prepareStatement(SQL_REMOVE_CATEGORY);
+            ps.setLong(1,id);
+            ps.setString(2,itemToDelete);
+            ps.execute();
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in removeCategory() for Catalogue", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error("DBException in removeCategory() for Catalogue", e);
+            DB_LOG.error(e);
+        } finally {
+            ConnectionFactory.close(con, ps);
+        }
+    }
+
+
+    public void renameCategory(String catalogue, String oldName, String newName) {
+
+        Connection con = null;
+        PreparedStatement  ps = null;
+        ResultSet rs = null;
+        long id=0;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_GET_CATALOGUE_ID_BY_NAME);
+            ps.setString(1,catalogue);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                id=rs.getInt(Fields.ENTITY_ID);
+            }
+            ps = con.prepareStatement(SQL_RENAME_CATEGORY);
+            ps.setString(1,newName);
+            ps.setLong(2,id);
+            ps.setString(3,oldName);
+            ps.execute();
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in renameCategory() for Catalogue", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error("DBException in renameCategory() for Catalogue", e);
             DB_LOG.error(e);
         } finally {
             ConnectionFactory.close(con, ps);

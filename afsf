@@ -1,0 +1,33 @@
+abc4bcf Commit 16:New tabs for updating catalogue added(without realization)
+362291c Commit 15: In login page input check only non-emptyness of pass + admin cabinet page created
+c47c5b1 Commit 15:In registering and login pages inputs checked
+f6ee782 Commit 14:List of Products and orders added to user acc
+c86360f Commit 13:Orders list added for clients
+7fe71a1 Commit 12:Order button configured
+25ed98b Commit 11:Editing user info in account basically finished
+afb4b62 Commit 11:try to sort all jsp in one folder but fail and return into beginning
+189fe88 Commit 11:Password check finished
+227ffa6 Commit 11:Added password changer
+5a9657e Commit 11:edit user info works better now + useless jspf deleted
+b9404a3 Commit 11:Deleting user`s account realisation done + realization of user info editing started + prettier view etablished
+0624593 Commit 10:user role established
+1dcf90f Commit 10: login + logout for client and admin basically done
+c74ad71 Commit 9: mistakes with the commands erased
+1ee5b34 Commit 9:registering done basically + dao mistakes erased
+5b7ce47 Commit 9:all dao improved
+5a211b9 Commit 9:form for registering improved
+87f29f9 Commit 8:logger explained + registering page added
+cd73852 Commit 8:logger fixed but need more attention
+d0d391e Commit 8:jsp cabinet added
+aa110f7 Commit 7:new Commands for admin and client added + Login became prettier
+cdc717c Merge https://github.com/MrObjectMain/ClothesShop
+f2cbaaa Delete README.md
+b1a8f6c Commit 6:Login page improved + some bugs in basket erased
+911b89c Create README.md
+a9bc1c7 Commit 5:User`s basket created+adding+removing realisation
+d1c4205 Commit 4:table with imagelinks added in db + img implemented + headers fixed
+7bb6508 Commit 3:block with hard filtration implemented + few bugs erased
+9604647 Commit 3:line with quick filtration added and implemented + block with hard filtration products added
+2568629 Commit 2: page for every product added + images
+3f42bbc Commit 2:creation of item`s product pages
+e39e6e0 Commit 1:main carcas + interface bootstrap

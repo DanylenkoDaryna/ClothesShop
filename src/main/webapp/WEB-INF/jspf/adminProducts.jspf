@@ -1,0 +1,58 @@
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5>
+                    <strong>
+                        <a href="#"
+                           class="dark-grey-text">
+                            Add new Product
+                        </a>
+                    </strong>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+<c:forEach items="${sessionScope.items}" var="item1">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="view overlay">
+                <img class="card-img-top"
+                     src="img/${(item1.getContainer().get(0)).getImages().get(0)}.jpg" alt="clothes img">
+                <a href="index.jsp">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <div class="card-body text-center">
+                <h5>
+                    <strong>
+                        <!--      request.setAttribute("itemContainer",product1.getContainer())
+                ##<a href="./currentItem.jsp" class="dark-grey-text"> -->
+                        <a href="controller?command=ItemProducts&ItemId=${item1.getId()}" class="dark-grey-text">
+                                ${item1}
+                        </a>
+                    </strong>
+                </h5>
+                <h6 class="font-weight-bold blue-text">
+                    <strong>${item1.getPrice()} $</strong>
+                </h6>
+                <h6>Release: ${item1.getReleaseDate()}</h6>
+                <!--Делать после нажатия кнопки неактивными, чтобы пользователю стало очевидным,
+                что он уже нажал на кнопку, и что форма отправляется
+                Чтобы сервер не загружался лишними запросами, и чтобы уменьшить вероятность какой-либо ошибки-->
+                <form action="controller" method="post">
+                    <input title="page to return" hidden name="page" value=<%=pageJspName%>>
+                    <button id="${item1.getId()}toDelete" type="submit" name="ClothesIdToBasket" value="Delete"
+                            class="btn btn-default btn-xs">Delete</button>
+                </form>
+                <form action="controller" method="post">
+                    <input title="page to return" hidden name="page" value=<%=pageJspName%>>
+                    <button id="${item1.getId()}toEdit" type="submit" name="ClothesIdToBasket" value="Edit"
+                            class="btn btn-default btn-xs">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</c:forEach>

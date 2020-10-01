@@ -39,10 +39,20 @@ public class UpdateCatalogueCommand extends Command {
                 break;
             }
             case "delete":{
-                System.out.println("delete");
+                cat=removeItem(request,cat);
                 break;
             }case "edit":{
-                System.out.println("edit");
+                cat=editItem(request,cat);
+                break;
+            } case "addCategory":{
+                cat=addCategory(request,cat);
+                break;
+            }
+            case "deleteCategory":{
+                cat=removeCategory(request,cat);
+                break;
+            }case "editCategory":{
+                cat=editCategory(request,cat);
                 break;
             }default:{
                 forward=Path.PAGE_ERROR_PAGE;
@@ -59,6 +69,7 @@ public class UpdateCatalogueCommand extends Command {
     }
 
     private Catalogue addItem(HttpServletRequest req, Catalogue cat) {
+        WEB_LOG.info("add item to catalogue");
         String itemName = req.getParameter("catalogueName");
         cat.getContainer().put(itemName,new ArrayList<Category>());
         CatalogueService catalogueService = new CatalogueService();
@@ -67,9 +78,70 @@ public class UpdateCatalogueCommand extends Command {
     }
 
 
-    private void addCategory(HttpSession session, HttpServletRequest req, Catalogue cat) {
-
+     private Catalogue removeItem(HttpServletRequest req, Catalogue cat) {
+        WEB_LOG.info("delete item from catalogue");
+        String itemToDelete = req.getParameter("itemToDelete");
+        cat.getContainer().remove(itemToDelete);
         CatalogueService catalogueService = new CatalogueService();
-        //catalogueService.getDao().addItem(req.getParameter("catalogueName"));
+        catalogueService.getDao().removeCatalogueItem(itemToDelete);
+        return cat;
+        }
+
+    private Catalogue editItem(HttpServletRequest req, Catalogue cat) {
+        WEB_LOG.info("edit item from catalogue");
+        String itemToEdit = req.getParameter("itemToEdit");
+        String editedItem = req.getParameter("editedItem");
+        cat.getContainer().remove(itemToEdit);
+        cat.getContainer().put(editedItem,new ArrayList<Category>());
+        CatalogueService catalogueService = new CatalogueService();
+        catalogueService.getDao().renameCatalogueItem(itemToEdit,editedItem);
+        return cat;
     }
+
+     private Catalogue addCategory(HttpServletRequest req, Catalogue cat) {
+
+        WEB_LOG.info("add new Category");
+            String catalogueItem = req.getParameter("CatalogueToAddTo");
+            String itemName = req.getParameter("categoryName");
+            Category category= new Category();
+            category.setName(itemName);
+            cat.getContainer().get(catalogueItem).add(category);
+            CatalogueService catalogueService = new CatalogueService();
+            catalogueService.getDao().addCategory(catalogueItem,itemName);
+            return cat;
+        }
+
+
+     private Catalogue removeCategory(HttpServletRequest req, Catalogue cat) {
+        WEB_LOG.info("delete Category from catalogue");
+         String catalogueToDeleteFrom = req.getParameter("CatalogueToDeleteFrom");
+         String itemNameToDelete = req.getParameter("itemToDelete");
+         for (int i=0; i<cat.getContainer().get(catalogueToDeleteFrom).size(); i++){
+             if(cat.getContainer().get(catalogueToDeleteFrom).get(i).getName().equals(itemNameToDelete)){
+                 cat.getContainer().get(catalogueToDeleteFrom).remove(i);
+             }
+         }
+        CatalogueService catalogueService = new CatalogueService();
+        catalogueService.getDao().removeCategory(catalogueToDeleteFrom,itemNameToDelete);
+        return cat;
+        }
+
+    private Catalogue editCategory(HttpServletRequest req, Catalogue cat) {
+        WEB_LOG.info("edit Category from catalogue");
+        String catalogue = req.getParameter("CatalogueToEditFrom");
+        String oldCategory = req.getParameter("itemToEdit");
+        String newCategory = req.getParameter("editedCategory");
+        for (int i=0; i<cat.getContainer().get(catalogue).size(); i++){
+            if(cat.getContainer().get(catalogue).get(i).getName().equals(oldCategory)){
+                cat.getContainer().get(catalogue).remove(i);
+            }
+        }
+        Category category= new Category();
+        category.setName(newCategory);
+        cat.getContainer().get(catalogue).add(category);
+        CatalogueService catalogueService = new CatalogueService();
+        catalogueService.getDao().renameCategory(catalogue,oldCategory,newCategory);
+        return cat;
+    }
+
 }
