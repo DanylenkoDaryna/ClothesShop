@@ -26,6 +26,8 @@ public class CatalogueDao implements IDao {
     private static final String SQL_REMOVE_CATEGORY = "DELETE FROM armadiodb.categories WHERE catalogue_id=? AND name=?";
     private static final String SQL_RENAME_CATEGORY = "UPDATE armadiodb.categories SET name=? WHERE catalogue_id=? AND name=?";
     private static final String SQL_GET_CATALOGUE_ID_BY_NAME = "SELECT id FROM armadiodb.catalogue WHERE name=?";
+    private static final String SQL_REMOVE_ITEM_BY_ID = "DELETE FROM armadiodb.items WHERE id=?";
+    private static final String SQL_REMOVE_PRODUCT_BY_ITEM_ID = "DELETE FROM armadiodb.products WHERE name=?;";
 
     @Override
     public void create(Object entity) {
@@ -172,7 +174,7 @@ public class CatalogueDao implements IDao {
         } catch (DBException e) {
             DB_LOG.error(e);
         } finally {
-            ConnectionFactory.close(con, ps);
+            ConnectionFactory.close(con, ps, rs);
         }
     }
 
@@ -202,7 +204,7 @@ public class CatalogueDao implements IDao {
             DB_LOG.error("DBException in removeCategory() for Catalogue", e);
             DB_LOG.error(e);
         } finally {
-            ConnectionFactory.close(con, ps);
+            ConnectionFactory.close(con, ps, rs);
         }
     }
 
@@ -233,6 +235,27 @@ public class CatalogueDao implements IDao {
         } catch (DBException e) {
             DB_LOG.error("DBException in renameCategory() for Catalogue", e);
             DB_LOG.error(e);
+        } finally {
+            ConnectionFactory.close(con, ps, rs);
+        }
+    }
+
+
+    public void removeProduct(long idToDelete) {
+
+        Connection con = null;
+        PreparedStatement  ps = null;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_REMOVE_ITEM_BY_ID);
+            ps.setLong(1,idToDelete);
+            ps.execute();
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in removeProduct() for Catalogue", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error("DBException in removeProduct() for Catalogue", e);
         } finally {
             ConnectionFactory.close(con, ps);
         }

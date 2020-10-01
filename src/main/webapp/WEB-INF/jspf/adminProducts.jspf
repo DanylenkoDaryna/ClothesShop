@@ -1,10 +1,15 @@
 
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-3">
         <div class="card">
+            <div class="view overlay">
+                <a href="#">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
             <div class="card-body text-center">
                 <h5>
                     <strong>
-                        <a href="#"
+                        <a href="index.jsp"
                            class="dark-grey-text">
                             Add new Product
                         </a>
@@ -15,12 +20,12 @@
     </div>
 
 <c:forEach items="${sessionScope.items}" var="item1">
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-3">
         <div class="card">
             <div class="view overlay">
                 <img class="card-img-top"
                      src="img/${(item1.getContainer().get(0)).getImages().get(0)}.jpg" alt="clothes img">
-                <a href="index.jsp">
+                <a href="#">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -44,11 +49,14 @@
                 Чтобы сервер не загружался лишними запросами, и чтобы уменьшить вероятность какой-либо ошибки-->
                 <form action="controller" method="post">
                     <input title="page to return" hidden name="page" value=<%=pageJspName%>>
-                    <button id="${item1.getId()}toDelete" type="submit" name="ClothesIdToBasket" value="Delete"
-                            class="btn btn-default btn-xs">Delete</button>
+                    <input type="hidden" name="command" value="updateCatalogue"/>
+                    <input type="hidden" name="updateCatalogueType" value="deleteProduct"/>
+                    <input type="hidden" name="productToDelete" value="${item1.getId()}"/>
+                    <button type="submit" class="btn btn-default btn-xs">Delete</button>
                 </form>
                 <form action="controller" method="post">
                     <input title="page to return" hidden name="page" value=<%=pageJspName%>>
+                    <input type="hidden" name="command" value="updateCatalogue"/>
                     <button id="${item1.getId()}toEdit" type="submit" name="ClothesIdToBasket" value="Edit"
                             class="btn btn-default btn-xs">Edit</button>
                 </form>

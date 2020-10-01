@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.entity.Catalogue;
 import ua.nure.danylenko.epam.db.entity.Category;
+import ua.nure.danylenko.epam.db.entity.Item;
 import ua.nure.danylenko.epam.db.service.CatalogueService;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateCatalogueCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
@@ -53,6 +55,9 @@ public class UpdateCatalogueCommand extends Command {
                 break;
             }case "editCategory":{
                 cat=editCategory(request,cat);
+                break;
+            }case "deleteProduct":{
+                session.setAttribute("items",deleteProduct(request,session));
                 break;
             }default:{
                 forward=Path.PAGE_ERROR_PAGE;
@@ -142,6 +147,22 @@ public class UpdateCatalogueCommand extends Command {
         CatalogueService catalogueService = new CatalogueService();
         catalogueService.getDao().renameCategory(catalogue,oldCategory,newCategory);
         return cat;
+    }
+
+
+    private List<Item> deleteProduct(HttpServletRequest req, HttpSession session) {
+        WEB_LOG.info("delete Product from catalogue");
+        long idToDelete = Long.parseLong(req.getParameter("productToDelete"));
+        List<Item> items = (List<Item>)session.getAttribute("items");
+        items.remove(idToDelete);
+        for (int i=0; i<items.size(); i++){
+            if(items.get(i).getId().equals(idToDelete)){
+                items.remove(i);
+            }
+        }
+        CatalogueService catalogueService = new CatalogueService();
+        catalogueService.getDao().removeProduct(idToDelete);
+        return items;
     }
 
 }
