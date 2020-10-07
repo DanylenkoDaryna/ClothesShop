@@ -2,8 +2,8 @@ package ua.nure.danylenko.epam.db.entity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -13,7 +13,7 @@ public class Item extends Entity{
 
     private double price;
 
-    private Date releaseDate;
+    private LocalDate releaseDate;
 
     private String formattedReleaseDate;
 
@@ -25,7 +25,6 @@ public class Item extends Entity{
 
     public Item(){
         productName = "empty";
-        releaseDate = new Date();
         container = new ArrayList<>();
     }
 
@@ -54,11 +53,11 @@ public class Item extends Entity{
         this.price = price;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 

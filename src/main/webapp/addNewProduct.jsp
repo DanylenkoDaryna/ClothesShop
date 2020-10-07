@@ -22,12 +22,18 @@
                 <div class="row">
 
                     <form id="editAccount_form" action="controller" method="post">
-                        <input type="hidden" name="command" value="editAccount"/>
+                        <input type="hidden" name="command" value="addNewProduct"/>
                         <table class="table" id="add_new_product">
                             <thead>
                             <h4>Add Product info</h4>
                             </thead>
                         <tbody>
+                        <tr>
+                            <td>Item Name</td>
+                            <td colspan="2">
+                            <input type="text" maxlength="15" required name="itemName">
+                            </td>
+                        </tr>
                         <tr>
                             <td>Brand</td>
                             <td colspan="2">
@@ -40,19 +46,29 @@
                         </tr>
                         <tr>
                             <td>Price</td>
-                            <td colspan="2"> <input type="number" min="10" max="1000000" name="Price"/>$</td>
+                            <td colspan="2"> <input type="number" min="10" max="1000000" name="price"/>$</td>
+                        </tr>
+                        <tr>
+                            <td>Image</td>
+                            <td colspan="2"> <input type="file" required name="image"/></td>
                         </tr>
                         <tr>
                             <td>Release Date</td>
-                            <td colspan="2"> <input type="date" name="Release Date"/></td>
+                            <td colspan="2"> <input type="date" name="releaseDate"/></td>
                         </tr>
-
+                        <tr>
+                            <td>Collection</td>
+                            <td colspan="2">
+                                <input type="text" maxlength="15" required name="collectionName">
+                            </td>
+                        </tr>
                         <tr>
                             <td>Available items</td>
                             <td>Available size</td>
                             <td>Colours</td>
                         </tr>
                         <tr>
+
                             <td>
                                 <input name="Available items" type="number" min="1" max="100" required/>
                             </td>
@@ -101,8 +117,6 @@
 
                     </div>
                 </div>
-            </div>
-
         </section>
     </div>
 </main>
@@ -166,7 +180,7 @@
         // Наполняем ячейки
         td11.innerHTML = '<label for="material_percents">Materials</label>';
         td21.innerHTML = '<input id="material_percents" name="Materials"/>';
-        td31.innerHTML = '<input id="percents" name="percents" type="number"/>';
+        td31.innerHTML = '<input id="percents" name="percents" type="number" min="1" max="100"/>';
     }
 </script>
 

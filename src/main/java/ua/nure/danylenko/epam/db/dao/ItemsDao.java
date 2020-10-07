@@ -234,7 +234,8 @@ public class ItemsDao implements IDao {
         item.setId(rs.getLong(Fields.ENTITY_ID));
         item.setProductName(rs.getString(Fields.ITEM_NAME));
         item.setPrice(rs.getDouble(Fields.ITEM_PRICE));
-        item.setReleaseDate(rs.getDate(Fields.ITEM_RELEASE_DATE));
+        Date d = rs.getDate(Fields.ITEM_RELEASE_DATE);
+        item.setReleaseDate(d.toLocalDate());
         item.setBrand(rs.getString(Fields.ITEM_BRAND));
         item.setCategoryId(rs.getInt(Fields.ITEM_CATEGORY_ID));
         return item;
