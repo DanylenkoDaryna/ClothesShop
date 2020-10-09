@@ -2,7 +2,10 @@ package ua.nure.danylenko.epam.web.command.admin;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
+import ua.nure.danylenko.epam.db.entity.BodySize;
+import ua.nure.danylenko.epam.db.entity.Colour;
 import ua.nure.danylenko.epam.db.entity.Item;
+import ua.nure.danylenko.epam.db.entity.Product;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
 
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddNewProductCommand extends Command {
@@ -32,7 +36,37 @@ public class AddNewProductCommand extends Command {
         newItem.setReleaseDate(LocalDate.parse(req.getParameter("releaseDate")));
         newItem.setProductName(req.getParameter("itemName"));
 
-        String img=req.getParameter("image");
+
+
+        String collection =req.getParameter("collectionName");
+        String[] available = req.getParameterValues("available");
+        String[] sizes = req.getParameterValues("size");
+        String[] colours = req.getParameterValues("colour");
+        String[] images = req.getParameterValues("image");
+
+        ArrayList<Product> products = new ArrayList<>();
+        for (int i=0; i<available.length; i++){
+            products.add(new Product());
+            products.get(i).setAvailable(Integer.parseInt(available[i]));
+            WEB_LOG.info(available[i] + " ");
+        }
+        for (int j=0; j<sizes.length; j++){
+            products.add(new Product());
+            products.get(j).setBodySize(BodySize.valueOf(sizes[j]));
+            WEB_LOG.info(available[j] + " ");
+        }
+        for (int k=0; k<colours.length; k++){
+            products.add(new Product());
+            products.get(k).setColour(Colour.valueOf(colours[k]));
+            WEB_LOG.info(available[k] + " ");
+        }
+        for (int m=0; m<images.length; m++){
+            products.add(new Product());
+            products.get(m).setImages(new ArrayList<>());
+            products.get(m).getImages().add(images[m]);
+            WEB_LOG.info("Image path - " + images[m] );
+        }
+
 
         items.add(newItem);
         String forward = Path.PAGE_GOOD;

@@ -48,10 +48,7 @@
                             <td>Price</td>
                             <td colspan="2"> <input type="number" min="10" max="1000000" name="price"/>$</td>
                         </tr>
-                        <tr>
-                            <td>Image</td>
-                            <td colspan="2"> <input type="file" required name="image"/></td>
-                        </tr>
+
                         <tr>
                             <td>Release Date</td>
                             <td colspan="2"> <input type="date" name="releaseDate"/></td>
@@ -65,26 +62,29 @@
                         <tr>
                             <td>Available items</td>
                             <td>Available size</td>
-                            <td>Colours</td>
+                            <td>Colour</td>
+                            <td>Image</td>
                         </tr>
                         <tr>
-
                             <td>
-                                <input name="Available items" type="number" min="1" max="100" required/>
+                                <input name="available" type="number" min="1" max="100" required/>
                             </td>
                             <td>
-                                <select id="sizes" name="sizes" required>
+                                <select id="size" name="size" required>
                                     <c:forEach items="${sessionScope.filterSizes}" var="filterSize">
                                     <option id="${filterSize}" value="${filterSize}">${filterSize}</option>
                                     </c:forEach>
                                 </select>
                             </td>
                             <td>
-                                <select id="colours" name="colours" required>
+                                <select id="colour" name="colour" required>
                                     <c:forEach items="${sessionScope.filterColours}" var="filterColour">
                                         <option id="${filterColour}" value="${filterColour}">${filterColour}</option>
                                     </c:forEach>
                                 </select>
+                            </td>
+                            <td>
+                                <input type="file" required name="image"/>
                             </td>
                         </tr>
 
@@ -94,7 +94,7 @@
                         <table class="table" id="add_materials">
                             <tbody>
                             <tr>
-                                <td><label for="material_percents">Materials</label></td>
+                                <td><label for="material_percents">Material</label></td>
                                 <td > <input id="material_percents" name="Materials"/></td>
                                 <td > <input id="percents" name="percents" type="number" min="1" max="100"/></td>
                             </tr>
@@ -138,10 +138,12 @@
         var td1 = d.createElement("TD");
         var td2 = d.createElement("TD");
         var td3 = d.createElement("TD");
+        var td4 = d.createElement("TD");
 
         row.appendChild(td1);
         row.appendChild(td2);
         row.appendChild(td3);
+        row.appendChild(td4);
 
         // Наполняем ячейки
         td1.innerHTML = '<input name="Available items" type="number" min="1" max="100" required/>';
@@ -155,6 +157,7 @@
             '                                        <option id="${filterColour}" value="${filterColour}">${filterColour}</option>\n' +
             '                                    </c:forEach>\n' +
             '                                </select>';
+        td4.innerHTML = '<input type="file" required name="image"/>';
     }
 
 
