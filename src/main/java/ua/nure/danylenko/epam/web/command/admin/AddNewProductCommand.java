@@ -53,12 +53,12 @@ public class AddNewProductCommand extends Command {
         for (int j=0; j<sizes.length; j++){
             products.add(new Product());
             products.get(j).setBodySize(BodySize.valueOf(sizes[j]));
-            WEB_LOG.info(available[j] + " ");
+            WEB_LOG.info(sizes[j] + " ");
         }
         for (int k=0; k<colours.length; k++){
             products.add(new Product());
             products.get(k).setColour(Colour.valueOf(colours[k]));
-            WEB_LOG.info(available[k] + " ");
+            WEB_LOG.info(colours[k] + " ");
         }
         for (int m=0; m<images.length; m++){
             products.add(new Product());

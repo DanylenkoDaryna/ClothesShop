@@ -29,13 +29,13 @@
                             </thead>
                         <tbody>
                         <tr>
-                            <td>Item Name</td>
+                            <td colspan="2">Item Name</td>
                             <td colspan="2">
                             <input type="text" maxlength="15" required name="itemName">
                             </td>
                         </tr>
                         <tr>
-                            <td>Brand</td>
+                            <td colspan="2">Brand</td>
                             <td colspan="2">
                             <select id="brand" name="brand" required>
                                 <c:forEach items="${sessionScope.filterBrands}" var="filterBrand">
@@ -45,16 +45,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Price</td>
+                            <td colspan="2">Price</td>
                             <td colspan="2"> <input type="number" min="10" max="1000000" name="price"/>$</td>
                         </tr>
 
                         <tr>
-                            <td>Release Date</td>
+                            <td colspan="2">Release Date</td>
                             <td colspan="2"> <input type="date" name="releaseDate"/></td>
                         </tr>
                         <tr>
-                            <td>Collection</td>
+                            <td colspan="2">Collection</td>
                             <td colspan="2">
                                 <input type="text" maxlength="15" required name="collectionName">
                             </td>
@@ -146,13 +146,13 @@
         row.appendChild(td4);
 
         // Наполняем ячейки
-        td1.innerHTML = '<input name="Available items" type="number" min="1" max="100" required/>';
-        td2.innerHTML = '<select id="sizes" name="sizes" required>\n' +
+        td1.innerHTML = '<input name="available" type="number" min="1" max="100" required/>';
+        td2.innerHTML = '<select id="size" name="size" required>\n' +
             '                                    <c:forEach items="${sessionScope.filterSizes}" var="filterSize">\n' +
             '                                    <option id="${filterSize}" value="${filterSize}">${filterSize}</option>\n' +
             '                                    </c:forEach>\n' +
             '                                </select>';
-        td3.innerHTML = '<select id="colours" name="colours" required>\n' +
+        td3.innerHTML = '<select id="colour" name="colour" required>\n' +
             '                                    <c:forEach items="${sessionScope.filterColours}" var="filterColour">\n' +
             '                                        <option id="${filterColour}" value="${filterColour}">${filterColour}</option>\n' +
             '                                    </c:forEach>\n' +
