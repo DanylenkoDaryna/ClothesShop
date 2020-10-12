@@ -14,7 +14,6 @@ public class Product extends Entity{
 
     private Colour colour;
 
-    private List<Material> materials;
 
     private List<String> images;
 
@@ -22,7 +21,6 @@ public class Product extends Entity{
     public Product(){
         colour=Colour.WHITE;
         bodySize=BodySize.S;
-        materials=new ArrayList<>();
         images = new ArrayList<>();
     }
 
@@ -61,14 +59,6 @@ public class Product extends Entity{
 
     public void setColour(Colour colour) {
         this.colour = colour;
-    }
-
-    public List<Material> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
     }
 
     public List<String> getImages() {

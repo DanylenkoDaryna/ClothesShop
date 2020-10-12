@@ -81,7 +81,7 @@
                             <tr class="warning">
                                 <td>Materials</td>
                                 <td>
-                                    <c:forEach items="${sessionScope.ItemsContainer2.get(0).getMaterials()}" var="material">
+                                    <c:forEach items="${sessionScope.items.get(0).getMaterials()}" var="material">
                                         ${material.toString()}<t>
                                     </c:forEach>
                                 </td>

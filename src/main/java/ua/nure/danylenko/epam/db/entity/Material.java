@@ -2,9 +2,12 @@ package ua.nure.danylenko.epam.db.entity;
 
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Material extends Entity{
     private static final long serialVersionUID = -6889036256149495388L;
-    private static final Logger LOG = Logger.getLogger(Material.class);
+    private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
     private String name;
 
@@ -38,8 +41,19 @@ public class Material extends Entity{
         if(percent>0&&percent<=100) {
             this.percent = percent;
         }else{
-            LOG.error("value percent is out of range");
+            DB_LOG.error("value percent is out of range");
         }
 
+    }
+
+    public static List<Material> extractItems(String[] materials, String[] percents){
+        List<Material> materialsList = new ArrayList<>();
+        for(int i=0; i<materials.length; i++){
+            Material material= new Material();
+            material.setName(materials[i]);
+            material.setPercent(Integer.parseInt(percents[i]));
+            materialsList.add(material);
+        }
+        return materialsList;
     }
 }

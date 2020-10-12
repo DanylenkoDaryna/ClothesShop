@@ -100,15 +100,15 @@ INSERT INTO user_info VALUES(DEFAULT, 'Ukraine',
 -- --------------------------------------------------------------
 -- GUESTS
 -- --------------------------------------------------------------
-CREATE TABLE guests(
-
-	id INTEGER NOT NULL auto_increment PRIMARY KEY,
-
-	first_name VARCHAR(20) NOT NULL,
-	last_name VARCHAR(20) NOT NULL,
-	basket_id INTEGER NOT NULL REFERENCES baskets(id)
-
-);
+--CREATE TABLE guests(
+--
+--	id INTEGER NOT NULL auto_increment PRIMARY KEY,
+--
+--	first_name VARCHAR(20) NOT NULL,
+--	last_name VARCHAR(20) NOT NULL,
+--	basket_id INTEGER NOT NULL REFERENCES baskets(id)
+--
+--);
 
 -- --------------------------------------------------------------
 -- STATUSES
@@ -283,7 +283,8 @@ INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari winter is coming', 1, 'XL', 
 -- --------------------------------------------------------------
 -- MATERIALS
 -- --------------------------------------------------------------
-CREATE TABLE materials(
+
+CREATE TABLE armadiodb.materials(
 
 -- id has the INTEGER type (other name is INT), it is the primary key
 	id INTEGER NOT NULL auto_increment PRIMARY KEY,
@@ -292,36 +293,37 @@ CREATE TABLE materials(
 
     percent INTEGER,
 
-	product_id INTEGER NOT NULL REFERENCES products(id)
+	item_id INTEGER NOT NULL REFERENCES items(id)
 	ON DELETE CASCADE ON UPDATE RESTRICT
 	);
 
 -- --------------------------------------------------------------
 INSERT INTO materials VALUES(DEFAULT, 'cotton', 75, 1);
 INSERT INTO materials VALUES(DEFAULT, 'silk', 25, 1);
-INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 2);
-INSERT INTO materials VALUES(DEFAULT, 'silk',98, 3);
-INSERT INTO materials VALUES(DEFAULT, 'cotton', 75, 3);
-INSERT INTO materials VALUES(DEFAULT, 'silk', 25, 3);
-INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 4);
-INSERT INTO materials VALUES(DEFAULT, 'corduroy',100, 5);
-INSERT INTO materials VALUES(DEFAULT, 'velvet', 65, 6);
-INSERT INTO materials VALUES(DEFAULT, 'silk', 35, 6);
-INSERT INTO materials VALUES(DEFAULT, 'leather ', 100, 7);
-INSERT INTO materials VALUES(DEFAULT, 'denim',100, 8);
-INSERT INTO materials VALUES(DEFAULT, 'linen', 50, 9);
-INSERT INTO materials VALUES(DEFAULT, 'suede', 50, 9);
+INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 1);
+INSERT INTO materials VALUES(DEFAULT, 'silk',98, 2);
+INSERT INTO materials VALUES(DEFAULT, 'cotton', 75, 2);
+INSERT INTO materials VALUES(DEFAULT, 'silk', 25, 2);
+INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 3);
+INSERT INTO materials VALUES(DEFAULT, 'corduroy',100, 3);
+INSERT INTO materials VALUES(DEFAULT, 'velvet', 65, 4);
+INSERT INTO materials VALUES(DEFAULT, 'silk', 35, 4);
+INSERT INTO materials VALUES(DEFAULT, 'leather ', 100, 5);
+INSERT INTO materials VALUES(DEFAULT, 'denim',100, 5);
+INSERT INTO materials VALUES(DEFAULT, 'linen', 50, 6);
+INSERT INTO materials VALUES(DEFAULT, 'suede', 50, 6);
+INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 7);
+INSERT INTO materials VALUES(DEFAULT, 'silk',100, 8);
+INSERT INTO materials VALUES(DEFAULT, 'cotton', 70, 9);
+INSERT INTO materials VALUES(DEFAULT, 'corduroy', 30, 9);
 INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 10);
-INSERT INTO materials VALUES(DEFAULT, 'silk',100, 11);
-INSERT INTO materials VALUES(DEFAULT, 'cotton', 70, 12);
-INSERT INTO materials VALUES(DEFAULT, 'corduroy', 30, 12);
-INSERT INTO materials VALUES(DEFAULT, 'wool', 100, 13);
-INSERT INTO materials VALUES(DEFAULT, 'velvet', 80, 14);
-INSERT INTO materials VALUES(DEFAULT, 'silk', 20, 14);
-INSERT INTO materials VALUES(DEFAULT, 'linen', 50, 16);
-INSERT INTO materials VALUES(DEFAULT, 'leather', 25, 16);
-INSERT INTO materials VALUES(DEFAULT, 'cotton', 25, 16);
-INSERT INTO materials VALUES(DEFAULT, 'silk',100, 17);
+INSERT INTO materials VALUES(DEFAULT, 'velvet', 80, 10);
+INSERT INTO materials VALUES(DEFAULT, 'silk', 20, 10);
+INSERT INTO materials VALUES(DEFAULT, 'linen', 50, 11);
+INSERT INTO materials VALUES(DEFAULT, 'leather', 25, 11);
+INSERT INTO materials VALUES(DEFAULT, 'cotton', 25, 11);
+INSERT INTO materials VALUES(DEFAULT, 'silk',100, 12);
+INSERT INTO materials VALUES(DEFAULT, 'linen',100, 13);
 
 -- --------------------------------------------------------------
 -- IMAGES

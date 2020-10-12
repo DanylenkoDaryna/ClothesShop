@@ -2,10 +2,7 @@ package ua.nure.danylenko.epam.web.command.admin;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
-import ua.nure.danylenko.epam.db.entity.BodySize;
-import ua.nure.danylenko.epam.db.entity.Colour;
-import ua.nure.danylenko.epam.db.entity.Item;
-import ua.nure.danylenko.epam.db.entity.Product;
+import ua.nure.danylenko.epam.db.entity.*;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
 
@@ -36,8 +33,6 @@ public class AddNewProductCommand extends Command {
         newItem.setReleaseDate(LocalDate.parse(req.getParameter("releaseDate")));
         newItem.setProductName(req.getParameter("itemName"));
 
-
-
         String collection =req.getParameter("collectionName");
         String[] available = req.getParameterValues("available");
         String[] sizes = req.getParameterValues("size");
@@ -66,6 +61,10 @@ public class AddNewProductCommand extends Command {
             products.get(m).getImages().add(images[m]);
             WEB_LOG.info("Image path - " + images[m] );
         }
+
+        String[] materials = req.getParameterValues("materials");
+        String[] percents = req.getParameterValues("percents");
+        List<Material> materialsList = (ArrayList<Material>) Material.extractItems(materials,percents);
 
 
         items.add(newItem);

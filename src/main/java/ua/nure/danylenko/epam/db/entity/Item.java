@@ -19,12 +19,15 @@ public class Item extends Entity{
 
     private String brand;
 
+    private List<Material> materials;
+
     private int categoryId;
 
     private List<Product> container;
 
     public Item(){
         productName = "empty";
+        materials=new ArrayList<>();
         container = new ArrayList<>();
     }
 
@@ -91,6 +94,14 @@ public class Item extends Entity{
 
     public void setContainer(List<Product> container) {
         this.container = container;
+    }
+
+    public List<Material> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
     }
 
     public String getRuReleaseDate(){

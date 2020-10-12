@@ -28,8 +28,8 @@ public class ItemsDao implements IDao {
     private static final String SQL_FIND_PRODUCTS_BY_ITEM =
             "SELECT * FROM products WHERE item_id=?";
     private static final String SQL_FIND_PRODUCTS_BY_ITEMID ="SELECT * FROM products WHERE item_id=?";
-    private static final String SQL_FIND_MATERIALS_BY_PRODUCT =
-            "SELECT * FROM materials WHERE product_id=?";
+    private static final String SQL_FIND_MATERIALS_BY_ITEM_ID =
+            "SELECT * FROM materials WHERE item_id=?";
     private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM products";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
@@ -70,10 +70,12 @@ public class ItemsDao implements IDao {
             pstmt.setInt(2,catalogId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-
-                items.add(extractItem(rs));
+                Item item = extractItem(rs);
+                getMaterialsByItem(con,item);
+                items.add(item);
 
             }
+
             getProductsByItem(con, items);
             con.commit();
         } catch (SQLException ex) {
@@ -103,7 +105,7 @@ public class ItemsDao implements IDao {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Product product = extractProduct(rs);
-                getMaterialsByProduct(con, product);
+                //getMaterialsByProduct(con, product);
                 products.add(product);
             }
 
@@ -130,7 +132,7 @@ public class ItemsDao implements IDao {
 
                     Product product = extractProduct(rs);
                     item.getContainer().add(product);
-                    getMaterialsByProduct(con, product);
+                   // getMaterialsByProduct(con, product);
                     getProductImages(con,product);
                 }
             }
@@ -156,25 +158,25 @@ public class ItemsDao implements IDao {
                 }
             }catch (SQLException ex) {
                 ConnectionFactory.rollback(con);
-                DB_LOG.error("getProductImages", ex);
-                throw new DBException("getProductImages", ex);
+                DB_LOG.error("getProductImages() failed", ex);
+                throw new DBException("getProductImages() failed", ex);
             }finally {
                 ConnectionFactory.close(rs);
             }
     }
 
-    private void getMaterialsByProduct(Connection con, Product product) throws DBException {
+    private void getMaterialsByItem(Connection con, Item item) throws DBException {
         ResultSet rs = null;
-        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_MATERIALS_BY_PRODUCT)) {
-            pstmt.setLong(1, product.getId());
+        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_MATERIALS_BY_ITEM_ID)) {
+            pstmt.setLong(1, item.getId());
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                product.getMaterials().add(extractMaterial(rs));
+                item.getMaterials().add(extractMaterial(rs));
             }
         }catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            DB_LOG.error("cccccc", ex);
-            throw new DBException("cccccc", ex);
+            DB_LOG.error("getMaterialsByItem() failed: ", ex);
+            throw new DBException("getMaterialsByItem() failed: ", ex);
         }finally {
             ConnectionFactory.close(rs);
         }

@@ -95,8 +95,8 @@
                             <tbody>
                             <tr>
                                 <td><label for="material_percents">Material</label></td>
-                                <td > <input id="material_percents" name="Materials"/></td>
-                                <td > <input id="percents" name="percents" type="number" min="1" max="100"/></td>
+                                <td > <input id="material_percents" name="materials"/></td>
+                                <td > <input id="percents" name="percents" type="number" min="1" max="100"/>%</td>
                             </tr>
                             </tbody>
                         </table>
