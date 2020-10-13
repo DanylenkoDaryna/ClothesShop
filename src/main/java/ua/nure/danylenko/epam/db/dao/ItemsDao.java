@@ -18,7 +18,7 @@ public class ItemsDao implements IDao {
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
-    private Connection createConnection() throws DBException {
+    private Connection getConnection() throws DBException {
 
         return ConnectionFactory.getInstance().getConnection();
     }
@@ -33,14 +33,65 @@ public class ItemsDao implements IDao {
     private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM products";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
-    private static final String SQL_FIND_IMAGES_BY_PRODUCT_ID =
-            "SELECT img_name FROM images WHERE product_id=?";
+    private static final String SQL_FIND_IMAGES_BY_PRODUCT_ID ="SELECT img_name FROM images WHERE product_id=?";
+    private static final String SQL_CREATE_NEW_ITEM =
+            "INSERT INTO armadiodb.items (id, product_name, price, release_date, brand, category_id) " +
+                    "values (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_PRODUCT =
+            "INSERT INTO armadiodb.products (id, product_name, available, product_size, colour, item_id) " +
+                    "values (DEFAULT, ?, ?, ?, ?, ?)";
 
 
     @Override
     public void create(Object entity) {
 
+        Item newItem= (Item)entity;
+        Connection con = null;
+        PreparedStatement ps = null;
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_CREATE_NEW_ITEM);
+            ps.setString(1,newItem.getProductName());
+            ps.setDouble(2,newItem.getPrice());
+            ps.setDate(3,Date.valueOf(newItem.getReleaseDate()));
+            ps.setString(4,newItem.getBrand());
+            ps.setInt(5,newItem.getCategoryId());
+            ps.execute();
+
+            createNewProductsForItem(con, newItem);
+            con.commit();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao create() SQLException! Trouble with commit: ", ex);
+        }catch (DBException dbex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao create() DBException! Trouble with connection: ", dbex);
+        } finally {
+            ConnectionFactory.close(con, ps);
+        }
     }
+
+
+    private void createNewProductsForItem(Connection con, Item newItem) {
+        PreparedStatement prep = null;
+        List<Product> products = newItem.getContainer();
+        try {
+            for(int i=0; i<products.size(); i++) {
+                prep = con.prepareStatement(SQL_CREATE_NEW_PRODUCT);
+                prep.setString(1, products.get(i).getName());
+                prep.setInt(2, products.get(i).getAvailable());
+                prep.setString(3, products.get(i).getBodySize().getName());
+                prep.setString(4, products.get(i).getColour().getName());
+                prep.setLong(5, newItem.getId());
+                prep.execute();
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao create() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,prep);
+        }
+    }
+
 
     @Override
     public Object read() throws DBException {
@@ -64,7 +115,7 @@ public class ItemsDao implements IDao {
         PreparedStatement pstmt = null;
         Connection con = null;
         try{
-            con = this.createConnection();
+            con = getConnection();
             pstmt = con.prepareStatement(SQL_FIND_ITEMS_BY_CATEGORY);
             pstmt.setString(1,categoryName);
             pstmt.setInt(2,catalogId);
@@ -94,33 +145,33 @@ public class ItemsDao implements IDao {
 
 
 
-    public List<Product> getProductsByItemId(int itemId) throws DBException {
-        List <Product> products = new ArrayList<>();
-        ResultSet rs = null;
-        Connection con = null;
-
-        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_PRODUCTS_BY_ITEMID)){
-            con = this.createConnection();
-            pstmt.setLong(1, itemId);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Product product = extractProduct(rs);
-                //getMaterialsByProduct(con, product);
-                products.add(product);
-            }
-
-        }catch (SQLException ex) {
-            ConnectionFactory.rollback(con);
-            DB_LOG.error("bbbbbbbb", ex);
-            throw new DBException("bbbbbbbb", ex);
-        }catch (DBException dbex) {
-            DB_LOG.error("bbbbbbbbc", dbex);
-            throw new DBException("bbbbbbbbc", dbex);
-        }finally {
-            ConnectionFactory.close(rs);
-        }
-        return products;
-    }
+//    public List<Product> getProductsByItemId(int itemId) throws DBException {
+//        List <Product> products = new ArrayList<>();
+//        ResultSet rs = null;
+//        Connection con = null;
+//
+//        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_PRODUCTS_BY_ITEMID)){
+//            con = getConnection();
+//            pstmt.setLong(1, itemId);
+//            rs = pstmt.executeQuery();
+//            while (rs.next()) {
+//                Product product = extractProduct(rs);
+//                //getMaterialsByProduct(con, product);
+//                products.add(product);
+//            }
+//
+//        }catch (SQLException ex) {
+//            ConnectionFactory.rollback(con);
+//            DB_LOG.error("bbbbbbbb", ex);
+//            throw new DBException("bbbbbbbb", ex);
+//        }catch (DBException dbex) {
+//            DB_LOG.error("bbbbbbbbc", dbex);
+//            throw new DBException("bbbbbbbbc", dbex);
+//        }finally {
+//            ConnectionFactory.close(rs);
+//        }
+//        return products;
+//    }
 
     private void getProductsByItem(Connection con, List<Item> items) throws DBException {
         ResultSet rs = null;
@@ -138,11 +189,11 @@ public class ItemsDao implements IDao {
             }
         }catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            DB_LOG.error("bbbbbbbb", ex);
-            throw new DBException("bbbbbbbb", ex);
+            DB_LOG.error("getProductsByItem", ex);
+            throw new DBException("getProductsByItem", ex);
         }catch (DBException dbex) {
-            DB_LOG.error("bbbbbbbbc", dbex);
-            throw new DBException("bbbbbbbbc", dbex);
+            DB_LOG.error("getProductsByItem", dbex);
+            throw new DBException("getProductsByItem", dbex);
         }finally {
             ConnectionFactory.close(rs);
         }
@@ -192,7 +243,7 @@ public class ItemsDao implements IDao {
         ResultSet rs = null;
         Connection con = null;
         try{
-            con = this.createConnection();
+            con = getConnection();
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL_FIND_All_COLOURS);
             while (rs.next()) {

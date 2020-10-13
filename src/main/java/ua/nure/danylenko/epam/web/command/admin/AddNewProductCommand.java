@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.web.command.admin;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.entity.*;
+import ua.nure.danylenko.epam.db.service.ItemsService;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
 
@@ -27,7 +28,9 @@ public class AddNewProductCommand extends Command {
         WEB_LOG.info("AddNewProductCommand starts");
         HttpSession session = req.getSession();
         List<Item> items=(List<Item>)session.getAttribute("items");
+
         Item newItem = new Item();
+        newItem.setCategoryId(items.get(0).getCategoryId());
         newItem.setBrand(req.getParameter("brand"));
         newItem.setPrice(Double.parseDouble(req.getParameter("price")));
         newItem.setReleaseDate(LocalDate.parse(req.getParameter("releaseDate")));
@@ -43,6 +46,7 @@ public class AddNewProductCommand extends Command {
         for (int i=0; i<available.length; i++){
             products.add(new Product());
             products.get(i).setAvailable(Integer.parseInt(available[i]));
+            products.get(i).setName(collection);
             WEB_LOG.info(available[i] + " ");
         }
         for (int j=0; j<sizes.length; j++){
@@ -64,11 +68,16 @@ public class AddNewProductCommand extends Command {
 
         String[] materials = req.getParameterValues("materials");
         String[] percents = req.getParameterValues("percents");
-        List<Material> materialsList = (ArrayList<Material>) Material.extractItems(materials,percents);
-
+        List<Material> materialsList = Material.extractItems(materials,percents);
+        newItem.setMaterials(materialsList);
 
         items.add(newItem);
-        String forward = Path.PAGE_GOOD;
+
+        ItemsService itemsService = new ItemsService();
+        itemsService.getDao().create(newItem);
+
+
+        String forward = Path.PAGE_PRODUCTS;
         session.setAttribute("items",items);
 
         WEB_LOG.info("AddNewProductCommand finished");
