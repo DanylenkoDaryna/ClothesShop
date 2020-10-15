@@ -1,15 +1,16 @@
-<%!private String pageJspName="/products.jsp";%>
-<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
-
+<!doctype html>
 <html lang="en">
+    <%!private String pageJspName="/products.jsp";%>
+
+<%-- HEAD --%>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
+<%-- HEAD --%>
+
 
 <body>
-
-    <%-- MAIN_MENU --%>
-    <%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
-    <%-- MAIN_MENU --%>
+<%-- MAIN_MENU --%>
+<%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
+<%-- MAIN_MENU --%>
 
     <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
@@ -42,6 +43,9 @@
                     <c:when test="${sessionScope.userRole.getName() eq 'admin'}">
                         <%@ include file="WEB-INF/jspf/adminProducts.jspf"%>
                     </c:when>
+                    <c:when test="${sessionScope.userRole.getName() eq 'client'}">
+                        <%@ include file="WEB-INF/jspf/clientProducts.jspf"%>
+                    </c:when>
                     <c:otherwise>
                         <%@ include file="WEB-INF/jspf/clientProducts.jspf"%>
                     </c:otherwise>
@@ -49,7 +53,7 @@
             </div>
         </section>
     </div>
-</div>
+    </div>
 </main>
     </div>
     <!-- footer -->
@@ -62,5 +66,6 @@
     <%@include file="js/bootstrap.bundle.min.js"%>
     <%@include file="js/bootstrap.min.js"%>
 </script>
+
 </body>
 </html>

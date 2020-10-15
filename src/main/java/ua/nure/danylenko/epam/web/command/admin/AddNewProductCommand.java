@@ -20,27 +20,27 @@ public class AddNewProductCommand extends Command {
 
     private static final long serialVersionUID = -3071536593627692473L;
 
-    private static final Logger DB_LOG = Logger.getLogger("jdbc");
     private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse response) throws IOException, ServletException, AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         WEB_LOG.info("AddNewProductCommand starts");
-        HttpSession session = req.getSession();
-        List<Item> items=(List<Item>)session.getAttribute("items");
+        HttpSession session = request.getSession();
+        List<Item> items = (ArrayList<Item>)session.getAttribute("items");
 
         Item newItem = new Item();
         newItem.setCategoryId(items.get(0).getCategoryId());
-        newItem.setBrand(req.getParameter("brand"));
-        newItem.setPrice(Double.parseDouble(req.getParameter("price")));
-        newItem.setReleaseDate(LocalDate.parse(req.getParameter("releaseDate")));
-        newItem.setProductName(req.getParameter("itemName"));
+        newItem.setBrand(request.getParameter("brand"));
+        newItem.setPrice(Double.parseDouble(request.getParameter("price")));
+        newItem.setReleaseDate(LocalDate.parse(request.getParameter("releaseDate")));
+        newItem.setProductName(request.getParameter("itemName"));
+        WEB_LOG.info("AAAAAAAAAA"+request.getParameter("itemName"));
 
-        String collection =req.getParameter("collectionName");
-        String[] available = req.getParameterValues("available");
-        String[] sizes = req.getParameterValues("size");
-        String[] colours = req.getParameterValues("colour");
-        String[] images = req.getParameterValues("image");
+        String collection =request.getParameter("collectionName");
+        String[] available = request.getParameterValues("available");
+        String[] sizes = request.getParameterValues("size");
+        String[] colours = request.getParameterValues("colour");
+        String[] images = request.getParameterValues("image");
 
         ArrayList<Product> products = new ArrayList<>();
         for (int i=0; i<available.length; i++){
@@ -66,9 +66,13 @@ public class AddNewProductCommand extends Command {
             WEB_LOG.info("Image path - " + images[m] );
         }
 
-        String[] materials = req.getParameterValues("materials");
-        String[] percents = req.getParameterValues("percents");
-        List<Material> materialsList = Material.extractItems(materials,percents);
+        for (int y=0; y<newItem.getContainer().size(); y++){
+
+            WEB_LOG.info("Products - " + newItem.getContainer().get(y).toString() );
+        }
+        String[] materials = request.getParameterValues("materials");
+        String[] percents = request.getParameterValues("percents");
+        List<Material> materialsList = Material.extractItems(materials,percents, newItem.getId());
         newItem.setMaterials(materialsList);
 
         items.add(newItem);
@@ -77,7 +81,7 @@ public class AddNewProductCommand extends Command {
         itemsService.getDao().create(newItem);
 
 
-        String forward = Path.PAGE_PRODUCTS;
+        String forward = Path.PAGE_GOOD;
         session.setAttribute("items",items);
 
         WEB_LOG.info("AddNewProductCommand finished");

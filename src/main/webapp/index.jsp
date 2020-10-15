@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <%!private String pageJspName="index.jsp";%>
-</head>
+
 
 
 <body>

@@ -34,18 +34,17 @@ public class ItemsDao implements IDao {
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
     private static final String SQL_FIND_IMAGES_BY_PRODUCT_ID ="SELECT img_name FROM images WHERE product_id=?";
-    private static final String SQL_CREATE_NEW_ITEM =
-            "INSERT INTO armadiodb.items (id, product_name, price, release_date, brand, category_id) " +
-                    "values (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_ITEM ="INSERT INTO armadiodb.items (id, product_name, price, release_date, brand, category_id) values (DEFAULT, ?, ?, ?, ?, ?)";
     private static final String SQL_CREATE_NEW_PRODUCT =
-            "INSERT INTO armadiodb.products (id, product_name, available, product_size, colour, item_id) " +
-                    "values (DEFAULT, ?, ?, ?, ?, ?)";
+            "INSERT INTO armadiodb.products (id, product_name, available, product_size, colour, item_id) values (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_ADD_NEW_PRODUCT_IMAGE = "INSERT INTO armadiodb.images (id, img_name, product_id) values (DEFAULT, ?, ?)";
+    private static final String SQL_ADD_PRODUCT_MATERIAL ="INSERT INTO armadiodb.materials (id, material, percent, item_id) values (DEFAULT, ?, ?, ?)";
 
 
     @Override
     public void create(Object entity) {
-
-        Item newItem= (Item)entity;
+        DB_LOG.info("create started");
+        Item newItem = (Item)entity;
         Connection con = null;
         PreparedStatement ps = null;
         try{
@@ -58,8 +57,9 @@ public class ItemsDao implements IDao {
             ps.setInt(5,newItem.getCategoryId());
             ps.execute();
 
-            createNewProductsForItem(con, newItem);
+           // addMatherialsForItem(con, newItem.getMaterials());
             con.commit();
+            // createNewProductsForItem(con, newItem.getContainer(), newItem.getId());
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao create() SQLException! Trouble with commit: ", ex);
@@ -72,9 +72,8 @@ public class ItemsDao implements IDao {
     }
 
 
-    private void createNewProductsForItem(Connection con, Item newItem) {
+    private void createNewProductsForItem(Connection con, List<Product>  products, Long itemId) {
         PreparedStatement prep = null;
-        List<Product> products = newItem.getContainer();
         try {
             for(int i=0; i<products.size(); i++) {
                 prep = con.prepareStatement(SQL_CREATE_NEW_PRODUCT);
@@ -82,13 +81,56 @@ public class ItemsDao implements IDao {
                 prep.setInt(2, products.get(i).getAvailable());
                 prep.setString(3, products.get(i).getBodySize().getName());
                 prep.setString(4, products.get(i).getColour().getName());
-                prep.setLong(5, newItem.getId());
+                prep.setLong(5, itemId);
                 prep.execute();
             }
+            addNewProductImages(con, products);
+            con.commit();
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            DB_LOG.error("In ItemsDao create() SQLException! Trouble with commit: ", ex);
+            DB_LOG.error("In ItemsDao createNewProductsForItem() SQLException! Trouble with commit: ", ex);
             ConnectionFactory.close(con,prep);
+        }finally {
+            ConnectionFactory.close(prep);
+        }
+    }
+
+    private void addNewProductImages(Connection con, List<Product>  products){
+        PreparedStatement pStatement = null;
+        try {
+            for(int i=0; i<products.size(); i++) {
+                pStatement = con.prepareStatement(SQL_ADD_NEW_PRODUCT_IMAGE);
+                pStatement.setString(1, products.get(i).getImages().get(0));
+                pStatement.setLong(2, products.get(i).getId());
+                pStatement.execute();
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao addNewProductImages() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,pStatement);
+        }finally {
+            ConnectionFactory.close(pStatement);
+        }
+    }
+
+    private void addMatherialsForItem(Connection con, List<Material> materials){
+        PreparedStatement ps = null;
+        try {
+            for(int i=0; i<materials.size(); i++) {
+                ps = con.prepareStatement(SQL_ADD_PRODUCT_MATERIAL);
+                ps.setString(1, materials.get(i).getName());
+                ps.setLong(2, materials.get(i).getPercent());
+                ps.setLong(3, materials.get(i).getItemId());
+                ps.execute();
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao addMatherialsForItem() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,ps);
+        }finally {
+            ConnectionFactory.close(ps);
         }
     }
 

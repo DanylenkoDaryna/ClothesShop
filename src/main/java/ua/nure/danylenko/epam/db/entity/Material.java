@@ -12,10 +12,12 @@ public class Material extends Entity{
     private String name;
 
     private int percent;
+    private long itemId;
 
-   public Material(String material ,int perc){
+   public Material(String material, int p, long id){
        name=material;
-       percent=perc;
+       percent=p;
+       itemId = id;
    }
 
     public Material(){ }
@@ -46,14 +48,23 @@ public class Material extends Entity{
 
     }
 
-    public static List<Material> extractItems(String[] materials, String[] percents){
+    public static List<Material> extractItems(String[] materials, String[] percents, long itemId){
         List<Material> materialsList = new ArrayList<>();
         for(int i=0; i<materials.length; i++){
             Material material= new Material();
             material.setName(materials[i]);
             material.setPercent(Integer.parseInt(percents[i]));
+            material.setItemId(itemId);
             materialsList.add(material);
         }
         return materialsList;
+    }
+
+    public long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
     }
 }

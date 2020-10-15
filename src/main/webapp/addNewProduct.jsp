@@ -21,7 +21,7 @@
             <div class="row wow fadeIn">
                 <div class="row">
 
-                    <form id="editAccount_form" action="controller" method="post">
+                    <form id="addNewProduct" method="post" action="controller">
                         <input type="hidden" name="command" value="addNewProduct"/>
                         <table class="table" id="add_new_product">
                             <thead>
@@ -94,27 +94,27 @@
                         <table class="table" id="add_materials">
                             <tbody>
                             <tr>
-                                <td><label for="material_percents">Material</label></td>
-                                <td > <input id="material_percents" name="materials"/></td>
-                                <td > <input id="percents" name="percents" type="number" min="1" max="100"/>%</td>
+                                <td><label for="materials">Material</label></td>
+                                <td> <input id="materials" name="materials"/></td>
+                                <td> <input id="percents" name="percents" type="number" min="1" max="100"/>%</td>
                             </tr>
                             </tbody>
                         </table>
 
-
-                        <table class="table" id="add_more">
-                            <tr>
-                                <td colspan="2">Add more items?</td>
-                                <td><button onclick="addRow()">OK</button></td>
-                                <td colspan="2">Add more materials?</td>
-                                <td><button onclick="addMaterials()">OK</button></td>
-                            </tr>
-                        </table>
-
                         <input type="reset">
-                        <input type="submit" value="Create" >
+                        <input type="submit" value="Create New Item" >
                     </form>
 
+                    <table class="table" id="add_more">
+                        <tbody>
+                        <tr>
+                            <td colspan="2">Add more items?</td>
+                            <td><button onclick="addRow()">OK</button></td>
+                            <td colspan="2">Add more materials?</td>
+                            <td><button onclick="addMaterials()">OK</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
                     </div>
                 </div>
         </section>
@@ -181,9 +181,9 @@
         row2.appendChild(td31);
 
         // Наполняем ячейки
-        td11.innerHTML = '<label for="material_percents">Materials</label>';
-        td21.innerHTML = '<input id="material_percents" name="Materials"/>';
-        td31.innerHTML = '<input id="percents" name="percents" type="number" min="1" max="100"/>';
+        td11.innerHTML = '<label for="materials">Material</label>';
+        td21.innerHTML = '<input id="materials" name="materials"/>';
+        td31.innerHTML = '<input id="percents" name="percents" type="number" min="1" max="100"/>%';
     }
 </script>
 
