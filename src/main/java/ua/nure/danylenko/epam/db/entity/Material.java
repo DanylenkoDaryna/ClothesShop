@@ -2,12 +2,10 @@ package ua.nure.danylenko.epam.db.entity;
 
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Material extends Entity{
     private static final long serialVersionUID = -6889036256149495388L;
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
+
 
     private String name;
 
@@ -48,17 +46,20 @@ public class Material extends Entity{
 
     }
 
-    public static List<Material> extractItems(String[] materials, String[] percents, long itemId){
-        List<Material> materialsList = new ArrayList<>();
-        for(int i=0; i<materials.length; i++){
-            Material material= new Material();
-            material.setName(materials[i]);
-            material.setPercent(Integer.parseInt(percents[i]));
-            material.setItemId(itemId);
-            materialsList.add(material);
-        }
-        return materialsList;
-    }
+//    public static List<Material> extractItems(String[] materials, String[] percents, long itemId){
+//        List<Material> materialsList = new ArrayList<>();
+//        for(int i=0; i<materials.length; i++){
+//            Material material= new Material();
+//            material.setName(materials[i]);
+//            material.setPercent(Integer.parseInt(percents[i]));
+//            material.setItemId(itemId);
+//            DB_LOG.info("material - " + materials[i] );
+//            DB_LOG.info("percents - " + percents[i] );
+//            DB_LOG.info("itemId - " + itemId );
+//            materialsList.add(material);
+//        }
+//        return materialsList;
+//    }
 
     public long getItemId() {
         return itemId;

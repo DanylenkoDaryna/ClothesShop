@@ -68,6 +68,7 @@
                         <tr>
                             <td>
                                 <input name="available" type="number" min="1" max="100" required/>
+                                <input type="hidden" id="productsNumber" value="1"/>
                             </td>
                             <td>
                                 <select id="size" name="size" required>
@@ -128,6 +129,8 @@
     {
         // Находим нужную таблицу
         var tableBody = d.getElementById('add_new_product').getElementsByTagName('TBODY')[0];
+        var productsNumber = d.getElementById('productsNumber');
+        d.getElementById('productsNumber').value = productsNumber+1;
 
         // Создаем строку таблицы и добавляем ее
         var row = d.createElement("TR");

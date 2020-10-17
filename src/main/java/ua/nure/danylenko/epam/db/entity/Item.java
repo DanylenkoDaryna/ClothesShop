@@ -88,7 +88,7 @@ public class Item extends Entity{
         this.categoryId = categoryId;
     }
 
-    public List getContainer() {
+    public List<Product>  getContainer() {
         return container;
     }
 

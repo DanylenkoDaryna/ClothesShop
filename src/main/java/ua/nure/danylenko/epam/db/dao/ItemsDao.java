@@ -35,8 +35,7 @@ public class ItemsDao implements IDao {
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
     private static final String SQL_FIND_IMAGES_BY_PRODUCT_ID ="SELECT img_name FROM images WHERE product_id=?";
     private static final String SQL_CREATE_NEW_ITEM ="INSERT INTO armadiodb.items (id, product_name, price, release_date, brand, category_id) values (DEFAULT, ?, ?, ?, ?, ?)";
-    private static final String SQL_CREATE_NEW_PRODUCT =
-            "INSERT INTO armadiodb.products (id, product_name, available, product_size, colour, item_id) values (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_PRODUCT ="INSERT INTO armadiodb.products (id, product_name, available, product_size, colour, item_id) values (DEFAULT, ?, ?, ?, ?, ?)";
     private static final String SQL_ADD_NEW_PRODUCT_IMAGE = "INSERT INTO armadiodb.images (id, img_name, product_id) values (DEFAULT, ?, ?)";
     private static final String SQL_ADD_PRODUCT_MATERIAL ="INSERT INTO armadiodb.materials (id, material, percent, item_id) values (DEFAULT, ?, ?, ?)";
 
@@ -47,6 +46,8 @@ public class ItemsDao implements IDao {
         Item newItem = (Item)entity;
         Connection con = null;
         PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
         try{
             con = getConnection();
             ps = con.prepareStatement(SQL_CREATE_NEW_ITEM);
@@ -57,9 +58,19 @@ public class ItemsDao implements IDao {
             ps.setInt(5,newItem.getCategoryId());
             ps.execute();
 
-           // addMatherialsForItem(con, newItem.getMaterials());
+            stmt=con.createStatement();
+            rs = stmt.executeQuery("SELECT last_insert_id()");
+            if (rs.next()){
+                long itemId=rs.getLong(1);
+                newItem.setId(itemId);
+                DB_LOG.info("Item id = " + itemId);
+                addMatherialsForItem(con, newItem.getMaterials(), itemId);
+                createNewProductsForItem(con, newItem.getContainer(), itemId);
+            } else{
+                DB_LOG.info("Error getting Item id!");
+            }
+
             con.commit();
-            // createNewProductsForItem(con, newItem.getContainer(), newItem.getId());
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao create() SQLException! Trouble with commit: ", ex);
@@ -67,31 +78,51 @@ public class ItemsDao implements IDao {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao create() DBException! Trouble with connection: ", dbex);
         } finally {
-            ConnectionFactory.close(con, ps);
+            ConnectionFactory.close(con, ps, rs);
+            ConnectionFactory.close(stmt);
         }
     }
 
 
     private void createNewProductsForItem(Connection con, List<Product>  products, Long itemId) {
+        DB_LOG.info("createNewProductsForItem starts");
         PreparedStatement prep = null;
+        Statement stmt = null;
+        ResultSet rs = null;
         try {
-            for(int i=0; i<products.size(); i++) {
+            for (Product product : products) {
                 prep = con.prepareStatement(SQL_CREATE_NEW_PRODUCT);
-                prep.setString(1, products.get(i).getName());
-                prep.setInt(2, products.get(i).getAvailable());
-                prep.setString(3, products.get(i).getBodySize().getName());
-                prep.setString(4, products.get(i).getColour().getName());
+                prep.setString(1, product.getName());
+                DB_LOG.info(product.getName());
+                prep.setInt(2, product.getAvailable());
+                DB_LOG.info(product.getAvailable());
+                prep.setString(3, product.getBodySize().toString());
+                DB_LOG.info(product.getBodySize().toString());
+                prep.setString(4, product.getColour().toString());
+                DB_LOG.info(product.getColour().toString());
                 prep.setLong(5, itemId);
+                DB_LOG.info(itemId);
                 prep.execute();
+
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT last_insert_id()");
+                if (rs.next()) {
+                    product.setId(rs.getLong(1));
+                    DB_LOG.info("Product id = " + rs.getLong(1));
+                } else {
+                    DB_LOG.info("Error getting Item id!");
+                }
             }
+
             addNewProductImages(con, products);
-            con.commit();
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao createNewProductsForItem() SQLException! Trouble with commit: ", ex);
             ConnectionFactory.close(con,prep);
         }finally {
             ConnectionFactory.close(prep);
+            ConnectionFactory.close(rs);
+            ConnectionFactory.close(stmt);
         }
     }
 
@@ -104,7 +135,6 @@ public class ItemsDao implements IDao {
                 pStatement.setLong(2, products.get(i).getId());
                 pStatement.execute();
             }
-            con.commit();
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao addNewProductImages() SQLException! Trouble with commit: ", ex);
@@ -114,17 +144,17 @@ public class ItemsDao implements IDao {
         }
     }
 
-    private void addMatherialsForItem(Connection con, List<Material> materials){
+    private void addMatherialsForItem(Connection con, List<Material> materials, long itemId){
         PreparedStatement ps = null;
         try {
             for(int i=0; i<materials.size(); i++) {
                 ps = con.prepareStatement(SQL_ADD_PRODUCT_MATERIAL);
                 ps.setString(1, materials.get(i).getName());
-                ps.setLong(2, materials.get(i).getPercent());
-                ps.setLong(3, materials.get(i).getItemId());
+                ps.setInt(2, materials.get(i).getPercent());
+                ps.setLong(3, itemId);
+                materials.get(i).setItemId(itemId);
                 ps.execute();
             }
-            con.commit();
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao addMatherialsForItem() SQLException! Trouble with commit: ", ex);
