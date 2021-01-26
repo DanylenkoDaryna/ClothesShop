@@ -1,10 +1,10 @@
 
 <c:forEach items="${sessionScope.items}" var="item1">
     <div class="col-lg-3 col-md-6">
-        <div class="card">
+    <div class="card">
             <div class="view overlay">
                 <img class="card-img-top"
-                     src="img/${(item1.getContainer().get(0)).getImages().get(0)}.jpg" alt="clothes img">
+                     src="img/${(item1.getContainer().get(0)).getImages().get(0)}" alt="clothes img">
                 <a href="#">
                     <div class="mask rgba-white-slight"></div>
                 </a>

@@ -59,8 +59,9 @@ public class AddNewProductCommand extends Command {
 
         String[] materials = request.getParameterValues("materials");
         String[] percents = request.getParameterValues("percents");
-        newItem.setContainer(products);
         newItem.setMaterials(extractItems(materials,percents));
+
+        newItem.setContainer(products);
         items.add(newItem);
 
         for (Product product : products) {
@@ -72,9 +73,11 @@ public class AddNewProductCommand extends Command {
         ItemsService itemsService = new ItemsService();
         itemsService.getDao().create(newItem);
 
-        String forward = Path.PAGE_GOOD;
         session.setAttribute("items",items);
+        String forward = Path.PAGE_GOOD;
 
+        int i=items.indexOf(newItem);
+        WEB_LOG.info("items last added element " + items.get(i).getProductName());
         WEB_LOG.info("AddNewProductCommand finished");
 
         return forward;
@@ -99,9 +102,8 @@ public class AddNewProductCommand extends Command {
 
     public void extractImages(ArrayList<Product> products, String[] images){
         for (int m=0; m<products.size(); m++){
-            products.get(m).setImages(new ArrayList<>());
-            products.get(m).getImages().add(images[m]);
-            WEB_LOG.info("Image path - " + images[m] );
+            products.get(m).setImage(images[m]);
+            WEB_LOG.info("Image path - " + products.get(m).getImage());
         }
     }
 

@@ -34,7 +34,7 @@ public class BasketServlet extends HttpServlet {
         String forward = req.getParameter("page");
 
         if(session.getAttribute("items")!=null){
-            container = (List<Item>)session.getAttribute("items");
+            container = (ArrayList<Item>)session.getAttribute("items");
         }else{
             forward = Path.PAGE_ERROR_PAGE;
             WEB_LOG.error("ERROR: BasketServlet doPost() -> items container is empty");

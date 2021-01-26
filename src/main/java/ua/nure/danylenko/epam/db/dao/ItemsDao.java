@@ -23,17 +23,13 @@ public class ItemsDao implements IDao {
         return ConnectionFactory.getInstance().getConnection();
     }
 
-    private static final String SQL_FIND_ITEMS_BY_CATEGORY = "SELECT * FROM items WHERE category_id=" +
-            "(SELECT id FROM categories WHERE name=? and catalogue_id=?);";
-    private static final String SQL_FIND_PRODUCTS_BY_ITEM =
-            "SELECT * FROM products WHERE item_id=?";
-    private static final String SQL_FIND_PRODUCTS_BY_ITEMID ="SELECT * FROM products WHERE item_id=?";
-    private static final String SQL_FIND_MATERIALS_BY_ITEM_ID =
-            "SELECT * FROM materials WHERE item_id=?";
+    private static final String SQL_FIND_ITEMS_BY_CATEGORY = "SELECT * FROM items WHERE category_id=(SELECT id FROM categories WHERE name=? and catalogue_id=?);";
+    private static final String SQL_FIND_PRODUCTS_BY_ITEM ="SELECT * FROM products WHERE item_id=?";
+    private static final String SQL_FIND_MATERIALS_BY_ITEM_ID="SELECT * FROM materials WHERE item_id=?";
     private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM products";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
-    private static final String SQL_FIND_IMAGES_BY_PRODUCT_ID ="SELECT img_name FROM images WHERE product_id=?";
+    private static final String SQL_FIND_IMAGE_BY_PRODUCT_ID ="SELECT img_name FROM images WHERE product_id=?";
     private static final String SQL_CREATE_NEW_ITEM ="INSERT INTO armadiodb.items (id, product_name, price, release_date, brand, category_id) values (DEFAULT, ?, ?, ?, ?, ?)";
     private static final String SQL_CREATE_NEW_PRODUCT ="INSERT INTO armadiodb.products (id, product_name, available, product_size, colour, item_id) values (DEFAULT, ?, ?, ?, ?, ?)";
     private static final String SQL_ADD_NEW_PRODUCT_IMAGE = "INSERT INTO armadiodb.images (id, img_name, product_id) values (DEFAULT, ?, ?)";
@@ -131,7 +127,7 @@ public class ItemsDao implements IDao {
         try {
             for(int i=0; i<products.size(); i++) {
                 pStatement = con.prepareStatement(SQL_ADD_NEW_PRODUCT_IMAGE);
-                pStatement.setString(1, products.get(i).getImages().get(0));
+                pStatement.setString(1, products.get(i).getImage());
                 pStatement.setLong(2, products.get(i).getId());
                 pStatement.execute();
             }
@@ -182,16 +178,17 @@ public class ItemsDao implements IDao {
     }
 
     public List<Item> getItemsByCategory(String categoryName, int catalogId) throws DBException {
+        DB_LOG.info("getItemsByCategory() started! ");
         List <Item> items = new ArrayList<>();
         ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        PreparedStatement pst = null;
         Connection con = null;
         try{
             con = getConnection();
-            pstmt = con.prepareStatement(SQL_FIND_ITEMS_BY_CATEGORY);
-            pstmt.setString(1,categoryName);
-            pstmt.setInt(2,catalogId);
-            rs = pstmt.executeQuery();
+            pst = con.prepareStatement(SQL_FIND_ITEMS_BY_CATEGORY);
+            pst.setString(1,categoryName);
+            pst.setInt(2,catalogId);
+            rs = pst.executeQuery();
             while (rs.next()) {
                 Item item = extractItem(rs);
                 getMaterialsByItem(con,item);
@@ -203,13 +200,13 @@ public class ItemsDao implements IDao {
             con.commit();
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            DB_LOG.error("aaaaaaaaba", ex);
-            throw new DBException("aaaaaaaaba", ex);
+            DB_LOG.error("in getItemsByCategory()", ex);
+            throw new DBException("in getItemsByCategory()", ex);
         }catch (DBException dbex) {
-            DB_LOG.error("aaaaaaaab", dbex);
-            throw new DBException("aaaaaaaab", dbex);
+            DB_LOG.error("in getItemsByCategory()", dbex);
+            throw new DBException("in getItemsByCategory()", dbex);
         } finally {
-            ConnectionFactory.close(con, pstmt, rs);
+            ConnectionFactory.close(con, pst, rs);
         }
 
         return items;
@@ -246,17 +243,19 @@ public class ItemsDao implements IDao {
 //    }
 
     private void getProductsByItem(Connection con, List<Item> items) throws DBException {
+
+        DB_LOG.info("getProductsByItem() started! ");
         ResultSet rs = null;
-        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_PRODUCTS_BY_ITEM)){
+        try(PreparedStatement pst = con.prepareStatement(SQL_FIND_PRODUCTS_BY_ITEM)){
             for (Item item : items) {
-                pstmt.setLong(1, item.getId());
-                rs = pstmt.executeQuery();
+                pst.setLong(1, item.getId());
+                rs = pst.executeQuery();
                 while (rs.next()) {
 
                     Product product = extractProduct(rs);
                     item.getContainer().add(product);
-                   // getMaterialsByProduct(con, product);
                     getProductImages(con,product);
+
                 }
             }
         }catch (SQLException ex) {
@@ -272,12 +271,13 @@ public class ItemsDao implements IDao {
     }
 
     private void getProductImages(Connection con, Product product)throws DBException {
-            ResultSet rs = null;
-            try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_IMAGES_BY_PRODUCT_ID)) {
-                pstmt.setLong(1, product.getId());
-                rs = pstmt.executeQuery();
+       // DB_LOG.info("getProductImages() started!");
+        ResultSet rs = null;
+            try(PreparedStatement ps = con.prepareStatement(SQL_FIND_IMAGE_BY_PRODUCT_ID)) {
+                ps.setLong(1, product.getId());
+                rs = ps.executeQuery();
                 while (rs.next()) {
-                    product.getImages().add(rs.getString(Fields.IMAGE_NAME));
+                    product.setImage(rs.getString(Fields.IMAGE_NAME));
                 }
             }catch (SQLException ex) {
                 ConnectionFactory.rollback(con);
@@ -381,6 +381,7 @@ public class ItemsDao implements IDao {
         material.setId(rs.getLong(Fields.ENTITY_ID));
         material.setName(rs.getString(Fields.MAERIAL_NAME));
         material.setPercent(rs.getInt(Fields.MAERIAL_PERCENT));
+        material.setItemId(rs.getLong(Fields.ENTITY_ID));
         return material;
     }
 }

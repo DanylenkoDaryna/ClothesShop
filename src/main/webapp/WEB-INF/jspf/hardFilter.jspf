@@ -1,13 +1,18 @@
 <form action="HardFilterServlet" method="post">
     <div class="form-group" id="filterProductsDiv">
-        <h6>Price</h6>
+        <h6>
+            <i class="fas fa-funnel-dollar">Price</i>
+        </h6>
         from:
-        <input type="number" class="form-control-sm" name="InputPriceFrom" placeholder="$" min=40>
+        <input type="number" class="form-control-sm" name="InputPriceFrom" placeholder="$" min=50>
         to:
-        <input type="number" class="form-control-sm" name="InputPriceTo" placeholder="$" min=500>
+        <input type="number" class="form-control-sm" name="InputPriceTo" placeholder="$" min=1000>
         <br>
     </div>
-    <h6>Size:</h6>
+    <h6>
+        <i class="fas fa-filter"></i>
+        Size:
+    </h6>
     <c:forEach items="${sessionScope.filterSizes}" var="filterSize">
         <div class="custom-control custom-checkbox custom-control-inline" id="filterProductsDiv">
             <input type="checkbox" name="sizes" class="custom-control-input" value="${filterSize}"
@@ -15,7 +20,10 @@
             <label class="custom-control-label" for="${filterSize}"> ${filterSize}</label>
         </div>
     </c:forEach>
-    <h6>Brand:</h6>
+    <h6>
+        <i class="fas fa-filter"></i>
+        Brand:
+    </h6>
     <c:forEach items="${sessionScope.filterBrands}" var="filterBrand">
         <div class="custom-control custom-checkbox custom-control-inline" id="filterProductsDiv">
             <input type="checkbox" name="brands" class="custom-control-input"  value="${filterBrand}"
@@ -24,7 +32,10 @@
         </div>
         <br>
     </c:forEach>
-    <h6>Colour:</h6>
+    <h6>
+        <i class="fas fa-filter"></i>
+        Colour:
+    </h6>
     <c:forEach items="${sessionScope.filterColours}" var="filterColour">
         <div class="custom-control custom-checkbox custom-control-inline" id="filterProductsDiv">
             <input type="checkbox" name="colours" class="custom-control-input" value="${filterColour}"

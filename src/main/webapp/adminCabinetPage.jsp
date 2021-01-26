@@ -52,14 +52,18 @@ Class page corresponds to the '.page' element in included CSS document.
                     </li>
                     <!-- Вторая вкладка -->
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#updatingUsers">Updating Users</a>
+                        <a class="nav-link" data-toggle="tab" href="#updatingUsers">
+                            <i class="fas fa-user-edit"></i>
+                            Updating Users
+                        </a>
                     </li><!-- 3 вкладка -->
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#updatingData">Updating Catalogue Data</a>
+                        <a class="nav-link" data-toggle="tab" href="#updatingData">
+                            <i class="fas fa-edit"></i>
+                            Updating Catalogue Data
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#updatingOrders">Updating Orders</a>
-                    </li>
+
                 </ul>
 
 
@@ -84,7 +88,7 @@ Class page corresponds to the '.page' element in included CSS document.
                     <!-- Второй блок -->
                     <div class="tab-pane fade" id="updatingUsers">
 
-
+                        <i class="fas fa-user-edit"></i>
                         <form id="editAccount_form" action="controller" method="post">
                             <%--===========================================================================
                             Hidden field. In the query it will act as command=login.
@@ -196,8 +200,14 @@ Class page corresponds to the '.page' element in included CSS document.
                                     <tbody>
                                     <tr class="active">
                                         <td>CATALOGUE ITEMS</td>
-                                        <td>DELETE</td>
-                                        <td>EDIT</td>
+                                        <td>
+                                            <i class="fas fa-trash-alt"></i>
+                                            DELETE
+                                        </td>
+                                        <td>
+                                            <i class="fas fa-edit"></i>
+                                            EDIT
+                                        </td>
                                     </tr>
                                     <c:forEach items="${catalogue.container.keySet()}" var="entry1">
                                         <tr>
@@ -230,6 +240,7 @@ Class page corresponds to the '.page' element in included CSS document.
                                             <input type="hidden" name="command" value="updateCatalogue"/>
                                             <input type="hidden" name="updateCatalogueType" value="add"/>
                                             <label>New Catalogue Item name
+                                                <i class="fas fa-plus-circle"></i>
                                                 <input name="catalogueName" maxlength="30" value="Enter name">
                                             </label>
                                             <input type="submit" value="Add New Item">

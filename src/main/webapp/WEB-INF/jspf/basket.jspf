@@ -12,7 +12,9 @@ aria-hidden="true" - указывает, что элемент и все его 
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="basketModalLabel">Your Basket</h5>
+                <h5 class="modal-title" id="basketModalLabel">
+                    <i class="fas fa-shopping-cart"></i>
+                    Your Basket</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&rotimes;</span>
                 </button>
@@ -32,6 +34,7 @@ aria-hidden="true" - указывает, что элемент и все его 
                                 <form action="basketCleanerServlet" method="post">
                                     <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
                                     <button type="submit" name="IdDeleteFromBasket" value="${itemInBasket.getId()}">
+                                        <i class="fas fa-trash-alt"></i>
                                         Remove</button>
                                 </form>
                             </div>

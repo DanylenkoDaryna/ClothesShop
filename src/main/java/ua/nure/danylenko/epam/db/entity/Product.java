@@ -1,8 +1,5 @@
 package ua.nure.danylenko.epam.db.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Product extends Entity{
     private static final long serialVersionUID = -6889036256149495388L;
 
@@ -14,14 +11,12 @@ public class Product extends Entity{
 
     private Colour colour;
 
-
-    private List<String> images;
+    private String image;
 
 
     public Product(){
         colour=Colour.WHITE;
         bodySize=BodySize.S;
-        images = new ArrayList<>();
     }
 
     @Override
@@ -61,24 +56,25 @@ public class Product extends Entity{
         this.colour = colour;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void extractSizeValue(String value){
         if(BodySize.valueOf(value.toUpperCase())!=null){
             BodySize bs = BodySize.valueOf(value.toUpperCase());
-            setBodySize(bs);
+            this.setBodySize(bs);
         }
     }
+
     public void extractColourValue(String colour){
         if(Colour.valueOf(colour.toUpperCase())!=null){
             Colour cl= Colour.valueOf(colour.toUpperCase());
-            setColour(cl);
+            this.setColour(cl);
         }
     }
 
