@@ -105,7 +105,8 @@
                         <input type="reset">
                         <input type="submit" value="Create New Item" >
                     </form>
-
+                    <br>
+                    <br>
                     <table class="table" id="add_more">
                         <tbody>
                         <tr>
