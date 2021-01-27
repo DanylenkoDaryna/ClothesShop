@@ -24,8 +24,10 @@ public class CatalogueDao implements IDao {
     private static final String SQL_RENAME_CATALOGUE_ITEM = "UPDATE armadiodb.catalogue SET name=? WHERE name=?;";
     private static final String SQL_ADD_NEW_CATEGORY = "INSERT INTO armadiodb.categories (id, catalogue_id, name) values (DEFAULT,?,?)";
     private static final String SQL_REMOVE_CATEGORY = "DELETE FROM armadiodb.categories WHERE catalogue_id=? AND name=?";
+    private static final String SQL_REMOVE_CATEGORY_BY_CATALOGUE_ID = "DELETE FROM armadiodb.categories WHERE catalogue_id=?";
     private static final String SQL_RENAME_CATEGORY = "UPDATE armadiodb.categories SET name=? WHERE catalogue_id=? AND name=?";
-    private static final String SQL_GET_CATALOGUE_ID_BY_NAME = "SELECT id FROM armadiodb.catalogue WHERE name=?";
+    private static final String SQL_GET_CATALOGUE_ID_BY_NAME = "SELECT id FROM armadiodb.catalogue WHERE name=? ";
+    private static final String SQL_GET_CATEGORY_ID_BY_CATALOGUE_ID_AND_CATEGORY = "SELECT id FROM armadiodb.categories WHERE catalogue_id=? AND name=?";
     private static final String SQL_REMOVE_ITEM_BY_ID = "DELETE FROM armadiodb.items WHERE id=?";
     private static final String SQL_REMOVE_PRODUCT_BY_ITEM_ID = "DELETE FROM armadiodb.products WHERE name=?;";
 
@@ -109,8 +111,23 @@ public class CatalogueDao implements IDao {
 
         Connection con = null;
         PreparedStatement  ps = null;
+        ResultSet rs = null;
+        long catalogueId=0;
         try{
+            /*code to delete when REcreate DB*/
             con = getConnection();
+            ps = con.prepareStatement(SQL_GET_CATALOGUE_ID_BY_NAME);
+            ps.setString(1,itemToDelete);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                catalogueId=rs.getLong(Fields.ENTITY_ID);
+            }
+
+            ps = con.prepareStatement(SQL_REMOVE_CATEGORY_BY_CATALOGUE_ID);
+            ps.setLong(1,catalogueId);
+            ps.execute();
+            /*code to delete when REcreate DB*/
+
             ps = con.prepareStatement(SQL_REMOVE_CATALOGUE_ITEM);
             ps.setString(1,itemToDelete);
             ps.execute();
@@ -120,9 +137,10 @@ public class CatalogueDao implements IDao {
             ConnectionFactory.rollback(con);
         } catch (DBException e) {
             DB_LOG.error("DBException in removeCatalogueItem() for Catalogue", e);
+            DB_LOG.error("If you REcreated DB, delete here code coz it would done automatically", e);
             DB_LOG.error(e);
         } finally {
-            ConnectionFactory.close(con, ps);
+            ConnectionFactory.close(con, ps, rs);
         }
     }
 
@@ -131,8 +149,22 @@ public class CatalogueDao implements IDao {
 
         Connection con = null;
         PreparedStatement  ps = null;
+        ResultSet rs = null;
+        long catalogueId=0;
         try{
             con = getConnection();
+            ps = con.prepareStatement(SQL_GET_CATALOGUE_ID_BY_NAME);
+            ps.setString(1,oldName);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                catalogueId=rs.getLong(Fields.ENTITY_ID);
+            }
+
+            ps = con.prepareStatement(SQL_REMOVE_CATEGORY_BY_CATALOGUE_ID);
+            ps.setLong(1,catalogueId);
+            ps.execute();
+
+
             ps = con.prepareStatement(SQL_RENAME_CATALOGUE_ITEM);
             ps.setString(1,newName);
             ps.setString(2,oldName);
@@ -259,6 +291,34 @@ public class CatalogueDao implements IDao {
         } finally {
             ConnectionFactory.close(con, ps);
         }
+    }
+
+    public int getCategoryId(int catalogId, String categoryType){
+        Connection con = null;
+        PreparedStatement  ps = null;
+        ResultSet rs = null;
+        int categoryId=0;
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(SQL_GET_CATEGORY_ID_BY_CATALOGUE_ID_AND_CATEGORY);
+            ps.setInt(1, catalogId);
+            ps.setString(2, categoryType);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                categoryId = rs.getInt(Fields.ENTITY_ID);
+            }
+            con.commit();
+
+        } catch (SQLException ex) {
+        DB_LOG.error("SQLException in getCategoryId() CatalogueDao.java", ex);
+        ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+        DB_LOG.error("DBException in getCategoryId() CatalogueDao.java", e);
+        DB_LOG.error(e);
+        } finally {
+        ConnectionFactory.close(con, ps, rs);
+        }
+        return categoryId;
     }
 
     @Override

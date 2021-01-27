@@ -150,9 +150,12 @@ INSERT INTO catalogue VALUES(DEFAULT, 'For Boys'); -- детская одежд�
 -- --------------------------------------------------------------
 CREATE TABLE categories(
 	id INTEGER NOT NULL auto_increment PRIMARY KEY,
-	catalogue_id INTEGER NOT NULL REFERENCES catalogue(id),
-	name VARCHAR(25) NOT NULL
-);
+	catalogue_id INTEGER NOT NULL,
+	name VARCHAR(25) NOT NULL,
+	FOREIGN KEY (catalogue_id) REFERENCES catalogue(id)
+	ON DELETE CASCADE
+	ON UPDATE RESTRICT
+	);
 
 -- FOR WOMEN
 -- --------------------------------------------------------------

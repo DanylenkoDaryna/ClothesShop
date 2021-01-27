@@ -95,11 +95,11 @@ public class UpdateCatalogueCommand extends Command {
     private Catalogue editItem(HttpServletRequest req, Catalogue cat) {
         WEB_LOG.info("edit item from catalogue");
         String itemToEdit = req.getParameter("itemToEdit");
-        String editedItem = req.getParameter("editedItem");
+        String editedName = req.getParameter("editedItem");
         cat.getContainer().remove(itemToEdit);
-        cat.getContainer().put(editedItem,new ArrayList<Category>());
+        cat.getContainer().put(editedName,new ArrayList<Category>());
         CatalogueService catalogueService = new CatalogueService();
-        catalogueService.getDao().renameCatalogueItem(itemToEdit,editedItem);
+        catalogueService.getDao().renameCatalogueItem(itemToEdit,editedName);
         return cat;
     }
 

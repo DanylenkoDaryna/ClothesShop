@@ -65,6 +65,10 @@ public class ProductsCommand extends Command {
         session.setAttribute("filterBrands", brandSorted);
         session.setAttribute("filterSizes", sizeSorted);
 
+
+        session.setAttribute("currentCatalogueId", catalogId);
+        session.setAttribute("currentCategoryName", categoryType);
+
         return forward;
     }
 
