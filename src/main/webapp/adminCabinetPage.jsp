@@ -46,17 +46,25 @@ Class page corresponds to the '.page' element in included CSS document.
 
 
                 <ul class="nav nav-tabs">
-                    <!-- Первая вкладка (активная) -->
+                    <!-- 1 вкладка (активна) -->
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#description">Personal info</a>
                     </li>
-                    <!-- Вторая вкладка -->
+                    <!-- 2 вкладка -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#updatingAdmin">
+                            <i class="fas fa-user-edit"></i>
+                            Updating Admin Info
+                        </a>
+                    </li>
+                    <!-- 3 вкладка -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#updatingUsers">
                             <i class="fas fa-user-edit"></i>
                             Updating Users
                         </a>
-                    </li><!-- 3 вкладка -->
+                    </li>
+                    <!-- 4 вкладка -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#updatingData">
                             <i class="fas fa-edit"></i>
@@ -69,7 +77,7 @@ Class page corresponds to the '.page' element in included CSS document.
 
                 <!-- Блоки с контентом -->
                 <div class="tab-content">
-                    <!-- Первый блок (он отображается по умолчанию, т.к. имеет классы show и active) -->
+                    <!-- 1 блок (он отображается по умолчанию, т.к. имеет классы show и active) -->
                     <div class="tab-pane fade show active" id="description">
 
                         <table class="table" id="cabinetTable">
@@ -85,9 +93,8 @@ Class page corresponds to the '.page' element in included CSS document.
                             </tbody>
                         </table>
                     </div>
-                    <!-- Второй блок -->
-                    <div class="tab-pane fade" id="updatingUsers">
-
+                    <!-- 2 блок  -->
+                    <div class="tab-pane fade" id="updatingAdmin">
                         <i class="fas fa-user-edit"></i>
                         <form id="editAccount_form" action="controller" method="post">
                             <%--===========================================================================
@@ -116,6 +123,10 @@ Class page corresponds to the '.page' element in included CSS document.
                                     <c:if test="${sessionScope.sessionUser.getCountry() eq 'Great Britain' }">
                                         <option value="Ukraine">Ukraine</option>
                                         <option selected value="Great Britain">Great Britain</option>
+                                    </c:if>
+                                    <c:if test="${sessionScope.sessionUser.getCountry() eq null }">
+                                        <option value="Ukraine" >Ukraine</option>
+                                        <option value="Great Britain">Great Britain</option>
                                     </c:if>
                                 </select>
                             </fieldset>
@@ -175,6 +186,11 @@ Class page corresponds to the '.page' element in included CSS document.
                             <input type="reset">
                             <input type="submit" value="Save changes" onclick="equalPasswords()" >
                         </form>
+                    </div>
+                    <!-- 3 блок -->
+                    <div class="tab-pane fade" id="updatingUsers">
+
+dsafadfsfafasf
                     </div>
 
                     <!-- 3 блок -->
