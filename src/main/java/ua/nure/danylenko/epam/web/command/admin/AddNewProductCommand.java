@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.web.command.admin;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.entity.*;
+import ua.nure.danylenko.epam.db.service.CatalogueService;
 import ua.nure.danylenko.epam.db.service.ItemsService;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
@@ -29,7 +30,19 @@ public class AddNewProductCommand extends Command {
         List<Item> items = (ArrayList<Item>)session.getAttribute("items");
 
         Item newItem = new Item();
-        newItem.setCategoryId(items.get(0).getCategoryId());
+
+        if(items.size()!=0) {
+            newItem.setCategoryId(items.get(0).getCategoryId());
+            WEB_LOG.info("Category Id = " + items.get(0).getCategoryId());
+        }else {
+            String categoryType = (String) session.getAttribute("currentCategoryName");
+            int catalogId = (Integer)session.getAttribute("currentCatalogueId");
+            CatalogueService catalogueService = new CatalogueService();
+            int categoryId = catalogueService.getDao().getCategoryId(catalogId, categoryType);
+            newItem.setCategoryId(categoryId);
+            WEB_LOG.info("Category Id = " + categoryId);
+        }
+
         newItem.setBrand(request.getParameter("brand"));
         newItem.setPrice(Double.parseDouble(request.getParameter("price")));
         newItem.setReleaseDate(LocalDate.parse(request.getParameter("releaseDate")));
