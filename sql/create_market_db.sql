@@ -249,7 +249,7 @@ CREATE TABLE products(
 
 	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'),
 
-	colour ENUM('RED','GREEN','BLUE', 'WHITE', 'BLACK', 'YELLOW', 'PINK'),
+	colour ENUM('RED','GREEN','BLUE', 'WHITE', 'BLACK', 'GREY', 'YELLOW', 'PINK'),
 
 
 	item_id INTEGER NOT NULL REFERENCES items(id)
@@ -265,7 +265,7 @@ INSERT INTO products VALUES(DEFAULT,'Jacket D&G classic black', 1, 'L', 'GREEN',
 INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'XL', 'PINK', 3);
 INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'L', 'BLUE', 4);
 INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXXL', 'BLACK',5);
-INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXL', 'BLACK',5);
+INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXL', 'GREY',5);
 INSERT INTO products VALUES(DEFAULT,'Bomber Moscino Emo Autumn', 1, 'S', 'PINK', 6);
 INSERT INTO products VALUES(DEFAULT,'Jacket Drupal Selestia', 1, 'XL', 'BLUE', 7);
 INSERT INTO products VALUES(DEFAULT,'Bomber Programmer IT', 1, 'L', 'BLACK',8);
@@ -331,7 +331,7 @@ INSERT INTO materials VALUES(DEFAULT, 'linen',100, 13);
 CREATE TABLE images(
 
 	id INTEGER NOT NULL auto_increment PRIMARY KEY,
-	img_name VARCHAR(35) NOT NULL UNIQUE,
+	img_name VARCHAR(40) NOT NULL,
     product_id INTEGER NOT NULL REFERENCES armadiodb.products(id)
     ON DELETE CASCADE
 	ON UPDATE RESTRICT
@@ -339,26 +339,29 @@ CREATE TABLE images(
 
 
 -- --------------------------------------------------------------
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_for_friends_blk',1);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_for_friends_pink',2);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_licolle_prestigue_bl',3);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_cb_grn',4);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_cb_pink',5);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_vip_bl',6);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_gucci_pride_blk',7);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_moscino_ea_pink',9);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_drupal_selestia_bl',10);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_programmer_it_bl',11);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_itguru_junior_pink',12);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_summertime_ld_yell',13);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_summertime_ld_blk',14);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_lano_bb_blk',15);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_cinderella_fp_yell',16);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dm_jp_bl',17);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_office_s3_grn',18);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_autumn_red',19);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_wic_wh',20);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'cardigan_moscino_es_red',21);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_for_friends_blk.jpg',1);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_for_friends_pink.jpg',2);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_licolle_prestigue_bl.jpg',3);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_cb_grn.jpg',4);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_cb_pink.jpg',5);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_dg_vip_bl.jpg',6);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_gucci_pride_blk.jpg',7);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_gucci_pride_grey.jpg',8);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_moscino_ea_pink.jpg',9);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_drupal_selestia_bl.jpg',10);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_programmer_it_bl.jpg',11);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_itguru_junior_pink.jpg',12);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_summertime_ld_yell.jpg',13);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_summertime_ld_blk.jpg',14);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_lano_bb_blk.jpg',15);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_cinderella_fp_yell.jpg',16);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dm_jp_bl.jpg',17);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_office_s3_grn.jpg',18);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_autumn_red.jpg',19);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_wic_wh.jpg',20);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_black.jpg',21);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_green.jpeg',21);
+INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_pink.jpg',21);
 
 
 -- --------------------------------------------------------------

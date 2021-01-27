@@ -4,8 +4,10 @@ table {
 }
 
 #basket_btn{
-    background-color: sandybrown;
+    background-color: #48f426;
     text-decoration-color: white;
+    align-content: center;
+    text-align: center;
 
 }
 
@@ -117,19 +119,19 @@ table {
     padding-left: 10px;
     content: "\2713";
 }
-#filterProductsDiv {
-    margin: auto;
-    size: A3;
-    padding: auto;
-    border: #fd7e14;
-}
+/*#filterProductsDiv {*/
+    /*margin: auto;*/
+    /*size: A3;*/
+    /*padding: auto;*/
+    /*border: #fd7e14;*/
+/*}*/
 
-#filterProductsSection {
-    margin: auto;
-    padding: auto;
-    text-align: left;
-    background-color: #f1f1f1;
-}
+/*#filterProductsSection {*/
+    /*margin: auto;*/
+    /*padding: auto;*/
+    /*text-align: left;*/
+    /*background-color: #f1f1f1;*/
+/*}*/
 
 .admin_data_table{
     margin: auto;

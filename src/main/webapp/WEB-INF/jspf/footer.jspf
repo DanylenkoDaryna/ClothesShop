@@ -1,11 +1,67 @@
-<%--=========================================================================== 
+<%--===========================================================================
 Footer (bottom area). 
-===========================================================================--%>
-<div class="container-fluid">
-	<section class="text-center mb-4">
-		Armadio (Final project, EPAM-KNURE Java Training), 2019
-	</section>
-</div>
+=========================================================================== --%>
+<a href="#" title="GoUp" class="toTopButton">
+	<i class="fas fa-angle-double-up"></i>
+</a>
 
+<div class="my-footer">
+	<br>
+	<br>
+	<div class="row">
+		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		</div>
+		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			My Contacts
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="my-icon-block-footer col-lg-4 col-md-1 col-sm-2 col-xs-3">
+            <i class="fab fa-telegram-plane"></i>
+		</div>
+		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			telegram @professional_prolysok
+		</div>
+	</div>
+	<div class="row">
+		<div class="my-icon-block-footer col-lg-4 col-md-1 col-sm-2 col-xs-3">
+			<i class="fab fa-linkedin-in"></i>
+		</div>
+		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			www.linkedin.com/in/daryna-danko
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="my-icon-block-footer col-lg-4 col-md-1 col-sm-2 col-xs-3">
+            <i class="fab fa-instagram"></i>
+
+		</div>
+		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			instagram @delibertato
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="my-icon-block-footer col-lg-4 col-md-1 col-sm-2 col-xs-3">
+            <i class="fab fa-github"></i>
+		</div>
+		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			GitHub @deLibertate
+		</div>
+	</div>
+	<br>
+	<div class="container-fluid">
+
+			<div class="footer-text-center">
+				<i class="fas fa-info-circle"></i>
+				<i class="fab fa-java"></i>
+					Armadio (Final project, EPAM-KNURE Java Training), 2019-2021
+
+			</div>
+
+	</div>
+</div>
 
 

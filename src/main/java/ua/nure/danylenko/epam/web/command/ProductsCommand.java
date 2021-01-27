@@ -30,8 +30,8 @@ public class ProductsCommand extends Command {
         HttpSession session = request.getSession();
         String categoryType = request.getParameter("clothes");
         int catalogId = Integer.parseInt(request.getParameter("catId"));
-        DB_LOG.info("ProductsCommand request from db parameter: forWho --> " + categoryType);
-        DB_LOG.info("ProductsCommand request from db parameter: forWho -->");
+        DB_LOG.info("ProductsCommand request from db parameter: for Who --> " + categoryType);
+        DB_LOG.info("ProductsCommand request from db parameter: for Who -->");
         if (categoryType == null || categoryType.isEmpty()){
             DB_LOG.error("categoryType cannot be empty");
             throw new AppException("categoryType cannot be empty");
@@ -45,8 +45,9 @@ public class ProductsCommand extends Command {
         if (items == null) {
             forward = Path.PAGE_ERROR_PAGE;
         }
+
         session.setAttribute("items", items);
-        //((Product) items.get(1).getContainer().get(0)).getImages().get(0);
+        DB_LOG.info("Products from DB by category id: " + items);
 
         Map<String,List> filterParameters = itemsService.getDao().getSizesColoursBrands();
         if (filterParameters == null) {

@@ -31,7 +31,7 @@
                         <tr>
                             <td colspan="2">Item Name</td>
                             <td colspan="2">
-                            <input type="text" maxlength="15" required name="itemName">
+                            <input type="text" maxlength="20" required name="itemName">
                             </td>
                         </tr>
                         <tr>
@@ -105,7 +105,8 @@
                         <input type="reset">
                         <input type="submit" value="Create New Item" >
                     </form>
-
+                    <br>
+                    <br>
                     <table class="table" id="add_more">
                         <tbody>
                         <tr>
@@ -129,8 +130,8 @@
     {
         // Находим нужную таблицу
         var tableBody = d.getElementById('add_new_product').getElementsByTagName('TBODY')[0];
-        var productsNumber = d.getElementById('productsNumber');
-        d.getElementById('productsNumber').value = productsNumber+1;
+        // var productsNumber = d.getElementById('productsNumber');
+        // d.getElementById('productsNumber').value = productsNumber+1;
 
         // Создаем строку таблицы и добавляем ее
         var row = d.createElement("TR");

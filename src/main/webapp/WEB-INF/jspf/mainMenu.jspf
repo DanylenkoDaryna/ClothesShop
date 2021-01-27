@@ -1,8 +1,13 @@
 
+<!-- BASKET -->
+<%@ include file="/WEB-INF/jspf/basket.jspf"%>
+<!-- BASKET -->
 <div class="container-fluid">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
-        <a href="index.jsp" class="navbar-brand">ARMADIO</a>
+        <a href="index.jsp" class="navbar-brand">
+            <i class="fas fa-store"></i>
+            ARMADIO</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,23 +15,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav nav-tabs">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                    <%--<a class="nav-link" href="index.jsp">Home<span class="sr-only">(current)</span></a>--%>
+
+                    <a class="nav-link" href="index.jsp">
+                        <i class="fas fa-home"></i>
+                        Home<span class="sr-only">(current)</span></a>
+
                 </li>
 
                 <c:forEach items="${catalogue.container.keySet()}" var="entry1">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 ${entry1}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
                             <c:forEach items="${catalogue.container.get(entry1)}" var="linker1">
-                                <a href="controller?command=listProducts&catId=${linker1.getCatalogueId()}&clothes=${linker1.getName()}"
-                                   class="dropdown-item">
+                                <a class="dropdown-item" href="controller?command=listProducts&catId=${linker1.getCatalogueId()}&clothes=${linker1.getName()}"
+                                   >
                                         ${linker1.getName()}</a>
                                 <div class="dropdown-divider"></div>
                             </c:forEach>
-
                         </div>
                     </li>
                 </c:forEach>
@@ -41,31 +49,49 @@
                         <li class="nav-item active">
                             <c:if test="${empty sessionScope.itemsInBasket}">
                                 <a class="nav-link disabled" >
+                                    <i class="fas fa-shopping-cart"></i>
                                     Basket(0)
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
                             <c:if test="${not empty sessionScope.itemsInBasket}">
                                 <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
+                                    <i class="fas fa-shopping-cart"></i>
                                     Basket(${sessionScope.itemsInBasket.size()})
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link" href="controller?command=logout">Logout</a>
+                            <a class="nav-link" href="controller?command=logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link" href="clientCabinetPage.jsp">MyCabinet</a>
+                            <a class="nav-link" href="clientCabinetPage.jsp">
+                                <i class="fas fa-sign-out-alt"></i>
+                                MyCabinet
+                            </a>
+
                         </li>
                     </c:when>
 
                     <c:when test="${sessionScope.userRole.getName() eq 'admin'}">
                         <li class="nav-item" >
-                        <a class="nav-link" href="controller?command=logout">Logout</a>
+                        <a class="nav-link" href="controller?command=logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+
                         </li>
                         <li class="nav-item" >
-                        <a class="nav-link" href="adminCabinetPage.jsp">Administration</a>
+                        <a class="nav-link" href="adminCabinetPage.jsp">
+                            <i class="fas fa-home"></i>
+                            Administration
+                        </a>
+
                         </li>
                     </c:when>
 
@@ -73,19 +99,23 @@
                         <li class="nav-item active">
                             <c:if test="${empty sessionScope.itemsInBasket}">
                                 <a class="nav-link disabled" >
+                                    <i class="fas fa-shopping-cart"></i>
                                     Basket(0)
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
                             <c:if test="${not empty sessionScope.itemsInBasket}">
                                 <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
+                                    <i class="fas fa-shopping-cart"></i>
                                     Basket(${sessionScope.itemsInBasket.size()})
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
                         </li>
                         <li class="nav-item" >
-                        <a class="nav-link" href="login.jsp">Log in</a>
+                        <a class="nav-link" href="login.jsp">
+                            <i class="fas fa-house-user"></i>
+                            Log in</a>
                         </li>
                     </c:otherwise>
 
@@ -98,6 +128,3 @@
     </nav>
 </div>
 
-<!-- BASKET -->
-<%@ include file="/WEB-INF/jspf/basket.jspf"%>
-<!-- BASKET -->

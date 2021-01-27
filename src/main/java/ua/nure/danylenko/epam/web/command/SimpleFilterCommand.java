@@ -27,17 +27,18 @@ public class SimpleFilterCommand extends Command {
         HttpSession session = request.getSession();
         String filterType = request.getParameter("filtration");
         String pageToReturn = request.getParameter("page");
-        List<Item> items = new ArrayList<>();
-        if(session.getAttribute("filteredItems")!=null&&"filteredPage".equals(pageToReturn)){
-            items = (List<Item>)session.getAttribute("filteredItems");
+        List<Item> itemstoFilter = new ArrayList<>();
+       // if(session.getAttribute("filteredItems")!=null & "filteredPage".equals(pageToReturn)){
+        if("filteredPage".equals(pageToReturn)){
+            itemstoFilter = (List<Item>)session.getAttribute("filteredItems");
         }else if("products".equals(pageToReturn)){
-            items = (List<Item>)session.getAttribute("items");
+            itemstoFilter = (List<Item>)session.getAttribute("items");
         }
 
         DB_LOG.info("Request parameters: filtration --> " + filterType);
-        DB_LOG.info("Request parameters: items --> " + items);
+        DB_LOG.info("Request parameters: items --> " + itemstoFilter);
 
-        if (items == null || items.isEmpty()){
+        if (itemstoFilter == null || itemstoFilter.isEmpty()){
             throw new AppException("items cannot be empty");
         }else if(filterType.isEmpty()){
             throw new AppException("filterType cannot be empty");
@@ -46,64 +47,64 @@ public class SimpleFilterCommand extends Command {
 
         switch (filterType){
             case "FromAToZ": {
-                filterFromAToZ(items);
+                filterFromAToZ(itemstoFilter);
                 break;
             }
             case "FromZToA": {
-                filterFromZToA(items);
+                filterFromZToA(itemstoFilter);
                 break;
             }
             case "LowPriceFirst":{
-                filterFromLowPrice(items);
+                filterFromLowPrice(itemstoFilter);
                 break;
             }
             case "HighPriceFirst":{
-                filterFromHighPrice(items);
+                filterFromHighPrice(itemstoFilter);
                 break;
             }
             case "oldFirst":{
-                filterFromOldProducts(items);
+                filterFromOldProducts(itemstoFilter);
                 break;
             }
             case "newFirst":{
-                filterFromNewProducts(items);
+                filterFromNewProducts(itemstoFilter);
                 break;
             }
         }
 
-        if (items == null) {
+        if (itemstoFilter == null) {
             forward = Path.PAGE_ERROR_PAGE;
         }
 
         return forward;
     }
 
-    private void filterFromAToZ(List<Item> items) {
-        for(int i=items.size()-1; i>=0; i--){
+    private void filterFromAToZ(List<Item> itemstoFilter) {
+        for(int i=itemstoFilter.size()-1; i>=0; i--){
             for(int j=0; j<i; j++){
-                if(items.get(j).getProductName().compareTo(items.get(j+1).getProductName())>0){
-                    Item temp = items.get(j);
-                    items.set(j,items.get(j+1));
-                    items.set(j+1,temp);
+                if(itemstoFilter.get(j).getProductName().compareTo(itemstoFilter.get(j+1).getProductName())>0){
+                    Item temp = itemstoFilter.get(j);
+                    itemstoFilter.set(j,itemstoFilter.get(j+1));
+                    itemstoFilter.set(j+1,temp);
                 }
             }
         }
     }
 
-    private void filterFromZToA(List<Item> items) {
-        for(int i=items.size()-1; i>=0; i--){
+    private void filterFromZToA(List<Item> itemstoFilter) {
+        for(int i=itemstoFilter.size()-1; i>=0; i--){
             for(int j=0; j<i; j++){
-                if(items.get(j).getProductName().compareTo(items.get(j+1).getProductName())<0){
-                    Item temp = items.get(j);
-                    items.set(j,items.get(j+1));
-                    items.set(j+1,temp);
+                if(itemstoFilter.get(j).getProductName().compareTo(itemstoFilter.get(j+1).getProductName())<0){
+                    Item temp = itemstoFilter.get(j);
+                    itemstoFilter.set(j,itemstoFilter.get(j+1));
+                    itemstoFilter.set(j+1,temp);
                 }
             }
         }
     }
 
-    private void filterFromLowPrice(List<Item> items) {
-        items.sort((o1, o2) -> {
+    private void filterFromLowPrice(List<Item> itemstoFilter) {
+        itemstoFilter.sort((o1, o2) -> {
             if (o1.getPrice() > o2.getPrice())
                 return -1;           // Neither val is NaN, thisVal is smaller
             if (o1.getPrice() < o2.getPrice())
@@ -120,15 +121,15 @@ public class SimpleFilterCommand extends Command {
         });
     }
 
-    private void filterFromHighPrice(List<Item> items) {
-        items.sort((o1, o2) -> Double.compare(o1.getPrice(), o2.getPrice()));
+    private void filterFromHighPrice(List<Item> itemstoFilter) {
+        itemstoFilter.sort((o1, o2) -> Double.compare(o1.getPrice(), o2.getPrice()));
     }
 
-    private void filterFromOldProducts(List<Item> items) {
-        items.sort(Comparator.comparing(Item::getReleaseDate));
+    private void filterFromOldProducts(List<Item> itemstoFilter) {
+        itemstoFilter.sort(Comparator.comparing(Item::getReleaseDate));
     }
 
-    private void filterFromNewProducts(List<Item> items) {
-        items.sort(Comparator.comparing(Item::getReleaseDate).reversed());
+    private void filterFromNewProducts(List<Item> itemstoFilter) {
+        itemstoFilter.sort(Comparator.comparing(Item::getReleaseDate).reversed());
     }
 }

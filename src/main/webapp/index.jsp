@@ -7,7 +7,6 @@
 
 
 <body>
-
 <%-- MAIN_MENU --%>
 <%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
 <%-- MAIN_MENU --%>
@@ -15,14 +14,18 @@
         <main>
             <div class="container-fluid">
                 <section class="text-center mb-4">
-                    <section class="text-center">
-                        <hi:Greetings/>
-                    </section>
+                    <h1><hi:Greetings/></h1>
+                    <h3>Shop of the best clothes for all your family!</h3>
                     <!-- basket -->
                     <%@ include file="/WEB-INF/jspf/basket.jspf"%>
+                    <!-- basket -->
                 </section>
             </div>
+            <div id="indexContainer">
+                <!-- main background image of shop -->
+            </div>
         </main>
+
 <!-- footer -->
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 <!-- Bootstrap -->
@@ -31,6 +34,7 @@
     <%@include file="js/popper.min.js"%>
     <%@include file="js/bootstrap.bundle.min.js"%>
     <%@include file="js/bootstrap.min.js"%>
+    <%@include file="js/fontawesome.min.js"%>
 </script>
 
 </body>
