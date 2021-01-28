@@ -21,7 +21,7 @@ public class CatalogueDao implements IDao {
     private static final String SQL_FIND_CATEGORIES_BY_ID = "SELECT * FROM categories WHERE catalogue_id=?";
     private static final String SQL_ADD_NEW_CATALOGUE_ITEM = "INSERT INTO armadiodb.catalogue (id, name) values (DEFAULT,?)";
     private static final String SQL_REMOVE_CATALOGUE_ITEM = "DELETE FROM armadiodb.catalogue WHERE name=?;";
-    private static final String SQL_RENAME_CATALOGUE_ITEM = "UPDATE armadiodb.catalogue SET name=? WHERE name=?;";
+    private static final String SQL_RENAME_CATALOGUE_ITEM = "UPDATE armadiodb.catalogue SET name=? WHERE id=?;";
     private static final String SQL_ADD_NEW_CATEGORY = "INSERT INTO armadiodb.categories (id, catalogue_id, name) values (DEFAULT,?,?)";
     private static final String SQL_REMOVE_CATEGORY = "DELETE FROM armadiodb.categories WHERE catalogue_id=? AND name=?";
     private static final String SQL_REMOVE_CATEGORY_BY_CATALOGUE_ID = "DELETE FROM armadiodb.categories WHERE catalogue_id=?";
@@ -159,15 +159,9 @@ public class CatalogueDao implements IDao {
             while (rs.next()) {
                 catalogueId=rs.getLong(Fields.ENTITY_ID);
             }
-
-            ps = con.prepareStatement(SQL_REMOVE_CATEGORY_BY_CATALOGUE_ID);
-            ps.setLong(1,catalogueId);
-            ps.execute();
-
-
             ps = con.prepareStatement(SQL_RENAME_CATALOGUE_ITEM);
             ps.setString(1,newName);
-            ps.setString(2,oldName);
+            ps.setLong(2,catalogueId);
             ps.execute();
             con.commit();
         } catch (SQLException ex) {

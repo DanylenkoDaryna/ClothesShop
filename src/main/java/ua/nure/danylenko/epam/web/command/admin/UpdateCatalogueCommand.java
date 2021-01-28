@@ -96,8 +96,9 @@ public class UpdateCatalogueCommand extends Command {
         WEB_LOG.info("edit item from catalogue");
         String itemToEdit = req.getParameter("itemToEdit");
         String editedName = req.getParameter("editedItem");
+        ArrayList<Category> categories = (ArrayList<Category>)cat.getContainer().get(itemToEdit);
         cat.getContainer().remove(itemToEdit);
-        cat.getContainer().put(editedName,new ArrayList<Category>());
+        cat.getContainer().put(editedName,categories);
         CatalogueService catalogueService = new CatalogueService();
         catalogueService.getDao().renameCatalogueItem(itemToEdit,editedName);
         return cat;
