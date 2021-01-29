@@ -3,10 +3,13 @@ package ua.nure.danylenko.epam.db.dao;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.Fields;
 import ua.nure.danylenko.epam.db.entity.User;
+import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.exception.DBException;
 import ua.nure.danylenko.epam.exception.Messages;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao implements IDao {
 
@@ -20,6 +23,7 @@ public class UserDao implements IDao {
     }
 
     private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login=?";
+    private static final String SQL_GET_ALL_USERS = "SELECT * FROM armadiodb.users";
     private static final String SQL_GET_USER_INFO_BY_ID = "SELECT * FROM user_info WHERE user_id=?";
     private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM users WHERE id=?";
@@ -93,6 +97,39 @@ public class UserDao implements IDao {
     public Object read() throws DBException {
 
         return null;
+    }
+
+
+    public List<User> getAllUsers() throws AppException {
+        List<User> users = new ArrayList<>();
+        ResultSet rs = null;
+        try(Connection con =getConnection();
+            PreparedStatement pstmt = con.prepareStatement(SQL_GET_ALL_USERS)){
+            rs=pstmt.executeQuery();
+            while (rs.next()) {
+                User user=new User();
+                user.setId(rs.getLong(Fields.ENTITY_ID));
+                user.setFirstName(rs.getString(Fields.USER_FIRST_NAME));
+                user.setLastName(rs.getString(Fields.USER_LAST_NAME));
+                user.setLogin(rs.getString(Fields.USER_LOGIN));
+                user.setPassword(rs.getString(Fields.USER_PASSWORD));
+                user.setRoleId(rs.getInt(Fields.USER_ROLE_ID));
+                users.add(user);
+            }
+
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in getAllUsers() in UserDao", ex);
+        } catch (DBException e) {
+            DB_LOG.error("DBException in getAllUsers() in UserDao", e);
+        } finally {
+            ConnectionFactory.close(rs);
+        }
+        if(users.isEmpty()){
+            DB_LOG.error("There are no users from DB throw getAllUsers() method");
+            throw new AppException("There are no users from DB throw getAllUsers() method");
+        }else{
+            return users;
+        }
     }
 
     @Override

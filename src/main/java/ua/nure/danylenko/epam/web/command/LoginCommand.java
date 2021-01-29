@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.web.command;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.Role;
+import ua.nure.danylenko.epam.db.dao.UserDao;
 import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.db.service.UserService;
 import ua.nure.danylenko.epam.exception.AppException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LoginCommand extends Command {
 
@@ -59,8 +61,15 @@ public class LoginCommand extends Command {
 
         if (userRole == Role.ADMIN) {
             //COMMAND_UPDATING_UPO - adding, removing, editing users, products, orders
-            forward = Path.PAGE_ADMIN_CABINET;
-            WEB_LOG.info("Set the session attribute: adminUser --> " + user);
+            try {
+                forward = Path.PAGE_ADMIN_CABINET;
+                WEB_LOG.info("Set the session attribute: adminUser --> " + user);
+                UserDao userDao = new UserDao();
+                ArrayList<User> listOfUsers = (ArrayList<User>) userDao.getAllUsers();
+                session.setAttribute("listOfUsers", listOfUsers);
+            }catch (AppException ae){
+                WEB_LOG.error(ae.getMessage());
+            }
         }
 
         if (userRole == Role.CLIENT) {
