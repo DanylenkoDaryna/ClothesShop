@@ -94,8 +94,8 @@ Class page corresponds to the '.page' element in included CSS document.
                                 </c:forEach>
                         <tr>
                             <td colspan="2">
-                                <form id="order_form" action="controller" method="post">
-                                    <input type="hidden" name="command" value="register"/>
+                                <form id="order_form" action="controller" method="post" >
+                                    <input type="hidden" name="command" value="ordering"/>
                                     <input type="submit" name="orderProducts" value="To order">
                                 </form>
                             </td>
