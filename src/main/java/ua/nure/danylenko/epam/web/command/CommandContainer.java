@@ -32,6 +32,7 @@ public class CommandContainer {
         commands.put("getMyCabinet", new GetMyCabinetCommand());
         commands.put("deleteAccount", new DeleteAccountCommand());
         commands.put("editAccount", new EditAccountCommand());
+        commands.put("ordering", new OrderingCommand());
 
          //admin commands
         commands.put("updatingUPO", new UpdatingUPOCommand());
