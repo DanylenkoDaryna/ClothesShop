@@ -24,6 +24,13 @@ public class User extends Entity {
 
     private int roleId;
 
+    private AccountStatus accountStatus;
+
+    public User(){
+        accountStatus=AccountStatus.UNLOCKED;
+    }
+
+
     public String getLogin() {
         return login;
     }
@@ -102,5 +109,13 @@ public class User extends Entity {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
     }
 }
