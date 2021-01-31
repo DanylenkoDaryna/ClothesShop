@@ -106,6 +106,10 @@
                                     </td>
                                     <td>
                                         <i class="fas fa-edit"></i>
+                                        STATUS OF ACCOUNT
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-edit"></i>
                                         LOCKING/UNLOCKING ACCOUNT
                                     </td>
                                 </tr>
@@ -121,6 +125,7 @@
                                         <c:if test="${user.getRoleId()==1}">
                                         <td>CLIENT</td>
                                         </c:if>
+                                        <td></td>
                                         <td>
                                             <form method="post" id="blockAccount" action="controller">
                                                 <input type="hidden" name="command" value="blockingUsers"/>

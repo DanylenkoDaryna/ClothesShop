@@ -45,7 +45,7 @@ CREATE TABLE users(
 	password VARCHAR(20) NOT NULL,
 	first_name VARCHAR(20) NOT NULL,
 	last_name VARCHAR(20) NOT NULL,
-
+    acc_status ENUM('LOCKED','UNLOCKED'),
 -- this declaration contains the foreign key constraint
 -- role_id in users table is associated with id in roles table
 -- role_id of user = id of role
@@ -63,11 +63,11 @@ CREATE TABLE users(
 );
 
 -- id = 1
-INSERT INTO users VALUES(DEFAULT, 'admin', 'admin', 'Ivan', 'Ivanov', 0);
+INSERT INTO users VALUES(DEFAULT, 'admin', 'admin', 'Ivan', 'Ivanov', 'UNLOCKED', 0);
 -- id = 2
-INSERT INTO users VALUES(DEFAULT, 'client', 'client', 'Petr', 'Petrov',  1);
+INSERT INTO users VALUES(DEFAULT, 'client', 'client', 'Petr', 'Petrov', 'UNLOCKED', 1);
 -- id = 3
-INSERT INTO users VALUES(DEFAULT, 'петров', 'петров', 'Иван', 'Петров', 1);
+INSERT INTO users VALUES(DEFAULT, 'петров', 'петров', 'Иван', 'Петров', 'UNLOCKED', 1);
 
 
 -- --------------------------------------------------------------
