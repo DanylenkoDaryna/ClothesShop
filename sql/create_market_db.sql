@@ -68,7 +68,8 @@ INSERT INTO users VALUES(DEFAULT, 'admin', 'admin', 'Ivan', 'Ivanov', 'UNLOCKED'
 INSERT INTO users VALUES(DEFAULT, 'client', 'client', 'Petr', 'Petrov', 'UNLOCKED', 1);
 -- id = 3
 INSERT INTO users VALUES(DEFAULT, 'петров', 'петров', 'Иван', 'Петров', 'UNLOCKED', 1);
-
+-- id = 4
+INSERT INTO users VALUES(DEFAULT, 'dead', 'inside', 'Dead', 'Inside', 'UNLOCKED', 0);
 
 -- --------------------------------------------------------------
 -- USER INFO
