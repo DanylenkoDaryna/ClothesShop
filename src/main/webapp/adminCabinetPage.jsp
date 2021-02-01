@@ -125,12 +125,12 @@
                                         <c:if test="${user.getRoleId()==1}">
                                         <td>CLIENT</td>
                                         </c:if>
-                                        <td></td>
+                                        <td>${user.getAccountStatus()}</td>
                                         <td>
                                             <form method="post" id="blockAccount" action="controller">
                                                 <input type="hidden" name="command" value="blockingUsers"/>
-                                                <input type="hidden" name="idToBlock" value="${user.getId()}"/>
-                                                <input type="submit" value="Block">
+                                                <input type="hidden" name="idToLock" value="${user.getId()}"/>
+                                                <input type="submit" value="Lock">
                                             </form>
                                         </td>
                                     </tr>

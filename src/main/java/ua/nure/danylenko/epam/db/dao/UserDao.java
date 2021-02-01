@@ -113,6 +113,8 @@ public class UserDao implements IDao {
                 user.setLastName(rs.getString(Fields.USER_LAST_NAME));
                 user.setLogin(rs.getString(Fields.USER_LOGIN));
                 user.setPassword(rs.getString(Fields.USER_PASSWORD));
+
+                user.extractAccountStatus(rs.getString(Fields.USER_ACC_STATUS));
                 user.setRoleId(rs.getInt(Fields.USER_ROLE_ID));
                 users.add(user);
             }

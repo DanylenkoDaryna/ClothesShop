@@ -4,8 +4,8 @@ public enum AccountStatus {
 
     LOCKED, UNLOCKED;
 
-
     public String getName() {
         return name().toLowerCase();
     }
+
 }

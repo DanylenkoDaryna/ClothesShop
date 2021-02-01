@@ -115,7 +115,12 @@ public class User extends Entity {
         return accountStatus;
     }
 
-    public void setAccountStatus(AccountStatus accountStatus) {
+    private void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public void extractAccountStatus(String value){
+        AccountStatus as = AccountStatus.valueOf(value.toUpperCase());
+        this.setAccountStatus(as);
     }
 }

@@ -8,6 +8,7 @@ public class Fields {
     public static final String USER_PASSWORD = "password";
     public static final String USER_FIRST_NAME = "first_name";
     public static final String USER_LAST_NAME = "last_name";
+    public static final String USER_ACC_STATUS = "acc_status";
     public static final String USER_ROLE_ID = "role_id";
     public static final String USER_INFO_COUNTRY = "country";
     public static final String USER_INFO_BDAY = "birthday";
