@@ -180,7 +180,7 @@
     <filter-class>ua.nure.danylenko.epam.web.filter.CommandAccessFilter</filter-class>
     <init-param>
       <param-name>admin</param-name>
-      <param-value>updatingUPO updateCatalogue addNewProduct</param-value>
+      <param-value>UpdatingUPOCommand updateCatalogue addNewProduct</param-value>
     </init-param>
     <init-param>
       <param-name>client</param-name>

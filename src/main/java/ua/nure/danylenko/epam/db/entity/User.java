@@ -115,7 +115,7 @@ public class User extends Entity {
         return accountStatus;
     }
 
-    private void setAccountStatus(AccountStatus accountStatus) {
+    public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
     }
 

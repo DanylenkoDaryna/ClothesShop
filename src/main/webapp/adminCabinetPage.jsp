@@ -75,6 +75,10 @@
                                 <td>ROLE</td>
                                 <td>${sessionScope.userRole.getName()}</td>
                             </tr>
+                            <tr class="danger">
+                                <td>YOUR ACCOUNT</td>
+                                <td>${sessionScope.sessionUser.getAccountStatus()}</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -127,8 +131,9 @@
                                         </c:if>
                                         <td>${user.getAccountStatus()}</td>
                                         <td>
-                                            <form method="post" id="blockAccount" action="controller">
-                                                <input type="hidden" name="command" value="blockingUsers"/>
+                                            <form method="post" id="lockAccount" action="controller">
+                                                <input type="hidden" name="command" value="UpdatingUPOCommand"/>
+                                                <input type="hidden" name="commandType" value="lockingUser"/>
                                                 <input type="hidden" name="idToLock" value="${user.getId()}"/>
                                                 <input type="submit" value="Lock">
                                             </form>
