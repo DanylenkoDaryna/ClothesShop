@@ -35,7 +35,7 @@ public class CommandContainer {
         commands.put("ordering", new OrderingCommand());
 
          //admin commands
-        commands.put("updatingUPO", new UpdatingUPOCommand());
+        commands.put("UpdatingUPOCommand", new UpdatingUPOCommand());
         commands.put("updateCatalogue", new UpdateCatalogueCommand());
         commands.put("addNewProduct", new AddNewProductCommand());
 

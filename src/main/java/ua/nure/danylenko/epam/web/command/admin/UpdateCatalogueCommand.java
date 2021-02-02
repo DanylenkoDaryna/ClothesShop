@@ -21,7 +21,6 @@ import java.util.List;
 public class UpdateCatalogueCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 
-    //private static final Logger DB_LOG = Logger.getLogger("jdbc");
     private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override

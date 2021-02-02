@@ -2,6 +2,7 @@ package ua.nure.danylenko.epam.db.dao;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.Fields;
+import ua.nure.danylenko.epam.db.entity.AccountStatus;
 import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.exception.DBException;
@@ -28,6 +29,7 @@ public class UserDao implements IDao {
     private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM users WHERE id=?";
     private static final String SQL_UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, first_name=?, last_name=? WHERE users.id=?";
+    private static final String SQL_UPDATE_USER_STATUS_BY_ID = "UPDATE users SET acc_status=? WHERE users.id=?";
 
 
     private static final String SQL_CREATE_USER = "INSERT INTO armadiodb.users (id, login, password, first_name, last_name, role_id) values (DEFAULT,?, ?, ?, ?, ?)";
@@ -224,6 +226,28 @@ public class UserDao implements IDao {
             ConnectionFactory.close(con, ps, rs);
         }
         return user;
+    }
+
+
+    public void lockUser(int userId) {
+        DB_LOG.info("lockUser() starts");
+        try (Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement(SQL_UPDATE_USER_STATUS_BY_ID)){
+
+            ps.setString(1, AccountStatus.LOCKED.toString());
+            ps.setLong(2,userId);
+            DB_LOG.info("lockUser()= status:" + AccountStatus.LOCKED.toString() +
+            "+ userId:" + userId);
+            //executes the query. It is used for create, drop, insert, update, delete etc.
+            boolean updateRes = ps.execute();
+            DB_LOG.info("lockUser() is well done is false. Now updateRes = " + updateRes);
+            con.commit();
+        } catch (DBException e) {
+            DB_LOG.info("DBException in lockUser() - trouble with connection");
+
+        } catch (SQLException e) {
+            DB_LOG.info("SQLException in lockUser() - trouble with commit or syntax");
+        }
     }
 
     private void setUserInfo(Connection con, PreparedStatement pstmt, User user){

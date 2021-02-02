@@ -85,7 +85,7 @@ public class LoginCommand extends Command {
 
         WEB_LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
 
-        WEB_LOG.info("Command finished");
+        WEB_LOG.info("LoginCommand finished");
         return forward;
     }
 
