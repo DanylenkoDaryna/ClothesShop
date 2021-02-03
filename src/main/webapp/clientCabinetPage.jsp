@@ -57,6 +57,10 @@ Class page corresponds to the '.page' element in included CSS document.
                             <td>${sessionScope.sessionUser.getLastName()}</td>
                         </tr>
                         <tr class="danger">
+                            <td>STATUS OF ACCOUNT</td>
+                            <td>${sessionScope.sessionUser.getAccountStatus()}</td>
+                        </tr>
+                        <tr class="danger">
                             <td>BDAY</td>
                             <td>${sessionScope.sessionUser.getBirthday()}</td>
                         </tr>
@@ -72,12 +76,16 @@ Class page corresponds to the '.page' element in included CSS document.
                             <td>TEL</td>
                             <td>${sessionScope.sessionUser.getTelephone()}</td>
                         </tr>
+
+
                         <tr class="danger">
                             <td colspan="2">
                                 <h3>LIST OF PRODUCTS</h3>
                             </td>
                         </tr>
 
+
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
                                 <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
                         <tr>
                             <td>
@@ -92,14 +100,36 @@ Class page corresponds to the '.page' element in included CSS document.
                             </td>
                         </tr>
                                 </c:forEach>
+                        </c:if>
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                            <tr>
+                                <td colspan="2">
+                            <h4>You can not delete anything, cuz your account is locked. </h4>
+                                </td>
+                            </tr>
+                        </c:if>
+
+
+
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                            <tr>
+                                <td colspan="2">
+                                    <form id="order_form" action="controller" method="post" >
+                                        <input type="hidden" name="command" value="ordering"/>
+                                        <input type="submit" name="orderProducts" value="To order">
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:if>
+
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
                         <tr>
                             <td colspan="2">
-                                <form id="order_form" action="controller" method="post" >
-                                    <input type="hidden" name="command" value="ordering"/>
-                                    <input type="submit" name="orderProducts" value="To order">
-                                </form>
+                            <h4>You can not order anything, cuz your account is locked. </h4>
                             </td>
                         </tr>
+                        </c:if>
+
 
 
                         <tr class="danger">
@@ -111,23 +141,35 @@ Class page corresponds to the '.page' element in included CSS document.
                             <td>NAME OF ORDER</td>
                             <td>STATUS</td>
                         </tr>
-                            <tr title="Editing" class="danger">
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                        <tr title="Editing" class="danger">
                                 <td colspan="2">
                                     <h3>EDITING</h3>
                                     <button name="editInfo">
                                         <a href="editAccount.jsp"> Edit my information</a>
                                     </button>
                                 </td>
+                        </tr>
+                        </c:if>
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                            <tr>
+                                <td colspan="2">
+                            <h4>
+                                You can not edit anything, cuz your account is locked.
+                            <br>For more information please contact our admin by armadio@gmail.com
+                            </h4>
+                                </td>
                             </tr>
-                            <tr class="danger">
+                        </c:if>
+                        <tr class="danger">
                                 <td colspan="2">
                                     <h3>DELETE ACCOUNT AND EXIT</h3>
                                     <input type="button" name="deleteAccount" value="Delete this Account"
                                            onclick="confirmRemoveAccount()"
                                     >
                                 </td>
-                            </tr>
-                            </tbody>
+                        </tr>
+                        </tbody>
                         </table>
                     </section>
             </section>

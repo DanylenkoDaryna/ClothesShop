@@ -131,19 +131,37 @@
                                             class="btn btn-default btn-xs">Edit</button>
                                 </form>
                             </c:when>
-                            <c:otherwise>
-                            <!--Делать после нажатия кнопки неактивными, чтобы пользователю стало очевидным,
-                            что он уже нажал на кнопку, и что форма отправляется
-                            Чтобы сервер не загружался лишними запросами, и чтобы уменьшить вероятность какой-либо ошибки-->
-                            <form action="basketServlet" method="post" >
+                            <c:when test="${sessionScope.sessionUser!=null}">
+                            <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                                <!--Делать после нажатия кнопки неактивными, чтобы пользователю стало очевидным,
+                                что он уже нажал на кнопку, и что форма отправляется
+                                Чтобы сервер не загружался лишними запросами, и чтобы уменьшить вероятность какой-либо ошибки-->
+                                <form action="basketServlet" method="post" >
+                                    <input title="page to return" hidden name="page" value=<%=pageJspName%>>
+                                    <button id="${item1.getId()}toBasket" type="submit" name="ClothesIdToBasket" value="${item1.getId()}"
+                                            class="btn btn-default btn-xs">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        To Basket</button>
+                                </form>
+                            </c:if>
+                                <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                            <button type="button" value="locked" class="btn btn-default btn-xs">locked</button>
+                                </c:if>
+                                    </c:when>
+                                    <c:otherwise>
+
+                                    <!--Делать после нажатия кнопки неактивными, чтобы пользователю стало очевидным,
+                                    что он уже нажал на кнопку, и что форма отправляется
+                                    Чтобы сервер не загружался лишними запросами, и чтобы уменьшить вероятность какой-либо ошибки-->
+                                    <form action="basketServlet" method="post" >
                                 <input title="page to return" hidden name="page" value=<%=pageJspName%>>
                                 <button id="${item1.getId()}toBasket" type="submit" name="ClothesIdToBasket" value="${item1.getId()}"
                                         class="btn btn-default btn-xs">
                                     <i class="fas fa-shopping-cart"></i>
                                     To Basket</button>
-                            </form>
-                            </c:otherwise>
-                            </c:choose>
+                                    </form>
+                                    </c:otherwise>
+                                    </c:choose>
                         </div>
                     </div>
                 </div>

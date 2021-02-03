@@ -15,14 +15,14 @@ public class LogoutCommand extends Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        WEB_LOG.info("Command starts");
+        WEB_LOG.info("LogoutCommand starts");
 
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
 
-        WEB_LOG.info("Command finished");
+        WEB_LOG.info("LogoutCommand finished");
         return Path.PAGE_LOGIN;
     }
 

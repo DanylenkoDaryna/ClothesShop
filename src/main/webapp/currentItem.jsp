@@ -109,15 +109,39 @@
                             </tr>
                             </tbody>
                         </table>
-                        <form action="basketServlet" method="post" >
-                            <input title="page to return" hidden name="page" value="/currentItem.jsp">
-                            <button type="submit" name="ClothesIdToBasket"
-                                    value="${sessionScope.items.get(0).getId()}"
-                                    class="btn" >
-                                <i class="fas fa-shopping-cart"></i>
-                                To Basket
-                            </button>
-                        </form>
+                        <c:choose>
+                        <c:when test="${sessionScope.sessionUser!=null}">
+                            <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                                <form action="basketServlet" method="post" >
+                                    <input title="page to return" hidden name="page" value="/currentItem.jsp">
+                                    <button type="submit" name="ClothesIdToBasket"
+                                            value="${sessionScope.items.get(0).getId()}"
+                                            class="btn" >
+                                        <i class="fas fa-shopping-cart"></i>
+                                        To Basket
+                                    </button>
+                                </form>
+                            </c:if>
+                            <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                                You cannot order anything, cuz your account is locked.
+                                <br>
+                                For more information please contact our admin by armadio@gmail.com
+                            </c:if>
+                        </c:when>
+                            <c:otherwise>
+                                <form action="basketServlet" method="post" >
+                                    <input title="page to return" hidden name="page" value="/currentItem.jsp">
+                                    <button type="submit" name="ClothesIdToBasket"
+                                            value="${sessionScope.items.get(0).getId()}"
+                                            class="btn" >
+                                        <i class="fas fa-shopping-cart"></i>
+                                        To Basket
+                                    </button>
+                                </form>
+                            </c:otherwise>
+                            </c:choose>
+
+
                     </div>
                 </div>
             </div>
