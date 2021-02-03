@@ -43,10 +43,10 @@ public class UpdatingUPOCommand extends Command {
 
         switch (command){
             case "lockingUser":{
-                users=lockUser(request,users);
+                lockUser(request,users);
                 break;
             }case "unlockingUser":{
-                //users=unlockUser(request,users);
+                unlockUser(request,users);
                 break;
             }
             default: forward=Path.PAGE_ERROR_PAGE;
@@ -75,22 +75,22 @@ public class UpdatingUPOCommand extends Command {
         return users;
     }
 
-//    private ArrayList<User> unlockUser(HttpServletRequest req, ArrayList<User> users) {
-//        WEB_LOG.info("lock User ");
-//        int idToLock = Integer.parseInt(req.getParameter("idToLock"));
-//        UserService userService = new UserService();
-//        userService.getDao().unlockUser();
-//        return updateLockedUser(users,idToLock);
-//    }
-//
-//    private ArrayList<User> updateUnlockedUser(ArrayList<User> users, int idToLock){
-//        for(User user:users){
-//            if(user.getId()==idToLock){
-//                user.setAccountStatus(AccountStatus.LOCKED);
-//            }
-//        }
-//        return users;
-//    }
+    private ArrayList<User> unlockUser(HttpServletRequest req, ArrayList<User> users) {
+        WEB_LOG.info("unlock User");
+        int idToUnlock = Integer.parseInt(req.getParameter("idToUnlock"));
+        UserService userService = new UserService();
+        userService.getDao().unlockUser(idToUnlock);
+        return updateUnlockedUser(users,idToUnlock);
+    }
+
+    private ArrayList<User> updateUnlockedUser(ArrayList<User> users, int idToUnlock){
+        for(User user:users){
+            if(user.getId()==idToUnlock){
+                user.setAccountStatus(AccountStatus.UNLOCKED);
+            }
+        }
+        return users;
+    }
 
      /* Serializable comparator used with TreeMap container. When the servlet
  * container tries to serialize the session it may fail because the session

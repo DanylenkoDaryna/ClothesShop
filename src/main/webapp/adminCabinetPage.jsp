@@ -131,12 +131,24 @@
                                         </c:if>
                                         <td>${user.getAccountStatus()}</td>
                                         <td>
-                                            <form method="post" id="lockAccount" action="controller">
-                                                <input type="hidden" name="command" value="UpdatingUPOCommand"/>
-                                                <input type="hidden" name="commandType" value="lockingUser"/>
-                                                <input type="hidden" name="idToLock" value="${user.getId()}"/>
-                                                <input type="submit" value="Lock">
-                                            </form>
+                                            <c:if test="${user.getAccountStatus()=='UNLOCKED'}">
+                                                <form method="post" id="lockAccount" action="controller">
+                                                    <input type="hidden" name="command" value="UpdatingUPOCommand"/>
+                                                    <input type="hidden" name="commandType" value="lockingUser"/>
+                                                    <input type="hidden" name="idToLock" value="${user.getId()}"/>
+                                                    <input type="submit" value="Lock">
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${user.getAccountStatus()=='LOCKED'}">
+                                                <form method="post" id="unlockAccount" action="controller">
+                                                    <input type="hidden" name="command" value="UpdatingUPOCommand"/>
+                                                    <input type="hidden" name="commandType" value="unlockingUser"/>
+                                                    <input type="hidden" name="idToUnlock" value="${user.getId()}"/>
+                                                    <input type="submit" value="Unlock">
+                                                </form>
+                                            </c:if>
+
+
                                         </td>
                                     </tr>
                                 </c:forEach>
