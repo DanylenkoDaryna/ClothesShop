@@ -132,12 +132,17 @@
                                         <td>${user.getAccountStatus()}</td>
                                         <td>
                                             <c:if test="${user.getAccountStatus()=='UNLOCKED'}">
-                                                <form method="post" id="lockAccount" action="controller">
-                                                    <input type="hidden" name="command" value="UpdatingUPOCommand"/>
-                                                    <input type="hidden" name="commandType" value="lockingUser"/>
-                                                    <input type="hidden" name="idToLock" value="${user.getId()}"/>
-                                                    <input type="submit" value="Lock">
-                                                </form>
+                                                <%--if condition here to not allow admin to lock himself, --%>
+                                                <%--only other admin if it really necessary--%>
+                                                <c:if test="${sessionScope.sessionUser.getId()!=user.getId()}">
+                                                    <form method="post" id="lockAccount" action="controller">
+                                                        <input type="hidden" name="command" value="UpdatingUPOCommand"/>
+                                                        <input type="hidden" name="commandType" value="lockingUser"/>
+                                                        <input type="hidden" name="idToLock" value="${user.getId()}"/>
+                                                        <input type="submit" value="Lock">
+                                                    </form>
+                                                </c:if>
+
                                             </c:if>
                                             <c:if test="${user.getAccountStatus()=='LOCKED'}">
                                                 <form method="post" id="unlockAccount" action="controller">
