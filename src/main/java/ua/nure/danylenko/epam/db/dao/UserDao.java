@@ -31,7 +31,6 @@ public class UserDao implements IDao {
     private static final String SQL_UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, first_name=?, last_name=? WHERE users.id=?";
     private static final String SQL_UPDATE_USER_STATUS_BY_ID = "UPDATE users SET acc_status=? WHERE users.id=?";
 
-
     private static final String SQL_CREATE_USER = "INSERT INTO armadiodb.users (id, login, password, first_name, last_name, role_id) values (DEFAULT,?, ?, ?, ?, ?)";
     private static final String SQL_ADD_USER_INFO_BY_ID = "INSERT INTO armadiodb.user_info (id, country, birthday, email, telephone, user_id) values (DEFAULT,?,?,?,?,?)";
     private static final String SQL_UPDATE_USER_INFO_BY_ID = "UPDATE armadiodb.user_info SET country=?, birthday=?, email=?, telephone=? WHERE user_id=?";
@@ -247,6 +246,20 @@ public class UserDao implements IDao {
 
         } catch (SQLException e) {
             DB_LOG.info("SQLException in lockUser() - trouble with commit or syntax");
+        }
+    }
+    public void unlockUser(int userId) {
+        try (Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement(SQL_UPDATE_USER_STATUS_BY_ID)){
+            ps.setString(1, AccountStatus.UNLOCKED.toString());
+            ps.setLong(2,userId);
+            ps.execute();
+            con.commit();
+        } catch (DBException e) {
+            DB_LOG.info("DBException in unlockUser() - trouble with connection");
+
+        } catch (SQLException e) {
+            DB_LOG.info("SQLException in unlockUser() - trouble with commit or syntax");
         }
     }
 
