@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.web.command;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.Role;
+import ua.nure.danylenko.epam.db.entity.AccountStatus;
 import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.db.service.UserService;
 import ua.nure.danylenko.epam.exception.AppException;
@@ -57,6 +58,7 @@ public class RegisterCommand extends Command {
         newUser.setLastName(lastName);
         newUser.setLogin(email);
         newUser.setPassword(password);
+        newUser.setAccountStatus(AccountStatus.UNLOCKED);
         newUser.setEmail(email);
         newUser.setTelephone(telephone);
         newUser.setBirthday(birthday);
