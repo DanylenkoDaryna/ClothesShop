@@ -31,7 +31,7 @@ public class UserDao implements IDao {
     private static final String SQL_UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, first_name=?, last_name=? WHERE users.id=?";
     private static final String SQL_UPDATE_USER_STATUS_BY_ID = "UPDATE users SET acc_status=? WHERE users.id=?";
 
-    private static final String SQL_CREATE_USER = "INSERT INTO armadiodb.users (id, login, password, first_name, last_name, role_id) values (DEFAULT,?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_USER = "INSERT INTO armadiodb.users (id, login, password, first_name, last_name, acc_status, role_id) values (DEFAULT,?, ?, ?, ?, ?, ?)";
     private static final String SQL_ADD_USER_INFO_BY_ID = "INSERT INTO armadiodb.user_info (id, country, birthday, email, telephone, user_id) values (DEFAULT,?,?,?,?,?)";
     private static final String SQL_UPDATE_USER_INFO_BY_ID = "UPDATE armadiodb.user_info SET country=?, birthday=?, email=?, telephone=? WHERE user_id=?";
     private static final String SQL_FIND_USER_ID = "SELECT id FROM users";
@@ -56,7 +56,8 @@ public class UserDao implements IDao {
             pstmt.setString(2,user.getPassword());
             pstmt.setString(3,user.getFirstName());
             pstmt.setString(4,user.getLastName());
-            pstmt.setInt(5,1);
+            pstmt.setString(5,user.getAccountStatus().toString());
+            pstmt.setInt(6,1);
 
             //pstmt.executeQuery();executes the select query. It returns an instance of ResultSet.
 
