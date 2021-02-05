@@ -44,7 +44,9 @@ Class page corresponds to the '.page' element in included CSS document.
                 <section class="table mb-lg-2">
                     <table class="table" id="cabinetTable">
                         <thead>
-                        <h3>PERSONAL INFORMATION</h3>
+                        <h3>
+                            <i class="fas fa-archive"></i>
+                            PERSONAL INFORMATION</h3>
 
                         </thead>
                         <tbody>
@@ -114,10 +116,13 @@ Class page corresponds to the '.page' element in included CSS document.
                         <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
                             <tr>
                                 <td colspan="2">
-                                    <form id="order_form" action="controller" method="post" >
-                                        <input type="hidden" name="command" value="ordering"/>
-                                        <input type="submit" name="orderProducts" value="To order">
-                                    </form>
+                                    <%--<form id="order_form" action="controller" method="post" >--%>
+                                        <%--<input type="hidden" name="command" value="ordering"/>--%>
+                                        <%--<input type="submit" name="orderProducts" value="To order">--%>
+                                    <%--</form>--%>
+                                    <button name="ordering">
+                                        <a href="ordering.jsp">To order</a>
+                                    </button>
                                 </td>
                             </tr>
                         </c:if>
