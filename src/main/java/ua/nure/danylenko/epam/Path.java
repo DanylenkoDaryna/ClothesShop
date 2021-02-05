@@ -6,6 +6,7 @@ public class Path {
     public static final String PAGE_GOOD = "index.jsp";
     public static final String PAGE_HEAD = "/WEB-INF/jspf/head.jspf";
     public static final String PAGE_PRODUCTS = "/products.jsp";
+    public static final String PAGE_ORDERING = "/ordering.jsp";
     public static final String PAGE_FILTERED_PRODUCTS = "filteredPage.jsp";
     public static final String PAGE_ITEM_PRODUCTS = "/currentItem.jsp";
     public static final String PAGE_ERROR_PAGE = "/WEB-INF/jsp/error_page.jsp";
