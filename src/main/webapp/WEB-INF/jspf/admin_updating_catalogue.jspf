@@ -1,0 +1,58 @@
+<!-- first tab for third tab (он отображается по умолчанию, т.к. имеет классы show и active) -->
+<div class="tab-pane fade show active" id="catalogueUpdate">
+    <section class="text-center">
+        <table class="admin_data_table">
+            <tbody>
+            <tr class="active">
+                <td>CATALOGUE ITEMS</td>
+                <td>
+                    <i class="fas fa-trash-alt"></i>
+                    DELETE
+                </td>
+                <td>
+                    <i class="fas fa-edit"></i>
+                    EDIT
+                </td>
+            </tr>
+            <c:forEach items="${catalogue.container.keySet()}" var="entry1">
+                <tr>
+                    <td>${entry1}</td>
+                    <td>
+                        <form method="post" id="delete_catalogue_form" action="controller">
+                            <input type="hidden" name="command" value="updateCatalogue"/>
+                            <input type="hidden" name="updateCatalogueType" value="delete"/>
+                            <input type="hidden" name="itemToDelete" value="${entry1}"/>
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" id="edit_catalogue_form" action="controller">
+                            <input type="hidden" name="command" value="updateCatalogue"/>
+                            <input type="hidden" name="updateCatalogueType" value="edit"/>
+                            <input type="hidden" name="itemToEdit" value="${entry1}"/>
+                            <label>New name
+                                <input name="editedItem"/>
+                            </label>
+                            <input type="submit" value="Save">
+                        </form>
+
+                    </td>
+                </tr>
+            </c:forEach>
+            <tr>
+                <td colspan="3">
+                    <form method="post" id="add_catalogue_form" action="controller">
+                        <input type="hidden" name="command" value="updateCatalogue"/>
+                        <input type="hidden" name="updateCatalogueType" value="add"/>
+                        <label>New Catalogue Item name
+                            <i class="fas fa-plus-circle"></i>
+                            <input name="catalogueName" maxlength="30" value="Enter name">
+                        </label>
+                        <input type="submit" value="Add New Item">
+                    </form>
+
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
