@@ -140,8 +140,8 @@
                                     <input title="page to return" hidden name="page" value=<%=pageJspName%>>
                                     <button id="${item1.getId()}toBasket" type="submit" name="ClothesIdToBasket" value="${item1.getId()}"
                                             class="btn btn-default btn-xs">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        To Basket</button>
+                                        <i class="far fa-heart"></i>
+                                        To Wishlist</button>
                                 </form>
                             </c:if>
                                 <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
@@ -157,8 +157,8 @@
                                 <input title="page to return" hidden name="page" value=<%=pageJspName%>>
                                 <button id="${item1.getId()}toBasket" type="submit" name="ClothesIdToBasket" value="${item1.getId()}"
                                         class="btn btn-default btn-xs">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    To Basket</button>
+                                    <i class="far fa-heart"></i>
+                                    To Wishlist</button>
                                     </form>
                                     </c:otherwise>
                                     </c:choose>

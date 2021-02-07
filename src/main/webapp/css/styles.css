@@ -14,7 +14,7 @@ table {
 .dropbtn {
     background-color: #b77916;
     color: white;
-    padding: 16px;
+    padding: 2px;
     font-size: 16px;
     border: none;
 }
@@ -79,7 +79,7 @@ table {
     display:table;
     width:fit-content;
     margin:auto;
-    padding: 50px;
+    padding: 30px;
     font-size: 50px;
 }
 .nav-item > li {
