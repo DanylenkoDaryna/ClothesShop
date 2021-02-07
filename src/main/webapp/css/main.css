@@ -120,9 +120,8 @@ body{
     -webkit-border-radius: 6px;
 }
 #indexContainer{
-    background: url("img/bacgroundImageIndex.jpg") no-repeat center top;
     text-align: center;
-    background-position: center center;
+    background: url("img/bacgroundImageIndex.jpg") no-repeat center center;
     padding-bottom: 20px;
     margin-bottom: 50px;
     margin-top: 50px;
