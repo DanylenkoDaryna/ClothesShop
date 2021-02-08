@@ -2,6 +2,10 @@
 <!-- BASKET -->
 <%@ include file="/WEB-INF/jspf/basket.jspf"%>
 <!-- BASKET -->
+
+<!-- WISH LIST -->
+<%@ include file="/WEB-INF/jspf/wishlist.jspf"%>
+<!-- WISH LIST -->
 <div class="container-fluid">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
@@ -62,6 +66,22 @@
                                 </a>
                             </c:if>
                         </li>
+                        <li class="nav-item active">
+                            <c:if test="${empty sessionScope.wishlist}">
+                                <a class="nav-link disabled" >
+                                    <i class="far fa-heart"></i>
+                                    Favourites(0)
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </c:if>
+                            <c:if test="${not empty sessionScope.wishlist}">
+                                <a class="nav-link" href="" data-toggle="modal" data-target="#wishlistModal">
+                                    <i class="far fa-heart"></i>
+                                    Favourites(${sessionScope.wishlist.size()})
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </c:if>
+                        </li>
                         <li class="nav-item" >
                             <a class="nav-link" href="controller?command=logout">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -112,6 +132,23 @@
                                 </a>
                             </c:if>
                         </li>
+                        <li class="nav-item active">
+                            <c:if test="${empty sessionScope.wishlist}">
+                                <a class="nav-link disabled" >
+                                    <i class="far fa-heart"></i>
+                                    Favourites(0)
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </c:if>
+                            <c:if test="${not empty sessionScope.wishlist}">
+                                <a class="nav-link" href="" data-toggle="modal" data-target="#wishlistModal">
+                                    <i class="far fa-heart"></i>
+                                    Favourites(${sessionScope.wishlist.size()})
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </c:if>
+                        </li>
+
                         <li class="nav-item" >
                         <a class="nav-link" href="login.jsp">
                             <i class="fas fa-house-user"></i>
