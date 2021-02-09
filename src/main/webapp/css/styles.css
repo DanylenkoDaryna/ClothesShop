@@ -70,6 +70,33 @@ table {
     text-align: center;
 }
 
+.wishlist_table {
+    display: table;
+    text-align: center;
+    border: black;
+    width: auto;
+}
+
+.wishlist_row{
+    display: table-row;
+    text-align: center;
+    border: black;
+}
+
+.wishlist_col{
+    display: table-cell;
+    padding: 20px;
+    border: orange;
+    text-align: center;
+}
+
+.wishlist_col2{
+    display: table-cell;
+    padding: 20px;
+    border: orange;
+    text-align: center;
+}
+
 /*.nav-item {*/
     /*text-align: right;*/
     /*right: 0;*/

@@ -82,11 +82,43 @@ Class page corresponds to the '.page' element in included CSS document.
 
                         <tr class="danger">
                             <td colspan="2">
+                                <h3>LIST OF FAVOURITES</h3>
+                            </td>
+                        </tr>
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                                <c:forEach items="${sessionScope.wishlist}" var="itemInWishlist">
+                        <tr>
+                            <td>
+                                <a href="controller?command=ItemProducts&ItemId=${itemInWishlist.getId()}" class="dark-grey-text">
+                                        ${itemInWishlist.getProductName()}
+                                </a>
+                            </td>
+                            <td>
+                                <form action="wishlistCleanerServlet" method="post">
+                                    <input title="page to return after deleting" hidden name="pageBack" value=<%=pageJspName%>>
+                                    <button type="submit" name="IdDeleteFromWishlist" value="${itemInWishlist.getId()}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                                </c:forEach>
+                        </c:if>
+                        <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                            <tr>
+                                <td colspan="2">
+                            <h4>You can not delete anything, cuz your account is locked. </h4>
+                                </td>
+                            </tr>
+                        </c:if>
+
+
+
+                        <tr class="danger">
+                            <td colspan="2">
                                 <h3>LIST OF PRODUCTS</h3>
                             </td>
                         </tr>
-
-
                         <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
                                 <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
                         <tr>
@@ -97,7 +129,8 @@ Class page corresponds to the '.page' element in included CSS document.
                                 <form action="basketCleanerServlet" method="post">
                                     <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
                                     <button type="submit" name="IdDeleteFromBasket" value="${itemToOrder.getId()}">
-                                        Remove</button>
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

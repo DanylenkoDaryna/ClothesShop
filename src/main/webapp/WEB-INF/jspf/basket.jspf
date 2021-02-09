@@ -9,7 +9,7 @@ aria-describedby - предназначен для идентификации э
 aria-hidden="true" - указывает, что элемент и все его потомки не видимы пользователю.-->
 <div class="modal fade" id="basketModal" tabindex="-1" role="dialog"
      aria-labelledby="basketModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="basketModalLabel">
@@ -35,7 +35,7 @@ aria-hidden="true" - указывает, что элемент и все его 
                                     <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
                                     <button type="submit" name="IdDeleteFromBasket" value="${itemInBasket.getId()}">
                                         <i class="fas fa-trash-alt"></i>
-                                        Remove</button>
+                                        </button>
                                 </form>
                             </div>
                         </c:forEach>

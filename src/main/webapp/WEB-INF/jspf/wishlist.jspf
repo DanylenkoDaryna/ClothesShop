@@ -9,7 +9,7 @@ aria-describedby - предназначен для идентификации э
 aria-hidden="true" - указывает, что элемент и все его потомки не видимы пользователю.-->
 <div class="modal fade" id="wishlistModal" tabindex="-1" role="dialog"
      aria-labelledby="wishlistModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="wishlistModalLabel">
@@ -25,19 +25,18 @@ aria-hidden="true" - указывает, что элемент и все его 
                         <c:forEach items="${sessionScope.wishlist}" var="itemInWishlist">
                             <div class="wishlist_row">
                                 <div class="wishlist_col1">
-
                                     <a href="controller?command=ItemProducts&ItemId=${itemInWishlist.getId()}" class="dark-grey-text">
                                             ${itemInWishlist.getProductName()}
                                     </a>
-                                        </div>
-                                <%--<div class="wishlist_col2">--%>
-                                <%--<form action="wishlistCleanerServlet" method="post">--%>
-                                    <%--<input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>--%>
-                                    <%--<button type="submit" name="IdDeleteFromWishlist" value="${itemInWishlist.getId()}">--%>
-                                        <%--<i class="fas fa-trash-alt"></i>--%>
-                                    <%--</button>--%>
-                                <%--</form>--%>
-                                <%--</div>--%>
+                                </div>
+                                <div class="wishlist_col2">
+                                <form action="wishlistCleanerServlet" method="post">
+                                    <input title="page to return after deleting" hidden name="pageBack" value=<%=pageJspName%>>
+                                    <button type="submit" name="IdDeleteFromWishlist" value="${itemInWishlist.getId()}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                                </div>
                             </div>
                         </c:forEach>
                     </c:if>
