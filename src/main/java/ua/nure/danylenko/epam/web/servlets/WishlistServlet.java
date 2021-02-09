@@ -49,14 +49,14 @@ public class WishlistServlet extends HttpServlet {
                     wishlist.add(item);
                     session.setAttribute("wishlist", wishlist);
                 } else {
-                    List<Item> itemsInWishlist = (List<Item>)session.getAttribute("wishlist");
-                    itemsInWishlist.add(item);
-                    session.setAttribute("wishlist", itemsInWishlist);
+                    List<Item> wishlist = (List<Item>)session.getAttribute("wishlist");
+                    wishlist.add(item);
+                    session.setAttribute("wishlist", wishlist);
                 }
             }
         }
+        WEB_LOG.info("WishlistServlet ends");
         RequestDispatcher rd = req.getRequestDispatcher(forward);
         rd.forward(req, resp);
-        WEB_LOG.info("WishlistServlet ends");
     }
 }
