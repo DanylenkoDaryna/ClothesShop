@@ -132,7 +132,7 @@
                                 </form>
                             </c:when>
                             <c:when test="${sessionScope.sessionUser!=null}">
-                            <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                                <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
                                 <form action="wishlistServlet" method="post" >
                                     <input title="page to return" hidden name="page" value=<%=pageJspName%>>
                                     <button id="${item1.getId()}toWishlist" type="submit" name="ClothesIdToWishlist" value="${item1.getId()}"
@@ -140,22 +140,21 @@
                                         <i class="far fa-heart"></i>
                                         To Wishlist</button>
                                 </form>
-                            </c:if>
-                                <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
-                            <button type="button" value="locked" class="btn btn-default btn-xs">locked</button>
                                 </c:if>
-                                    </c:when>
-                                    <c:otherwise>
-
+                                <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                                    <button type="button" value="locked" class="btn btn-default btn-xs">locked</button>
+                                </c:if>
+                            </c:when>
+                                <c:otherwise>
                                     <form action="wishlistServlet" method="post" >
-                                <input title="page to return" hidden name="page" value=<%=pageJspName%>>
-                                <button id="${item1.getId()}toWishlist" type="submit" name="ClothesIdToWishlist" value="${item1.getId()}"
+                                        <input title="page to return" hidden name="page" value=<%=pageJspName%>>
+                                        <button id="${item1.getId()}toWishlist" type="submit" name="ClothesIdToWishlist" value="${item1.getId()}"
                                         class="btn btn-default btn-xs">
-                                    <i class="far fa-heart"></i>
-                                    To Wishlist</button>
+                                            <i class="far fa-heart"></i>
+                                            To Wishlist</button>
                                     </form>
-                                    </c:otherwise>
-                                    </c:choose>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>

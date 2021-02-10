@@ -126,7 +126,7 @@
                                 <td> ${sessionScope.items.get(0).getReleaseDate()}</td>
                             </tr>
                     <tr>
-                        <td colspan="2">
+                        <td>
                             <c:choose>
                                 <c:when test="${sessionScope.sessionUser!=null}">
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
@@ -151,6 +151,36 @@
                                                 class="btn" >
                                             <i class="fas fa-shopping-cart"></i>
                                             To Basket
+                                        </button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${sessionScope.sessionUser!=null}">
+                                    <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                                        <form action="wishlistServlet" method="post" >
+                                            <input title="page to return" hidden name="page" value="<%=pageJspName%>">
+                                            <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.items.get(0).getId()}"
+                                                    class="btn" >
+                                                <i class="far fa-heart"></i>
+                                                To Wishlist
+                                            </button>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                                        You cannot order anything, cuz your account is locked.<br>
+                                        For more information please contact our admin by armadio@gmail.com
+                                    </c:if>
+                                </c:when>
+                                <c:otherwise>
+                                    <form action="wishlistServlet" method="post" >
+                                        <input title="page to return" hidden name="page" value="<%=pageJspName%>">
+                                        <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.items.get(0).getId()}"
+                                                class="btn" >
+                                            <i class="far fa-heart"></i>
+                                            To Wishlist
                                         </button>
                                     </form>
                                 </c:otherwise>
