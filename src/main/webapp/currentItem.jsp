@@ -34,65 +34,83 @@
 <%-- MAIN_MENU --%>
 <%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
 <%-- MAIN_MENU --%>
-<main>
-    <div class="container">
+    <div class="headerwrap">
         <section class="text-center mb-4">
-            <div class="row wow fadeIn">
-                <h1>${sessionScope.ItemsContainer2.get(0)}</h1>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 ">
-                        <c:forEach items="${sessionScope.ItemsContainer2}" var="productCurr">
-                                <img src="img/${productCurr.getImage()}" class="img-fluid" alt="Why God? why can`t I see that?">
-                        </c:forEach>
+            <h1>${sessionScope.ItemsContainer2.get(0)}</h1>
+        </section>
 
-                    </div>
-                    <div class="col-lg-6 col-md-6 ">
-                        <table class="table">
-                            <thead>
+        <div class="row">
+            <div class="col-lg-5 col-md-5 ">
+                <c:forEach items="${sessionScope.ItemsContainer2}" var="productCurr">
+                    <img src="img/${productCurr.getImage()}" class="img-fluid" alt="Why God? why can`t I see that?">
+                </c:forEach>
+            </div>
+            <div class="col-lg-6 col-md-6 ">
+                <table class="table" id="current_item_table">
+                    <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <i class="fas fa-tag"></i>
+                            Product description
+                            <i class="fab fa-shopify"></i>
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>Brand</td><td>${sessionScope.items.get(0).getBrand()}</td>
+                    </tr>
+                    <tr class="danger">
+                        <td>Price</td>
+                        <td>${sessionScope.items.get(0).getPrice()}
+                        <i class="fas fa-dollar-sign"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Choose size</td>
+                        <td>
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownSizes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Available sizes
+                                </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownSizes">
+                                            <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
+                                                <a class="dropdown-item" href="#">${ItemProduct.getBodySize()}</a>
+                                                <%--<t>--%>
+                                            </c:forEach>
+
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
                             <tr>
-                                <th>
-                                    <i class="fas fa-tag"></i>
-                                    Product description
-                                    <i class="fab fa-shopify"></i>
+                                <td>Choose colour</td>
+                                <td>
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownColour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Available colours
+                                        </a>
 
-                                </th>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownColour">
+                                            <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
+                                                <a class="dropdown-item" href="#">${ItemProduct.getColour()}</a>
+                                                <%--<t>--%>
+                                            </c:forEach>
+
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="active">
-                                <td>Brand</td><td>${sessionScope.items.get(0).getBrand()}</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>Price</td><td>${sessionScope.items.get(0).getPrice()}
-                                <i class="fas fa-dollar-sign"></i>
-                            </td>
-                            </tr>
-                            <tr class="active">
+                            <tr>
                                 <td>Available items</td>
                                 <td>
-                                <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
-                                    ${ItemProduct.getAvailable()}<t>
-                                </c:forEach>
-                                </td>
-                            </tr>
-                            <tr class="success">
-                                <td>Available size</td>
-                                <td>
                                     <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
-                                    ${ItemProduct.getBodySize()}<t>
+                                        ${ItemProduct.getAvailable()}<t>
                                     </c:forEach>
                                 </td>
                             </tr>
-                            <tr class="info">
-                                <td>Colours</td>
-                                <td>
-                                    <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
-                                        ${ItemProduct.getColour()}
-                                        <t>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                            <tr class="warning">
+
+                            <tr>
                                 <td>
                                     <i class="fas fa-tshirt"></i>
                                     Materials
@@ -107,48 +125,73 @@
                                 <td>Release Date</td>
                                 <td> ${sessionScope.items.get(0).getReleaseDate()}</td>
                             </tr>
-                            </tbody>
-                        </table>
-                        <c:choose>
-                        <c:when test="${sessionScope.sessionUser!=null}">
-                            <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                                <form action="basketServlet" method="post" >
-                                    <input title="page to return" hidden name="page" value="/currentItem.jsp">
-                                    <button type="submit" name="ClothesIdToBasket"
-                                            value="${sessionScope.items.get(0).getId()}"
-                                            class="btn" >
-                                        <i class="fas fa-shopping-cart"></i>
-                                        To Basket
-                                    </button>
-                                </form>
-                            </c:if>
-                            <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
-                                You cannot order anything, cuz your account is locked.
-                                <br>
-                                For more information please contact our admin by armadio@gmail.com
-                            </c:if>
-                        </c:when>
-                            <c:otherwise>
-                                <form action="basketServlet" method="post" >
-                                    <input title="page to return" hidden name="page" value="/currentItem.jsp">
-                                    <button type="submit" name="ClothesIdToBasket"
-                                            value="${sessionScope.items.get(0).getId()}"
-                                            class="btn" >
-                                        <i class="fas fa-shopping-cart"></i>
-                                        To Basket
-                                    </button>
-                                </form>
-                            </c:otherwise>
+                    <tr>
+                        <td>
+                            <c:choose>
+                                <c:when test="${sessionScope.sessionUser!=null}">
+                                    <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                                        <form action="basketServlet" method="post" >
+                                            <input title="page to return" hidden name="page" value="/currentItem.jsp">
+                                            <button type="submit" name="ClothesIdToBasket" value="${sessionScope.items.get(0).getId()}"
+                                                    class="btn" >
+                                                <i class="fas fa-shopping-cart"></i>
+                                                To Basket
+                                            </button>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                                        You cannot order anything, cuz your account is locked.<br>
+                                        For more information please contact our admin by armadio@gmail.com
+                                    </c:if>
+                                </c:when>
+                                <c:otherwise>
+                                    <form action="basketServlet" method="post" >
+                                        <input title="page to return" hidden name="page" value="/currentItem.jsp">
+                                        <button type="submit" name="ClothesIdToBasket" value="${sessionScope.items.get(0).getId()}"
+                                                class="btn" >
+                                            <i class="fas fa-shopping-cart"></i>
+                                            To Basket
+                                        </button>
+                                    </form>
+                                </c:otherwise>
                             </c:choose>
-
-
-                    </div>
-                </div>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${sessionScope.sessionUser!=null}">
+                                    <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
+                                        <form action="wishlistServlet" method="post" >
+                                            <input title="page to return" hidden name="page" value="<%=pageJspName%>">
+                                            <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.items.get(0).getId()}"
+                                                    class="btn" >
+                                                <i class="far fa-heart"></i>
+                                                To Wishlist
+                                            </button>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
+                                        You cannot order anything, cuz your account is locked.<br>
+                                        For more information please contact our admin by armadio@gmail.com
+                                    </c:if>
+                                </c:when>
+                                <c:otherwise>
+                                    <form action="wishlistServlet" method="post" >
+                                        <input title="page to return" hidden name="page" value="<%=pageJspName%>">
+                                        <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.items.get(0).getId()}"
+                                                class="btn" >
+                                            <i class="far fa-heart"></i>
+                                            To Wishlist
+                                        </button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-        </section>
+        </div>
     </div>
-</main>
 
 <!-- footer -->
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
