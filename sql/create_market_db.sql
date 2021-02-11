@@ -217,26 +217,28 @@ CREATE TABLE items(
 
 	brand VARCHAR(15) NOT NULL,
 
+	colour ENUM('RED','GREEN','BLUE', 'WHITE', 'BLACK', 'GREY', 'YELLOW', 'PINK'),
+
 	category_id INTEGER NOT NULL REFERENCES categories(id)
 		ON DELETE CASCADE ON UPDATE RESTRICT
 	);
 
 -- --------------------------------------------------------------
-INSERT INTO items VALUES(DEFAULT, 'Bomber For Friends', 222.44, current_date,'For Friends', 1);
-INSERT INTO items VALUES(DEFAULT, 'Bomber Licolle', 500.99, current_date,'Licolle', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket D&G', 59.99, current_date,'D&G', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket D&G', 1059.99, current_date,'D&G', 1);
-INSERT INTO items VALUES(DEFAULT, 'Bomber Gucci', 128.99, current_date,'Gucci', 1);
-INSERT INTO items VALUES(DEFAULT, 'Bomber Moscino', 360.99, current_date,'Moscino', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket Drupal', 359.99, current_date,'Drupal', 1);
-INSERT INTO items VALUES(DEFAULT, 'Bomber Programmer', 102.99, current_date,'Programmer', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket ItGuru', 100.99, current_date,'ItGuru', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket Summertime', 1030.99, current_date,'Summertime', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket Lano', 1500.99, current_date,'Lano', 1);
-INSERT INTO items VALUES(DEFAULT, 'Bomber Cinderella', 600.99, current_date,'Cinderella', 1);
-INSERT INTO items VALUES(DEFAULT, 'Bomber Dunder Mifflin', 400.99, current_date,'DM', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket Office', 880.99, current_date,'Office', 1);
-INSERT INTO items VALUES(DEFAULT, 'Shirts Moscino', 40.00 , current_date,'Moscino', 4);
+INSERT INTO items VALUES(DEFAULT, 'Bomber For Friends', 222.44, current_date,'For Friends','BLACK', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Licolle', 500.99, current_date,'Licolle','BLUE', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket D&G', 59.99, current_date,'D&G','GREEN', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket D&G', 1059.99, current_date,'D&G','BLUE', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Gucci', 128.99, current_date,'Gucci','GREY', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Moscino', 360.99, current_date,'Moscino','PINK', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Drupal', 359.99, current_date,'Drupal','BLUE', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Programmer', 102.99, current_date,'Programmer','BLACK', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket ItGuru', 100.99, current_date,'ItGuru','PINK', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Summertime', 1030.99, current_date,'Summertime','YELLOW', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Lano', 1500.99, current_date,'Lano','BLACK', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Cinderella', 600.99, current_date,'Cinderella','YELLOW', 1);
+INSERT INTO items VALUES(DEFAULT, 'Bomber Dunder Mifflin', 400.99, current_date,'DM','GREEN', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Office', 880.99, current_date,'Office','RED', 1);
+INSERT INTO items VALUES(DEFAULT, 'Shirts Moscino', 40.00 , current_date,'Moscino','WHITE', 4);
 
 
 -- --------------------------------------------------------------
@@ -253,35 +255,32 @@ CREATE TABLE products(
 
 	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'),
 
-	colour ENUM('RED','GREEN','BLUE', 'WHITE', 'BLACK', 'GREY', 'YELLOW', 'PINK'),
-
-
 	item_id INTEGER NOT NULL REFERENCES items(id)
 		ON DELETE CASCADE ON UPDATE RESTRICT
 
 	);
 
 -- --------------------------------------------------------------
-INSERT INTO products VALUES(DEFAULT,'Bomber For Friends весна', 3, 'L', 'BLACK',1);
-INSERT INTO products VALUES(DEFAULT,'Bomber For Friends осень', 1, 'S', 'PINK', 1);
-INSERT INTO products VALUES(DEFAULT,'Bomber Licolle Prestigue', 2, 'XL', 'BLUE', 2);
-INSERT INTO products VALUES(DEFAULT,'Jacket D&G classic black', 1, 'L', 'GREEN',3);
-INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'XL', 'PINK', 3);
-INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'L', 'BLUE', 4);
-INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXXL', 'BLACK',5);
-INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXL', 'GREY',5);
-INSERT INTO products VALUES(DEFAULT,'Bomber Moscino Emo Autumn', 1, 'S', 'PINK', 6);
-INSERT INTO products VALUES(DEFAULT,'Jacket Drupal Selestia', 1, 'XL', 'BLUE', 7);
-INSERT INTO products VALUES(DEFAULT,'Bomber Programmer IT', 1, 'L', 'BLACK',8);
-INSERT INTO products VALUES(DEFAULT,'Jacket ItGuru Junior', 1, 'S', 'PINK', 9);
-INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL', 'YELLOW', 10);
-INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL', 'BLACK', 10);
-INSERT INTO products VALUES(DEFAULT,'Jacket Lano Bo Banano', 1, 'L', 'BLACK',11);
-INSERT INTO products VALUES(DEFAULT,'Bomber Cinderella For Parties', 1, 'L', 'YELLOW', 12);
-INSERT INTO products VALUES(DEFAULT,'Bomber Dunder Mifflin Jim+Pam', 1, 'XL', 'BLUE', 13);
-INSERT INTO products VALUES(DEFAULT,'Jacket Office s3', 1, 'L', 'GREEN',14);
-INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari autumn', 1, 'XXS', 'RED', 16);
-INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari winter is coming', 1, 'XL', 'WHITE', 17);
+INSERT INTO products VALUES(DEFAULT,'Bomber For Friends весна', 3, 'L',1);
+INSERT INTO products VALUES(DEFAULT,'Bomber For Friends осень', 1, 'S', 1);
+INSERT INTO products VALUES(DEFAULT,'Bomber Licolle Prestigue', 2, 'XL', 2);
+INSERT INTO products VALUES(DEFAULT,'Jacket D&G classic black', 1, 'L',3);
+INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'XL', 3);
+INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'L', 4);
+INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXXL',5);
+INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXL',5);
+INSERT INTO products VALUES(DEFAULT,'Bomber Moscino Emo Autumn', 1, 'S',6);
+INSERT INTO products VALUES(DEFAULT,'Jacket Drupal Selestia', 1, 'XL',7);
+INSERT INTO products VALUES(DEFAULT,'Bomber Programmer IT', 1, 'L',8);
+INSERT INTO products VALUES(DEFAULT,'Jacket ItGuru Junior', 1, 'S',9);
+INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL',10);
+INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL',10);
+INSERT INTO products VALUES(DEFAULT,'Jacket Lano Bo Banano', 1, 'L',11);
+INSERT INTO products VALUES(DEFAULT,'Bomber Cinderella For Parties', 1, 'L',12);
+INSERT INTO products VALUES(DEFAULT,'Bomber Dunder Mifflin Jim+Pam', 1, 'XL',13);
+INSERT INTO products VALUES(DEFAULT,'Jacket Office s3', 1, 'L',14);
+INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari autumn', 1, 'XXS',15);
+INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari winter is coming', 1, 'XL',15);
 
 
 -- --------------------------------------------------------------
