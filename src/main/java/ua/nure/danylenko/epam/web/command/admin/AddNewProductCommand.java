@@ -44,9 +44,11 @@ public class AddNewProductCommand extends Command {
         }
 
         newItem.setBrand(request.getParameter("brand"));
+        //check later
+        //newItem.setColour(request.getParameter("colour"));
         newItem.setPrice(Double.parseDouble(request.getParameter("price")));
         newItem.setReleaseDate(LocalDate.parse(request.getParameter("releaseDate")));
-        newItem.setProductName(request.getParameter("itemName"));
+        newItem.setItemName(request.getParameter("itemName"));
 
         ArrayList<Product> products = new ArrayList<>();
         String collectionName = request.getParameter("collectionName");
@@ -64,8 +66,9 @@ public class AddNewProductCommand extends Command {
         String[] sizes = request.getParameterValues("size");
         extractBodySizes(products,sizes);
 
+        //check later
         String[] colours = request.getParameterValues("colour");
-        extractColours(products,colours);
+        extractColours(newItem,colours);
 
         String[] images = request.getParameterValues("image");
         extractImages(products,images);
@@ -79,7 +82,7 @@ public class AddNewProductCommand extends Command {
 
         for (Product product : products) {
 
-            WEB_LOG.info(product.getName() + " " + product.getAvailable() + " " + product.getColour().toString() + " "+
+            WEB_LOG.info(product.getName() + " " + product.getAvailable() +  " "+
             product.getBodySize().toString() );
         }
 
@@ -90,7 +93,7 @@ public class AddNewProductCommand extends Command {
         String forward = Path.PAGE_GOOD;
 
         int i=items.indexOf(newItem);
-        WEB_LOG.info("items last added element " + items.get(i).getProductName());
+        WEB_LOG.info("items last added element " + items.get(i).getItemName());
         WEB_LOG.info("AddNewProductCommand finished");
 
         return forward;
@@ -105,11 +108,11 @@ public class AddNewProductCommand extends Command {
 
     }
 
-    public void extractColours(ArrayList<Product> products, String[] colours){
-        for (int k=0; k<products.size(); k++){
-            products.get(k).setColour(Colour.valueOf(colours[k]));
-            WEB_LOG.info(colours[k] + " ");
-        }
+    public void extractColours(Item item, String[] colours){
+            //check later
+            item.setColour(Colour.valueOf(colours[0]));
+            WEB_LOG.info(item.getColour() + " ");
+
 
     }
 

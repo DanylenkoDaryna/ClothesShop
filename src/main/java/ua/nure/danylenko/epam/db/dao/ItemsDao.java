@@ -26,12 +26,12 @@ public class ItemsDao implements IDao {
     private static final String SQL_FIND_ITEMS_BY_CATEGORY = "SELECT * FROM items WHERE category_id=(SELECT id FROM categories WHERE name=? and catalogue_id=?);";
     private static final String SQL_FIND_PRODUCTS_BY_ITEM ="SELECT * FROM products WHERE item_id=?";
     private static final String SQL_FIND_MATERIALS_BY_ITEM_ID="SELECT * FROM materials WHERE item_id=?";
-    private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM products";
+    private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM items";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
     private static final String SQL_FIND_IMAGE_BY_PRODUCT_ID ="SELECT img_name FROM images WHERE product_id=?";
-    private static final String SQL_CREATE_NEW_ITEM ="INSERT INTO armadiodb.items (id, product_name, price, release_date, brand, category_id) values (DEFAULT, ?, ?, ?, ?, ?)";
-    private static final String SQL_CREATE_NEW_PRODUCT ="INSERT INTO armadiodb.products (id, product_name, available, product_size, colour, item_id) values (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_ITEM ="INSERT INTO armadiodb.items (id, item_name, price, release_date, brand, colour, category_id) values (DEFAULT, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_PRODUCT ="INSERT INTO armadiodb.products (id, product_name, available, product_size, item_id) values (DEFAULT, ?, ?, ?, ?)";
     private static final String SQL_ADD_NEW_PRODUCT_IMAGE = "INSERT INTO armadiodb.images (id, img_name, product_id) values (DEFAULT, ?, ?)";
     private static final String SQL_ADD_PRODUCT_MATERIAL ="INSERT INTO armadiodb.materials (id, material, percent, item_id) values (DEFAULT, ?, ?, ?)";
 
@@ -47,11 +47,12 @@ public class ItemsDao implements IDao {
         try{
             con = getConnection();
             ps = con.prepareStatement(SQL_CREATE_NEW_ITEM);
-            ps.setString(1,newItem.getProductName());
+            ps.setString(1,newItem.getItemName());
             ps.setDouble(2,newItem.getPrice());
             ps.setDate(3,Date.valueOf(newItem.getReleaseDate()));
             ps.setString(4,newItem.getBrand());
-            ps.setInt(5,newItem.getCategoryId());
+            ps.setString(5,newItem.getColour().toString());
+            ps.setInt(6,newItem.getCategoryId());
             ps.execute();
 
             stmt=con.createStatement();
@@ -94,9 +95,7 @@ public class ItemsDao implements IDao {
                 DB_LOG.info(product.getAvailable());
                 prep.setString(3, product.getBodySize().toString());
                 DB_LOG.info(product.getBodySize().toString());
-                prep.setString(4, product.getColour().toString());
-                DB_LOG.info(product.getColour().toString());
-                prep.setLong(5, itemId);
+                prep.setLong(4, itemId);
                 DB_LOG.info(itemId);
                 prep.execute();
 
@@ -212,36 +211,6 @@ public class ItemsDao implements IDao {
         return items;
     }
 
-
-
-//    public List<Product> getProductsByItemId(int itemId) throws DBException {
-//        List <Product> products = new ArrayList<>();
-//        ResultSet rs = null;
-//        Connection con = null;
-//
-//        try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_PRODUCTS_BY_ITEMID)){
-//            con = getConnection();
-//            pstmt.setLong(1, itemId);
-//            rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                Product product = extractProduct(rs);
-//                //getMaterialsByProduct(con, product);
-//                products.add(product);
-//            }
-//
-//        }catch (SQLException ex) {
-//            ConnectionFactory.rollback(con);
-//            DB_LOG.error("bbbbbbbb", ex);
-//            throw new DBException("bbbbbbbb", ex);
-//        }catch (DBException dbex) {
-//            DB_LOG.error("bbbbbbbbc", dbex);
-//            throw new DBException("bbbbbbbbc", dbex);
-//        }finally {
-//            ConnectionFactory.close(rs);
-//        }
-//        return products;
-//    }
-
     private void getProductsByItem(Connection con, List<Item> items) throws DBException {
 
         DB_LOG.info("getProductsByItem() started! ");
@@ -319,7 +288,7 @@ public class ItemsDao implements IDao {
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL_FIND_All_COLOURS);
             while (rs.next()) {
-                String colour = rs.getString(Fields.PRODUCT_COLOUR);
+                String colour = rs.getString(Fields.ITEM_COLOUR);
                 colours.add(colour);
             }
             result.put("colours",colours);
@@ -346,22 +315,15 @@ public class ItemsDao implements IDao {
         return result;
     }
 
-    public List<Product> getCategorySizes(String categoryType, int catalogId){
-        return null;
-    }
-
-    public List<Product> getCategoryBrands(String categoryType, int catalogId){
-        return null;
-    }
-
     private static Item extractItem(ResultSet rs) throws SQLException {
         Item item = new Item();
         item.setId(rs.getLong(Fields.ENTITY_ID));
-        item.setProductName(rs.getString(Fields.ITEM_NAME));
+        item.setItemName(rs.getString(Fields.ITEM_NAME));
         item.setPrice(rs.getDouble(Fields.ITEM_PRICE));
         Date d = rs.getDate(Fields.ITEM_RELEASE_DATE);
         item.setReleaseDate(d.toLocalDate());
         item.setBrand(rs.getString(Fields.ITEM_BRAND));
+        item.extractColourValue(rs.getString(Fields.ITEM_COLOUR));
         item.setCategoryId(rs.getInt(Fields.ITEM_CATEGORY_ID));
         return item;
     }
@@ -372,7 +334,6 @@ public class ItemsDao implements IDao {
         product.setName(rs.getString(Fields.PRODUCT_NAME));
         product.setAvailable(rs.getInt(Fields.PRODUCT_AVAILABLE));
         product.extractSizeValue(rs.getString(Fields.PRODUCT_SIZE));
-        product.extractColourValue(rs.getString(Fields.PRODUCT_COLOUR));
 
         return product;
     }

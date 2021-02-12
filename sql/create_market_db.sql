@@ -209,7 +209,7 @@ CREATE TABLE items(
 -- id has the INTEGER type (other name is INT), it is the primary key
 	id INTEGER NOT NULL auto_increment PRIMARY KEY,
 
-	product_name VARCHAR(30) NOT NULL,
+	item_name VARCHAR(30) NOT NULL,
 
 	price DOUBLE NOT NULL,
 
