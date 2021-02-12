@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public class Item extends Entity{
 
-    private String productName;
+    private String itemName;
 
     private double price;
 
@@ -19,6 +19,8 @@ public class Item extends Entity{
 
     private String brand;
 
+    private Colour colour;
+
     private List<Material> materials;
 
     private int categoryId;
@@ -26,26 +28,27 @@ public class Item extends Entity{
     private List<Product> container;
 
     public Item(){
-        productName = "empty";
+        itemName = "empty";
+        colour=Colour.WHITE;
         materials=new ArrayList<>();
         container = new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        return productName;
+        return itemName;
     }
 
     private void addItem(Product product){
         getContainer().add(product);
     }
 
-    public String getProductName() {
-        return productName;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setProductName(String name) {
-        this.productName = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public double getPrice() {
@@ -78,6 +81,14 @@ public class Item extends Entity{
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Colour getColour() {
+        return colour;
+    }
+
+    public void setColour(Colour colour) {
+        this.colour = colour;
     }
 
     public int getCategoryId() {
@@ -116,5 +127,10 @@ public class Item extends Entity{
         return getFormattedReleaseDate();
     }
 
-
+    public void extractColourValue(String colour){
+        if(Colour.valueOf(colour.toUpperCase())!=null){
+            Colour cl= Colour.valueOf(colour.toUpperCase());
+            this.setColour(cl);
+        }
+    }
 }

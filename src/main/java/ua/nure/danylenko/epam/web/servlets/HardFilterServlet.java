@@ -120,19 +120,16 @@ public class HardFilterServlet extends HttpServlet {
 
     private List<Item> sortByColours(String[] colours,List<Item> container){
         List<Item> itemsNew = new ArrayList<>();
-        for(Item i:container){
+        for(Item item:container){
             int hitCount=0;
-            for(Object p:i.getContainer()){
-                Product product = (Product)p;
-                for(String colour: colours){
-                    if(product.getColour().toString().equals(colour)){
-                        hitCount=hitCount+1;
-                    }
+            for(String colour: colours){
+                if(item.getColour().toString().equals(colour)){
+                    hitCount=hitCount+1;
                 }
             }
 
             if(hitCount!=0) {
-                itemsNew.add(i);
+                itemsNew.add(item);
             }
         }
         return itemsNew;

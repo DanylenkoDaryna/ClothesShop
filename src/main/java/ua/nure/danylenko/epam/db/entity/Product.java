@@ -9,13 +9,10 @@ public class Product extends Entity{
 
     private BodySize bodySize;
 
-    private Colour colour;
-
     private String image;
 
 
     public Product(){
-        colour=Colour.WHITE;
         bodySize=BodySize.S;
     }
 
@@ -48,14 +45,6 @@ public class Product extends Entity{
         this.bodySize = bodySize;
     }
 
-    public Colour getColour() {
-        return colour;
-    }
-
-    public void setColour(Colour colour) {
-        this.colour = colour;
-    }
-
     public String getImage() {
         return image;
     }
@@ -68,13 +57,6 @@ public class Product extends Entity{
         if(BodySize.valueOf(value.toUpperCase())!=null){
             BodySize bs = BodySize.valueOf(value.toUpperCase());
             this.setBodySize(bs);
-        }
-    }
-
-    public void extractColourValue(String colour){
-        if(Colour.valueOf(colour.toUpperCase())!=null){
-            Colour cl= Colour.valueOf(colour.toUpperCase());
-            this.setColour(cl);
         }
     }
 

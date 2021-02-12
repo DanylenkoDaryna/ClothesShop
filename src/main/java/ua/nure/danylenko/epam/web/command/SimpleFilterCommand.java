@@ -82,7 +82,7 @@ public class SimpleFilterCommand extends Command {
     private void filterFromAToZ(List<Item> itemstoFilter) {
         for(int i=itemstoFilter.size()-1; i>=0; i--){
             for(int j=0; j<i; j++){
-                if(itemstoFilter.get(j).getProductName().compareTo(itemstoFilter.get(j+1).getProductName())>0){
+                if(itemstoFilter.get(j).getItemName().compareTo(itemstoFilter.get(j+1).getItemName())>0){
                     Item temp = itemstoFilter.get(j);
                     itemstoFilter.set(j,itemstoFilter.get(j+1));
                     itemstoFilter.set(j+1,temp);
@@ -94,7 +94,7 @@ public class SimpleFilterCommand extends Command {
     private void filterFromZToA(List<Item> itemstoFilter) {
         for(int i=itemstoFilter.size()-1; i>=0; i--){
             for(int j=0; j<i; j++){
-                if(itemstoFilter.get(j).getProductName().compareTo(itemstoFilter.get(j+1).getProductName())<0){
+                if(itemstoFilter.get(j).getItemName().compareTo(itemstoFilter.get(j+1).getItemName())<0){
                     Item temp = itemstoFilter.get(j);
                     itemstoFilter.set(j,itemstoFilter.get(j+1));
                     itemstoFilter.set(j+1,temp);

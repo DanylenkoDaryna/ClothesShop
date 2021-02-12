@@ -23,16 +23,16 @@ public class Fields {
     public static final String CATEGORY_NAME = "name";
     public static final String CATALOGUE_ID = "catalogue_id";
 
-    public static final String ITEM_NAME = "product_name";
+    public static final String ITEM_NAME = "item_name";
     public static final String ITEM_PRICE = "price";
     public static final String ITEM_RELEASE_DATE = "release_date";
     public static final String ITEM_BRAND = "brand";
+    public static final String ITEM_COLOUR = "colour";
     public static final String ITEM_CATEGORY_ID = "category_id";
 
     public static final String PRODUCT_NAME = "product_name";
     public static final String PRODUCT_AVAILABLE = "available";
     public static final String PRODUCT_SIZE = "product_size";
-    public static final String PRODUCT_COLOUR = "colour";
     public static final String PRODUCT_ITEM_ID = "category_id";
 
     public static final String MAERIAL_NAME = "material";

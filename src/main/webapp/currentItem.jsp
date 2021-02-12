@@ -84,20 +84,21 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Choose colour</td>
+                                <td>Colour</td>
                                 <td>
-                                    <div class="dropdown show">
-                                        <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownColour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Available colours
-                                        </a>
+                                    ${sessionScope.items.get(0).getColour()}
+                                    <%--<div class="dropdown show">--%>
+                                        <%--<a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownColour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+                                            <%--Available colours--%>
+                                        <%--</a>--%>
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdownColour">
-                                            <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
-                                                <a class="dropdown-item" href="#">${ItemProduct.getColour()}</a>
-                                                <%--<t>--%>
-                                            </c:forEach>
+                                        <%--<div class="dropdown-menu" aria-labelledby="dropdownColour">--%>
+                                            <%--<c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">--%>
+                                                <%--<a class="dropdown-item" href="#">${ItemProduct.getColour()}</a>--%>
+                                                <%--&lt;%&ndash;<t>&ndash;%&gt;--%>
+                                            <%--</c:forEach>--%>
 
-                                        </div>
+                                        <%--</div>--%>
                                     </div>
                                 </td>
                             </tr>
