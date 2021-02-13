@@ -99,19 +99,6 @@ INSERT INTO user_info VALUES(DEFAULT, 'Ukraine',
 '1990-08-10', 'петров@i.ua', '+380974533337', 3);
 
 -- --------------------------------------------------------------
--- GUESTS
--- --------------------------------------------------------------
---CREATE TABLE guests(
---
---	id INTEGER NOT NULL auto_increment PRIMARY KEY,
---
---	first_name VARCHAR(20) NOT NULL,
---	last_name VARCHAR(20) NOT NULL,
---	basket_id INTEGER NOT NULL REFERENCES baskets(id)
---
---);
-
--- --------------------------------------------------------------
 -- STATUSES
 -- statuses for orders
 -- --------------------------------------------------------------
@@ -144,7 +131,7 @@ INSERT INTO catalogue VALUES(DEFAULT, 'For Women'); -- женская одежд
 INSERT INTO catalogue VALUES(DEFAULT, 'For Men'); -- мужская одежда
 INSERT INTO catalogue VALUES(DEFAULT, 'For Girls'); -- детская одежда для девочек
 INSERT INTO catalogue VALUES(DEFAULT, 'For Boys'); -- детская одежда для мальчиков
---INSERT INTO armadiodb.catalogue (id, name) values (DEFAULT,'For santa');
+-- INSERT INTO catalogue VALUES (DEFAULT,'For Baby');
 -- --------------------------------------------------------------
 -- CATEGORIES
 -- categories names of catalogue
@@ -261,25 +248,25 @@ CREATE TABLE products(
 	);
 
 -- --------------------------------------------------------------
-INSERT INTO products VALUES(DEFAULT,'Bomber For Friends весна', 3, 'L',1);
+INSERT INTO products VALUES(DEFAULT,'Bomber For Friends весна', 10, 'L',1);
 INSERT INTO products VALUES(DEFAULT,'Bomber For Friends осень', 1, 'S', 1);
 INSERT INTO products VALUES(DEFAULT,'Bomber Licolle Prestigue', 2, 'XL', 2);
 INSERT INTO products VALUES(DEFAULT,'Jacket D&G classic black', 1, 'L',3);
 INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'XL', 3);
 INSERT INTO products VALUES(DEFAULT,'Jacket D&G VIP', 1, 'L', 4);
 INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXXL',5);
-INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 1, 'XXL',5);
+INSERT INTO products VALUES(DEFAULT,'Bomber Gucci Pride', 6, 'XXL',5);
 INSERT INTO products VALUES(DEFAULT,'Bomber Moscino Emo Autumn', 1, 'S',6);
 INSERT INTO products VALUES(DEFAULT,'Jacket Drupal Selestia', 1, 'XL',7);
 INSERT INTO products VALUES(DEFAULT,'Bomber Programmer IT', 1, 'L',8);
-INSERT INTO products VALUES(DEFAULT,'Jacket ItGuru Junior', 1, 'S',9);
+INSERT INTO products VALUES(DEFAULT,'Jacket ItGuru Junior', 7, 'S',9);
 INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL',10);
 INSERT INTO products VALUES(DEFAULT,'Jacket Summertime from Lana Del Rey', 1, 'XL',10);
 INSERT INTO products VALUES(DEFAULT,'Jacket Lano Bo Banano', 1, 'L',11);
 INSERT INTO products VALUES(DEFAULT,'Bomber Cinderella For Parties', 1, 'L',12);
 INSERT INTO products VALUES(DEFAULT,'Bomber Dunder Mifflin Jim+Pam', 1, 'XL',13);
 INSERT INTO products VALUES(DEFAULT,'Jacket Office s3', 1, 'L',14);
-INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari autumn', 1, 'XXS',15);
+INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari autumn', 8, 'XXS',15);
 INSERT INTO products VALUES(DEFAULT,'Bomber Ferrari winter is coming', 1, 'XL',15);
 
 
@@ -327,6 +314,8 @@ INSERT INTO materials VALUES(DEFAULT, 'leather', 25, 11);
 INSERT INTO materials VALUES(DEFAULT, 'cotton', 25, 11);
 INSERT INTO materials VALUES(DEFAULT, 'silk',100, 12);
 INSERT INTO materials VALUES(DEFAULT, 'linen',100, 13);
+INSERT INTO materials VALUES(DEFAULT, 'linen',100, 14);
+INSERT INTO materials VALUES(DEFAULT, 'linen',100, 15);
 
 -- --------------------------------------------------------------
 -- IMAGES
@@ -362,9 +351,9 @@ INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dm_jp_bl.jpg',17);
 INSERT INTO armadiodb.images VALUES(DEFAULT, 'jacket_office_s3_grn.jpg',18);
 INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_autumn_red.jpg',19);
 INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_wic_wh.jpg',20);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_black.jpg',21);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_green.jpeg',21);
-INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_pink.jpg',21);
+-- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_black.jpg',21);
+-- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_green.jpeg',21);
+-- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_pink.jpg',21);
 
 
 -- --------------------------------------------------------------
