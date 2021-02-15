@@ -90,7 +90,7 @@ Class page corresponds to the '.page' element in included CSS document.
                         <tr>
                             <td>
                                 <a href="controller?command=ItemProducts&ItemId=${itemInWishlist.getId()}" class="dark-grey-text">
-                                        ${itemInWishlist.getProductName()}
+                                        ${itemInWishlist.getItemName()}
                                 </a>
                             </td>
                             <td>
@@ -123,7 +123,7 @@ Class page corresponds to the '.page' element in included CSS document.
                                 <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
                         <tr>
                             <td>
-                                    ${itemToOrder.getProductName()}
+                                    ${itemToOrder.getItemName()}
                             </td>
                             <td>
                                 <form action="basketCleanerServlet" method="post">
@@ -153,9 +153,12 @@ Class page corresponds to the '.page' element in included CSS document.
                                         <%--<input type="hidden" name="command" value="ordering"/>--%>
                                         <%--<input type="submit" name="orderProducts" value="To order">--%>
                                     <%--</form>--%>
-                                    <button name="ordering">
-                                        <a href="ordering.jsp">To order</a>
-                                    </button>
+                                    <c:if test="${sessionScope.itemsInBasket!=null}">
+                                        <button name="ordering">
+                                            <a href="ordering.jsp">To order</a>
+                                        </button>
+                                    </c:if>
+
                                 </td>
                             </tr>
                         </c:if>

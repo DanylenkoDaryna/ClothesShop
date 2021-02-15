@@ -14,7 +14,7 @@
 --%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%!private String pageJspName="/ordering.jsp";%>
+<%! String pageJspName="/ordering.jsp";%>
 <html lang="en">
 
 <%-- HEAD --%>
@@ -48,9 +48,10 @@
                         <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
                             <tr>
                                 <td>
-                                        ${itemToOrder.getProductName()},
+                                        ${itemToOrder.getItemName()},
                                         ${itemToOrder.getBrand()},
                                         ${itemToOrder.getPrice()}
+                                        ${itemToOrder.getColour()}
 
                                 </td>
                                 <td>
@@ -79,37 +80,90 @@
                     </tr>
                     <tr>
                         <td>
-                            <h3>METHOD OF PAYMENT</h3>
+                            <h3>CHOOSE THE METHOD OF PAYMENT</h3>
                         </td>
                         <td>
-                            <i class="fab fa-google-pay"></i>
-                            <i class="fab fa-cc-mastercard"></i>
-                            <i class="fab fa-cc-paypal"></i>
-                            <i class="fab fa-cc-visa"></i>
-                            <i class="fab fa-bitcoin"></i>
-                            <i class="fab fa-apple-pay"></i>
-                            <i class="fab fa-amazon-pay"></i>
-                            <select id="payment" name="type_of_payment">
-                                <option selected value="Mastercard" >Mastercard</option>
-                                <option value="LiqPay">LiqPay</option>
-                                <option value="Cash">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    Cash
-                                </option>
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="payment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Type of payment
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownSizes">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        Mastercard
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-cc-visa"></i>
+                                        Visa
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        LiqPay
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        Cash
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-bitcoin"></i>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-google-pay"></i>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-cc-paypal"></i>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-apple-pay"></i>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-amazon-pay"></i>
+                                    </a>
 
-                            </select>
+                                </div>
+                            </div>
+
+                            <%--<select id="payment2" name="type_of_payment">--%>
+                                <%--<option selected value="Mastercard" >Mastercard</option>--%>
+                                <%--<option value="LiqPay">LiqPay</option>--%>
+                                <%--<option value="Cash">--%>
+                                    <%--<i class="fas fa-money-bill-wave"></i>--%>
+                                    <%--Cash--%>
+                                <%--</option>--%>
+
+                            <%--</select>--%>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h3>METHOD OF DELIVERY</h3>
+                            <h3>CHOOSE THE METHOD OF DELIVERY</h3>
                         </td>
                         <td>
-                            <select id="delivery" name="type_of_delivery">
-                                <option selected value="Ukraine" >Нова Пошта</option>
-                                <option value="Great Britain">Укрпошта</option>
-                                <option value="Ukraine">Self-pickup</option>
-                            </select>
+
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="delivery" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Type of delivery
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownSizes">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        Nova Poshta
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fab fa-cc-visa"></i>
+                                        Ukrposhta
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        Self-pickup
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <%--<select id="delivery" name="type_of_delivery">--%>
+                                <%--<option selected value="Ukraine" >Nova Poshta</option>--%>
+                                <%--<option value="Great Britain">Ukrposhta</option>--%>
+                                <%--<option value="Ukraine">Self-pickup</option>--%>
+                            <%--</select>--%>
                         </td>
                     </tr>
                     <tr>
@@ -118,9 +172,8 @@
                         </td>
                         <td>
                             <h3>
+                                0
                                 <i class="fas fa-hryvnia"></i>
-                                0$
-                                <i class="fas fa-dollar-sign"></i>
                             </h3>
                         </td>
                     </tr>

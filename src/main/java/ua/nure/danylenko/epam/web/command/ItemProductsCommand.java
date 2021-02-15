@@ -30,7 +30,8 @@ public class ItemProductsCommand extends Command{
         List<Item> items =(List<Item>)session.getAttribute("items");
         for(Item it:items){
             if(it.getId()==itemId){
-                session.setAttribute("ItemsContainer2", it.getContainer());
+                session.setAttribute("productsOfItem", it.getContainer());
+                session.setAttribute("currentItem", it);
             }
         }
         return forward;
