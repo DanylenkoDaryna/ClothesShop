@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
-<%!private String pageJspName="/currentItem.jsp";%>
+<%! String pageJspName="/currentItem.jsp";%>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -25,7 +25,7 @@
         <%@include file="/css/styles.css"%>
     </style>
 
-    <title>${sessionScope.ItemsContainer2.get(0)}</title>
+    <title>${sessionScope.currentItem.getItemName()}</title>
 
 </head>
 
@@ -35,14 +35,19 @@
 <%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
 <%-- MAIN_MENU --%>
     <div class="headerwrap">
-        <section class="text-center mb-4">
-            <h1>${sessionScope.ItemsContainer2.get(0)}</h1>
+        <section class="text-center">
+            <h1>${sessionScope.currentItem.getItemName()}</h1>
+            <br>
+            <c:forEach items="${sessionScope.productsOfItem}" var="product">
+                <h2>${product.getName()}</h2>
+            </c:forEach>
+
         </section>
 
         <div class="row">
             <div class="col-lg-5 col-md-5 ">
-                <c:forEach items="${sessionScope.ItemsContainer2}" var="productCurr">
-                    <img src="img/${productCurr.getImage()}" class="img-fluid" alt="Why God? why can`t I see that?">
+                <c:forEach items="${sessionScope.productsOfItem}" var="product">
+                    <img src="img/${product.getImage()}" class="img-fluid" alt="Why God? why can`t I see that?">
                 </c:forEach>
             </div>
             <div class="col-lg-6 col-md-6 ">
@@ -56,11 +61,11 @@
                         </td>
                     </tr>
                     <tr class="active">
-                        <td>Brand</td><td>${sessionScope.items.get(0).getBrand()}</td>
+                        <td>Brand</td><td>${sessionScope.currentItem.getBrand()}</td>
                     </tr>
                     <tr class="danger">
                         <td>Price</td>
-                        <td>${sessionScope.items.get(0).getPrice()}
+                        <td>${sessionScope.currentItem.getPrice()}
                         <i class="fas fa-dollar-sign"></i>
                         </td>
                     </tr>
@@ -71,60 +76,45 @@
                                 <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownSizes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Available sizes
                                 </a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownSizes">
-                                            <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
-                                                <a class="dropdown-item" href="#">${ItemProduct.getBodySize()}</a>
-                                                <%--<t>--%>
-                                            </c:forEach>
-
-                                        </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Colour</td>
-                                <td>
-                                    ${sessionScope.items.get(0).getColour()}
-                                    <%--<div class="dropdown show">--%>
-                                        <%--<a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownColour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-                                            <%--Available colours--%>
-                                        <%--</a>--%>
-
-                                        <%--<div class="dropdown-menu" aria-labelledby="dropdownColour">--%>
-                                            <%--<c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">--%>
-                                                <%--<a class="dropdown-item" href="#">${ItemProduct.getColour()}</a>--%>
-                                                <%--&lt;%&ndash;<t>&ndash;%&gt;--%>
-                                            <%--</c:forEach>--%>
-
-                                        <%--</div>--%>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Available items</td>
-                                <td>
-                                    <c:forEach items="${sessionScope.ItemsContainer2}" var="ItemProduct">
-                                        ${ItemProduct.getAvailable()}<t>
+                                <div class="dropdown-menu" aria-labelledby="dropdownSizes">
+                                    <c:forEach items="${sessionScope.productsOfItem}" var="product">
+                                        <a class="dropdown-item" href="#">
+                                                ${product.getBodySize()}
+                                        </a>
                                     </c:forEach>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Colour</td>
+                        <td>
+                            ${sessionScope.currentItem.getColour()}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Available items</td>
+                        <td>
+                            <c:forEach items="${sessionScope.productsOfItem}" var="product">
+                                ${product.getAvailable()}<t>
 
-                            <tr>
-                                <td>
-                                    <i class="fas fa-tshirt"></i>
-                                    Materials
-                                </td>
-                                <td>
-                                    <c:forEach items="${sessionScope.items.get(0).getMaterials()}" var="material">
-                                        ${material.toString()}<t>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                            <tr class="active">
+                                </c:forEach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-tshirt"></i>
+                            Materials
+                        </td>
+                        <td>
+                            <c:forEach items="${sessionScope.currentItem.getMaterials()}" var="material">
+                                ${material.toString()}<t>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                    <tr class="active">
                                 <td>Release Date</td>
-                                <td> ${sessionScope.items.get(0).getReleaseDate()}</td>
+                                <td> ${sessionScope.currentItem.getReleaseDate()}</td>
                             </tr>
                     <tr>
                         <td>
@@ -163,7 +153,7 @@
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
                                         <form action="wishlistServlet" method="post" >
                                             <input title="page to return" hidden name="page" value="<%=pageJspName%>">
-                                            <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.items.get(0).getId()}"
+                                            <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.currentItem.getId()}"
                                                     class="btn" >
                                                 <i class="far fa-heart"></i>
                                                 To Wishlist
@@ -178,7 +168,7 @@
                                 <c:otherwise>
                                     <form action="wishlistServlet" method="post" >
                                         <input title="page to return" hidden name="page" value="<%=pageJspName%>">
-                                        <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.items.get(0).getId()}"
+                                        <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.currentItem.getId()}"
                                                 class="btn" >
                                             <i class="far fa-heart"></i>
                                             To Wishlist

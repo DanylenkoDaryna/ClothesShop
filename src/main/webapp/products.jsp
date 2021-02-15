@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-    <%!private String pageJspName="/products.jsp";%>
+    <%! String pageJspName="/products.jsp";%>
 
 <%-- HEAD --%>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
@@ -60,7 +60,7 @@
 
             <c:choose>
                     <c:when test="${sessionScope.userRole.getName() eq 'admin'}">
-                        <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class="card">
                                 <div class="view overlay">
                                     <a href="#">

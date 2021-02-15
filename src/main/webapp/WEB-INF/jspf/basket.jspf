@@ -16,7 +16,7 @@ aria-hidden="true" - указывает, что элемент и все его 
                     <i class="fas fa-shopping-cart"></i>
                     Your Basket</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&rotimes;</span>
+                    <i class="far fa-times-circle"></i>
                 </button>
             </div>
             <div class="modal-body">
@@ -28,7 +28,7 @@ aria-hidden="true" - указывает, что элемент и все его 
                     <c:if test="${not empty sessionScope.itemsInBasket}" >
                         <c:forEach items="${sessionScope.itemsInBasket}" var="itemInBasket">
                             <div class="basket_row">
-                                <div class="basket_col">${itemInBasket.getProductName()}</div>
+                                <div class="basket_col">${itemInBasket.getItemName()}</div>
                                 <div class="basket_col2">${itemInBasket.getBrand()},
                                         ${itemInBasket.getPrice()}</div>
                                 <form action="basketCleanerServlet" method="post">

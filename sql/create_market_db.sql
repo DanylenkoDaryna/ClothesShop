@@ -224,7 +224,7 @@ INSERT INTO items VALUES(DEFAULT, 'Jacket Summertime', 1030.99, current_date,'Su
 INSERT INTO items VALUES(DEFAULT, 'Jacket Lano', 1500.99, current_date,'Lano','BLACK', 1);
 INSERT INTO items VALUES(DEFAULT, 'Bomber Cinderella', 600.99, current_date,'Cinderella','YELLOW', 1);
 INSERT INTO items VALUES(DEFAULT, 'Bomber Dunder Mifflin', 400.99, current_date,'DM','GREEN', 1);
-INSERT INTO items VALUES(DEFAULT, 'Jacket Office', 880.99, current_date,'Office','RED', 1);
+INSERT INTO items VALUES(DEFAULT, 'Jacket Office', 880.99, current_date,'Office','GREEN', 1);
 INSERT INTO items VALUES(DEFAULT, 'Shirts Moscino', 40.00 , current_date,'Moscino','WHITE', 4);
 
 

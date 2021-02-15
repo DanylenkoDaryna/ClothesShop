@@ -26,7 +26,7 @@ aria-hidden="true" - указывает, что элемент и все его 
                             <div class="wishlist_row">
                                 <div class="wishlist_col1">
                                     <a href="controller?command=ItemProducts&ItemId=${itemInWishlist.getId()}" class="dark-grey-text">
-                                            ${itemInWishlist.getProductName()}
+                                            ${itemInWishlist.getItemName()}
                                     </a>
                                 </div>
                                 <div class="wishlist_col2">
