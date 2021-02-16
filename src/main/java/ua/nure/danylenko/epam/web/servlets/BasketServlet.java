@@ -28,11 +28,11 @@ public class BasketServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //String forward = Path.PAGE_PRODUCTS;
+        WEB_LOG.info("BasketServlet starts");
         HttpSession session = req.getSession();
         List<Item> container = new ArrayList<>();
         String forward = req.getParameter("page");
-
+        WEB_LOG.info("here");
         if(session.getAttribute("items")!=null){
             container = (ArrayList<Item>)session.getAttribute("items");
         }else{
@@ -41,6 +41,8 @@ public class BasketServlet extends HttpServlet {
         }
 
         long idToBasket=Long.parseLong(req.getParameter("ClothesIdToBasket"));
+        WEB_LOG.info("ClothesIdToBasket =" + idToBasket);
+
         //корзина должна сохраняться в сессии и не создаваться при каждом добавлении новая
 
             for(Item item: container){
@@ -56,6 +58,7 @@ public class BasketServlet extends HttpServlet {
                     }
                 }
             }
+        WEB_LOG.info("BasketServlet ends");
         RequestDispatcher rd = req.getRequestDispatcher(forward);
         rd.forward(req, resp);
     }

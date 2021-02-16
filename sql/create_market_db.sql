@@ -240,7 +240,7 @@ CREATE TABLE products(
 
 	available INTEGER NOT NULL,
 
-	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'),
+	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL') UNIQUE,
 
 	item_id INTEGER NOT NULL REFERENCES items(id)
 		ON DELETE CASCADE ON UPDATE RESTRICT

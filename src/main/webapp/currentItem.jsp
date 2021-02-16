@@ -70,23 +70,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Choose size</td>
-                        <td>
-                            <div class="dropdown show">
-                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownSizes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Available sizes
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownSizes">
-                                    <c:forEach items="${sessionScope.productsOfItem}" var="product">
-                                        <a class="dropdown-item" href="#">
-                                                ${product.getBodySize()}
-                                        </a>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>Colour</td>
                         <td>
                             ${sessionScope.currentItem.getColour()}
@@ -98,7 +81,7 @@
                             <c:forEach items="${sessionScope.productsOfItem}" var="product">
                                 ${product.getAvailable()}<t>
 
-                                </c:forEach>
+                            </c:forEach>
                         </td>
                     </tr>
                     <tr>
@@ -113,18 +96,43 @@
                         </td>
                     </tr>
                     <tr class="active">
-                                <td>Release Date</td>
-                                <td> ${sessionScope.currentItem.getReleaseDate()}</td>
-                            </tr>
-                    <tr>
-                        <td>
+                        <td>Release Date</td>
+                        <td> ${sessionScope.currentItem.getReleaseDate()}</td>
+                    </tr>
+                        <tr>
+                            <td>Choose size</td>
+                            <td>
+                                <%--<div class="dropdown show">--%>
+                                <%--<a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownSizes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+                                    <%--Available sizes--%>
+                                <%--</a>--%>
+                                <%--<div class="dropdown-menu" aria-labelledby="dropdownSizes">--%>
+                                    <%--<c:forEach items="${sessionScope.productsOfItem}" var="product">--%>
+                                        <%--<a class="dropdown-item" href="#">--%>
+                                                <%--${product.getBodySize()}--%>
+                                        <%--</a>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</div>--%>
+                                <%--</div>--%>
+
+                                <c:forEach items="${sessionScope.productsOfItem}" var="product">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="chosenSize"
+                                               id="${product.getId()}" value="${product.getBodySize()}" onclick="enableSubmit()">
+                                        <label class="form-check-label" for="${product.getId()}">${product.getBodySize()}</label>
+                                    </div>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                             <c:choose>
                                 <c:when test="${sessionScope.sessionUser!=null}">
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                                        <form action="basketServlet" method="post" >
+                                        <form action="basketServlet" method="post" >--%>
                                             <input title="page to return" hidden name="page" value="/currentItem.jsp">
-                                            <button type="submit" name="ClothesIdToBasket" value="${sessionScope.items.get(0).getId()}"
-                                                    class="btn" >
+                                            <button type="submit" name="ClothesIdToBasket" value="${sessionScope.currentItem.getId()}"
+                                                    id="toBasketButton1" disabled class="btn" >
                                                 <i class="fas fa-shopping-cart"></i>
                                                 To Basket
                                             </button>
@@ -138,8 +146,8 @@
                                 <c:otherwise>
                                     <form action="basketServlet" method="post" >
                                         <input title="page to return" hidden name="page" value="/currentItem.jsp">
-                                        <button type="submit" name="ClothesIdToBasket" value="${sessionScope.items.get(0).getId()}"
-                                                class="btn" >
+                                        <button type="submit" name="ClothesIdToBasket" value="${sessionScope.currentItem.getId()}"
+                                                id="toBasketButton2" disabled class="btn" >
                                             <i class="fas fa-shopping-cart"></i>
                                             To Basket
                                         </button>
@@ -183,6 +191,20 @@
             </div>
         </div>
     </div>
+
+<%--===========================================================================--%>
+<script>
+
+    function enableSubmit(){
+
+        var toBasketButton1=document.getElementById("toBasketButton1");
+        var toBasketButton2=document.getElementById("toBasketButton2");
+        toBasketButton1.disabled=false;
+        toBasketButton2.disabled=false;
+    }
+
+</script>
+<%--==========================================================================--%>
 
 <!-- footer -->
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
