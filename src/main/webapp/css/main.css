@@ -119,6 +119,12 @@ body{
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
 }
+
+.form-check-input{
+    size: 40px;
+}
+
+
 #indexContainer{
     text-align: center;
     background: url("img/bacgroundImageIndex.jpg") no-repeat center center;
