@@ -172,7 +172,7 @@
                         </td>
                         <td>
                             <h3>
-                                0
+                                45
                                 <i class="fas fa-hryvnia"></i>
                             </h3>
                         </td>

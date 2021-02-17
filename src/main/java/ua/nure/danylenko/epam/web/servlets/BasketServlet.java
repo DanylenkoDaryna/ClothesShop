@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.web.servlets;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.entity.Item;
+import ua.nure.danylenko.epam.db.entity.Product;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,7 +33,16 @@ public class BasketServlet extends HttpServlet {
         HttpSession session = req.getSession();
         List<Item> container = new ArrayList<>();
         String forward = req.getParameter("page");
-        WEB_LOG.info("here");
+        String chosenSize = req.getParameter("chosenSize");
+        WEB_LOG.info("chosenSize="+chosenSize);
+        List<Product> productsOfItem = (ArrayList<Product>)session.getAttribute("productsOfItem");
+        for(Product prod:productsOfItem){
+            if(prod.getBodySize().toString().equals(chosenSize)){
+                WEB_LOG.info("chosen product to add in basket = " + prod.getId());
+                break;
+            }
+        }
+
         if(session.getAttribute("items")!=null){
             container = (ArrayList<Item>)session.getAttribute("items");
         }else{

@@ -126,17 +126,17 @@
                         </tr>
                         <tr>
                             <td>
+                                <form action="basketServlet" method="post" >
                             <c:choose>
                                 <c:when test="${sessionScope.sessionUser!=null}">
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                                        <form action="basketServlet" method="post" >--%>
                                             <input title="page to return" hidden name="page" value="/currentItem.jsp">
                                             <button type="submit" name="ClothesIdToBasket" value="${sessionScope.currentItem.getId()}"
-                                                    id="toBasketButton1" disabled class="btn" >
+                                                    id="toBasketButton" disabled class="btn" >
                                                 <i class="fas fa-shopping-cart"></i>
                                                 To Basket
                                             </button>
-                                        </form>
+                                        <%--</form>--%>
                                     </c:if>
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
                                         You cannot order anything, cuz your account is locked.<br>
@@ -144,16 +144,16 @@
                                     </c:if>
                                 </c:when>
                                 <c:otherwise>
-                                    <form action="basketServlet" method="post" >
+                                    <%--<form action="basketServlet" method="post" >--%>
                                         <input title="page to return" hidden name="page" value="/currentItem.jsp">
                                         <button type="submit" name="ClothesIdToBasket" value="${sessionScope.currentItem.getId()}"
-                                                id="toBasketButton2" disabled class="btn" >
+                                                id="toBasketButton" disabled class="btn" >
                                             <i class="fas fa-shopping-cart"></i>
                                             To Basket
                                         </button>
-                                    </form>
                                 </c:otherwise>
                             </c:choose>
+                                </form>
                         </td>
                         <td>
                             <c:choose>
@@ -196,11 +196,8 @@
 <script>
 
     function enableSubmit(){
-
-        var toBasketButton1=document.getElementById("toBasketButton1");
-        var toBasketButton2=document.getElementById("toBasketButton2");
-        toBasketButton1.disabled=false;
-        toBasketButton2.disabled=false;
+        var toBasketButton=document.getElementById("toBasketButton");
+        toBasketButton.disabled=false;
     }
 
 </script>
