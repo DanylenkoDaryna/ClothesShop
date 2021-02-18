@@ -120,15 +120,17 @@ Class page corresponds to the '.page' element in included CSS document.
                             </td>
                         </tr>
                         <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                                <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
+                                <c:forEach items="${sessionScope.itemsInBasket}" var="elementToOrder">
                         <tr>
                             <td>
-                                    ${itemToOrder.getItemName()}
+                                <a href="controller?command=ItemProducts&ItemId=${elementToOrder.getBasketItem().getId()}">
+                                    ${elementToOrder.getBasketItem().getItemName()}
+                                </a>
                             </td>
                             <td>
                                 <form action="basketCleanerServlet" method="post">
                                     <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
-                                    <button type="submit" name="IdDeleteFromBasket" value="${itemToOrder.getId()}">
+                                    <button type="submit" name="IdDeleteFromBasket" value="${elementToOrder.getBasketProduct().getId()}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
