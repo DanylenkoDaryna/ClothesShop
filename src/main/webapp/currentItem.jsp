@@ -114,11 +114,11 @@
                                     <%--</c:forEach>--%>
                                 <%--</div>--%>
                                 <%--</div>--%>
-
+                                    <form action="basketServlet" method="post" >
                                 <c:forEach items="${sessionScope.productsOfItem}" var="product">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="chosenSize"
-                                               id="${product.getId()}" value="${product.getBodySize()}" onclick="enableSubmit()">
+                                               id="${product.getId()}" value="${product.getBodySize().toString()}" onclick="enableSubmit()">
                                         <label class="form-check-label" for="${product.getId()}">${product.getBodySize()}</label>
                                     </div>
                                 </c:forEach>
@@ -126,7 +126,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <form action="basketServlet" method="post" >
+                                <%--<form action="basketServlet" method="post" >--%>
                             <c:choose>
                                 <c:when test="${sessionScope.sessionUser!=null}">
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">

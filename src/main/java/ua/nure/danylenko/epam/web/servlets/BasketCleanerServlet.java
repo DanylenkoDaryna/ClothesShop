@@ -2,7 +2,7 @@ package ua.nure.danylenko.epam.web.servlets;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
-import ua.nure.danylenko.epam.db.entity.Item;
+import ua.nure.danylenko.epam.db.entity.BasketElement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class BasketCleanerServlet extends HttpServlet {
@@ -32,7 +33,7 @@ public class BasketCleanerServlet extends HttpServlet {
         String forward = req.getParameter("pageBack");
         HttpSession session = req.getSession();
 
-        List<Item> basket = (List<Item>)session.getAttribute("itemsInBasket");
+        List<BasketElement> basket = (LinkedList<BasketElement>)session.getAttribute("itemsInBasket");
         long idToDelete=Long.parseLong(req.getParameter("IdDeleteFromBasket"));
 
         if(basket==null){
@@ -41,9 +42,9 @@ public class BasketCleanerServlet extends HttpServlet {
         }
 
         try {
-            for(Item item: basket){
-                if(item.getId().equals(idToDelete)){
-                    basket.remove(item);
+            for(BasketElement element: basket){
+                if(element.getBasketProduct().getId().equals(idToDelete)){
+                    basket.remove(element);
                     session.setAttribute("itemsInBasket", basket);
                 }
             }

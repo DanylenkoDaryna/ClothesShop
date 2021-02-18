@@ -24,16 +24,24 @@ aria-hidden="true" - указывает, что элемент и все его 
                     <div class="basket_row">
                         <div class="basket_col">Product</div>
                         <div class="basket_col2">Description</div>
+                        <div class="basket_col3">Size</div>
                     </div>
                     <c:if test="${not empty sessionScope.itemsInBasket}" >
                         <c:forEach items="${sessionScope.itemsInBasket}" var="itemInBasket">
                             <div class="basket_row">
-                                <div class="basket_col">${itemInBasket.getItemName()}</div>
-                                <div class="basket_col2">${itemInBasket.getBrand()},
-                                        ${itemInBasket.getPrice()}</div>
+                                <div class="basket_col">
+                                    <a href="controller?command=ItemProducts&ItemId=${itemInBasket.getBasketItem().getId()}"
+                                       class="dark-grey-text">
+                                ${itemInBasket.getBasketItem().getItemName()}
+                                    </a>
+                                </div>
+                                <div class="basket_col2">${itemInBasket.getBasketItem().getBrand()},
+                                        ${itemInBasket.getBasketItem().getPrice()}</div>
+                                <div class="basket_col3">${itemInBasket.getBasketProduct().getBodySize().toString()}</div>
                                 <form action="basketCleanerServlet" method="post">
                                     <input title="page to return after delete" hidden name="pageBack" value=<%=pageJspName%>>
-                                    <button type="submit" name="IdDeleteFromBasket" value="${itemInBasket.getId()}">
+                                    <button type="submit" name="IdDeleteFromBasket"
+                                            value="${itemInBasket.getBasketProduct().getId()}">
                                         <i class="fas fa-trash-alt"></i>
                                         </button>
                                 </form>

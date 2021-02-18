@@ -45,13 +45,14 @@
                         </td>
                     </tr>
                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                        <c:forEach items="${sessionScope.itemsInBasket}" var="itemToOrder">
+                        <c:forEach items="${sessionScope.itemsInBasket}" var="elementToOrder">
                             <tr>
                                 <td>
-                                        ${itemToOrder.getItemName()},
-                                        ${itemToOrder.getBrand()},
-                                        ${itemToOrder.getPrice()}
-                                        ${itemToOrder.getColour()}
+                                        ${elementToOrder.getBasketItem().getItemName()},
+                                        ${elementToOrder.getBasketItem().getBrand()},
+                                        ${elementToOrder.getBasketItem().getPrice()}
+                                        ${elementToOrder.getBasketItem().getColour()}
+                                        ${elementToOrder.getBasketProduct().getBodySize().toString()}
 
                                 </td>
                                 <td>
