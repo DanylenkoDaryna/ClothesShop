@@ -59,11 +59,11 @@ Class page corresponds to the '.page' element in included CSS document.
 
                             <fieldset>
                                 <legend>First name</legend>
-                                <input name="first name" required/><br/>
+                                <input class="form-control" placeholder="First name" name="first name" required/><br/>
                             </fieldset><br/>
                                 <fieldset>
                                     <legend>Last name</legend>
-                                    <input name="last name" required/><br/>
+                                    <input class="form-control" placeholder="Last name" name="last name" required/><br/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <label for="country">Country</label>
@@ -79,19 +79,20 @@ Class page corresponds to the '.page' element in included CSS document.
                                 <fieldset>
                                     <!--це заглушка для логіна, бо логін має бути унікальним, а емейли унікальні-->
                                     <legend>Email</legend>
-                                    <input type="email" name="email" required/><br/>
+                                    <input class="form-control" placeholder="Email" type="email" name="email" required/><br/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Password</legend>
-                                    <input type="password" id="first_pass" name="password" maxlength="10"  minlength="7" required/>
+                                    <input class="form-control" placeholder="Password" type="password" id="first_pass"
+                                           name="password" maxlength="10"  minlength="7" required/>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Repeat Password</legend>
-                                <input type="password" id="second_pass"  name="password2" maxlength="10"  minlength="7" required>
+                                <input  class="form-control" placeholder="Password" type="password" id="second_pass"  name="password2" maxlength="10"  minlength="7" required>
                                 </fieldset><br/>
                                 <fieldset>
                                     <legend>Phone number</legend>
-                                    <input type="tel" name="telephone"required/>
+                                    <input type="tel"  class="form-control" placeholder="+38" name="telephone" required/>
                                            <!--pattern="+[0-9]{5}[0-9]{3}-[0-9]{2}-[0-9]{2}" required/>-->
                                 </fieldset><br/>
 
