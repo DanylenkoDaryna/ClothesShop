@@ -105,6 +105,7 @@
                             <h5>
                                 <strong>
                                     <a href="controller?command=ItemProducts&ItemId=${item1.getId()}" class="dark-grey-text">
+                                        <i class="fas fa-tag"></i>
                                             ${item1}
                                     </a>
                                 </strong>

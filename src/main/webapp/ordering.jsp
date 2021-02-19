@@ -27,35 +27,43 @@
 <%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
 <%-- MAIN_MENU --%>
 
-<main>
-    <div class="container-fluid">
-        <section class="text-center">
+<div class="container-fluid">
+        <%--<section class="text-center">--%>
             <section class="table mb-lg-2">
+                <form action="" method="post">
                 <table class="table" id="cabinetTable">
                     <thead>
-                    <h3>Order Description</h3>
                     </thead>
                     <tbody>
 
                     <tr class="active">
                         <td colspan="2">
-                            <h3>
+                            <h4>
                                 <i class="fas fa-shopping-bag"></i>
-                                LIST OF PRODUCTS</h3>
+                                LIST OF PRODUCTS</h4>
                         </td>
                     </tr>
                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
                         <c:forEach items="${sessionScope.itemsInBasket}" var="elementToOrder">
                             <tr>
                                 <td>
+                                    <h4>
                                         ${elementToOrder.getBasketItem().getItemName()},
                                         ${elementToOrder.getBasketItem().getBrand()},
                                         ${elementToOrder.getBasketItem().getPrice()}
                                         ${elementToOrder.getBasketItem().getColour()}
                                         ${elementToOrder.getBasketProduct().getBodySize().toString()}
-
+                                    </h4>
                                 </td>
                                 <td>
+
+                                    <div class="form-group" id="chooseNum">
+                                        <h4>
+                                            CHOOSE THE NUMBER OF PRODUCTS
+                                        </h4>
+                                        <input type="number" class="form-control-md" name="NumProds"
+                                               placeholder="1" min=1 max="${elementToOrder.getBasketProduct().getAvailable()}">
+                                    </div>
                                     +-
                                 </td>
                             </tr>
@@ -70,22 +78,15 @@
                     </c:if>
                     <tr>
                         <td>
-                            <h3>
-                                <i class="fas fa-wallet"></i>
-                                TOTAL COST
-                            </h3>
-                        </td>
-                        <td>
-                            <h3>0$</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3>CHOOSE THE METHOD OF PAYMENT</h3>
+                            <h4>
+                                <i class="fas fa-comment-dollar"></i>
+                                CHOOSE THE METHOD OF PAYMENT
+                            </h4>
                         </td>
                         <td>
                             <div class="dropdown show">
                                 <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="payment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
                                     Type of payment
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownSizes">
@@ -136,7 +137,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <h3>CHOOSE THE METHOD OF DELIVERY</h3>
+                            <h4>
+                                <i class="fas fa-truck"></i>
+                                CHOOSE THE METHOD OF DELIVERY
+                            </h4>
                         </td>
                         <td>
 
@@ -146,14 +150,15 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownSizes">
                                     <a class="dropdown-item" href="#">
-                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fas fa-truck-loading"></i>
                                         Nova Poshta
                                     </a>
                                     <a class="dropdown-item" href="#">
-                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fas fa-truck-loading"></i>
                                         Ukrposhta
                                     </a>
                                     <a class="dropdown-item" href="#">
+                                        <i class="fas fa-car-side"></i>
                                         Self-pickup
                                     </a>
                                 </div>
@@ -169,41 +174,52 @@
                     </tr>
                     <tr>
                         <td>
-                            <h3>PRICE OF DELIVERY</h3>
+                            <h4>PRICE OF DELIVERY</h4>
                         </td>
                         <td>
-                            <h3>
+                            <h4>
                                 45
                                 <i class="fas fa-hryvnia"></i>
-                            </h3>
+                            </h4>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <form action="" method="post">
-                                <input title="" hidden name="" >
-                                <button type="submit">
-                                    <i class="fas fa-angle-left"></i>
-                                    Cancel</button>
-                            </form>
+                            <h4>
+                                <i class="fas fa-wallet"></i>
+                                TOTAL COST
+                            </h4>
                         </td>
                         <td>
-                            <form action="" method="post">
+                            <h4>${(45+10)}$</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <%--<td>--%>
+                            <%--<form action="" method="post">--%>
+                                <%--<input title="" hidden name="" >--%>
+                                <%--<button type="submit">--%>
+                                    <%--<i class="fas fa-angle-left"></i>--%>
+                                    <%--Cancel</button>--%>
+                            <%--</form>--%>
+                        <%--</td>--%>
+                        <td colspan="2">
+
                                 <input title="" hidden name="" >
                                 <button type="submit">
                                     <i class="fas fa-angle-right"></i>
-                                    Continue
+                                    To order
                                     <i class="fas fa-handshake"></i>
                                 </button>
-                            </form>
+
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
+                </form>
             </section>
-        </section>
-    </div>
+
+</div>
 
 
     <%--===========================================================================
@@ -211,8 +227,6 @@
     ===========================================================================--%>
 
     <%--==========================================================================--%>
-
-</main>
 <%-- FOOTER --%>
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 <%-- FOOTER --%>
