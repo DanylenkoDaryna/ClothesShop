@@ -30,17 +30,17 @@
 <div class="container-fluid">
         <%--<section class="text-center">--%>
             <section class="table mb-lg-2">
-                <form action="" method="post">
-                <table class="table" id="cabinetTable">
-                    <thead>
-                    </thead>
-                    <tbody>
+                <form action="controller" method="post">
+                  <input type="hidden" name="command" value="ordering"/>
 
+                    <table class="table" id="cabinetTable">
+                    <tbody>
                     <tr class="active">
                         <td colspan="2">
                             <h4>
                                 <i class="fas fa-shopping-bag"></i>
-                                LIST OF PRODUCTS</h4>
+                                LIST OF PRODUCTS
+                            </h4>
                         </td>
                     </tr>
                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
@@ -64,7 +64,6 @@
                                         <input type="number" class="form-control-md" name="NumProds"
                                                placeholder="1" min=1 max="${elementToOrder.getBasketProduct().getAvailable()}">
                                     </div>
-                                    +-
                                 </td>
                             </tr>
                         </c:forEach>
@@ -84,13 +83,14 @@
                             </h4>
                         </td>
                         <td>
-                            <div class="dropdown show">
-                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="payment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="dropdown show" >
+                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button"
+                                   id="payment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                     Type of payment
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownSizes">
-                                    <a class="dropdown-item" href="#">
+                                <div class="dropdown-menu"  aria-labelledby="dropdownSizes">
+                                    <a class="dropdown-item"  href="#">
                                         <i class="fab fa-cc-mastercard"></i>
                                         Mastercard
                                     </a>
@@ -107,18 +107,23 @@
                                     </a>
                                     <a class="dropdown-item" href="#">
                                         <i class="fab fa-bitcoin"></i>
+                                        bitcoin
                                     </a>
                                     <a class="dropdown-item" href="#">
                                         <i class="fab fa-google-pay"></i>
+                                        google-pay
                                     </a>
                                     <a class="dropdown-item" href="#">
                                         <i class="fab fa-cc-paypal"></i>
+                                        paypal
                                     </a>
                                     <a class="dropdown-item" href="#">
                                         <i class="fab fa-apple-pay"></i>
+                                        apple-pay
                                     </a>
                                     <a class="dropdown-item" href="#">
                                         <i class="fab fa-amazon-pay"></i>
+                                        amazon-pay
                                     </a>
 
                                 </div>
@@ -207,7 +212,6 @@
 
                                 <input title="" hidden name="" >
                                 <button type="submit">
-                                    <i class="fas fa-angle-right"></i>
                                     To order
                                     <i class="fas fa-handshake"></i>
                                 </button>
