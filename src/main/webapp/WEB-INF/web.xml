@@ -205,7 +205,7 @@
     </init-param>
     <init-param>
       <param-name>client</param-name>
-      <param-value>getMyCabinet deleteAccount editAccount</param-value>
+      <param-value>getMyCabinet deleteAccount editAccount ordering</param-value>
     </init-param>
     <init-param>
       <param-name>common</param-name>
