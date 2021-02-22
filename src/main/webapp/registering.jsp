@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!doctype html>
-<%!private String pageJspName="/registering.jsp";%>
+<%! String pageJspName="/registering.jsp";%>
 <html lang="en">
 
 <%-- HEAD --%>

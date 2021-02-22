@@ -14,7 +14,7 @@
 --%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%! String pageJspName="/registering.jsp";%>
+<%! String pageJspName="/registeredOrder.jsp";%>
 <html lang="en">
 
 <%-- HEAD --%>

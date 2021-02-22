@@ -102,18 +102,6 @@
                         <tr>
                             <td>Choose size</td>
                             <td>
-                                <%--<div class="dropdown show">--%>
-                                <%--<a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="dropdownSizes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-                                    <%--Available sizes--%>
-                                <%--</a>--%>
-                                <%--<div class="dropdown-menu" aria-labelledby="dropdownSizes">--%>
-                                    <%--<c:forEach items="${sessionScope.productsOfItem}" var="product">--%>
-                                        <%--<a class="dropdown-item" href="#">--%>
-                                                <%--${product.getBodySize()}--%>
-                                        <%--</a>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</div>--%>
-                                <%--</div>--%>
                                     <form action="basketServlet" method="post" >
                                 <c:forEach items="${sessionScope.productsOfItem}" var="product">
                                     <div class="form-check form-check-inline">

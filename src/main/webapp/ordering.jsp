@@ -15,6 +15,7 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%! String pageJspName="/ordering.jsp";%>
+<%! int averageCost=45;%>
 <html lang="en">
 
 <%-- HEAD --%>
@@ -83,61 +84,70 @@
                             </h4>
                         </td>
                         <td>
-                            <div class="dropdown show" >
-                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button"
-                                   id="payment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                    Type of payment
-                                </a>
-                                <div class="dropdown-menu"  aria-labelledby="dropdownSizes">
-                                    <a class="dropdown-item"  href="#">
-                                        <i class="fab fa-cc-mastercard"></i>
-                                        Mastercard
-                                    </a>
-                                    <a class="dropdown-item" href="#">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="chosenPayment"
+                                           id="Mastercard" value="Mastercard">
+                                <label class="form-check-label" for="Mastercard">
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    Mastercard
+                                </label>
+                            </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chosenPayment"
+                                           id="Visa" value="Mastercard" >
+                                    <label class="form-check-label" for="Visa">
                                         <i class="fab fa-cc-visa"></i>
                                         Visa
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        LiqPay
-                                    </a>
-                                    <a class="dropdown-item" href="#">
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chosenPayment"
+                                       id="Cash" value="Mastercard" >
+                                    <label class="form-check-label" for="Cash">
                                         <i class="fas fa-dollar-sign"></i>
                                         Cash
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fab fa-bitcoin"></i>
-                                        bitcoin
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fab fa-google-pay"></i>
-                                        google-pay
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fab fa-cc-paypal"></i>
-                                        paypal
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fab fa-apple-pay"></i>
-                                        apple-pay
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fab fa-amazon-pay"></i>
-                                        amazon-pay
-                                    </a>
-
+                                    </label>
                                 </div>
-                            </div>
-
-                            <%--<select id="payment2" name="type_of_payment">--%>
-                                <%--<option selected value="Mastercard" >Mastercard</option>--%>
-                                <%--<option value="LiqPay">LiqPay</option>--%>
-                                <%--<option value="Cash">--%>
-                                    <%--<i class="fas fa-money-bill-wave"></i>--%>
-                                    <%--Cash--%>
-                                <%--</option>--%>
-
-                            <%--</select>--%>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chosenPayment"
+                                           id="Bitcoin" value="Bitcoin" >
+                                    <label class="form-check-label" for="Bitcoin">
+                                        <i class="fab fa-bitcoin"></i>
+                                        Bitcoin
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chosenPayment"
+                                           id="Google-pay" value="Google-pay" >
+                                    <label class="form-check-label" for="Google-pay">
+                                        <i class="fab fa-google-pay"></i>
+                                        Google-pay
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chosenPayment"
+                                           id="Paypal" value="Paypal" >
+                                    <label class="form-check-label" for="Paypal">
+                                        <i class="fab fa-cc-paypal"></i>
+                                        Paypal
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chosenPayment"
+                                           id="Apple-pay" value="Apple-pay" >
+                                    <label class="form-check-label" for="Apple-pay">
+                                        <i class="fab fa-apple-pay"></i>
+                                        Apple-pay
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chosenPayment"
+                                           id="Amazon-pay" value="Amazon-pay" >
+                                    <label class="form-check-label" for="Amazon-pay">
+                                        <i class="fab fa-amazon-pay"></i>
+                                        Amazon-pay
+                                    </label>
+                                </div>
                         </td>
                     </tr>
                     <tr>
@@ -148,33 +158,30 @@
                             </h4>
                         </td>
                         <td>
-
-                            <div class="dropdown show">
-                                <a class="btn btn-secondary dropdown-toggle btn-info" href="#" role="button" id="delivery" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Type of delivery
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownSizes">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-truck-loading"></i>
-                                        Nova Poshta
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-truck-loading"></i>
-                                        Ukrposhta
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-car-side"></i>
-                                        Self-pickup
-                                    </a>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="chosenDelivery"
+                                       id="Nova Poshta" value="Nova Poshta" onclick="enableSubmit()">
+                                <label class="form-check-label" for="Nova Poshta">
+                                    <i class="fas fa-truck-loading"></i>
+                                    Nova Poshta
+                                </label>
                             </div>
-
-
-                            <%--<select id="delivery" name="type_of_delivery">--%>
-                                <%--<option selected value="Ukraine" >Nova Poshta</option>--%>
-                                <%--<option value="Great Britain">Ukrposhta</option>--%>
-                                <%--<option value="Ukraine">Self-pickup</option>--%>
-                            <%--</select>--%>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="chosenDelivery"
+                                       id="Ukrposhta" value="Ukrposhta" onclick="enableSubmit()">
+                                <label class="form-check-label" for="Ukrposhta">
+                                    <i class="fas fa-truck-loading"></i>
+                                    Ukrposhta
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="chosenDelivery"
+                                       id="Self-pickup" value="Self-pickup" onclick="enableSubmit()">
+                                <label class="form-check-label" for="Self-pickup">
+                                    <i class="fas fa-car-side"></i>
+                                    Self-pickup
+                                </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -196,7 +203,12 @@
                             </h4>
                         </td>
                         <td>
-                            <h4>${(45+10)}$</h4>
+                            <c:forEach items="${sessionScope.itemsInBasket}" var="elToOrder">
+                                <%averageCost=averageCost+ ${elToOrder.getBasketItem().getPrice()";%>
+
+                            <c:/>
+
+                            <h4>${averageCost}$</h4>
                         </td>
                     </tr>
                     <tr>
@@ -211,7 +223,7 @@
                         <td colspan="2">
 
                                 <input title="" hidden name="" >
-                                <button type="submit">
+                                <button type="submit" disabled id="orderingButton">
                                     To order
                                     <i class="fas fa-handshake"></i>
                                 </button>
@@ -226,11 +238,21 @@
 </div>
 
 
-    <%--===========================================================================
+<%--===========================================================================
      This is the SCRIPT, containing the main functions of the page.
-    ===========================================================================--%>
+===========================================================================--%>
+<script>
 
-    <%--==========================================================================--%>
+    function enableSubmit(){
+        var orderingButton=document.getElementById("orderingButton");
+        orderingButton.disabled=false;
+    }
+
+</script>
+<%--==========================================================================--%>
+
+<%--==========================================================================--%>
+
 <%-- FOOTER --%>
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 <%-- FOOTER --%>

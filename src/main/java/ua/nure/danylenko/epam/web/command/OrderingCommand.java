@@ -25,8 +25,8 @@ public class OrderingCommand extends Command {
         WEB_LOG.info("OrderingCommand starts");
         String forward = Path.PAGE_PERSONAL_CABINET;
         HttpSession session = request.getSession();
-        String paymentType = request.getParameter("paymentType");
-        String deliveryType = request.getParameter("deliveryType");
+        String paymentType = request.getParameter("chosenPayment");
+        String deliveryType = request.getParameter("chosenDelivery");
         DB_LOG.info( "paymentType ="+paymentType+" "+ "deliveryType=" + deliveryType);
         List<BasketElement> orderingElements = (LinkedList<BasketElement>)session.getAttribute("itemsInBasket");
         if (orderingElements.isEmpty()){
