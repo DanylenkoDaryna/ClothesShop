@@ -2,6 +2,7 @@ package ua.nure.danylenko.epam.web.servlets;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
+import ua.nure.danylenko.epam.db.entity.Basket;
 import ua.nure.danylenko.epam.db.entity.BasketElement;
 
 import javax.servlet.RequestDispatcher;
@@ -33,7 +34,8 @@ public class BasketCleanerServlet extends HttpServlet {
         String forward = req.getParameter("pageBack");
         HttpSession session = req.getSession();
 
-        List<BasketElement> basket = (LinkedList<BasketElement>)session.getAttribute("itemsInBasket");
+        Basket basket = (Basket)session.getAttribute("itemsInBasket");
+        List<BasketElement> itemsInBasket = (LinkedList<BasketElement>) basket.getBasketElements();
         long idToDelete=Long.parseLong(req.getParameter("IdDeleteFromBasket"));
 
         if(basket==null){
@@ -42,9 +44,9 @@ public class BasketCleanerServlet extends HttpServlet {
         }
 
         try {
-            for(BasketElement element: basket){
+            for(BasketElement element: itemsInBasket){
                 if(element.getBasketProduct().getId().equals(idToDelete)){
-                    basket.remove(element);
+                    itemsInBasket.remove(element);
                     session.setAttribute("itemsInBasket", basket);
                 }
             }

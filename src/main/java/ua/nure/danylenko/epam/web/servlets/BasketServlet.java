@@ -2,6 +2,7 @@ package ua.nure.danylenko.epam.web.servlets;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
+import ua.nure.danylenko.epam.db.entity.Basket;
 import ua.nure.danylenko.epam.db.entity.BasketElement;
 import ua.nure.danylenko.epam.db.entity.Item;
 import ua.nure.danylenko.epam.db.entity.Product;
@@ -64,15 +65,17 @@ public class BasketServlet extends HttpServlet {
                 if(item.getId().equals(idToBasket)){
                     element.setBasketItem(item);
                     if (session.getAttribute("itemsInBasket")==null) {
-                        List<BasketElement> basket = new LinkedList<>();
-                        basket.add(element);
+                        Basket basket = new Basket();
+                        basket.getBasketElements().add(element);
                         session.setAttribute("itemsInBasket", basket);
+                        session.setAttribute("totalAmount", basket.sumCosts());
 
 //                        List<Item> basket = new ArrayList<>();
 //                        basket.add(item);
 //                        session.setAttribute("itemsInBasket", basket);
                     } else {
-                        List<BasketElement> itemsInBasket = (LinkedList<BasketElement>)session.getAttribute("itemsInBasket");
+                        Basket basket = (Basket) session.getAttribute("itemsInBasket");
+                        LinkedList<BasketElement> itemsInBasket = (LinkedList<BasketElement>) basket.getBasketElements();
                         itemsInBasket.add(element);
                         session.setAttribute("itemsInBasket", itemsInBasket);
 
