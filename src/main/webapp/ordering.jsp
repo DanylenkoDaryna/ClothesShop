@@ -45,7 +45,7 @@
                         </td>
                     </tr>
                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                        <c:forEach items="${sessionScope.itemsInBasket}" var="elementToOrder">
+                        <c:forEach items="${sessionScope.itemsInBasket.getBasketElements()}" var="elementToOrder">
                             <tr>
                                 <td>
                                     <h4>
@@ -203,12 +203,8 @@
                             </h4>
                         </td>
                         <td>
-                            <c:forEach items="${sessionScope.itemsInBasket}" var="elToOrder">
-                                <%averageCost=averageCost+ ${elToOrder.getBasketItem().getPrice()";%>
 
-                            <c:/>
-
-                            <h4>${averageCost}$</h4>
+                            <h4>${sessionScope.itemsInBasket.sumCosts()}$</h4>
                         </td>
                     </tr>
                     <tr>
