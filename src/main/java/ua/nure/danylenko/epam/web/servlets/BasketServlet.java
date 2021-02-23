@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class BasketServlet extends HttpServlet {
@@ -75,9 +74,8 @@ public class BasketServlet extends HttpServlet {
 //                        session.setAttribute("itemsInBasket", basket);
                     } else {
                         Basket basket = (Basket) session.getAttribute("itemsInBasket");
-                        LinkedList<BasketElement> itemsInBasket = (LinkedList<BasketElement>) basket.getBasketElements();
-                        itemsInBasket.add(element);
-                        session.setAttribute("itemsInBasket", itemsInBasket);
+                        basket.getBasketElements().add(element);
+                        session.setAttribute("itemsInBasket", basket);
 
 //                        List<Item> itemsInBasket = (List<Item>)session.getAttribute("itemsInBasket");
 //                        itemsInBasket.add(item);

@@ -117,17 +117,17 @@
 
                     <c:otherwise>
                         <li class="nav-item active">
-                            <c:if test="${empty sessionScope.itemsInBasket}">
+                            <c:if test="${empty sessionScope.itemsInBasket.getBasketElements()}">
                                 <a class="nav-link disabled" >
                                     <i class="fas fa-shopping-cart"></i>
                                     Basket(0)
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
-                            <c:if test="${not empty sessionScope.itemsInBasket}">
+                            <c:if test="${not empty sessionScope.itemsInBasket.getBasketElements()}">
                                 <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
                                     <i class="fas fa-shopping-cart"></i>
-                                    Basket(${sessionScope.itemsInBasket.size()})
+                                    Basket(${sessionScope.itemsInBasket.getBasketElements().size()})
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
