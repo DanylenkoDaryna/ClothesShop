@@ -26,8 +26,8 @@ aria-hidden="true" - указывает, что элемент и все его 
                         <div class="basket_col2">Description</div>
                         <div class="basket_col3">Size</div>
                     </div>
-                    <c:if test="${not empty sessionScope.itemsInBasket}" >
-                        <c:forEach items="${sessionScope.itemsInBasket.getBasketElements()}" var="itemInBasket">
+                    <c:if test="${not empty sessionScope.Basket.getBasketElements()}" >
+                        <c:forEach items="${sessionScope.Basket.getBasketElements()}" var="itemInBasket">
                             <div class="basket_row">
                                 <div class="basket_col">
                                     <a href="controller?command=ItemProducts&ItemId=${itemInBasket.getBasketItem().getId()}"

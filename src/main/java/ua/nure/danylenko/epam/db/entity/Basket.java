@@ -9,26 +9,25 @@ public class Basket extends Entity {
     private List<BasketElement> basketElements;
 
     public Basket(){
-
-        totalAmount = 45L;
         basketElements=new LinkedList<>();
     }
 
     public double sumCosts(){
 
+        double result=45.0;
         for(BasketElement be:basketElements){
-            totalAmount+=be.getBasketItem().getPrice();
+            result=result+be.getBasketItem().getPrice();
         }
-
-        return totalAmount;
+        return Math.round(result);
     }
+    
 
     public double getTotalAmount() {
         return totalAmount;
     }
 
     public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+        totalAmount = totalAmount;
     }
 
     public List<BasketElement> getBasketElements() {

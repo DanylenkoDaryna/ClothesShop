@@ -127,6 +127,19 @@ body{
 
 }
 
+.fab{
+
+    font-size: 42px;
+}
+.fas{
+
+    font-size: 42px;
+}
+
+.form-check{
+    text-align:left;
+}
+
 
 #indexContainer{
     text-align: center;
