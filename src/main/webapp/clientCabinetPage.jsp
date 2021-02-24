@@ -120,7 +120,7 @@ Class page corresponds to the '.page' element in included CSS document.
                             </td>
                         </tr>
                         <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                                <c:forEach items="${sessionScope.itemsInBasket}" var="elementToOrder">
+                                <c:forEach items="${sessionScope.Basket.getBasketElements()}" var="elementToOrder">
                         <tr>
                             <td>
                                 <a href="controller?command=ItemProducts&ItemId=${elementToOrder.getBasketItem().getId()}">
@@ -155,7 +155,7 @@ Class page corresponds to the '.page' element in included CSS document.
                                         <%--<input type="hidden" name="command" value="ordering"/>--%>
                                         <%--<input type="submit" name="orderProducts" value="To order">--%>
                                     <%--</form>--%>
-                                    <c:if test="${sessionScope.itemsInBasket!=null}">
+                                    <c:if test="${sessionScope.Basket.getBasketElements()!=null}">
                                         <button name="ordering">
                                             <a href="ordering.jsp">To order</a>
                                         </button>

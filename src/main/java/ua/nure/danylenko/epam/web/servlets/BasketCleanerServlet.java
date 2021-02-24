@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 public class BasketCleanerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -29,25 +27,24 @@ public class BasketCleanerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //String forward = Path.PAGE_PRODUCTS;
-        //String forward = req.getParameter("pageBack");
+
         String forward = req.getParameter("pageBack");
         HttpSession session = req.getSession();
 
-        Basket basket = (Basket)session.getAttribute("itemsInBasket");
-        List<BasketElement> itemsInBasket = (LinkedList<BasketElement>) basket.getBasketElements();
+        Basket basket = (Basket)session.getAttribute("Basket");
         long idToDelete=Long.parseLong(req.getParameter("IdDeleteFromBasket"));
 
-        if(basket==null){
+        if(basket.getBasketElements().isEmpty()){
             forward = Path.PAGE_ERROR_PAGE;
-            WEB_LOG.error("ERROR: BasketCleanerServlet doPost() -> itemsInBasket container is empty");
+            WEB_LOG.error("ERROR: BasketCleanerServlet doPost() -> Basket container is empty");
         }
 
         try {
-            for(BasketElement element: itemsInBasket){
+            for(BasketElement element: basket.getBasketElements()){
                 if(element.getBasketProduct().getId().equals(idToDelete)){
-                    itemsInBasket.remove(element);
-                    session.setAttribute("itemsInBasket", basket);
+                    basket.getBasketElements().remove(element);
+                    session.setAttribute("totalAmount", basket.sumCosts());
+                    session.setAttribute("Basket", basket);
                 }
             }
         } catch (Exception e) {

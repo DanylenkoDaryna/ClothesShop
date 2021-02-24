@@ -63,19 +63,20 @@ public class BasketServlet extends HttpServlet {
             for(Item item: container){
                 if(item.getId().equals(idToBasket)){
                     element.setBasketItem(item);
-                    if (session.getAttribute("itemsInBasket")==null) {
+                    if (session.getAttribute("Basket")==null) {
                         Basket basket = new Basket();
                         basket.getBasketElements().add(element);
-                        session.setAttribute("itemsInBasket", basket);
                         session.setAttribute("totalAmount", basket.sumCosts());
+                        session.setAttribute("Basket", basket);
 
 //                        List<Item> basket = new ArrayList<>();
 //                        basket.add(item);
 //                        session.setAttribute("itemsInBasket", basket);
                     } else {
-                        Basket basket = (Basket) session.getAttribute("itemsInBasket");
+                        Basket basket = (Basket) session.getAttribute("Basket");
                         basket.getBasketElements().add(element);
-                        session.setAttribute("itemsInBasket", basket);
+                        session.setAttribute("totalAmount", basket.sumCosts());
+                        session.setAttribute("Basket", basket);
 
 //                        List<Item> itemsInBasket = (List<Item>)session.getAttribute("itemsInBasket");
 //                        itemsInBasket.add(item);

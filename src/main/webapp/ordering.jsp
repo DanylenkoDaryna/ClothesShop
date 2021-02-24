@@ -45,7 +45,7 @@
                         </td>
                     </tr>
                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                        <c:forEach items="${sessionScope.itemsInBasket.getBasketElements()}" var="elementToOrder">
+                        <c:forEach items="${sessionScope.Basket.getBasketElements()}" var="elementToOrder">
                             <tr>
                                 <td>
                                     <h4>
@@ -204,18 +204,13 @@
                         </td>
                         <td>
 
-                            <h4>${sessionScope.itemsInBasket.sumCosts()}$</h4>
+                            <h4>
+                                ${sessionScope.totalAmount}
+                                <i class="fas fa-hryvnia"></i>
+                            </h4>
                         </td>
                     </tr>
                     <tr>
-                        <%--<td>--%>
-                            <%--<form action="" method="post">--%>
-                                <%--<input title="" hidden name="" >--%>
-                                <%--<button type="submit">--%>
-                                    <%--<i class="fas fa-angle-left"></i>--%>
-                                    <%--Cancel</button>--%>
-                            <%--</form>--%>
-                        <%--</td>--%>
                         <td colspan="2">
 
                                 <input title="" hidden name="" >
