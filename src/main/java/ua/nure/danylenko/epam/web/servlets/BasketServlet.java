@@ -58,7 +58,7 @@ public class BasketServlet extends HttpServlet {
         long idToBasket=Long.parseLong(req.getParameter("ClothesIdToBasket"));
         WEB_LOG.info("ClothesIdToBasket =" + idToBasket);
 
-        //корзина должна сохраняться в сессии и не создаваться при каждом добавлении новая
+        //корзина має зберігатися в сесії а не створювати себе заново після кожного додавання продукту
 
             for(Item item: container){
                 if(item.getId().equals(idToBasket)){
@@ -69,18 +69,12 @@ public class BasketServlet extends HttpServlet {
                         session.setAttribute("totalAmount", basket.sumCosts());
                         session.setAttribute("Basket", basket);
 
-//                        List<Item> basket = new ArrayList<>();
-//                        basket.add(item);
-//                        session.setAttribute("itemsInBasket", basket);
                     } else {
                         Basket basket = (Basket) session.getAttribute("Basket");
                         basket.getBasketElements().add(element);
                         session.setAttribute("totalAmount", basket.sumCosts());
                         session.setAttribute("Basket", basket);
 
-//                        List<Item> itemsInBasket = (List<Item>)session.getAttribute("itemsInBasket");
-//                        itemsInBasket.add(item);
-//                        session.setAttribute("itemsInBasket", itemsInBasket);
                     }
                 }
             }

@@ -20,7 +20,7 @@ public class Basket extends Entity {
         }
         return Math.round(result);
     }
-    
+
 
     public double getTotalAmount() {
         return totalAmount;

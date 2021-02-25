@@ -31,8 +31,11 @@
 <div class="container-fluid">
         <%--<section class="text-center">--%>
             <section class="table mb-lg-2">
+
+
                 <form action="controller" method="post">
-                  <input type="hidden" name="command" value="ordering"/>
+                    <input type="hidden" name="command" value="ordering"/>
+
 
                     <table class="table" id="cabinetTable">
                     <tbody>
@@ -213,7 +216,7 @@
                     <tr>
                         <td colspan="2">
 
-                                <input title="" hidden name="" >
+                                <%--<input title="" hidden name="" >--%>
                                 <button type="submit" disabled id="orderingButton">
                                     To order
                                     <i class="fas fa-handshake"></i>
