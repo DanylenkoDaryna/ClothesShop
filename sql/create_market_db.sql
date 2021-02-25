@@ -115,7 +115,6 @@ CREATE TABLE statuses(
 INSERT INTO statuses VALUES(0, 'registered');
 INSERT INTO statuses VALUES(1, 'paid');
 INSERT INTO statuses VALUES(2, 'canceled');
-INSERT INTO statuses VALUES(3, 'nonregistered');
 
 
 -- --------------------------------------------------------------
@@ -355,6 +354,37 @@ INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_wic_wh.jpg',20);
 -- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_green.jpeg',21);
 -- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_pink.jpg',21);
 
+
+-- --------------------------------------------------------------
+
+
+
+
+
+-- --------------------------------------------------------------
+-- PRODUCTS
+-- --------------------------------------------------------------
+CREATE TABLE orders(
+
+-- id has the INTEGER type (other name is INT), it is the primary key
+	id INTEGER NOT NULL auto_increment PRIMARY KEY,
+
+	order_status ENUM('REGISTERED', 'PAID', 'CANCELED') UNIQUE,
+
+	paymentType VARCHAR(15) NOT NULL,
+
+	deliveryType VARCHAR(15) NOT NULL,
+
+	product_name VARCHAR(20) NOT NULL,
+
+	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL') UNIQUE,
+
+	totalAmount DOUBLE NOT NULL,
+
+	user_id INTEGER NOT NULL REFERENCES users(id)
+		ON DELETE CASCADE ON UPDATE RESTRICT
+
+	);
 
 -- --------------------------------------------------------------
 
