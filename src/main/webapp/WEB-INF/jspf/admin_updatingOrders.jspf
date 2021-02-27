@@ -1,0 +1,52 @@
+<div class="tab-pane fade" id="categoriesUpdate">
+    <table class="admin_data_table">
+        <tbody >
+        <tr class="active">
+            <td>CATALOGUE ITEMS</td>
+            <td>DELETE/EDIT/ADD NEW</td>
+        </tr>
+
+        <c:forEach items="${catalogue.container.keySet()}" var="entry1">
+            <tr>
+                <td>${entry1}</td>
+
+                <td>
+                    <c:forEach items="${catalogue.container.get(entry1)}" var="linker1">
+
+                        ${linker1.getName()}
+
+                        <form method="post" id="delete_category_form" action="controller">
+                            <input type="hidden" name="command" value="updateCatalogue"/>
+                            <input type="hidden" name="updateCatalogueType" value="deleteCategory"/>
+                            <input type="hidden" name="CatalogueToDeleteFrom" value="${entry1}"/>
+                            <input type="hidden" name="itemToDelete" value="${linker1.getName()}"/>
+                            <input type="submit" value="Delete">
+                        </form>
+
+                        <form method="post" id="edit_category_form" action="controller">
+                            <input type="hidden" name="command" value="updateCatalogue"/>
+                            <input type="hidden" name="updateCatalogueType" value="editCategory"/>
+                            <input type="hidden" name="CatalogueToEditFrom" value="${entry1}"/>
+                            <input type="hidden" name="itemToEdit" value="${linker1.getName()}"/>
+                            <input name="editedCategory"/>
+                            <input type="submit" value="Save">
+                        </form>
+
+                    </c:forEach>
+                    <form method="post" id="add_category_form" action="controller">
+                        <input type="hidden" name="command" value="updateCatalogue"/>
+                        <input type="hidden" name="updateCatalogueType" value="addCategory"/>
+                        <input type="hidden" name="CatalogueToAddTo" value="${entry1}"/>
+                        <label>New Category
+                            <input name="categoryName" maxlength="30" required>
+                        </label>
+                        <input type="submit" value="Add">
+                    </form>
+                </td>
+
+
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
