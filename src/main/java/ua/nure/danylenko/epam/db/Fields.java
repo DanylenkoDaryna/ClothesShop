@@ -16,9 +16,12 @@ public class Fields {
     public static final String USER_INFO_EMAIL="email";
 
 
-    public static final String ORDER_BILL = "bill";
-    public static final String ORDER_USER_ID = "user_id";
-    public static final String ORDER_STATUS_ID= "status_id";
+    public static final String ORDER_NUMBER = "id";
+    public static final String ORDER_STATUS = "order_status";
+    public static final String ORDER_PAYMENT_TYPE= "payment_type";
+    public static final String ORDER_DELIVERY_TYPE= "delivery_type";
+    public static final String ORDER_TOTAL_AMOUNT= "total_amount";
+    public static final String ORDER_USER_ID= "user_id";
 
     public static final String CATEGORY_NAME = "name";
     public static final String CATALOGUE_ID = "catalogue_id";

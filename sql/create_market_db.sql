@@ -362,27 +362,23 @@ INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_wic_wh.jpg',20);
 
 
 -- --------------------------------------------------------------
--- PRODUCTS
+-- ORDERS
 -- --------------------------------------------------------------
 CREATE TABLE orders(
 
 -- id has the INTEGER type (other name is INT), it is the primary key
 	id INTEGER NOT NULL auto_increment PRIMARY KEY,
 
-	order_status ENUM('REGISTERED', 'PAID', 'CANCELED') UNIQUE,
+    order_status ENUM('REGISTERED', 'PAID', 'CANCELED') UNIQUE,
 
-	paymentType VARCHAR(15) NOT NULL,
+    payment_type VARCHAR(15) NOT NULL,
 
-	deliveryType VARCHAR(15) NOT NULL,
+    delivery_type VARCHAR(15) NOT NULL,
 
-	product_name VARCHAR(20) NOT NULL,
+    total_amount DOUBLE NOT NULL,
 
-	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL') UNIQUE,
-
-	totalAmount DOUBLE NOT NULL,
-
-	user_id INTEGER NOT NULL REFERENCES users(id)
-		ON DELETE CASCADE ON UPDATE RESTRICT
+    user_id INTEGER NOT NULL REFERENCES users(id)
+    ON DELETE CASCADE ON UPDATE RESTRICT
 
 	);
 
