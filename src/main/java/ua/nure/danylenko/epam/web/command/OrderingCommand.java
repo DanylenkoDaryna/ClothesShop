@@ -44,21 +44,20 @@ public class OrderingCommand extends Command {
         clientOrder.setDeliveryType(deliveryType);
         clientOrder.setTotalAmount(basket.sumCosts());
         clientOrder.setUserId(client.getId());
-        //clientOrder.setProductId(basket.getBasketElements());
 
         OrderService orderService = new OrderService();
-        orderService.getDao().create(clientOrder);
+        clientOrder = orderService.getDao().createOrder(clientOrder);
 
 
-        if (session.getAttribute("OrdersList")==null) {
+        if (session.getAttribute("orderList")==null) {
             List<Order> ordersList = new LinkedList<>();
             ordersList.add(clientOrder);
-            session.setAttribute("OrdersList", ordersList);
+            session.setAttribute("orderList", ordersList);
 
         } else {
-            List<Order>  ordersList = (List<Order> ) session.getAttribute("OrdersList");
-            ordersList.add(clientOrder);
-            session.setAttribute("OrdersList", ordersList);
+            List<Order>  orderList = (List<Order>)session.getAttribute("orderList");
+            orderList.add(clientOrder);
+            session.setAttribute("orderList", orderList);
 
         }
 

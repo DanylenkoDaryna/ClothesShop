@@ -8,13 +8,14 @@ public class Order {
     private String deliveryType;
     private double totalAmount;
     private long userId;
-    private long productId;
-    private String productSize;
-    private int productNum;
 
     public Order(){
         orderStatus=OrderStatus.CANCELED;
-//        purchases = new LinkedList<>();
+    }
+
+    public void extractOrderStatus(String value){
+        OrderStatus os = OrderStatus.valueOf(value.toUpperCase());
+        this.setOrderStatus(os);
     }
 
     public long getOrderNumber() {
@@ -65,27 +66,5 @@ public class Order {
         this.userId = userId;
     }
 
-    public long getProductId() {
-        return productId;
-    }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductSize() {
-        return productSize;
-    }
-
-    public void setProductSize(String productSize) {
-        this.productSize = productSize;
-    }
-
-    public int getProductNum() {
-        return productNum;
-    }
-
-    public void setProductNum(int productNum) {
-        this.productNum = productNum;
-    }
 }

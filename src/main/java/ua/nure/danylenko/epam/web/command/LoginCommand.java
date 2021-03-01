@@ -3,7 +3,9 @@ package ua.nure.danylenko.epam.web.command;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.Role;
+import ua.nure.danylenko.epam.db.dao.OrderDao;
 import ua.nure.danylenko.epam.db.dao.UserDao;
+import ua.nure.danylenko.epam.db.entity.Order;
 import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.db.service.UserService;
 import ua.nure.danylenko.epam.exception.AppException;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class LoginCommand extends Command {
 
@@ -29,8 +32,6 @@ public class LoginCommand extends Command {
         String forward = Path.PAGE_GOOD;
         HttpSession session = request.getSession();
 
-        // obtain login and password from a request
-
         String login = request.getParameter("login");
         DB_LOG.info("Request parameter: login --> " + login);
 
@@ -39,15 +40,10 @@ public class LoginCommand extends Command {
             throw new AppException("Login/password cannot be empty");
         }
 
-        //DBManager manager = DBManager.getInstance();
-        //User user = manager.findUserByLogin(login);
         UserService userService= new UserService();
         User user = userService.getDao().findUserByLogin(login);
         DB_LOG.info("Found in DB: user --> " + user.getFirstName());
 
-//        if (user == null) {
-//            throw new AppException("Cannot find user with such login");
-//        }else
         if(!password.equals(user.getPassword())){
 
             throw new AppException("Incorrect password. Please try again ");
@@ -76,7 +72,11 @@ public class LoginCommand extends Command {
             forward = Path.PAGE_PERSONAL_CABINET;
             WEB_LOG.info("Set the session attribute: clientUser --> " + user);
         }
-
+        OrderDao orderDao = new OrderDao();
+        LinkedList<Order> orderList = (LinkedList)orderDao.read(user.getId()) ;
+        if(!orderList.isEmpty()) {
+            session.setAttribute("orderList", orderList);
+        }
 
 
         session.setAttribute("userRole", userRole);
