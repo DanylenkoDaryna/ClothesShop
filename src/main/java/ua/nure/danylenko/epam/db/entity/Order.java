@@ -1,5 +1,8 @@
 package ua.nure.danylenko.epam.db.entity;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Order {
 
     private long orderNumber;
@@ -8,8 +11,10 @@ public class Order {
     private String deliveryType;
     private double totalAmount;
     private long userId;
+    private List<OrderItem> orderItems;
 
     public Order(){
+        orderItems = new LinkedList<>();
         orderStatus=OrderStatus.CANCELED;
     }
 
@@ -66,5 +71,12 @@ public class Order {
         this.userId = userId;
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 
 }

@@ -353,13 +353,7 @@ INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_ferrari_wic_wh.jpg',20);
 -- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_black.jpg',21);
 -- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_green.jpeg',21);
 -- INSERT INTO armadiodb.images VALUES(DEFAULT, 'bomber_dg_sega_pink.jpg',21);
-
-
 -- --------------------------------------------------------------
-
-
-
-
 
 -- --------------------------------------------------------------
 -- ORDERS
@@ -379,6 +373,30 @@ CREATE TABLE orders(
 
     user_id INTEGER NOT NULL REFERENCES users(id)
     ON DELETE CASCADE ON UPDATE RESTRICT
+
+	);
+
+-- --------------------------------------------------------------
+-- ORDER ITEMS
+-- --------------------------------------------------------------
+	CREATE TABLE order_items(
+
+    id INTEGER NOT NULL auto_increment PRIMARY KEY,
+
+    product_id INTEGER NOT NULL,
+
+	order_name VARCHAR(20) NOT NULL,
+
+	brand VARCHAR(15) NOT NULL,
+
+	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL') UNIQUE,
+
+	colour ENUM('RED','GREEN','BLUE', 'WHITE', 'BLACK', 'GREY', 'YELLOW', 'PINK'),
+
+	amount INTEGER NOT NULL,
+
+	orders_id INTEGER NOT NULL REFERENCES orders(id)
+		ON DELETE CASCADE ON UPDATE RESTRICT
 
 	);
 
