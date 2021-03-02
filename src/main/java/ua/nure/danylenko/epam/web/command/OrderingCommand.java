@@ -2,10 +2,7 @@ package ua.nure.danylenko.epam.web.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
-import ua.nure.danylenko.epam.db.entity.Basket;
-import ua.nure.danylenko.epam.db.entity.Order;
-import ua.nure.danylenko.epam.db.entity.OrderStatus;
-import ua.nure.danylenko.epam.db.entity.User;
+import ua.nure.danylenko.epam.db.entity.*;
 import ua.nure.danylenko.epam.db.service.OrderService;
 import ua.nure.danylenko.epam.exception.AppException;
 
@@ -30,6 +27,7 @@ public class OrderingCommand extends Command {
         HttpSession session = request.getSession();
         String paymentType = request.getParameter("chosenPayment");
         String deliveryType = request.getParameter("chosenDelivery");
+        String[] amountOfpurchases = request.getParameterValues("NumProds");
         User client =(User)session.getAttribute("sessionUser");
 
         Basket basket = (Basket)session.getAttribute("Basket");
@@ -45,6 +43,23 @@ public class OrderingCommand extends Command {
         clientOrder.setTotalAmount(basket.sumCosts());
         clientOrder.setUserId(client.getId());
 
+        List<OrderItem> purchases = new LinkedList<>();
+
+        List<BasketElement> basketElements = basket.getBasketElements();
+        int i=0;
+        for(BasketElement be: basketElements){
+            OrderItem temp = new OrderItem();
+            temp.setProductId(be.getBasketProduct().getId());
+            temp.setName(be.getBasketItem().getItemName());
+            temp.setBrand(be.getBasketItem().getBrand());
+            temp.setProductSize(be.getBasketProduct().getBodySize());
+            temp.setColour(be.getBasketItem().getColour());
+            temp.setAmount(Integer.parseInt(amountOfpurchases[i]));
+            WEB_LOG.info("amount = "+ amountOfpurchases[i]);
+            purchases.add(temp);
+            i++;
+        }
+        clientOrder.setOrderItems(purchases);
         OrderService orderService = new OrderService();
         clientOrder = orderService.getDao().createOrder(clientOrder);
 
@@ -61,6 +76,8 @@ public class OrderingCommand extends Command {
 
         }
 
+        session.setAttribute("totalAmount", 0);
+        session.setAttribute("Basket", null);
         WEB_LOG.info("OrderingCommand finished");
         return forward;
     }

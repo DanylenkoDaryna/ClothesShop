@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="img/armadio2.jpg" class="d-block w-100" alt="armadio2">
+                                <img src="img/armadio2.JPG" class="d-block w-100" alt="armadio2">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Second slide label</h5>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.db.dao;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.Fields;
 import ua.nure.danylenko.epam.db.entity.Order;
+import ua.nure.danylenko.epam.db.entity.OrderItem;
 import ua.nure.danylenko.epam.exception.DBException;
 
 import java.sql.*;
@@ -13,13 +14,13 @@ public class OrderDao implements IDao  {
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
-    private static final String SQL_CREATE_ORDER = "INSERT INTO orders (id, order_status, paymentType, deliveryType, totalAmount, " +
-                                                    "user_id) values (DEFAULT,?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_ORDER = "INSERT INTO orders values (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO order_items " +
+            " values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FIND_ORDERS_BY_ID = "SELECT * FROM orders WHERE user_id=?";
     private static final String SQL_UPDATE_ORDER_BY_ID = "UPDATE orders SET login=?, password=?, first_name=?, " +
                                                          "last_name=? WHERE users.id=?";
     private static final String SQL_DELETE_ORDER = "DELETE FROM orders WHERE id=?";
-
 
     // ConnectionFactory is already a singleton so just get connection
     //like this for less code
@@ -27,7 +28,6 @@ public class OrderDao implements IDao  {
 
         return ConnectionFactory.getInstance().getConnection();
     }
-
 
 
     public Order createOrder(Object entity) {
@@ -45,7 +45,6 @@ public class OrderDao implements IDao  {
             pstmt.setString(3,order.getDeliveryType());
             pstmt.setDouble(4,order.getTotalAmount());
             pstmt.setLong(5,order.getUserId());
-
             pstmt.execute();
 
             stmt=con.createStatement();
@@ -58,15 +57,18 @@ public class OrderDao implements IDao  {
             } else{
                 DB_LOG.info("Error getting OrderNumber");
             }
+            order.setOrderItems(
+                    createOrderItems(con, order.getOrderItems(), order.getOrderNumber())
+            );
 
             con.commit();
 
         } catch (DBException e) {
 
-            DB_LOG.info("DBException - trouble with connection");
+            DB_LOG.info("DBException - trouble with connection in createOrder()");
 
         } catch (SQLException e) {
-            DB_LOG.info("SQLException - trouble with commit");
+            DB_LOG.info("SQLException - trouble with commit in createOrder()");
             ConnectionFactory.rollback(con);
         } finally {
             ConnectionFactory.close(con, pstmt, rs);
@@ -75,6 +77,46 @@ public class OrderDao implements IDao  {
 
         DB_LOG.info("Order creating ends");
         return order;
+    }
+
+    private List<OrderItem> createOrderItems(Connection con, List<OrderItem> orderItems, long orderId){
+        DB_LOG.info("createOrderItems starts");
+        PreparedStatement prep = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            for (OrderItem oi : orderItems) {
+                prep = con.prepareStatement(SQL_CREATE_NEW_ORDER_ITEM);
+                prep.setLong(1, oi.getProductId());
+                prep.setString(2, oi.getName());
+                prep.setString(3, oi.getBrand());
+                prep.setString(4, oi.getProductSize().toString());
+                prep.setString(5, oi.getColour().toString());
+                prep.setInt(6, oi.getAmount());
+                prep.setLong(7, orderId);
+                prep.execute();
+
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT last_insert_id()");
+                if (rs.next()) {
+                    oi.setId(rs.getLong(1));
+                    DB_LOG.info("Product id = " + rs.getLong(1));
+                } else {
+                    DB_LOG.info("Error getting Product id!");
+                }
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In createOrderItems() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,prep);
+        }finally {
+            ConnectionFactory.close(prep);
+            ConnectionFactory.close(rs);
+            ConnectionFactory.close(stmt);
+        }
+        DB_LOG.info("createOrderItems ends");
+        return orderItems;
     }
 
 
