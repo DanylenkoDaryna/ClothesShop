@@ -23,6 +23,15 @@ public class Fields {
     public static final String ORDER_TOTAL_AMOUNT= "total_amount";
     public static final String ORDER_USER_ID= "user_id";
 
+    public static final String ORDERITEM_PROD_ID = "product_id";
+    public static final String ORDERITEM_NAME = "order_name";
+    public static final String ORDERITEM_BRAND = "brand";
+    public static final String ORDERITEM_PRODUCT_SIZE = "product_size";
+    public static final String ORDERITEM_COLOUR = "colour";
+    public static final String ORDERITEM_AMOUNT = "amount";
+    public static final String ORDERITEM_ORDER_ID = "orders_id";
+
+
     public static final String CATEGORY_NAME = "name";
     public static final String CATALOGUE_ID = "catalogue_id";
 

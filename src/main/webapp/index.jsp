@@ -19,45 +19,55 @@
                     <!-- basket -->
                     <%@ include file="/WEB-INF/jspf/basket.jspf"%>
                     <!-- basket -->
-
-                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-                            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
-                            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="img/bacgroundImageIndex.jpg" class="d-block w-100" alt="armadio1">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>First slide label</h5>
-                                    <p>Shop of the best clothes for all your family!</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="img/armadio2.JPG" class="d-block w-100" alt="armadio2">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Second slide label</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="img/armadio3.jpg" class="d-block w-100" alt="armadio3">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Third slide label</h5>
-                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                                </div>
+                <div id="carouselIndex" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselIndex" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselIndex" data-slide-to="1"></li>
+                        <li data-target="#carouselIndex" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="img/bacgroundImageIndex.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block d-lg-block">
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </a>
+                        <div class="carousel-item">
+                            <img src="img/armadio2.JPG" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block d-lg-block">
+                                <h5>"You could find here many purchases for yourself! Amazing! True prices!"</h5>
+                                <p>© Amy Williams, Vogue journalist</p>
+                                <p>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/armadio3.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block d-lg-block">
+                                <h5>"I love colours and brands! Would buy here everything for myself, very good quality!"</h5>
+                                <p> © Gorgio Armani, cool guy</p>
+                                <p>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    <a class="carousel-control-prev" href="#carouselIndex" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Prev</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselIndex" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
                 </section>
             </div>
             <%--<div id="indexContainer">--%>

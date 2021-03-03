@@ -11,6 +11,24 @@ public class OrderItem extends Entity {
     private int amount;
     private long orderId;
 
+    public OrderItem(){
+        name="empty";
+        brand="empty";
+        productSize=BodySize.S;
+        colour=Colour.WHITE;
+    }
+
+
+    public void extractProductSize(String value){
+        BodySize size = BodySize.valueOf(value.toUpperCase());
+        this.setProductSize(size);
+    }
+
+    public void extractColour(String value){
+        Colour colour = Colour.valueOf(value.toUpperCase());
+        this.setColour(colour);
+    }
+
     public long getProductId() {
         return productId;
     }

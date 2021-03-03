@@ -15,9 +15,10 @@ public class OrderDao implements IDao  {
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
     private static final String SQL_CREATE_ORDER = "INSERT INTO orders values (DEFAULT, ?, ?, ?, ?, ?)";
-    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO order_items " +
-            " values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO order_items values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FIND_ORDERS_BY_ID = "SELECT * FROM orders WHERE user_id=?";
+    private static final String SQL_FIND_ORDER_ITEMS_BY_ORDER_ID = "SELECT * FROM order_items WHERE orders_id=?";
+
     private static final String SQL_UPDATE_ORDER_BY_ID = "UPDATE orders SET login=?, password=?, first_name=?, " +
                                                          "last_name=? WHERE users.id=?";
     private static final String SQL_DELETE_ORDER = "DELETE FROM orders WHERE id=?";
@@ -144,8 +145,10 @@ public class OrderDao implements IDao  {
             rs = pst.executeQuery();
             while (rs.next()) {
                 Order order = extractOrder(rs);
+                order.setOrderItems(
+                        readOrderItems(con, order.getOrderNumber())
+                );
                 orders.add(order);
-
             }
 
             con.commit();
@@ -160,6 +163,33 @@ public class OrderDao implements IDao  {
 
         DB_LOG.info("Orders reading ends");
         return orders;
+    }
+
+
+    private List<OrderItem> readOrderItems(Connection con, long orderId){
+        DB_LOG.info("readOrderItems starts");
+        LinkedList<OrderItem> orderItems = new LinkedList<>();
+        PreparedStatement prep = null;
+        ResultSet rs = null;
+        try {
+            prep = con.prepareStatement(SQL_FIND_ORDER_ITEMS_BY_ORDER_ID);
+            prep.setLong(1, orderId);
+            rs = prep.executeQuery();
+            while (rs.next()) {
+                OrderItem orderItem = extractOrderItem(rs);
+                orderItem.setOrderId(orderId);
+                orderItems.add(orderItem);
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In readOrderItems() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,prep);
+        }finally {
+            ConnectionFactory.close(prep);
+            ConnectionFactory.close(rs);
+        }
+        DB_LOG.info("readOrderItems ends");
+        return orderItems;
     }
 
 
@@ -182,6 +212,19 @@ public class OrderDao implements IDao  {
         temp.setDeliveryType(rs.getString(Fields.ORDER_DELIVERY_TYPE));
         temp.setTotalAmount(rs.getDouble(Fields.ORDER_TOTAL_AMOUNT));
         temp.setUserId(rs.getLong(Fields.ORDER_USER_ID));
+        return temp;
+
+    }
+
+    private OrderItem extractOrderItem(ResultSet rs) throws SQLException {
+        OrderItem temp = new OrderItem();
+        temp.setId(rs.getLong(Fields.ENTITY_ID));
+        temp.setProductId(rs.getLong(Fields.ORDERITEM_PROD_ID));
+        temp.setName(rs.getString(Fields.ORDERITEM_NAME));
+        temp.setBrand(rs.getString(Fields.ORDERITEM_BRAND));
+        temp.extractProductSize(Fields.ORDERITEM_PRODUCT_SIZE);
+        temp.extractColour(Fields.ORDERITEM_COLOUR);
+        temp.setAmount(rs.getInt(Fields.ORDERITEM_AMOUNT));
         return temp;
 
     }
