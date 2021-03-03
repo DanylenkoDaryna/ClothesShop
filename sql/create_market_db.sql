@@ -389,7 +389,7 @@ CREATE TABLE orders(
 
 	brand VARCHAR(15) NOT NULL,
 
-	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL') UNIQUE,
+	product_size ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'),
 
 	colour ENUM('RED','GREEN','BLUE', 'WHITE', 'BLACK', 'GREY', 'YELLOW', 'PINK'),
 

@@ -74,9 +74,8 @@ public class LoginCommand extends Command {
         }
         OrderDao orderDao = new OrderDao();
         LinkedList<Order> orderList = (LinkedList)orderDao.read(user.getId()) ;
-        if(!orderList.isEmpty()) {
-            session.setAttribute("orderList", orderList);
-        }
+        session.setAttribute("orderList", orderList);
+
 
 
         session.setAttribute("userRole", userRole);

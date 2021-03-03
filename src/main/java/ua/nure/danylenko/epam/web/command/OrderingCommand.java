@@ -27,7 +27,7 @@ public class OrderingCommand extends Command {
         HttpSession session = request.getSession();
         String paymentType = request.getParameter("chosenPayment");
         String deliveryType = request.getParameter("chosenDelivery");
-        String[] amountOfpurchases = request.getParameterValues("NumProds");
+        String[] amountOfPurchases = request.getParameterValues("NumProds");
         User client =(User)session.getAttribute("sessionUser");
 
         Basket basket = (Basket)session.getAttribute("Basket");
@@ -54,8 +54,8 @@ public class OrderingCommand extends Command {
             temp.setBrand(be.getBasketItem().getBrand());
             temp.setProductSize(be.getBasketProduct().getBodySize());
             temp.setColour(be.getBasketItem().getColour());
-            temp.setAmount(Integer.parseInt(amountOfpurchases[i]));
-            WEB_LOG.info("amount = "+ amountOfpurchases[i]);
+            temp.setAmount(Integer.parseInt(amountOfPurchases[i]));
+            WEB_LOG.info("amount = "+ amountOfPurchases[i]);
             purchases.add(temp);
             i++;
         }
