@@ -57,7 +57,7 @@ public class OrderingCommand extends Command {
             temp.setAmount(Integer.parseInt(amountOfPurchases[i]));
             WEB_LOG.info("amount = "+ amountOfPurchases[i]);
             purchases.add(temp);
-            i++;
+            i+=1;
         }
         clientOrder.setOrderItems(purchases);
         OrderService orderService = new OrderService();
@@ -77,7 +77,7 @@ public class OrderingCommand extends Command {
         }
 
         session.setAttribute("totalAmount", 0);
-        session.setAttribute("Basket", null);
+        session.setAttribute("Basket", new Basket());
         WEB_LOG.info("OrderingCommand finished");
         return forward;
     }
