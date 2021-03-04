@@ -14,8 +14,10 @@ public class OrderDao implements IDao  {
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
-    private static final String SQL_CREATE_ORDER = "INSERT INTO orders values (DEFAULT, ?, ?, ?, ?, ?)";
-    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO order_items values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_ORDER = "INSERT INTO orders(id, order_status, payment_type, delivery_type, total_amount, user_id ) values (DEFAULT, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO order_items " +
+            " (id, product_id, order_name, brand, product_size, colour, amount, orders_id) " +
+            "values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FIND_ORDERS_BY_ID = "SELECT * FROM orders WHERE user_id=?";
     private static final String SQL_FIND_ORDER_ITEMS_BY_ORDER_ID = "SELECT * FROM order_items WHERE orders_id=?";
 
@@ -52,8 +54,8 @@ public class OrderDao implements IDao  {
             rs = stmt.executeQuery("SELECT last_insert_id()");
 
             if (rs.next()){
-                order.setOrderNumber(rs.getLong(1));
-                DB_LOG.info("OrderNumber ="+rs.getLong(1));
+                DB_LOG.info("OrderNumber ="+rs.getLong(Fields.ENTITY_ID));
+                order.setOrderNumber(rs.getLong(Fields.ENTITY_ID));
 
             } else{
                 DB_LOG.info("Error getting OrderNumber");
@@ -176,9 +178,7 @@ public class OrderDao implements IDao  {
             prep.setLong(1, orderId);
             rs = prep.executeQuery();
             while (rs.next()) {
-                OrderItem orderItem = extractOrderItem(rs);
-                orderItem.setOrderId(orderId);
-                orderItems.add(orderItem);
+                orderItems.add(extractOrderItem(rs));
             }
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
@@ -204,6 +204,7 @@ public class OrderDao implements IDao  {
     }
 
     private Order extractOrder(ResultSet rs) throws SQLException {
+        DB_LOG.info("extractOrder() starts");
         Order temp = new Order();
 
         temp.setOrderNumber(rs.getLong(Fields.ORDER_NUMBER));
@@ -212,20 +213,24 @@ public class OrderDao implements IDao  {
         temp.setDeliveryType(rs.getString(Fields.ORDER_DELIVERY_TYPE));
         temp.setTotalAmount(rs.getDouble(Fields.ORDER_TOTAL_AMOUNT));
         temp.setUserId(rs.getLong(Fields.ORDER_USER_ID));
+        DB_LOG.info("extractOrder() ends");
         return temp;
 
     }
 
     private OrderItem extractOrderItem(ResultSet rs) throws SQLException {
-        OrderItem temp = new OrderItem();
-        temp.setId(rs.getLong(Fields.ENTITY_ID));
-        temp.setProductId(rs.getLong(Fields.ORDERITEM_PROD_ID));
-        temp.setName(rs.getString(Fields.ORDERITEM_NAME));
-        temp.setBrand(rs.getString(Fields.ORDERITEM_BRAND));
-        temp.extractProductSize(Fields.ORDERITEM_PRODUCT_SIZE);
-        temp.extractColour(Fields.ORDERITEM_COLOUR);
-        temp.setAmount(rs.getInt(Fields.ORDERITEM_AMOUNT));
-        return temp;
+        DB_LOG.info("extractOrderItem() starts");
+        OrderItem ordIt = new OrderItem();
+        ordIt.setId(rs.getLong(Fields.ENTITY_ID));
+        ordIt.setProductId(rs.getLong(Fields.ORDERITEM_PROD_ID));
+        ordIt.setName(rs.getString(Fields.ORDERITEM_NAME));
+        ordIt.setBrand(rs.getString(Fields.ORDERITEM_BRAND));
+        ordIt.extractProductSize(rs.getString(Fields.ORDERITEM_PRODUCT_SIZE));
+        ordIt.extractColour(rs.getString(Fields.ORDERITEM_COLOUR));
+        ordIt.setAmount(rs.getInt(Fields.ORDERITEM_AMOUNT));
+        ordIt.setOrderId(rs.getLong(Fields.ORDERITEM_ORDER_ID));
+        DB_LOG.info("extractOrderItem() ends");
+        return ordIt;
 
     }
 }

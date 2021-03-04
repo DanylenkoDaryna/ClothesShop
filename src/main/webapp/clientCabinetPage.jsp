@@ -196,6 +196,18 @@ Class page corresponds to the '.page' element in included CSS document.
                             </td>
                             <td>${clientOrder.getOrderStatus().toString()}</td>
                         </tr>
+                            <c:forEach items="${clientOrder.getOrderItems()}" var="clientOrderItem">
+                                <tr>
+                                <td>
+                                        ${clientOrderItem.getName()},
+                                        ${clientOrderItem.getBrand()},
+                                        ${clientOrderItem.getProductSize().toString()},
+                                        ${clientOrderItem.getColour().toString()},
+                                        ${clientOrderItem.getAmount()}
+                                </td>
+                                <td></td>
+                                </tr>
+                            </c:forEach>
                         </c:forEach>
 
                         <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">

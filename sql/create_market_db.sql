@@ -363,7 +363,7 @@ CREATE TABLE orders(
 -- id has the INTEGER type (other name is INT), it is the primary key
 	id INTEGER NOT NULL auto_increment PRIMARY KEY,
 
-    order_status ENUM('REGISTERED', 'PAID', 'CANCELED') UNIQUE,
+    order_status ENUM('REGISTERED', 'PAID', 'CANCELED'),
 
     payment_type VARCHAR(15) NOT NULL,
 
