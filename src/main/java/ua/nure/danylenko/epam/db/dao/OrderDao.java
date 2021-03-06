@@ -14,10 +14,11 @@ public class OrderDao implements IDao  {
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
-    private static final String SQL_CREATE_ORDER = "INSERT INTO orders(id, order_status, payment_type, delivery_type, total_amount, user_id ) values (DEFAULT, ?, ?, ?, ?, ?)";
-    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO order_items " +
-            " (id, product_id, order_name, brand, product_size, colour, amount, orders_id) " +
-            "values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_ORDER = "INSERT INTO armadiodb.orders (id, order_status, payment_type, delivery_type, total_amount, user_id ) " +
+            "values (DEFAULT, ?, ?, ?, ?, ?);";
+    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO armadiodb.order_items " +
+            "(id, product_id, order_name, brand, product_size, colour, amount, orders_id) " +
+            "values (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
     private static final String SQL_FIND_ORDERS_BY_ID = "SELECT * FROM orders WHERE user_id=?";
     private static final String SQL_FIND_ORDER_ITEMS_BY_ORDER_ID = "SELECT * FROM order_items WHERE orders_id=?";
 
@@ -31,7 +32,6 @@ public class OrderDao implements IDao  {
 
         return ConnectionFactory.getInstance().getConnection();
     }
-
 
     public Order createOrder(Object entity) {
         DB_LOG.info("Order creating starts");
@@ -51,11 +51,11 @@ public class OrderDao implements IDao  {
             pstmt.execute();
 
             stmt=con.createStatement();
-            rs = stmt.executeQuery("SELECT last_insert_id()");
+            rs = stmt.executeQuery("SELECT last_insert_id();");
 
             if (rs.next()){
-                DB_LOG.info("OrderNumber ="+rs.getLong(Fields.ENTITY_ID));
-                order.setOrderNumber(rs.getLong(Fields.ENTITY_ID));
+                DB_LOG.info("OrderNumber ="+rs.getLong(1));
+                order.setOrderNumber(rs.getLong(1));
 
             } else{
                 DB_LOG.info("Error getting OrderNumber");

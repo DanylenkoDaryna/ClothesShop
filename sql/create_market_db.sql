@@ -365,9 +365,9 @@ CREATE TABLE orders(
 
     order_status ENUM('REGISTERED', 'PAID', 'CANCELED'),
 
-    payment_type VARCHAR(15) NOT NULL,
+    payment_type VARCHAR(30) NOT NULL,
 
-    delivery_type VARCHAR(15) NOT NULL,
+    delivery_type VARCHAR(30) NOT NULL,
 
     total_amount DOUBLE NOT NULL,
 

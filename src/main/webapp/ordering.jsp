@@ -66,7 +66,8 @@
                                             CHOOSE THE NUMBER OF PRODUCTS
                                         </h4>
                                         <input type="number" class="form-control-md" name="NumProds"
-                                               placeholder="1" value="1" min=1 max="${elementToOrder.getBasketProduct().getAvailable()}">
+                                               placeholder="1" value="1" min=1
+                                               max="${elementToOrder.getBasketProduct().getAvailable()}">
                                     </div>
                                 </td>
                             </tr>
@@ -207,7 +208,7 @@
                         </td>
                         <td>
 
-                            <h4>
+                            <h4 id="totalCost">
                                 ${sessionScope.totalAmount}
                                 <i class="fas fa-hryvnia"></i>
                             </h4>
@@ -218,7 +219,7 @@
 
                                 <%--<input title="" hidden name="" >--%>
                                 <button type="submit" disabled id="orderingButton">
-                                    To order
+                                    Next
                                     <i class="fas fa-handshake"></i>
                                 </button>
 
