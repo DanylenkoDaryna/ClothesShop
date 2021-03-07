@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.Fields;
 import ua.nure.danylenko.epam.db.entity.Order;
 import ua.nure.danylenko.epam.db.entity.OrderItem;
+import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.exception.DBException;
 
 import java.sql.*;
@@ -14,10 +15,12 @@ public class OrderDao implements IDao  {
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
-    private static final String SQL_CREATE_ORDER = "INSERT INTO orders(id, order_status, payment_type, delivery_type, total_amount, user_id ) values (DEFAULT, ?, ?, ?, ?, ?)";
-    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO order_items " +
-            " (id, product_id, order_name, brand, product_size, colour, amount, orders_id) " +
-            "values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_CREATE_ORDER = "INSERT INTO armadiodb.orders (id, order_status, payment_type, delivery_type, total_amount, user_id ) " +
+            "values (DEFAULT, ?, ?, ?, ?, ?);";
+    private static final String SQL_CREATE_NEW_ORDER_ITEM = "INSERT INTO armadiodb.order_items " +
+            "(id, product_id, order_name, brand, product_size, colour, amount, orders_id) " +
+            "values (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String SQL_GET_ALL_ORDERS = "SELECT * FROM orders;";
     private static final String SQL_FIND_ORDERS_BY_ID = "SELECT * FROM orders WHERE user_id=?";
     private static final String SQL_FIND_ORDER_ITEMS_BY_ORDER_ID = "SELECT * FROM order_items WHERE orders_id=?";
 
@@ -31,7 +34,6 @@ public class OrderDao implements IDao  {
 
         return ConnectionFactory.getInstance().getConnection();
     }
-
 
     public Order createOrder(Object entity) {
         DB_LOG.info("Order creating starts");
@@ -51,11 +53,11 @@ public class OrderDao implements IDao  {
             pstmt.execute();
 
             stmt=con.createStatement();
-            rs = stmt.executeQuery("SELECT last_insert_id()");
+            rs = stmt.executeQuery("SELECT last_insert_id();");
 
             if (rs.next()){
-                DB_LOG.info("OrderNumber ="+rs.getLong(Fields.ENTITY_ID));
-                order.setOrderNumber(rs.getLong(Fields.ENTITY_ID));
+                DB_LOG.info("OrderNumber ="+rs.getLong(1));
+                order.setOrderNumber(rs.getLong(1));
 
             } else{
                 DB_LOG.info("Error getting OrderNumber");
@@ -192,6 +194,39 @@ public class OrderDao implements IDao  {
         return orderItems;
     }
 
+
+    public List<Order> getAllOrders() throws AppException {
+        List<Order> orders = new LinkedList<>();
+        ResultSet rs = null;
+        Connection con = null;
+        try{
+            con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement(SQL_GET_ALL_ORDERS);
+            rs=pstmt.executeQuery();
+            while (rs.next()) {
+                Order order=new Order();
+                order.setOrderNumber(rs.getLong(Fields.ENTITY_ID));
+               // order.extractAccountStatus(rs.getString(Fields.USER_ACC_STATUS));
+                readOrderItems(con, order.getOrderNumber());
+                orders.add(order);
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DB_LOG.error("SQLException in getAllUsers() in UserDao", ex);
+            ConnectionFactory.rollback(con);
+        } catch (DBException e) {
+            DB_LOG.error("DBException in getAllUsers() in UserDao", e);
+            ConnectionFactory.rollback(con);
+        } finally {
+            ConnectionFactory.close(rs);
+        }
+        if(orders.isEmpty()){
+            DB_LOG.error("There are no orders from DB throw getAllUsers() method");
+            throw new AppException("There are no users from DB throw getAllUsers() method");
+        }else{
+            return orders;
+        }
+    }
 
     @Override
     public void update(Object entity) {
