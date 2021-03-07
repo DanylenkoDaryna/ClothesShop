@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class LoginCommand extends Command {
 
@@ -55,6 +56,8 @@ public class LoginCommand extends Command {
 
         session.setAttribute("sessionUser", user);
 
+        OrderDao orderDao = new OrderDao();
+
         if (userRole == Role.ADMIN) {
             //COMMAND_UPDATING_UPO - adding, removing, editing users, products, orders
             try {
@@ -62,7 +65,9 @@ public class LoginCommand extends Command {
                 WEB_LOG.info("Set the session attribute: adminUser --> " + user);
                 UserDao userDao = new UserDao();
                 ArrayList<User> listOfUsers = (ArrayList<User>) userDao.getAllUsers();
+                List<Order> listOfOrders = (LinkedList<Order>) orderDao.getAllOrders();
                 session.setAttribute("listOfUsers", listOfUsers);
+                session.setAttribute("listOfOrders", listOfOrders);
             }catch (AppException ae){
                 WEB_LOG.error(ae.getMessage());
             }
@@ -71,10 +76,11 @@ public class LoginCommand extends Command {
         if (userRole == Role.CLIENT) {
             forward = Path.PAGE_PERSONAL_CABINET;
             WEB_LOG.info("Set the session attribute: clientUser --> " + user);
+
+            LinkedList<Order> orderList = (LinkedList)orderDao.read(user.getId()) ;
+            session.setAttribute("orderList", orderList);
         }
-        OrderDao orderDao = new OrderDao();
-        LinkedList<Order> orderList = (LinkedList)orderDao.read(user.getId()) ;
-        session.setAttribute("orderList", orderList);
+
 
 
 
