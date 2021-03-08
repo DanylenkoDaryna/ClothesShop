@@ -1,0 +1,70 @@
+<div class="tab-pane fade" id="updatingOrders">
+    <table class="admin_data_table">
+        <tbody>
+        <tr class="active">
+            <td>
+                <i class="fas fa-wallet"></i>
+                ORDER NUMBER
+            </td>
+            <td>
+                <i class="fas fa-hryvnia"></i>
+                TOTAL AMOUNT
+            </td>
+            <td>
+                <i class="fas fa-comment-dollar"></i>
+               PAYMENT TYPE
+            </td>
+            <td>
+                <i class="fas fa-truck"></i>
+                DELIVERY TYPE
+            </td>
+            <td>
+                <i class="fas fa-trash-alt"></i>
+                USER ID
+            </td>
+            <td>
+                <i class="fas fa-edit"></i>
+                ORDER STATUS
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fas fa-shopping-bag"></i>
+                ORDER iTEMS
+            </td>
+        </tr>
+        <c:forEach items="${sessionScope.listOfOrders}" var="order">
+        <tr>
+            <td>${order.getOrderNumber()}</td>
+            <td>${order.getTotalAmount()}</td>
+            <td>${order.getPaymentType()}</td>
+            <td>${order.getDeliveryType()}</td>
+            <td>${order.getUserId()}</td>
+            <td>${order.getOrderStatus().toString()}
+                <form method="post" id="update_order_form" action="controller">
+                    <input type="hidden" name="command" value="updateOrder"/>
+                    <input type="hidden" name="updateOrderType" value="delete"/>
+                    <input type="hidden" name="orderToUpdate" value="${order.getOrderNumber()}"/>
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+            <c:forEach items="${order.getOrderItems()}" var="orderItem">
+                <tr>
+                    <td>
+                        <i class="fas fa-thumbtack"></i>
+                    </td>
+                    <td colspan="5">
+                            ${orderItem.getProductId()},
+                            ${orderItem.getName()},
+                            ${orderItem.getBrand()},
+                            ${orderItem.getProductSize().toString()},
+                            ${orderItem.getColour().toString()},
+                            ${orderItem.getAmount()}
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>

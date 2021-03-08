@@ -45,11 +45,18 @@
                                 Updating Users
                         </a>
                     </li>
-                    <!-- 4 вкладка -->
+                    <!-- 3 вкладка -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#updatingData">
                             <i class="fas fa-edit"></i>
                             Updating Catalogue Data
+                        </a>
+                    </li>
+                    <!-- 4 вкладка -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#updatingOrders">
+                            <i class="fas fa-edit"></i>
+                            Updating Orders
                         </a>
                     </li>
 
@@ -99,10 +106,9 @@
                             </div>
                             <!-- third tab for third tab-->
                     </div>
-                    <!-- 3 блок -->
-                    <div class="tab-pane fade" id="updatingOrders">
-
-                    </div>
+                        <%-- fourth tab --%>
+                        <%@ include file="/WEB-INF/jspf/admin_updating_orders.jspf"%>
+                        <%-- fourth tab --%>
 
                 </div>
                 </div>
