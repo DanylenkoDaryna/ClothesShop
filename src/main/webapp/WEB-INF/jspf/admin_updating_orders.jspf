@@ -26,6 +26,10 @@
                 <i class="fas fa-edit"></i>
                 ORDER STATUS
             </td>
+            <td>
+                <i class="fas fa-edit"></i>
+                SET ORDER STATUS
+            </td>
         </tr>
         <tr>
             <td>
@@ -40,12 +44,22 @@
             <td>${order.getPaymentType()}</td>
             <td>${order.getDeliveryType()}</td>
             <td>${order.getUserId()}</td>
-            <td>${order.getOrderStatus().toString()}
+            <td>${order.getOrderStatus().toString()}</td>
+            <td>
                 <form method="post" id="update_order_form" action="controller">
+                    <div class="form-group">
+                        <label for="SelectOrderStatus">Select order Status</label>
+                        <select class="form-control" id="SelectOrderStatus" name="OrderStatus">
+                            <option value="REGISTERED">REGISTERED</option>
+                            <option value="PAID">PAID</option>
+                            <option value="CANCELED">CANCELED</option>
+                        </select>
+                    </div>
+
+
                     <input type="hidden" name="command" value="updateOrder"/>
-                    <input type="hidden" name="updateOrderType" value="delete"/>
                     <input type="hidden" name="orderToUpdate" value="${order.getOrderNumber()}"/>
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Change status">
                 </form>
             </td>
         </tr>

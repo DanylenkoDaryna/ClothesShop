@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.web.command;
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.web.command.admin.AddNewProductCommand;
 import ua.nure.danylenko.epam.web.command.admin.UpdateCatalogueCommand;
+import ua.nure.danylenko.epam.web.command.admin.UpdateOrderCommand;
 import ua.nure.danylenko.epam.web.command.admin.UpdatingUPOCommand;
 import ua.nure.danylenko.epam.web.command.client.DeleteAccountCommand;
 import ua.nure.danylenko.epam.web.command.client.EditAccountCommand;
@@ -37,6 +38,7 @@ public class CommandContainer {
          //admin commands
         commands.put("UpdatingUPOCommand", new UpdatingUPOCommand());
         commands.put("updateCatalogue", new UpdateCatalogueCommand());
+        commands.put("updateOrder", new UpdateOrderCommand());
         commands.put("addNewProduct", new AddNewProductCommand());
 
         WEB_LOG.info("Command container was successfully initialized");
