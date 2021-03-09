@@ -40,7 +40,6 @@ public class OrderingCommand extends Command {
         clientOrder.setOrderStatus(OrderStatus.REGISTERED);
         clientOrder.setPaymentType(paymentType);
         clientOrder.setDeliveryType(deliveryType);
-        clientOrder.setTotalAmount(basket.sumCosts());
         clientOrder.setUserId(client.getId());
 
         List<OrderItem> purchases = new LinkedList<>();
@@ -59,6 +58,13 @@ public class OrderingCommand extends Command {
             purchases.add(temp);
             i+=1;
         }
+
+        double res = clientOrder.sumTotalAmount(purchases, basket.getBasketElements());
+        clientOrder.setTotalAmount(res);
+        WEB_LOG.info("purchases size =" + purchases.size() );
+        WEB_LOG.info("BasketElements size =" + basket.getBasketElements().size() );
+        WEB_LOG.info("sumTotalAmount =" + res );
+
         clientOrder.setOrderItems(purchases);
         OrderService orderService = new OrderService();
         clientOrder = orderService.getDao().createOrder(clientOrder);

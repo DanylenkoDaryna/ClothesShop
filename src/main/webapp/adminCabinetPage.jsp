@@ -47,18 +47,20 @@
                     </li>
                     <!-- 3 вкладка -->
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#updatingData">
-                            <i class="fas fa-edit"></i>
-                            Updating Catalogue Data
-                        </a>
-                    </li>
-                    <!-- 4 вкладка -->
-                    <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#updatingOrders">
                             <i class="fas fa-edit"></i>
                             Updating Orders
                         </a>
                     </li>
+
+                    <!-- 4 вкладка -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#updatingData">
+                            <i class="fas fa-edit"></i>
+                            Updating Catalogue Data
+                        </a>
+                    </li>
+
 
                 </ul>
 
@@ -73,7 +75,11 @@
                     <%@ include file="/WEB-INF/jspf/admin_updating_users.jspf"%>
                     <%-- second tab --%>
 
-                    <!-- third tab -->
+                    <%-- third tab --%>
+                    <%@ include file="/WEB-INF/jspf/admin_updating_orders.jspf"%>
+                    <%-- third tab --%>
+
+                    <!-- fourth tab -->
                     <div class="tab-pane fade" id="updatingData">
                         <h4>Here you can choose what you want to update(add new/delete/edit) -
                             catalogue, category, products?</h4>
@@ -87,28 +93,25 @@
                                 <a class="nav-link" data-toggle="tab" href="#categoriesUpdate">Categories update</a>
                             </li>
                         </ul>
-                    <!-- third tab -->
+                    <!-- fourth tab -->
 
 
-                        <!-- content for third tab -->
+                        <!-- content for fourth tab -->
                         <div class="tab-content">
-                            <!-- first tab for third tab -->
+                            <!-- first tab for fourth tab -->
                             <%@ include file="/WEB-INF/jspf/admin_updating_catalogue.jspf"%>
                             <!-- first tab for third tab -->
 
-                            <!-- second tab for third tab -->
+                            <!-- second tab for fourth tab -->
                             <%@ include file="/WEB-INF/jspf/admin_updating_categories.jspf"%>
                             <!-- second tab for third tab -->
 
-                            <!-- third tab for third tab-->
+                            <!-- third tab for fourth tab-->
                             <div class="tab-pane fade" id="productsUpdate">
 
                             </div>
-                            <!-- third tab for third tab-->
-                    </div>
-                        <%-- fourth tab --%>
-                        <%@ include file="/WEB-INF/jspf/admin_updating_orders.jspf"%>
-                        <%-- fourth tab --%>
+                            <!-- third tab for fourth tab-->
+                        </div>
 
                 </div>
                 </div>

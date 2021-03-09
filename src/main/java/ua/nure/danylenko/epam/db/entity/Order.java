@@ -18,6 +18,15 @@ public class Order {
         orderStatus=OrderStatus.CANCELED;
     }
 
+    public double sumTotalAmount(List<OrderItem> purchases, List<BasketElement> basketElements){
+
+        double result=45.0;
+        for(int i=0; i<purchases.size(); i++){
+            result=result+basketElements.get(i).getBasketItem().getPrice()*purchases.get(i).getAmount();
+        }
+        return Math.round(result);
+    }
+
     public void extractOrderStatus(String value){
         OrderStatus os = OrderStatus.valueOf(value.toUpperCase());
         this.setOrderStatus(os);

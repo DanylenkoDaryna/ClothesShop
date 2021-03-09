@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.Fields;
 import ua.nure.danylenko.epam.db.entity.Order;
 import ua.nure.danylenko.epam.db.entity.OrderItem;
+import ua.nure.danylenko.epam.db.entity.OrderStatus;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.exception.DBException;
 
@@ -26,6 +27,7 @@ public class OrderDao implements IDao  {
 
     private static final String SQL_UPDATE_ORDER_BY_ID = "UPDATE orders SET login=?, password=?, first_name=?, " +
                                                          "last_name=? WHERE users.id=?";
+    private static final String SQL_UPDATE_ORDER_STATUS_BY_ID = "UPDATE orders SET order_status=? WHERE orders.id=?";
     private static final String SQL_DELETE_ORDER = "DELETE FROM orders WHERE id=?";
 
     // ConnectionFactory is already a singleton so just get connection
@@ -171,7 +173,6 @@ public class OrderDao implements IDao  {
 
 
     private List<OrderItem> readOrderItems(Connection con, long orderId){
-        DB_LOG.info("readOrderItems starts");
         LinkedList<OrderItem> orderItems = new LinkedList<>();
         PreparedStatement prep = null;
         ResultSet rs = null;
@@ -190,7 +191,6 @@ public class OrderDao implements IDao  {
             ConnectionFactory.close(prep);
             ConnectionFactory.close(rs);
         }
-        DB_LOG.info("readOrderItems ends");
         return orderItems;
     }
 
@@ -204,25 +204,23 @@ public class OrderDao implements IDao  {
             PreparedStatement pstmt = con.prepareStatement(SQL_GET_ALL_ORDERS);
             rs=pstmt.executeQuery();
             while (rs.next()) {
-                Order order=new Order();
-                order.setOrderNumber(rs.getLong(Fields.ENTITY_ID));
-               // order.extractAccountStatus(rs.getString(Fields.USER_ACC_STATUS));
-                readOrderItems(con, order.getOrderNumber());
-                orders.add(order);
+                Order order=extractOrder(rs);
+                order.setOrderItems(readOrderItems(con, order.getOrderNumber()));
+                orders.add(extractOrder(rs));
             }
             con.commit();
         } catch (SQLException ex) {
-            DB_LOG.error("SQLException in getAllUsers() in UserDao", ex);
+            DB_LOG.error("SQLException in getAllOrders() - Trouble with commit", ex);
             ConnectionFactory.rollback(con);
         } catch (DBException e) {
-            DB_LOG.error("DBException in getAllUsers() in UserDao", e);
+            DB_LOG.error("DBException in getAllOrders() - trouble with connection", e);
             ConnectionFactory.rollback(con);
         } finally {
             ConnectionFactory.close(rs);
         }
         if(orders.isEmpty()){
-            DB_LOG.error("There are no orders from DB throw getAllUsers() method");
-            throw new AppException("There are no users from DB throw getAllUsers() method");
+            DB_LOG.error("There are no orders from DB ");
+            throw new AppException("There are no orders from DB");
         }else{
             return orders;
         }
@@ -231,6 +229,27 @@ public class OrderDao implements IDao  {
     @Override
     public void update(Object entity) {
 
+    }
+
+    public void updateStatus(OrderStatus updatedStatus, long orderId) {
+        PreparedStatement pst = null;
+        Connection con = null;
+        try{
+            con = getConnection();
+            pst = con.prepareStatement(SQL_UPDATE_ORDER_STATUS_BY_ID);
+            pst.setString(1,updatedStatus.toString());
+            pst.setLong(2,orderId);
+            pst.execute();
+
+            con.commit();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("SQLException - trouble with commit in updateStatus()", ex);
+        }catch (DBException dbx) {
+            DB_LOG.error("DBException - trouble with connection in updateStatus()", dbx);
+        } finally {
+            ConnectionFactory.close(con, pst);
+        }
     }
 
     @Override
