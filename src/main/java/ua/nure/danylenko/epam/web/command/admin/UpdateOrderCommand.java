@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.entity.Order;
 import ua.nure.danylenko.epam.db.entity.OrderStatus;
+import ua.nure.danylenko.epam.db.service.ItemsService;
 import ua.nure.danylenko.epam.db.service.OrderService;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
@@ -32,20 +33,41 @@ public class UpdateOrderCommand extends Command {
         String updatedStatus= request.getParameter("OrderStatus");
         WEB_LOG.info("OrderStatus = " + updatedStatus);
         OrderStatus status = OrderStatus.valueOf(updatedStatus);
+        Order currentOrder = new Order();
         for(Order o1: orders){
             if(o1.getOrderNumber()==orderToUpdate){
+                currentOrder=o1;
                 o1.setOrderStatus(status);
             }
         }
-
         OrderService orderService = new OrderService();
         orderService.getDao().updateStatus(status, orderToUpdate);
+
+        switch (status){
+            case CANCELED:{
+                WEB_LOG.info("Order CANCELED");
+                break;
+            }case PAID:{
+                orders.remove(currentOrder);
+                ItemsService itemsService = new ItemsService();
+                itemsService.getDao().deleteProducts(currentOrder.getOrderItems());
+
+//                List<Item> items = (ArrayList<Item>)session.getAttribute("items");
+//                session.setAttribute("items", items);
+                WEB_LOG.info("Order PAID");
+                break;
+            }case REGISTERED:{
+                WEB_LOG.info("Order REGISTERED");
+                break;
+            }
+            default: forward=Path.PAGE_ERROR_PAGE;
+        }
+
 
         session.setAttribute("listOfOrders", orders);
         WEB_LOG.info("UpdateOrderCommand finished");
         return forward;
     }
-
 
 
 }

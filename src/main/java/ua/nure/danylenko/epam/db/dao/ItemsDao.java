@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.db.Fields;
 import ua.nure.danylenko.epam.db.entity.Item;
 import ua.nure.danylenko.epam.db.entity.Material;
+import ua.nure.danylenko.epam.db.entity.OrderItem;
 import ua.nure.danylenko.epam.db.entity.Product;
 import ua.nure.danylenko.epam.exception.DBException;
 import ua.nure.danylenko.epam.exception.Messages;
@@ -26,6 +27,7 @@ public class ItemsDao implements IDao {
     private static final String SQL_FIND_ITEMS_BY_CATEGORY = "SELECT * FROM items WHERE category_id=(SELECT id FROM categories WHERE name=? and catalogue_id=?);";
     private static final String SQL_FIND_PRODUCTS_BY_ITEM ="SELECT * FROM products WHERE item_id=?";
     private static final String SQL_FIND_MATERIALS_BY_ITEM_ID="SELECT * FROM materials WHERE item_id=?";
+    private static final String SQL_FIND_PRODUCT_BY_ID ="SELECT * FROM products WHERE id=?";
     private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM items";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
@@ -176,6 +178,51 @@ public class ItemsDao implements IDao {
 
     }
 
+    public void deleteProducts(List<OrderItem> orderItems){
+        DB_LOG.info("deleteProducts() starts");
+
+        PreparedStatement pst = null;
+        Connection con = null;
+        ResultSet rs = null;
+        try{
+            con = getConnection();
+
+            for(OrderItem orderItem: orderItems){
+
+                Product product = getProductById(con,orderItem.getProductId());
+                if(orderItem.getAmount()<product.getAvailable()){
+
+                }else if(orderItem.getAmount()==product.getAvailable()){
+
+                }else{
+                    DB_LOG.error("error in deleteProducts()");
+                }
+            }
+
+//            pst = con.prepareStatement(SQL_UPDATE_ORDER_STATUS_BY_ID);
+//            pst.setString(1,updatedStatus.toString());
+//            pst.setLong(2,orderId);
+//            rs=pst.executeQuery();
+//            while (rs.next()) {
+//                Order order=extractOrder(rs);
+//                order.setOrderItems(readOrderItems(con, order.getOrderNumber()));
+//                orders.add(extractOrder(rs));
+//            }
+//
+//            pst.execute();
+
+            con.commit();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("SQLException - trouble with commit in deleteProducts()", ex);
+        }catch (DBException dbx) {
+            DB_LOG.error("DBException - trouble with connection in deleteProducts()", dbx);
+        } finally {
+            ConnectionFactory.close(con, pst);
+        }
+        DB_LOG.info("deleteProducts() ends");
+    }
+
     public List<Item> getItemsByCategory(String categoryName, int catalogId) throws DBException {
         DB_LOG.info("getItemsByCategory() started! ");
         List <Item> items = new ArrayList<>();
@@ -238,6 +285,32 @@ public class ItemsDao implements IDao {
             ConnectionFactory.close(rs);
         }
     }
+
+
+    private Product getProductById(Connection con, long productId) throws DBException {
+
+        DB_LOG.info("getProductById() started! ");
+        Product product = new Product();
+        ResultSet rs = null;
+        try(PreparedStatement pst = con.prepareStatement(SQL_FIND_PRODUCT_BY_ID)){
+            pst.setLong(1, productId);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                product = extractProduct(rs);
+            }
+            getProductImages(con,product);
+
+        }catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("SQLException - trouble with commit in getProductById()", ex);
+        }catch (DBException dbex) {
+            DB_LOG.error("DBException - trouble with connection in getProductById()", dbex);
+        }finally {
+            ConnectionFactory.close(rs);
+        }
+        return product;
+    }
+
 
     private void getProductImages(Connection con, Product product)throws DBException {
        // DB_LOG.info("getProductImages() started!");
