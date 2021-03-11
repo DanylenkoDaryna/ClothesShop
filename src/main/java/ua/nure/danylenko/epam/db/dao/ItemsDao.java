@@ -190,9 +190,27 @@ public class ItemsDao implements IDao {
             for(OrderItem orderItem: orderItems){
 
                 Product product = getProductById(con,orderItem.getProductId());
-                if(orderItem.getAmount()<product.getAvailable()){
+                if(orderItem.getAmount() < product.getAvailable()){
+                    int availableAmount = product.getAvailable();
+                    int orderAmount = orderItem.getAmount();
+                    product.setAvailable(availableAmount-orderAmount);
+                    updateProduct(con, product);
+                }else if(orderItem.getAmount()== product.getAvailable()){
+                    deleteProduct(con, product);
+                    long itemId = -1;
+                    pst = con.prepareStatement(SQL_FIND_ITEM_BY_PRODUCT);
+                    pst.setLong(1,product.getId());
+                    rs = pst.executeQuery();
+                    while (rs.next()) {
+                        itemId=rs.getLong(Fields.PRODUCT_ITEM_ID);
+                        DB_LOG.info("itemId="+itemId);
+                    }
 
-                }else if(orderItem.getAmount()==product.getAvailable()){
+                    Item item = getItemById(con, itemId);
+                    item.getContainer().remove(product);
+                    if(item.getContainer().isEmpty()){
+                        deleteItem(con, itemId);
+                    }
 
                 }else{
                     DB_LOG.error("error in deleteProducts()");
@@ -222,6 +240,108 @@ public class ItemsDao implements IDao {
         }
         DB_LOG.info("deleteProducts() ends");
     }
+
+    public void updateProduct(Connection con, Product product){
+
+
+        PreparedStatement ps = null;
+        try {
+            for(int i=0; i<materials.size(); i++) {
+                ps = con.prepareStatement(SQL_ADD_PRODUCT_MATERIAL);
+                ps.setString(1, materials.get(i).getName());
+                ps.setInt(2, materials.get(i).getPercent());
+                ps.setLong(3, itemId);
+                materials.get(i).setItemId(itemId);
+                ps.execute();
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao addMatherialsForItem() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,ps);
+        }finally {
+            ConnectionFactory.close(ps);
+        }
+
+
+
+    }
+
+    public void deleteProduct(Connection con, Product product){
+
+
+        PreparedStatement ps = null;
+        try {
+            for(int i=0; i<materials.size(); i++) {
+                ps = con.prepareStatement(SQL_ADD_PRODUCT_MATERIAL);
+                ps.setString(1, materials.get(i).getName());
+                ps.setInt(2, materials.get(i).getPercent());
+                ps.setLong(3, itemId);
+                materials.get(i).setItemId(itemId);
+                ps.execute();
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao addMatherialsForItem() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,ps);
+        }finally {
+            ConnectionFactory.close(ps);
+        }
+
+
+
+    }
+
+    public Item getItemById(Connection con, long itemId){
+
+
+        PreparedStatement ps = null;
+        try {
+            for(int i=0; i<materials.size(); i++) {
+                ps = con.prepareStatement(SQL_ADD_PRODUCT_MATERIAL);
+                ps.setString(1, materials.get(i).getName());
+                ps.setInt(2, materials.get(i).getPercent());
+                ps.setLong(3, itemId);
+                materials.get(i).setItemId(itemId);
+                ps.execute();
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao addMatherialsForItem() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,ps);
+        }finally {
+            ConnectionFactory.close(ps);
+        }
+
+
+
+        return null;
+    }
+
+    public void deleteItem(Connection con, long itemId){
+
+
+        PreparedStatement ps = null;
+        try {
+            for(int i=0; i<materials.size(); i++) {
+                ps = con.prepareStatement(SQL_ADD_PRODUCT_MATERIAL);
+                ps.setString(1, materials.get(i).getName());
+                ps.setInt(2, materials.get(i).getPercent());
+                ps.setLong(3, itemId);
+                materials.get(i).setItemId(itemId);
+                ps.execute();
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In ItemsDao addMatherialsForItem() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,ps);
+        }finally {
+            ConnectionFactory.close(ps);
+        }
+
+
+
+    }
+
 
     public List<Item> getItemsByCategory(String categoryName, int catalogId) throws DBException {
         DB_LOG.info("getItemsByCategory() started! ");
