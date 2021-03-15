@@ -2,7 +2,9 @@ package ua.nure.danylenko.epam.web.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.danylenko.epam.Path;
+import ua.nure.danylenko.epam.db.Role;
 import ua.nure.danylenko.epam.db.entity.Item;
+import ua.nure.danylenko.epam.db.entity.User;
 import ua.nure.danylenko.epam.db.service.ItemsService;
 import ua.nure.danylenko.epam.exception.AppException;
 
@@ -54,7 +56,19 @@ public class ProductsCommand extends Command {
         }
 
         Set<String> colorSorted = new TreeSet<>();
-        colorSorted.addAll(filterParameters.get("colours"));
+
+        if(session.getAttribute("sessionUser")!=null){
+            User user =(User)session.getAttribute("sessionUser");
+            Role userRole = Role.getRole(user);
+            WEB_LOG.info("userRole --> " + userRole);
+
+            if (userRole == Role.ADMIN) {
+                colorSorted=itemsService.getDao().getColours();
+            }
+        }else{
+            colorSorted.addAll(filterParameters.get("colours"));
+        }
+
         Set<String> brandSorted = new TreeSet<>();
         brandSorted.addAll(filterParameters.get("brands"));
         Set<String> sizeSorted = new TreeSet<>();

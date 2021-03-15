@@ -37,7 +37,7 @@ public class UpdateOrderCommand extends Command {
         for(Order o1: orders){
             if(o1.getOrderNumber()==orderToUpdate){
                 currentOrder=o1;
-                o1.setOrderStatus(status);
+                currentOrder.setOrderStatus(status);
             }
         }
         OrderService orderService = new OrderService();

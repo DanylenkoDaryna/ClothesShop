@@ -10,10 +10,8 @@ import ua.nure.danylenko.epam.exception.DBException;
 import ua.nure.danylenko.epam.exception.Messages;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.sql.Date;
+import java.util.*;
 
 public class ItemsDao implements IDao {
 
@@ -30,9 +28,10 @@ public class ItemsDao implements IDao {
     private static final String SQL_FIND_MATERIALS_BY_ITEM_ID="SELECT * FROM materials WHERE item_id=?";
     private static final String SQL_FIND_PRODUCT_BY_ID ="SELECT item_id FROM products WHERE id=?";
     private static final String SQL_FIND_ITEM_ID_BY_PRODUCT ="SELECT * FROM products WHERE id=?";
-    private static final String SQL_FIND_All_COLOURS = "SELECT colour FROM items";
+    private static final String SQL_FIND_All_AVAILABLE_COLOURS = "SELECT colour FROM items";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
+    private static final String SQL_GET_All_DB_COLOURS = "SELECT * FROM colours";
     private static final String SQL_FIND_IMAGE_BY_PRODUCT_ID ="SELECT img_name FROM images WHERE product_id=?";
     private static final String SQL_CREATE_NEW_ITEM ="INSERT INTO armadiodb.items (id, item_name, price, release_date, brand, colour, category_id) values (DEFAULT, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_CREATE_NEW_PRODUCT ="INSERT INTO armadiodb.products (id, product_name, available, product_size, item_id) values (DEFAULT, ?, ?, ?, ?)";
@@ -445,7 +444,7 @@ public class ItemsDao implements IDao {
         try{
             con = getConnection();
             stmt = con.createStatement();
-            rs = stmt.executeQuery(SQL_FIND_All_COLOURS);
+            rs = stmt.executeQuery(SQL_FIND_All_AVAILABLE_COLOURS);
             while (rs.next()) {
                 String colour = rs.getString(Fields.ITEM_COLOUR);
                 colours.add(colour);
@@ -472,6 +471,30 @@ public class ItemsDao implements IDao {
         }
 
         return result;
+    }
+
+    public Set<String> getColours() throws DBException {
+        Set<String> colours = new TreeSet<>();
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try{
+            con = getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL_GET_All_DB_COLOURS);
+            while (rs.next()) {
+                String colour = rs.getString(Fields.COLOUR);
+                colours.add(colour);
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("getColours() failed");
+        } finally {
+            ConnectionFactory.close(con, stmt, rs);
+        }
+
+        return colours;
     }
 
     private static Item extractItem(ResultSet rs) throws SQLException {
