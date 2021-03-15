@@ -81,9 +81,6 @@ public class LoginCommand extends Command {
             session.setAttribute("orderList", orderList);
         }
 
-
-
-
         session.setAttribute("userRole", userRole);
         WEB_LOG.info("Set the session attribute: userRole --> " + userRole);
 

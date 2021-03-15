@@ -401,6 +401,28 @@ CREATE TABLE orders(
 	);
 
 -- --------------------------------------------------------------
+-- --------------------------------------------------------------
+-- COLOURS
+-- --------------------------------------------------------------
+	CREATE TABLE colours(
+
+    id INTEGER NOT NULL auto_increment PRIMARY KEY,
+
+	colour VARCHAR(10) NOT NULL UNIQUE
+
+	);
+
+
+INSERT INTO colours VALUES(DEFAULT, 'RED');
+INSERT INTO colours VALUES(DEFAULT, 'GREEN');
+INSERT INTO colours VALUES(DEFAULT, 'BLUE');
+INSERT INTO colours VALUES(DEFAULT, 'WHITE');
+INSERT INTO colours VALUES(DEFAULT, 'BLACK');
+INSERT INTO colours VALUES(DEFAULT, 'GREY');
+INSERT INTO colours VALUES(DEFAULT, 'YELLOW');
+INSERT INTO colours VALUES(DEFAULT, 'PINK');
+
+-- --------------------------------------------------------------
 
 
 SELECT * FROM users;

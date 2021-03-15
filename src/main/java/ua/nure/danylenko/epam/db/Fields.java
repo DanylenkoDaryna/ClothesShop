@@ -3,6 +3,7 @@ package ua.nure.danylenko.epam.db;
 public class Fields {
     // entities
     public static final String ENTITY_ID = "id";
+    public static final String COLOUR = "colour";
 
     public static final String USER_LOGIN = "login";
     public static final String USER_PASSWORD = "password";
