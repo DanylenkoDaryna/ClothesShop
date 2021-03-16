@@ -65,7 +65,7 @@ public class LoginCommand extends Command {
                 WEB_LOG.info("Set the session attribute: adminUser --> " + user);
                 UserDao userDao = new UserDao();
                 ArrayList<User> listOfUsers = (ArrayList<User>) userDao.getAllUsers();
-                List<Order> listOfOrders = orderDao.getAllOrders();
+                List<Order> listOfOrders =  orderDao.getAllOrders();
                 session.setAttribute("listOfUsers", listOfUsers);
                 session.setAttribute("listOfOrders", listOfOrders);
             }catch (AppException ae){

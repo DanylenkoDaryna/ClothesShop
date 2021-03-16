@@ -1,10 +1,12 @@
 package ua.nure.danylenko.epam.db.entity;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
 
+    private static final long serialVersionUID = -6889036256149495388L;
     private long orderNumber;
     private OrderStatus orderStatus;
     private String paymentType;

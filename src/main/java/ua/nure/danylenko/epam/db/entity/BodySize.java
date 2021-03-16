@@ -1,6 +1,8 @@
 package ua.nure.danylenko.epam.db.entity;
 
-public enum BodySize {
+import java.io.Serializable;
+
+public enum BodySize implements Serializable {
 
     XXS, XS, S, M, L, XL, XXL, XXXL;
 

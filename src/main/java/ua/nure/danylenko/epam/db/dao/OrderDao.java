@@ -151,9 +151,7 @@ public class OrderDao implements IDao  {
             rs = pst.executeQuery();
             while (rs.next()) {
                 Order order = extractOrder(rs);
-                order.setOrderItems(
-                        readOrderItems(con, order.getOrderNumber())
-                );
+                order.setOrderItems(readOrderItems(con, order.getOrderNumber()));
                 orders.add(order);
             }
 
@@ -206,7 +204,7 @@ public class OrderDao implements IDao  {
             while (rs.next()) {
                 Order order=extractOrder(rs);
                 order.setOrderItems(readOrderItems(con, order.getOrderNumber()));
-                orders.add(extractOrder(rs));
+                orders.add(order);
             }
             con.commit();
         } catch (SQLException ex) {
