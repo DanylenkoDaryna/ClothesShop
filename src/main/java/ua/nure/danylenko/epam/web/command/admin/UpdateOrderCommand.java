@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 
 public class UpdateOrderCommand extends Command {
@@ -26,7 +25,7 @@ public class UpdateOrderCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         WEB_LOG.info("UpdateOrderCommand starts");
         HttpSession session = request.getSession();
-        List<Order> orders=(LinkedList<Order>)session.getAttribute("listOfOrders");
+        List<Order> orders=(List<Order>)session.getAttribute("listOfOrders");
 
         String forward = Path.PAGE_ADMIN_CABINET;
         long orderToUpdate = Long.parseLong(request.getParameter("orderToUpdate"));

@@ -1,6 +1,8 @@
 package ua.nure.danylenko.epam.db.entity;
 
-public enum OrderStatus {
+import java.io.Serializable;
+
+public enum OrderStatus implements Serializable {
 
     REGISTERED, PAID, CANCELED;
     public String getName() {

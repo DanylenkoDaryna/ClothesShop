@@ -1,7 +1,10 @@
 package ua.nure.danylenko.epam.db.entity;
 
-public class OrderItem extends Entity {
+import java.io.Serializable;
 
+public class OrderItem extends Entity implements Serializable {
+
+    private static final long serialVersionUID = -6889036256149495388L;
 
     private long productId;
     private String name;

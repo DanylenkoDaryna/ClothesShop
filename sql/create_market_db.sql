@@ -404,7 +404,7 @@ CREATE TABLE orders(
 -- --------------------------------------------------------------
 -- COLOURS
 -- --------------------------------------------------------------
-	CREATE TABLE colours(
+CREATE TABLE colours(
 
     id INTEGER NOT NULL auto_increment PRIMARY KEY,
 
