@@ -26,8 +26,8 @@ public class ItemsDao implements IDao {
     private static final String SQL_GET_ITEM_BY_ID = "SELECT * FROM items WHERE id=?;";
     private static final String SQL_FIND_PRODUCTS_BY_ITEM ="SELECT * FROM products WHERE item_id=?";
     private static final String SQL_FIND_MATERIALS_BY_ITEM_ID="SELECT * FROM materials WHERE item_id=?";
-    private static final String SQL_FIND_PRODUCT_BY_ID ="SELECT item_id FROM products WHERE id=?";
-    private static final String SQL_FIND_ITEM_ID_BY_PRODUCT ="SELECT * FROM products WHERE id=?";
+    private static final String SQL_FIND_PRODUCT_BY_ID ="SELECT * FROM products WHERE id=?";
+    private static final String SQL_FIND_ITEM_ID_BY_PRODUCT_ID ="SELECT item_id FROM products WHERE id=?";
     private static final String SQL_FIND_All_AVAILABLE_COLOURS = "SELECT colour FROM items";
     private static final String SQL_FIND_All_BRANDS = "SELECT brand FROM items";
     private static final String SQL_FIND_All_SIZES = "SELECT product_size FROM products";
@@ -200,13 +200,12 @@ public class ItemsDao implements IDao {
                     product.setAvailable(availableAmount-orderAmount);
                     updateProductAmount(con, product, product.getAvailable());
                 }else if(orderItem.getAmount()== product.getAvailable()){
-                    deleteProduct(con, product);
                     long itemId = -1;
-                    pst = con.prepareStatement(SQL_FIND_ITEM_ID_BY_PRODUCT);
+                    pst = con.prepareStatement(SQL_FIND_ITEM_ID_BY_PRODUCT_ID);
                     pst.setLong(1,product.getId());
                     rs = pst.executeQuery();
                     while (rs.next()) {
-                        itemId=rs.getLong(Fields.PRODUCT_ITEM_ID);
+                        itemId=rs.getLong(1);
                         DB_LOG.info("itemId="+itemId);
                     }
                     Item item = getItemById(con, itemId);
@@ -214,6 +213,7 @@ public class ItemsDao implements IDao {
                     if(item.getContainer().isEmpty()){
                         deleteItem(con, itemId);
                     }
+                    deleteProduct(con, product);
                 }else{
                     DB_LOG.error("error in deleteProducts()");
                 }
@@ -226,7 +226,7 @@ public class ItemsDao implements IDao {
         }catch (DBException dbx) {
             DB_LOG.error("DBException - trouble with connection in deleteProducts()", dbx);
         } finally {
-            ConnectionFactory.close(con, pst);
+            ConnectionFactory.close(con, pst, rs);
         }
         DB_LOG.info("deleteProducts() ends");
     }
@@ -383,7 +383,7 @@ public class ItemsDao implements IDao {
             while (rs.next()) {
                 product = extractProduct(rs);
             }
-            getProductImages(con,product);
+            product=getProductImages(con,product);
 
         }catch (SQLException ex) {
             ConnectionFactory.rollback(con);
@@ -397,7 +397,7 @@ public class ItemsDao implements IDao {
     }
 
 
-    private void getProductImages(Connection con, Product product)throws DBException {
+    private Product getProductImages(Connection con, Product product)throws DBException {
        // DB_LOG.info("getProductImages() started!");
         ResultSet rs = null;
             try(PreparedStatement ps = con.prepareStatement(SQL_FIND_IMAGE_BY_PRODUCT_ID)) {
@@ -413,6 +413,7 @@ public class ItemsDao implements IDao {
             }finally {
                 ConnectionFactory.close(rs);
             }
+            return product;
     }
 
     private void getMaterialsByItem(Connection con, Item item) throws DBException {
