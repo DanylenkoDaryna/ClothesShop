@@ -76,7 +76,7 @@
 <main>
     <div class="container-fluid">
         <section class="text-center">
-          
+
             <div id="carouselIndex" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselIndex" data-slide-to="0" class="active"></li>

@@ -47,7 +47,7 @@ public class UpdateOrderCommand extends Command {
                 WEB_LOG.info("Order CANCELED");
                 break;
             }case PAID:{
-                orders.remove(currentOrder);
+               // orders.remove(currentOrder);
                 ItemsService itemsService = new ItemsService();
                 itemsService.getDao().deleteProducts(currentOrder.getOrderItems());
 

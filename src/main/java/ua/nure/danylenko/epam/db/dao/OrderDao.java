@@ -23,7 +23,7 @@ public class OrderDao implements IDao  {
             "values (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
     private static final String SQL_GET_ALL_ORDERS = "SELECT * FROM orders;";
     private static final String SQL_FIND_ORDERS_BY_ID = "SELECT * FROM orders WHERE user_id=?";
-    private static final String SQL_FIND_ORDER_ITEMS_BY_ORDER_ID = "SELECT * FROM order_items WHERE orders_id=?";
+    private static final String SQL_FIND_ORDER_ITEMS_BY_ORDER_ID = "SELECT * FROM armadiodb.order_items WHERE orders_id=?";
 
     private static final String SQL_UPDATE_ORDER_BY_ID = "UPDATE orders SET login=?, password=?, first_name=?, " +
                                                          "last_name=? WHERE users.id=?";
@@ -184,7 +184,7 @@ public class OrderDao implements IDao  {
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In readOrderItems() SQLException! Trouble with commit: ", ex);
-            ConnectionFactory.close(con,prep);
+            ConnectionFactory.close(con);
         }finally {
             ConnectionFactory.close(prep);
             ConnectionFactory.close(rs);
