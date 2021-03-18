@@ -40,6 +40,7 @@ public class ItemsDao implements IDao {
     private static final String SQL_ADD_PRODUCT_MATERIAL ="INSERT INTO armadiodb.materials (id, material, percent, item_id) values (DEFAULT, ?, ?, ?)";
     private static final String SQL_DELETE_PRODUCT_BY_ID ="DELETE FROM armadiodb.products WHERE  id=?";
     private static final String SQL_DELETE_ITEM_BY_ID ="DELETE FROM armadiodb.items WHERE id=?";
+    private static final String SQL_DELETE_MATERIALS_BY_ITEM_ID ="DELETE FROM armadiodb.materials WHERE item_id=?";
 
 
     @Override
@@ -212,6 +213,7 @@ public class ItemsDao implements IDao {
                     item.getContainer().remove(product);
                     if(item.getContainer().isEmpty()){
                         deleteItem(con, itemId);
+                        deleteMaterials(con, itemId);
                     }
                     deleteProduct(con, product);
                 }else{
@@ -242,6 +244,23 @@ public class ItemsDao implements IDao {
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In updateProductAmount() SQLException! Trouble with commit: ", ex);
+            ConnectionFactory.close(con,ps);
+        }finally {
+            ConnectionFactory.close(ps);
+        }
+
+    }
+
+    private void deleteMaterials(Connection con, long itemId){
+
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(SQL_DELETE_MATERIALS_BY_ITEM_ID);
+            ps.setLong(1, itemId);
+            ps.execute();
+        } catch (SQLException ex) {
+            ConnectionFactory.rollback(con);
+            DB_LOG.error("In deleteMaterials() SQLException! Trouble with commit: ", ex);
             ConnectionFactory.close(con,ps);
         }finally {
             ConnectionFactory.close(ps);
