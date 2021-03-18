@@ -114,17 +114,25 @@
                         </tr>
                         <tr>
                             <td>
-                                <%--<form action="basketServlet" method="post" >--%>
+                                <form action="basketServlet" method="post" >
                             <c:choose>
                                 <c:when test="${sessionScope.sessionUser!=null}">
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                                            <input title="page to return" hidden name="page" value="/currentItem.jsp">
+                                        <c:if test="${sessionScope.userRole.getName() eq 'admin'}">
+                                            <button type="submit" disabled class="btn" >
+                                                <i class="fas fa-shopping-cart"></i>
+                                                To Basket
+                                            </button>
+                                        </c:if>
+                                        <c:if test="${sessionScope.userRole.getName() eq 'client'}">
+                                        <input title="page to return" hidden name="page" value="/currentItem.jsp">
                                             <button type="submit" name="ClothesIdToBasket" value="${sessionScope.currentItem.getId()}"
-                                                    id="toBasketButton" disabled class="btn" >
+                                                    id="toBasketButton" disabled class="btn">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 To Basket
                                             </button>
                                         <%--</form>--%>
+                                        </c:if>
                                     </c:if>
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
                                         You cannot order anything, cuz your account is locked.<br>
@@ -134,11 +142,12 @@
                                 <c:otherwise>
                                     <%--<form action="basketServlet" method="post" >--%>
                                         <input title="page to return" hidden name="page" value="/currentItem.jsp">
-                                        <button type="submit" name="ClothesIdToBasket" value="${sessionScope.currentItem.getId()}"
-                                                id="toBasketButton" disabled class="btn" >
+                                        <button type="submit" disabled name="ClothesIdToBasket" value="${sessionScope.currentItem.getId()}"
+                                                id="toBasketButton" class="btn" >
                                             <i class="fas fa-shopping-cart"></i>
                                             To Basket
                                         </button>
+
                                 </c:otherwise>
                             </c:choose>
                                 </form>
@@ -147,14 +156,22 @@
                             <c:choose>
                                 <c:when test="${sessionScope.sessionUser!=null}">
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='UNLOCKED'}">
-                                        <form action="wishlistServlet" method="post" >
-                                            <input title="page to return" hidden name="page" value="<%=pageJspName%>">
-                                            <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.currentItem.getId()}"
-                                                    class="btn" >
+                                        <c:if test="${sessionScope.userRole.getName() eq 'admin'}">
+                                            <button type="submit" disabled class="btn" >
                                                 <i class="far fa-heart"></i>
                                                 To Wishlist
                                             </button>
-                                        </form>
+                                        </c:if>
+                                        <c:if test="${sessionScope.userRole.getName() eq 'client'}">
+                                            <form action="wishlistServlet" method="post" >
+                                                <input title="page to return" hidden name="page" value=<%=pageJspName%>>
+                                                <button type="submit" name="ClothesIdToWishlist" value="${sessionScope.currentItem.getId()}"
+                                                        class="btn" >
+                                                    <i class="far fa-heart"></i>
+                                                    To Wishlist
+                                                </button>
+                                            </form>
+                                        </c:if>
                                     </c:if>
                                     <c:if test="${sessionScope.sessionUser.getAccountStatus()=='LOCKED'}">
                                         You cannot order anything, cuz your account is locked.<br>
