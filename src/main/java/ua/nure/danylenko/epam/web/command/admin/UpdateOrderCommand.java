@@ -51,8 +51,6 @@ public class UpdateOrderCommand extends Command {
                 ItemsService itemsService = new ItemsService();
                 itemsService.getDao().deleteProducts(currentOrder.getOrderItems());
 
-//                List<Item> items = (ArrayList<Item>)session.getAttribute("items");
-//                session.setAttribute("items", items);
                 WEB_LOG.info("Order PAID");
                 break;
             }case REGISTERED:{
