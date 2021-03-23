@@ -92,6 +92,12 @@
   <load-on-startup>0</load-on-startup>
   </servlet>
 
+  <servlet>
+  <servlet-name>LocaleTagServlet</servlet-name>
+  <servlet-class>ua.nure.danylenko.epam.web.servlets.LocaleTagServlet</servlet-class>
+  <load-on-startup>0</load-on-startup>
+  </servlet>
+
     <servlet-mapping>
     <servlet-name>Controller</servlet-name>
     <url-pattern>/controller</url-pattern>
@@ -124,6 +130,11 @@
   <servlet-mapping>
     <servlet-name>WishlistCleanerServlet</servlet-name>
     <url-pattern>/wishlistCleanerServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>LocaleTagServlet</servlet-name>
+    <url-pattern>/LocaleTagServlet</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
