@@ -24,9 +24,15 @@ public class LocaleTagServlet extends HttpServlet {
         String language = pLanguage[0];
         String country = pLanguage[1];
         Locale locale = new Locale(language, country);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         request.setAttribute("country", locale.getDisplayCountry());
         request.setAttribute("language", request.getParameter("Language"));
         WEB_LOG.info("LocaleTagServlet ends");
+
+
+
         request.getRequestDispatcher("index.jsp")
                 .forward(request, response);
     }
