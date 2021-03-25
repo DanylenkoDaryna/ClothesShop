@@ -1,13 +1,13 @@
-
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!doctype html>
+
 <html lang="en">
-<%--<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>--%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@page import="java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <%!private String pageJspName="index.jsp";%>
-
+<%--<%@ page isELIgnored="false" %>--%>
 
 <body>
 <%-- MAIN_MENU --%>
@@ -19,7 +19,10 @@
                 <section class="text-center mb-4">
                     <h1><hi:Greetings/></h1>
 
+                    Привіт
 
+                    іті
+                    привет
                     <button>
                     <a href="LocaleTagServlet?Language=uk_UA">Ukrainian</a>
                     </button>
@@ -30,11 +33,11 @@
                     country = <h3>${country}</h3>
                     language = <h3>${language}</h3>
                     <fmt:setLocale value="${language}"/>
-                    <fmt:setBundle var="BundleContent" basename="src.resources.content_"/>
+                    <fmt:setBundle var="BundleContent" basename="content"/>
 
-                    <fmt:message key="message" bundle="${BundleContent}"/>
+                    <fmt:message key="label.message" bundle="${BundleContent}"/>
                     <br>
-                    <fmt:message key="bebe" bundle="${BundleContent}"/>
+                    <fmt:message key="label.bebe" bundle="${BundleContent}"/>
 
                     <h3>Shop of the best clothes for all your family!</h3>
                     <!-- basket -->
