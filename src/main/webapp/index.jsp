@@ -19,10 +19,7 @@
                 <section class="text-center mb-4">
                     <h1><hi:Greetings/></h1>
 
-                    Привіт
 
-                    іті
-                    привет
                     <button>
                     <a href="LocaleTagServlet?Language=uk_UA">Ukrainian</a>
                     </button>
@@ -38,6 +35,8 @@
                     <fmt:message key="label.message" bundle="${BundleContent}"/>
                     <br>
                     <fmt:message key="label.bebe" bundle="${BundleContent}"/>
+                    <br>
+                    <fmt:message key="index.content" bundle="${BundleContent}"/>
 
                     <h3>Shop of the best clothes for all your family!</h3>
                     <!-- basket -->
