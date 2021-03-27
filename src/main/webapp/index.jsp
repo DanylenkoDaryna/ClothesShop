@@ -1,15 +1,17 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=WINDOWS-1251" language="java" pageEncoding="WINDOWS-1251" %>
 <!doctype html>
-
 <html lang="en">
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@page import="java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <%!private String pageJspName="index.jsp";%>
-<%--<%@ page isELIgnored="false" %>--%>
 
 <body>
+
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle var="BundleContent" basename="armadio"/>
+
 <%-- MAIN_MENU --%>
 <%@ include file="/WEB-INF/jspf/mainMenu.jspf"%>
 <%-- MAIN_MENU --%>
@@ -19,7 +21,10 @@
                 <section class="text-center mb-4">
                     <h1><hi:Greetings/></h1>
 
-
+                    бебеебе бебе
+                    bebebebe bebeb
+                    Хелоу
+                    Я знаю що ти підар
                     <button>
                     <a href="LocaleTagServlet?Language=uk_UA">Ukrainian</a>
                     </button>
@@ -28,15 +33,9 @@
                     </button>
                     <br>
                     country = <h3>${country}</h3>
+                    <br>
                     language = <h3>${language}</h3>
-                    <fmt:setLocale value="${language}"/>
-                    <fmt:setBundle var="BundleContent" basename="content"/>
 
-                    <fmt:message key="label.message" bundle="${BundleContent}"/>
-                    <br>
-                    <fmt:message key="label.bebe" bundle="${BundleContent}"/>
-                    <br>
-                    <fmt:message key="index.content" bundle="${BundleContent}"/>
 
                     <h3>Shop of the best clothes for all your family!</h3>
                     <!-- basket -->
@@ -58,7 +57,7 @@
                             <img src="img/armadio2.JPG" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block d-lg-block">
                                 <h5>"You could find here many purchases for yourself! Amazing! True prices!"</h5>
-                                <p>В© Amy Williams, Vogue journalist</p>
+                                <p>© Amy Williams, Vogue journalist</p>
                                 <p>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -72,7 +71,7 @@
                             <img src="img/armadio3.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block d-lg-block">
                                 <h5>"I love colours and brands! Would buy here everything for myself, very good quality!"</h5>
-                                <p> В© Gorgio Armani, cool guy</p>
+                                <p> © Gorgio Armani, cool guy</p>
                                 <p>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>

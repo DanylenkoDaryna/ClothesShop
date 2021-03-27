@@ -23,7 +23,8 @@
 
                     <a class="nav-link" href="index.jsp">
                         <i class="fas fa-home"></i>
-                        Home<span class="sr-only">(current)</span></a>
+                        <fmt:message key="index.menu.home" bundle="${BundleContent}"/>
+                        <span class="sr-only">(current)</span></a>
 
                 </li>
 
@@ -54,7 +55,7 @@
                             <c:if test="${empty sessionScope.Basket.getBasketElements()}">
                                 <a class="nav-link disabled" >
                                     <i class="fas fa-shopping-cart"></i>
-                                    Basket(0)
+                                    <fmt:message key="index.menu.basket" bundle="${BundleContent}"/>(0)
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>

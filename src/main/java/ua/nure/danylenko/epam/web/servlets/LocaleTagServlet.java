@@ -21,15 +21,24 @@ public class LocaleTagServlet extends HttpServlet {
             throws ServletException, IOException {
         WEB_LOG.info("LocaleTagServlet starts");
 
+//        Charset currentCharset = Charset.defaultCharset();
+
+//        WEB_LOG.info("Default Charset = " + currentCharset.toString());
+
         String[] pLanguage=request.getParameter("Language").split("_");
         String language = pLanguage[0];
         String country = pLanguage[1];
 
         Locale locale = new Locale(language, country);
 
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
+//        response.setCharacterEncoding("KOI8-U");
+//        //response.setContentType("text/html; charset=KOI8-U");
+
+        WEB_LOG.info(" request.getContentType() = " +  request.getContentType());
+        WEB_LOG.info(" response.getContentType() = " +  response.getContentType());
+        WEB_LOG.info(" response.getCharacterEncoding() = " +  response.getCharacterEncoding());
+
+//        request.setCharacterEncoding("UTF-8");
 
         request.setAttribute("country", locale.getDisplayCountry());
         request.setAttribute("language", request.getParameter("Language"));
