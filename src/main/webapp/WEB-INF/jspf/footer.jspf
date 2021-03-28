@@ -12,7 +12,8 @@ Footer (bottom area).
 		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
 		</div>
 		<div class="my-text-block-footer col-lg-6 col-md-12 col-sm-12 col-xs-12">
-			My Contacts
+			<%--My Contacts--%>
+			<fmt:message key="index.menu.contacts" bundle="${BundleContent}"/>
 		</div>
 	</div>
 	<br>
