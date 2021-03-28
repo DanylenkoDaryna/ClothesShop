@@ -1,4 +1,9 @@
 
+<%-- l10n --%>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle var="BundleContent" basename="armadio" />
+<%-- l10n --%>
+
 <!-- BASKET -->
 <%@ include file="/WEB-INF/jspf/basket.jspf"%>
 <!-- BASKET -->
@@ -55,6 +60,7 @@
                             <c:if test="${empty sessionScope.Basket.getBasketElements()}">
                                 <a class="nav-link disabled" >
                                     <i class="fas fa-shopping-cart"></i>
+                                        <%--Basket(0)--%>
                                     <fmt:message key="index.menu.basket" bundle="${BundleContent}"/>(0)
                                     <span class="sr-only">(current)</span>
                                 </a>
@@ -62,6 +68,7 @@
                             <c:if test="${not empty sessionScope.Basket.getBasketElements()}">
                                 <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
                                     <i class="fas fa-shopping-cart"></i>
+                                        <%--Basket(size)--%>
                                     Basket(${sessionScope.Basket.getBasketElements().size()})
                                     <span class="sr-only">(current)</span>
                                 </a>
@@ -71,14 +78,17 @@
                             <c:if test="${empty sessionScope.wishlist}">
                                 <a class="nav-link disabled" >
                                     <i class="far fa-heart"></i>
-                                    Favourites(0)
+                                        <%--Favourites(0)--%>
+                                    <fmt:message key="index.menu.wishlist" bundle="${BundleContent}"/>(0)
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
                             <c:if test="${not empty sessionScope.wishlist}">
                                 <a class="nav-link" href="" data-toggle="modal" data-target="#wishlistModal">
                                     <i class="far fa-heart"></i>
-                                    Favourites(${sessionScope.wishlist.size()})
+                                        <%--Favourites(size)--%>
+                                    <fmt:message key="index.menu.wishlist" bundle="${BundleContent}"/>
+                                    (${sessionScope.wishlist.size()})
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </c:if>
@@ -86,14 +96,15 @@
                         <li class="nav-item" >
                             <a class="nav-link" href="controller?command=logout">
                                 <i class="fas fa-sign-out-alt"></i>
-                                Logout
+                                    <%--Logout--%>
+                                <fmt:message key="index.menu.logout" bundle="${BundleContent}"/>
                             </a>
 
                         </li>
                         <li class="nav-item" >
                             <a class="nav-link" href="clientCabinetPage.jsp">
                                 <i class="fas fa-sign-out-alt"></i>
-                                MyCabinet
+                                <fmt:message key="index.menu.cabinet" bundle="${BundleContent}"/>
                             </a>
 
                         </li>
@@ -103,14 +114,16 @@
                         <li class="nav-item" >
                         <a class="nav-link" href="controller?command=logout">
                             <i class="fas fa-sign-out-alt"></i>
-                            Logout
+                            <%--Logout--%>
+                            <fmt:message key="index.menu.logout" bundle="${BundleContent}"/>
                         </a>
 
                         </li>
                         <li class="nav-item" >
                         <a class="nav-link" href="adminCabinetPage.jsp">
                             <i class="fas fa-home"></i>
-                            Administration
+                                <%--Administration--%>
+                            <fmt:message key="index.menu.administration" bundle="${BundleContent}"/>
                         </a>
 
                         </li>
@@ -121,48 +134,65 @@
                             <c:if test="${empty sessionScope.Basket.getBasketElements()}">
                                 <a class="nav-link disabled" >
                                     <i class="fas fa-shopping-cart"></i>
-                                    Basket(0)
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </c:if>
-                            <c:if test="${not empty sessionScope.Basket.getBasketElements()}">
-                                <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    Basket(${sessionScope.Basket.getBasketElements().size()})
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </c:if>
-                        </li>
-                        <li class="nav-item active">
-                            <c:if test="${empty sessionScope.wishlist}">
-                                <a class="nav-link disabled" >
-                                    <i class="far fa-heart"></i>
-                                    Favourites(0)
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </c:if>
-                            <c:if test="${not empty sessionScope.wishlist}">
-                                <a class="nav-link" href="" data-toggle="modal" data-target="#wishlistModal">
-                                    <i class="far fa-heart"></i>
-                                    Favourites(${sessionScope.wishlist.size()})
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </c:if>
-                        </li>
+                                <%--Basket(0)--%>
+                                <fmt:message key="index.menu.basket" bundle="${BundleContent}"/>(0)
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </c:if>
+                        <c:if test="${not empty sessionScope.Basket.getBasketElements()}">
+                            <a class="nav-link" href="" data-toggle="modal" data-target="#basketModal">
+                                <i class="fas fa-shopping-cart"></i>
+                            <%--Basket(${sessionScope.Basket.getBasketElements().size()})--%>
+                            <fmt:message key="index.menu.basket" bundle="${BundleContent}"/>
+                            (${sessionScope.Basket.getBasketElements().size()})
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </c:if>
+                </li>
+                <li class="nav-item active">
+                    <c:if test="${empty sessionScope.wishlist}">
+                        <a class="nav-link disabled" >
+                            <i class="far fa-heart"></i>
+                                <%--Favourites(0)--%>
+                            <fmt:message key="index.menu.wishlist" bundle="${BundleContent}"/>(0)
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </c:if>
+                    <c:if test="${not empty sessionScope.wishlist}">
+                        <a class="nav-link" href="" data-toggle="modal" data-target="#wishlistModal">
+                            <i class="far fa-heart"></i>
+                                <%--Favourites(${sessionScope.wishlist.size()})--%>
+                            <fmt:message key="index.menu.wishlist" bundle="${BundleContent}"/>
+                            (${sessionScope.wishlist.size()})
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </c:if>
+                </li>
 
-                        <li class="nav-item" >
-                        <a class="nav-link" href="login.jsp">
-                            <i class="fas fa-house-user"></i>
-                            Log in</a>
-                        </li>
-                    </c:otherwise>
+                <li class="nav-item" >
+                <a class="nav-link" href="login.jsp">
+                    <i class="fas fa-house-user"></i>
+                    <%--Log in--%>
+                    <fmt:message key="index.menu.login" bundle="${BundleContent}"/>
+                </a>
+                </li>
+            </c:otherwise>
 
-                    </c:choose>
+            </c:choose>
 
 
 
-            </ul>
-        </div>
-    </nav>
+    </ul>
+</div>
+</nav>
+</div>
+
+<div class="container-fluid">
+<button>
+    <a href="LocaleTagServlet?Language=uk_UA">Ukrainian</a>
+</button>
+<button>
+    <a href="LocaleTagServlet?Language=en_US">English</a>
+</button>
 </div>
 
