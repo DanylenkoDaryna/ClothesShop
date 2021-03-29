@@ -188,11 +188,21 @@
 </div>
 
 <div class="container-fluid">
-<button>
-    <a href="LocaleTagServlet?Language=uk_UA">Ukrainian</a>
-</button>
-<button>
-    <a href="LocaleTagServlet?Language=en_US">English</a>
-</button>
-</div>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+        <a role="button" class="btn btn-outline-primary"
+           href="LocaleTagServlet?Language=uk_UA&pageToReturn=<%=pageJspName%>">
+
+            <img src="img/ukraine-flag-icon-64.png">
+            <%--Ukrainian--%>
+            <fmt:message key="menu.localisation.ukraine" bundle="${BundleContent}"/>
+        </a>
+        <a role="button" class="btn btn-outline-primary"
+           href="LocaleTagServlet?Language=en_US&pageToReturn=<%=pageJspName%>">
+
+            <img src="img/united-kingdom-flag-icon-64.png">
+            <%--English--%>
+            <fmt:message key="menu.localisation.english" bundle="${BundleContent}"/>
+        </a>
+    </nav>
+</div>

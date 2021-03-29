@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=WINDOWS-1251" language="java" pageEncoding="WINDOWS-1251" %>
 <!doctype html>
 <html lang="en">
-<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<%@page import="java.util.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <%!private String pageJspName="index.jsp";%>
 
@@ -18,12 +15,6 @@
                 <section class="text-center mb-4">
                     <h1><hi:Greetings/></h1>
 
-                    <%--<button>--%>
-                    <%--<a href="LocaleTagServlet?Language=uk_UA">Ukrainian</a>--%>
-                    <%--</button>--%>
-                    <%--<button>--%>
-                    <%--<a href="LocaleTagServlet?Language=en_US">English</a>--%>
-                    <%--</button>--%>
                     <br>
                     country = <h3>${country}</h3>
                     <br>
@@ -42,7 +33,8 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="img/bacgroundImageIndex.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block d-lg-block">
+                            <div class="carousel-caption d-none d-md-block d-lg-block" id="black-colored-review">
+
                                 <h5><fmt:message key="index.view1" bundle="${BundleContent}"/></h5>
                                 <h3><p>© Загорецька Л.С., пенсіонерка</p></h3>
                                 <p>
@@ -52,6 +44,7 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half"></i>
                                 </p>
+
                             </div>
                         </div>
                         <div class="carousel-item">

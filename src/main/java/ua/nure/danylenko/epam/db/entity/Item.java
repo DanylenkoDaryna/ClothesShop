@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Class Item extends Entity and consists of unique parameters for that item
+ * and has list of products with unique parameters for every product
+ */
 public class Item extends Entity{
 
     private String itemName;
