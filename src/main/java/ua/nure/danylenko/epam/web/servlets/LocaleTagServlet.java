@@ -21,6 +21,7 @@ public class LocaleTagServlet extends HttpServlet {
             throws ServletException, IOException {
         WEB_LOG.info("LocaleTagServlet starts");
 
+        String forward = request.getParameter("pageToReturn");
 //        Charset currentCharset = Charset.defaultCharset();
 
 //        WEB_LOG.info("Default Charset = " + currentCharset.toString());
@@ -31,21 +32,16 @@ public class LocaleTagServlet extends HttpServlet {
 
         Locale locale = new Locale(language, country);
 
-//        response.setCharacterEncoding("KOI8-U");
-//        //response.setContentType("text/html; charset=KOI8-U");
-
-        WEB_LOG.info(" request.getContentType() = " +  request.getContentType());
-        WEB_LOG.info(" response.getContentType() = " +  response.getContentType());
-        WEB_LOG.info(" response.getCharacterEncoding() = " +  response.getCharacterEncoding());
-
-//        request.setCharacterEncoding("UTF-8");
+//        WEB_LOG.info(" request.getContentType() = " +  request.getContentType());
+//        WEB_LOG.info(" response.getContentType() = " +  response.getContentType());
+//        WEB_LOG.info(" response.getCharacterEncoding() = " +  response.getCharacterEncoding());
 
         request.setAttribute("country", locale.getDisplayCountry());
         request.setAttribute("language", request.getParameter("Language"));
 
         WEB_LOG.info("LocaleTagServlet ends");
 
-        request.getRequestDispatcher("index.jsp")
+        request.getRequestDispatcher(forward)
                 .forward(request, response);
     }
 

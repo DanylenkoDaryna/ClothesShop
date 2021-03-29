@@ -1,12 +1,14 @@
+<%@ page contentType="text/html; charset=WINDOWS-1251" language="java" pageEncoding="WINDOWS-1251" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <head>
 	<meta charset="UTF-8">
-	<!-- Ð´Ð»Ñ ÐºÐ¾Ñ€ÐµÐºÑ‚Ð½Ð¾Ð³Ð¾ Ð²Ñ–Ð´Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð½Ñ ÑÑ‚Ð¾Ñ€Ñ–Ð½ÐºÐ¸ Ñƒ ÑÑ‚Ð°Ñ€Ð¸Ñ… Ð²ÐµÑ€ÑÑ–ÑÑ… Ð†Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚ Ð•ÐºÑÐ¿Ð»Ð¾Ñ€ÐµÑ€Ñƒ-->
+	<!-- äëÿ êîðåêòíîãî â³äîáðàæåííÿ ñòîð³íêè ó ñòàðèõ âåðñ³ÿõ ²íòåðíåò Åêñïëîðåðó-->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- Ð´Ð»Ñ ÐºÐ¾Ñ€ÐµÐºÑ‚Ð½Ð¾Ð³Ð¾ Ð²Ñ–Ð´Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð½Ñ ÑÑ‚Ð¾Ñ€Ñ–Ð½ÐºÐ¸ Ð½Ð° Ð¼Ð¾Ð±Ñ–Ð»ÑŒÐ½Ð¸Ñ… Ð¿Ñ€Ð¸ÑÑ‚Ñ€Ð¾ÑÑ…-->
+	<!-- äëÿ êîðåêòíîãî â³äîáðàæåííÿ ñòîð³íêè íà ìîá³ëüíèõ ïðèñòðîÿõ-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 

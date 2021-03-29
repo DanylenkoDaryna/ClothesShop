@@ -10,7 +10,7 @@ public class Greeting extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         try {
-            pageContext.getOut().print( "<h1>Welcome to Armadio Internet-shop!</h1>" );
+            pageContext.getOut().print( "<h1> <fmt:message key=\"index.greetings\" bundle=\"${BundleContent}\"/></h1>" );
         } catch(IOException ioException) {
             throw new JspException("Error: " + ioException.getMessage());
         }
