@@ -2,8 +2,15 @@ package ua.nure.danylenko.epam.db.entity;
 
 import org.apache.log4j.Logger;
 
+/**
+ * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class Material extends Entity{
+
     private static final long serialVersionUID = -6889036256149495388L;
+
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
 

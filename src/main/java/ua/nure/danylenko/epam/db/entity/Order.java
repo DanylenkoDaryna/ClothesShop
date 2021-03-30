@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The Order class provides fields and methods for making orders of bying purchases by customer
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -6889036256149495388L;
@@ -20,6 +25,12 @@ public class Order implements Serializable {
         orderStatus=OrderStatus.CANCELED;
     }
 
+    /**
+     * Method for calculaiting the cost of all purchases, buying by client
+     * @param purchases -products in List<Product> productlist of specific item
+     * @param basketElements Items in basket, which would be buyed by customer
+     * @return round value of total cost for customer (double)
+     */
     public double sumTotalAmount(List<OrderItem> purchases, List<BasketElement> basketElements){
 
         double result=45.0;

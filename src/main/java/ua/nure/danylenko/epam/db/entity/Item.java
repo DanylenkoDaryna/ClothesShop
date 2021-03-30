@@ -10,6 +10,9 @@ import java.util.Locale;
 /**
  * Class Item extends Entity and consists of unique parameters for that item
  * and has list of products with unique parameters for every product
+ * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
  */
 public class Item extends Entity{
 
