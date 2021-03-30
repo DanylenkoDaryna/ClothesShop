@@ -13,6 +13,11 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
+/**
+ * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class ItemsDao implements IDao {
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");

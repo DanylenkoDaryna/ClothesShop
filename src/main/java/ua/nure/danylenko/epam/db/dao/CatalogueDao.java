@@ -10,6 +10,11 @@ import ua.nure.danylenko.epam.exception.Messages;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class CatalogueDao implements IDao {
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");

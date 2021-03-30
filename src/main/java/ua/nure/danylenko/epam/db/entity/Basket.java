@@ -3,6 +3,11 @@ package ua.nure.danylenko.epam.db.entity;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class Basket extends Entity {
 
     private double totalAmount;
