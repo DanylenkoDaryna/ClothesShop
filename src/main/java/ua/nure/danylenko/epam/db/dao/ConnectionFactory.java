@@ -14,7 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The ConnectionFactory class provides methods to get the connection, to work with connection and transactions and
+ * to clear connection and other resources
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */

@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The Catalogue class provides map of Categories as the container for Catalog (Menu) item
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */

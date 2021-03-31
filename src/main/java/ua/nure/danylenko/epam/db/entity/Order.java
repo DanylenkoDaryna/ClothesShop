@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The Order class provides fields and methods for making orders of bying purchases by customer
+ * The Order class provides fields and methods for order description
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */

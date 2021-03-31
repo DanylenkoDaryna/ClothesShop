@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The Basket class provides fields and methods for describing basket entity
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */

@@ -3,7 +3,8 @@ package ua.nure.danylenko.epam.db;
 import ua.nure.danylenko.epam.db.entity.User;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The Role enum provides two types of users that could use full ability of site and have their own cabinets
+ *
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */

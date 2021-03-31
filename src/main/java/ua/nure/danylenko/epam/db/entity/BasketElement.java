@@ -1,7 +1,7 @@
 package ua.nure.danylenko.epam.db.entity;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The BasketElement class provides fields and methods for describing BasketElement entity
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */

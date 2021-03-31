@@ -1,7 +1,7 @@
 package ua.nure.danylenko.epam.db;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The Fields class has the number of entity names from database
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */
@@ -21,7 +21,6 @@ public class Fields {
     public static final String USER_INFO_TEL = "telephone";
     public static final String USER_INFO_EMAIL="email";
 
-
     public static final String ORDER_NUMBER = "id";
     public static final String ORDER_STATUS = "order_status";
     public static final String ORDER_PAYMENT_TYPE= "payment_type";
@@ -36,7 +35,6 @@ public class Fields {
     public static final String ORDERITEM_COLOUR = "colour";
     public static final String ORDERITEM_AMOUNT = "amount";
     public static final String ORDERITEM_ORDER_ID = "orders_id";
-
 
     public static final String CATEGORY_NAME = "name";
     public static final String CATALOGUE_ID = "catalogue_id";
@@ -62,10 +60,4 @@ public class Fields {
     public static final String MENU_ITEM_NAME = "name";
     public static final String MENU_ITEM_CATEGORY_ID = "category_id";
 
-    // beans
-    public static final String USER_ORDER_BEAN_ORDER_ID = "id";
-    public static final String USER_ORDER_BEAN_USER_FIRST_NAME = "first_name";
-    public static final String USER_ORDER_BEAN_USER_LAST_NAME = "last_name";
-    public static final String USER_ORDER_BEAN_ORDER_BILL = "bill";
-    public static final String USER_ORDER_BEAN_STATUS_NAME = "name";
 }
