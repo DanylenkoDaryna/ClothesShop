@@ -3,7 +3,7 @@ package ua.nure.danylenko.epam.db.dao;
 import ua.nure.danylenko.epam.exception.DBException;
 
 /**
- The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ The IDao<E> interface provides important default methods (CRUD) that dao classes usually needed
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  * @param <E>

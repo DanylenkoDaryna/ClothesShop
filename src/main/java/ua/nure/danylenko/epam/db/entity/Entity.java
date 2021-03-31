@@ -3,7 +3,7 @@ package ua.nure.danylenko.epam.db.entity;
 import java.io.Serializable;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The Entity abstract class provides main fields and methods for entity classes
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */

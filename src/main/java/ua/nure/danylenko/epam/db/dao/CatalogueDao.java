@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The CatalogueDao class implements IDao provides requests to db for manipulating with catalogue and categories
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */
@@ -29,7 +29,7 @@ public class CatalogueDao implements IDao {
     private static final String SQL_RENAME_CATALOGUE_ITEM = "UPDATE armadiodb.catalogue SET name=? WHERE id=?;";
     private static final String SQL_ADD_NEW_CATEGORY = "INSERT INTO armadiodb.categories (id, catalogue_id, name) values (DEFAULT,?,?)";
     private static final String SQL_REMOVE_CATEGORY = "DELETE FROM armadiodb.categories WHERE catalogue_id=? AND name=?";
-    private static final String SQL_REMOVE_CATEGORY_BY_CATALOGUE_ID = "DELETE FROM armadiodb.categories WHERE catalogue_id=?";
+    private static final String SQL_REMOVE_CATEGORIES_BY_CATALOGUE_ID = "DELETE FROM armadiodb.categories WHERE catalogue_id=?";
     private static final String SQL_RENAME_CATEGORY = "UPDATE armadiodb.categories SET name=? WHERE catalogue_id=? AND name=?";
     private static final String SQL_GET_CATALOGUE_ID_BY_NAME = "SELECT id FROM armadiodb.catalogue WHERE name=? ";
     private static final String SQL_GET_CATEGORY_ID_BY_CATALOGUE_ID_AND_CATEGORY = "SELECT id FROM armadiodb.categories WHERE catalogue_id=? AND name=?";
@@ -59,7 +59,8 @@ public class CatalogueDao implements IDao {
             con.commit();
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
-            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_LOGIN, ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_MENU_ITEMS);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_MENU_ITEMS, ex);
         } finally {
             ConnectionFactory.close(con, stmt, rs);
         }
@@ -78,7 +79,8 @@ public class CatalogueDao implements IDao {
                 clothes.add(extractCategory(rs));
             }
         } catch (SQLException ex) {
-            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_LOGIN, ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_CATEGORIES);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_CATEGORIES, ex);
         } finally {
             if(rs!=null){
                 rs.close();
@@ -102,6 +104,7 @@ public class CatalogueDao implements IDao {
             con.commit();
         } catch (SQLException ex) {
             DB_LOG.error("SQLException in addItem() for Catalogue", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_ADD_NEW_MENU_ITEM);
             ConnectionFactory.rollback(con);
         } catch (DBException e) {
             DB_LOG.error(e);
@@ -128,7 +131,7 @@ public class CatalogueDao implements IDao {
                 catalogueId=rs.getLong(Fields.ENTITY_ID);
             }
 
-            ps = con.prepareStatement(SQL_REMOVE_CATEGORY_BY_CATALOGUE_ID);
+            ps = con.prepareStatement(SQL_REMOVE_CATEGORIES_BY_CATALOGUE_ID);
             ps.setLong(1,catalogueId);
             ps.execute();
             /*code to delete when REcreate DB*/
@@ -139,6 +142,7 @@ public class CatalogueDao implements IDao {
             con.commit();
         } catch (SQLException ex) {
             DB_LOG.error("SQLException in removeCatalogueItem() for Catalogue", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_REMOVE_CATALOGUE_ITEM_AND_CATEGORIES);
             ConnectionFactory.rollback(con);
         } catch (DBException e) {
             DB_LOG.error("DBException in removeCatalogueItem() for Catalogue", e);
@@ -171,10 +175,11 @@ public class CatalogueDao implements IDao {
             con.commit();
         } catch (SQLException ex) {
             DB_LOG.error("SQLException in renameCatalogueItem() for Catalogue", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_RENAME_MENU_ITEM);
             ConnectionFactory.rollback(con);
         } catch (DBException e) {
             DB_LOG.error("DBException in renameCatalogueItem() for Catalogue", e);
-            DB_LOG.error(e);
+            DB_LOG.error(Messages.ERR_CANNOT_RENAME_MENU_ITEM);
         } finally {
             ConnectionFactory.close(con, ps);
         }

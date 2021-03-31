@@ -3,7 +3,7 @@ package ua.nure.danylenko.epam.db.entity;
 import java.time.LocalDate;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The User class provides fields and methods that describes user of site
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */
@@ -34,7 +34,6 @@ public class User extends Entity {
     public User(){
         accountStatus=AccountStatus.UNLOCKED;
     }
-
 
     public String getLogin() {
         return login;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The UserDao class implements IDao provides requests to db for manipulating with users
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */
@@ -88,16 +88,17 @@ public class UserDao implements IDao {
         } catch (DBException e) {
 
             DB_LOG.error(e.getStackTrace());
-            DB_LOG.info("trouble with connection");
+            DB_LOG.error("trouble with connection");
+            DB_LOG.error(Messages.ERR_CANNOT_CREATE_USER);
 
         } catch (SQLException e) {
             DB_LOG.error(e);
-            DB_LOG.info("trouble with commit");
+            DB_LOG.error("trouble with commit");
+            DB_LOG.error(Messages.ERR_CANNOT_CREATE_USER);
             ConnectionFactory.rollback(con);
         } finally {
             ConnectionFactory.close(con, pstmt);
         }
-
     }
 
     @Override
@@ -165,6 +166,7 @@ public class UserDao implements IDao {
 
         } catch (SQLException e) {
             DB_LOG.error(e.getStackTrace());
+            DB_LOG.error(Messages.ERR_CANNOT_UPDATE_USER);
             DB_LOG.info("update() - trouble with commit");
             ConnectionFactory.rollback(con);
         } finally {

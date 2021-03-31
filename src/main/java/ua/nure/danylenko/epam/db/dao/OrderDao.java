@@ -7,13 +7,14 @@ import ua.nure.danylenko.epam.db.entity.OrderItem;
 import ua.nure.danylenko.epam.db.entity.OrderStatus;
 import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.exception.DBException;
+import ua.nure.danylenko.epam.exception.Messages;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The OrderDao class implements IDao provides requests to db for manipulating with orders
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */
@@ -42,7 +43,7 @@ public class OrderDao implements IDao  {
         return ConnectionFactory.getInstance().getConnection();
     }
 
-    public Order createOrder(Object entity) {
+    public Order createOrder(Object entity) throws AppException {
         DB_LOG.info("Order creating starts");
         Order order=(Order)entity;
         Connection con = null;
@@ -77,11 +78,14 @@ public class OrderDao implements IDao  {
 
         } catch (DBException e) {
 
-            DB_LOG.info("DBException - trouble with connection in createOrder()");
+            DB_LOG.error("DBException - trouble with connection in createOrder()");
+            throw new AppException(Messages.ERR_CANNOT_CREATE_ORDER, e);
 
         } catch (SQLException e) {
-            DB_LOG.info("SQLException - trouble with commit in createOrder()");
+            DB_LOG.error("SQLException - trouble with commit in createOrder()");
+            DB_LOG.error(Messages.ERR_CANNOT_CREATE_ORDER);
             ConnectionFactory.rollback(con);
+            throw new AppException(Messages.ERR_CANNOT_CREATE_ORDER, e);
         } finally {
             ConnectionFactory.close(con, pstmt, rs);
             ConnectionFactory.close(stmt);
@@ -164,8 +168,10 @@ public class OrderDao implements IDao  {
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("SQLException - trouble with commit in read(long user_id)", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_ORDERS_BY_ID);
         }catch (DBException dbx) {
             DB_LOG.error("DBException - trouble with connection in read(long user_id)", dbx);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_ORDERS_BY_ID);
         } finally {
             ConnectionFactory.close(con, pst, rs);
         }
@@ -214,9 +220,11 @@ public class OrderDao implements IDao  {
             con.commit();
         } catch (SQLException ex) {
             DB_LOG.error("SQLException in getAllOrders() - Trouble with commit", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_ORDERS);
             ConnectionFactory.rollback(con);
         } catch (DBException e) {
             DB_LOG.error("DBException in getAllOrders() - trouble with connection", e);
+            DB_LOG.error(Messages.ERR_CANNOT_OBTAIN_ORDERS);
             ConnectionFactory.rollback(con);
         } finally {
             ConnectionFactory.close(rs);
@@ -248,8 +256,10 @@ public class OrderDao implements IDao  {
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("SQLException - trouble with commit in updateStatus()", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_UPDATE_ORDER_STATUS);
         }catch (DBException dbx) {
             DB_LOG.error("DBException - trouble with connection in updateStatus()", dbx);
+            DB_LOG.error(Messages.ERR_CANNOT_UPDATE_ORDER_STATUS);
         } finally {
             ConnectionFactory.close(con, pst);
         }

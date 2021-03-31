@@ -14,7 +14,8 @@ import java.sql.Date;
 import java.util.*;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The ItemsDao class implements IDao provides requests to db for manipulating with Items and products,
+ * images and materials
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */
@@ -83,9 +84,11 @@ public class ItemsDao implements IDao {
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao create() SQLException! Trouble with commit: ", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_CREATE_ITEM);
         }catch (DBException dbex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao create() DBException! Trouble with connection: ", dbex);
+            DB_LOG.error(Messages.ERR_CANNOT_CREATE_ITEM);
         } finally {
             ConnectionFactory.close(con, ps, rs);
             ConnectionFactory.close(stmt);
@@ -125,6 +128,7 @@ public class ItemsDao implements IDao {
         } catch (SQLException ex) {
             ConnectionFactory.rollback(con);
             DB_LOG.error("In ItemsDao createNewProductsForItem() SQLException! Trouble with commit: ", ex);
+            DB_LOG.error(Messages.ERR_CANNOT_CREATE_PRODUCT);
             ConnectionFactory.close(con,prep);
         }finally {
             ConnectionFactory.close(prep);

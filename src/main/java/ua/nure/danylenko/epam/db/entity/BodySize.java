@@ -3,7 +3,7 @@ package ua.nure.danylenko.epam.db.entity;
 import java.io.Serializable;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
+ * The BodySize enum provides types of size for products
  * @version 1.0 30/03/2021
  * @author Daryna Danylenko (delibertato)
  */
