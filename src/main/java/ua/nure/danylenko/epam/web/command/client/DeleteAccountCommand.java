@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * The DeleteAccountCommand class extends Command and provides deleting personal cabinet by user
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class DeleteAccountCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 

@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * The OrderItem class provides fields and methods for making orders of bying purchases by customer
- * @version 1.0 30/03/2021
+ * The Command abstract class implements Serializable and provides execution method for command
+ * @version 1.0 01/04/2021
  * @author Daryna Danylenko (delibertato)
  */
 public abstract class Command implements Serializable {

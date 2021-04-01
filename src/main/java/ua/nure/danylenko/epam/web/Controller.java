@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The Controller class extends HttpServlet implements manipulating with requested commands
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class Controller extends HttpServlet {
 
     private static final long serialVersionUID = 2423353715955164816L;

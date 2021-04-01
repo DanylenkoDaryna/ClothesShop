@@ -17,6 +17,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The BasketServlet class extends HttpServlet provides request processing about adding item to basket
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class BasketServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger WEB_LOG = Logger.getLogger("servlets");

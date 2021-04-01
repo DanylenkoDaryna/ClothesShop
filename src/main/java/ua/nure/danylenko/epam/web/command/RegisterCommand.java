@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
+/**
+ * The RegisterCommand class extends Command and provides registering of new clients on site
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class RegisterCommand extends Command {
 
     private static final long serialVersionUID = -3071536593627692473L;

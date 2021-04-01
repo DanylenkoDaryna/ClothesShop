@@ -7,6 +7,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * The ContextListener class implements ServletContextListener provides initialisation of logger, servlet context and
+ * command container
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class ContextListener implements ServletContextListener {
 
     private static final Logger WEB_LOG = Logger.getLogger("servlets");

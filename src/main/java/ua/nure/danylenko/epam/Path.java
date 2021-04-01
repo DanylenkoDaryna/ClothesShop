@@ -1,5 +1,10 @@
 package ua.nure.danylenko.epam;
 
+/**
+ * The Path class holds constant strings of path that usually used in site
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class Path {
     // pages
     public static final String PAGE_LOGIN = "/login.jsp";

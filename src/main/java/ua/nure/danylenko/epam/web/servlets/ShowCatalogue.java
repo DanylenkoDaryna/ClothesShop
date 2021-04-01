@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The ShowCatalogue class extends HttpServlet provides the main request processing about catalogue
+ * and categories for creating proper menu view
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class ShowCatalogue extends HttpServlet {
     @Override
     public void init() throws ServletException {

@@ -6,6 +6,11 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * The EncodingFilter class implements Filter and provides manipulation with filter (init, destroy) and encoding
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class EncodingFilter implements Filter {
 
     private static final Logger WEB_LOG = Logger.getLogger("servlets");

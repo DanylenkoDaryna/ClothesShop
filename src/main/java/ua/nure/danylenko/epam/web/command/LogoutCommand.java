@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The LogoutCommand class extends Command and provides logout for user
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class LogoutCommand extends Command {
 
     private static final long serialVersionUID = -2785976616686657267L;

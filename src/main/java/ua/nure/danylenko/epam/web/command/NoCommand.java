@@ -6,6 +6,11 @@ import ua.nure.danylenko.epam.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * The NoCommand class extends Command and provides command if some command can not be found or not existed
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class NoCommand extends Command {
 
     private static final long serialVersionUID = -2785976616686657267L;

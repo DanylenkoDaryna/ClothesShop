@@ -10,6 +10,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The CommandAccessFilter class implements Filter and provides manipulation with filter (init, destroy) and accessMap
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class CommandAccessFilter implements Filter {
 
     private static final Logger WEB_LOG = Logger.getLogger("servlets");

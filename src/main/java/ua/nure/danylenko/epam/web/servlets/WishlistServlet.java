@@ -14,6 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The WishlistServlet class extends HttpServlet provides request processing about adding item to wish list
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class WishlistServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger WEB_LOG = Logger.getLogger("servlets");

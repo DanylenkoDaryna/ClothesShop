@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ * The LocaleTagServlet class extends HttpServlet provides request processing about changing localisation
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class LocaleTagServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
