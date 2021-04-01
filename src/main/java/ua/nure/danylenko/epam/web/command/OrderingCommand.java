@@ -14,6 +14,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The OrderingCommand class extends Command and provides creating new order for client
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class OrderingCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 

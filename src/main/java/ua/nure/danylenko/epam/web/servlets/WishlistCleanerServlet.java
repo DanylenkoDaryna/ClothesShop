@@ -15,9 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * WishlistCleanerServlet extends HttpServlet
+ * The WishlistCleanerServlet extends HttpServlet
  * Servlet for removing items from wish list and returning back on the page
  * where this servlet was called
+ * @version 1.0 30/03/2021
+ * @author Daryna Danylenko (delibertato)
  */
 public class WishlistCleanerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

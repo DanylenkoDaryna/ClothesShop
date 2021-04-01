@@ -1,8 +1,59 @@
-ClothesShop
-java web-project with servlets sql and maven Магазин Armadio має каталог Товарів, реалізовано:
+java web-project with servlets sql and maven (store Armadio)
 
-Сортування за назвою товару (az, za);
-Сортування товарів за ціною (від дешевих до дорогих, від дорогих до дешевих);
-Сортування товарів за новизною;
-Вибірки товарів за параметрами (категорія, проміжок ціни, колір, розмір, ...).
-Користувач переглядає каталог і може додавати товари до кошику, та видаляти із нього непотрібне.
+1)The store has a catalog of purchases (items with a list of products in each) with the possibility of:
+
+* Sorting by product name (az, za);
+* Sorting goods by price (from cheap to expensive and from expensive to cheap);
+* Sort of goods by novelty (by the date of the premiere of the collection);
+* Samples of goods by various parameters (category, price range, color, size).
+
+2)You can register a user on the site.
+
+* The user browses the catalog and can add products to the basket or to the wish list.
+* After adding the goods to the basket , the registered user can place an Order. This option is not available for an
+     unregistered user.
+* After placing an order, it is assigned the status 'registered'.
+* The user has a personal account where he can view his orders and view his data and change them.
+* The user can delete the account.
+
+3)The system administrator has the rights to:
+
+* Adding / deleting goods, changing product information;
+* Adding / deleting catalogs and categories, changing information about them;
+* Blocking / unlocking the user (in my opinion blocking the ability to place an order or add something to the cart);
+* Transfer of the order from the status 'registered' to 'paid' or 'canceled'.
+* Available basic localization, logging.
+
+Environment: Tomcat, JSTL, RDBMS, Log4j.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+java web-project with servlets sql and maven Магазин Armadio
+
+1)Магазин Armadio має каталог Товарів, реалізовано:
+
+* Сортування за назвою товару (az, za);
+* Сортування товарів за ціною (від дешевих до дорогих, від дорогих до дешевих);
+* Сортування товарів за новизною;
+* Вибірки товарів за параметрами (категорія, проміжок ціни, колір, розмір).
+* Користувач переглядає каталог і може додавати товари до кошику, та видаляти із нього непотрібне.
+
+2)На сайті можна зареєструвати користувача.
+
+* Користувач переглядає каталог і може додавати товари до кошику або до списку бажаного.
+* Після додавання товарів в кошик зареєстрований користувач може зробити Замовлення. Для незареєстрованого користувача
+    ця опція недоступна.
+* Після розміщення замовлення, йому присвоюється статус 'зареєстровано'.
+* Користувач має особистий кабінет, в якому може переглянути свої замовлення та переглядати свої дані і змінювати їх.
+* Користувач може видалити акаунт.
+
+3)Адміністратор системи володіє правами:
+
+* Додавання / видалення товарів, зміни інформації про товар;
+* Додавання / видалення каталогу і категорій, зміни інформації про них;
+* Блокування / розблокування користувача (на мій розсуд блокування можливості зробити замовлення або додати щось до
+    кошика);
+* Переведення замовлення зі статусу 'зареєстровано' в 'сплачено' або 'скасовано'.
+* Наявна базова локалізація, логування.
+
+Environment: Tomcat, JSTL, RDBMS, Log4j.

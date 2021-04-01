@@ -17,6 +17,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The AddNewProductCommand class extends Command and provides adding new product for particular category by admin
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class AddNewProductCommand extends Command {
 
     private static final long serialVersionUID = -3071536593627692473L;

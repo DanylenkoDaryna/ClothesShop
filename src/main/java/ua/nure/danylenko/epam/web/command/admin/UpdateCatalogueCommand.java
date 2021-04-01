@@ -18,6 +18,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The UpdateCatalogueCommand class extends Command and provides changing catalogue (and)or categories lists by admin
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class UpdateCatalogueCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 

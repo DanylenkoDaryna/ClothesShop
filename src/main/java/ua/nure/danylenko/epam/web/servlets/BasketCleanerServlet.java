@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ *The BasketCleanerServlet class extends HttpServlet provides request processing about removing item from basket
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class BasketCleanerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger WEB_LOG = Logger.getLogger("servlets");

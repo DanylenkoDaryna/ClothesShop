@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * The SimpleFilterCommand class extends Command and provides popular types of filtering for products
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class SimpleFilterCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 

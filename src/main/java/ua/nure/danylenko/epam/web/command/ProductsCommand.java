@@ -18,6 +18,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * The ProductsCommand class extends Command and provides item list for particular category
+ * and values for sorting and filtration
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class ProductsCommand extends Command {
     private static final long serialVersionUID = -3071536593627692473L;
 

@@ -15,6 +15,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The HardFilterServlet class extends HttpServlet provides request processing about filtering items on page by
+ * different orders
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class HardFilterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger WEB_LOG = Logger.getLogger("servlets");

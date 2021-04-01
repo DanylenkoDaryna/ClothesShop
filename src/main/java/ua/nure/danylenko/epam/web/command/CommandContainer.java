@@ -12,6 +12,11 @@ import ua.nure.danylenko.epam.web.command.client.GetMyCabinetCommand;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * The CommandContainer class extends Command and provides container of commands for user
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class CommandContainer {
 
     private static final Logger WEB_LOG = Logger.getLogger("servlets");
@@ -23,7 +28,6 @@ public class CommandContainer {
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogoutCommand());
         commands.put("register", new RegisterCommand());
-      //  commands.put("viewSettings", new ViewSettingsCommand());
         commands.put("noCommand", new NoCommand());
         commands.put("listProducts", new ProductsCommand());
         commands.put("ItemProducts", new ItemProductsCommand());

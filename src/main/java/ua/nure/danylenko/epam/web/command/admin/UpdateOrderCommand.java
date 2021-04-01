@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The UpdateOrderCommand class extends Command and provides changing user status by admin
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
 public class UpdateOrderCommand extends Command {
     private static final long serialVersionUID = 1863978254689586513L;
 

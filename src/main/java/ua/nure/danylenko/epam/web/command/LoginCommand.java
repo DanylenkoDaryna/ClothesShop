@@ -19,7 +19,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LoginCommand extends Command {
+/**
+ * The LoginCommand class extends Command and provides log in for user and specified parameters for every type of user
+ * @version 1.0 01/04/2021
+ * @author Daryna Danylenko (delibertato)
+ */
+public class  LoginCommand extends Command {
 
     private static final long serialVersionUID = -3071536593627692473L;
 
