@@ -371,6 +371,11 @@ public class ItemsDao implements IDao {
         return items;
     }
 
+    /**
+     * @param con
+     * @param items
+     * @throws DBException
+     */
     private void getProductsByItem(Connection con, List<Item> items) throws DBException {
 
         DB_LOG.info("getProductsByItem() started! ");
@@ -400,6 +405,12 @@ public class ItemsDao implements IDao {
     }
 
 
+    /**
+     * @param con
+     * @param productId
+     * @return
+     * @throws DBException
+     */
     private Product getProductById(Connection con, long productId) throws DBException {
 
         DB_LOG.info("getProductById() started! ");
@@ -425,8 +436,15 @@ public class ItemsDao implements IDao {
     }
 
 
+    /**
+     * @param con
+     * @param product
+     * @return
+     * @throws DBException
+     */
     private Product getProductImages(Connection con, Product product)throws DBException {
        // DB_LOG.info("getProductImages() started!");
+
         ResultSet rs = null;
             try(PreparedStatement ps = con.prepareStatement(SQL_FIND_IMAGE_BY_PRODUCT_ID)) {
                 ps.setLong(1, product.getId());
@@ -444,7 +462,13 @@ public class ItemsDao implements IDao {
             return product;
     }
 
+    /**
+     * @param con
+     * @param item
+     * @throws DBException
+     */
     private void getMaterialsByItem(Connection con, Item item) throws DBException {
+
         ResultSet rs = null;
         try(PreparedStatement pstmt = con.prepareStatement(SQL_FIND_MATERIALS_BY_ITEM_ID)) {
             pstmt.setLong(1, item.getId());
@@ -462,7 +486,13 @@ public class ItemsDao implements IDao {
     }
 
 
+    /**
+     * Method for extracting all Sizes Colours Brands from db for filter products or creating new products
+     * @return TreeMap <String,List> result
+     * @throws DBException if problems with connection
+     */
     public Map<String,List> getSizesColoursBrands() throws DBException {
+
         List<String> colours = new ArrayList<>();
         List<String> sizes = new ArrayList<>();
         List<String> brands = new ArrayList<>();
@@ -502,7 +532,13 @@ public class ItemsDao implements IDao {
         return result;
     }
 
+    /**
+     * Method for extracting colour values from db and ordering them by ab
+     * @return new TreeSet<String> colours
+     * @throws DBException if problems with connection
+     */
     public Set<String> getColours() throws DBException {
+
         Set<String> colours = new TreeSet<>();
         Statement stmt = null;
         ResultSet rs = null;
@@ -526,7 +562,14 @@ public class ItemsDao implements IDao {
         return colours;
     }
 
+    /**
+     * Method for extracting item values from respond to create item
+     * @param rs ResultSet
+     * @return new Item
+     * @throws SQLException if rs null
+     */
     private static Item extractItem(ResultSet rs) throws SQLException {
+
         Item item = new Item();
         item.setId(rs.getLong(Fields.ENTITY_ID));
         item.setItemName(rs.getString(Fields.ITEM_NAME));
@@ -539,7 +582,14 @@ public class ItemsDao implements IDao {
         return item;
     }
 
+    /**
+     * Method for extracting product values from respond to create product
+     * @param rs ResultSet
+     * @return new Product
+     * @throws SQLException if rs null
+     */
     private static Product extractProduct(ResultSet rs) throws SQLException {
+
         Product product = new Product();
         product.setId(rs.getLong(Fields.ENTITY_ID));
         product.setName(rs.getString(Fields.PRODUCT_NAME));
@@ -548,12 +598,21 @@ public class ItemsDao implements IDao {
 
         return product;
     }
+
+    /**
+     * Method for extracting materials values from respond to Item with products
+     * @param rs ResultSet
+     * @return Material
+     * @throws SQLException if rs null
+     */
     private static Material extractMaterial(ResultSet rs) throws SQLException {
+
         Material material = new Material();
         material.setId(rs.getLong(Fields.ENTITY_ID));
         material.setName(rs.getString(Fields.MAERIAL_NAME));
         material.setPercent(rs.getInt(Fields.MAERIAL_PERCENT));
         material.setItemId(rs.getLong(Fields.ENTITY_ID));
         return material;
+
     }
 }

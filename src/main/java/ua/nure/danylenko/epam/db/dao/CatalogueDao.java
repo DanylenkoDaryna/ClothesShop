@@ -335,6 +335,11 @@ public class CatalogueDao implements IDao {
 
     }
 
+    /**
+     * Method for sorting Catalogue items for menu
+     * @param map Catalogue with list of Categories
+     * @return sorted menu Map<String,List<Category>>
+     */
     private static Map<String,List<Category>> sortByValues(Map<String,List<Category>> map) {
 
         List<String> keys = new ArrayList<>(map.keySet());
@@ -349,6 +354,12 @@ public class CatalogueDao implements IDao {
     }
 
 
+    /**
+     * Method for extracting category values from respond to new Category
+     * @param rs resultset with Category values
+     * @return new Category
+     * @throws SQLException if fields are null
+     */
     private static Category extractCategory(ResultSet rs) throws SQLException {
         Category category = new Category();
         category.setId(rs.getLong(Fields.ENTITY_ID));
