@@ -59,6 +59,10 @@ public class Product extends Entity{
         this.image = image;
     }
 
+    /**
+     * Method for converting string of Size we have from db to the exact enum value
+     * @param value Size with String type
+     */
     public void extractSizeValue(String value){
         if(BodySize.valueOf(value.toUpperCase())!=null){
             BodySize bs = BodySize.valueOf(value.toUpperCase());

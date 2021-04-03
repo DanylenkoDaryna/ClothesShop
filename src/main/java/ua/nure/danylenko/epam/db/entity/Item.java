@@ -133,6 +133,10 @@ public class Item extends Entity{
         return getFormattedReleaseDate();
     }
 
+    /**
+     * Method for converting string of color we have from db to the exact enum value
+     * @param colour String
+     */
     public void extractColourValue(String colour){
         if(Colour.valueOf(colour.toUpperCase())!=null){
             Colour cl= Colour.valueOf(colour.toUpperCase());

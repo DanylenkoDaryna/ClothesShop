@@ -270,6 +270,12 @@ public class OrderDao implements IDao  {
 
     }
 
+    /**
+     * Method for extracting Order values from respond to new Order
+     * @param rs ResultSet from db respond
+     * @return new Order
+     * @throws SQLException if rs null
+     */
     private Order extractOrder(ResultSet rs) throws SQLException {
         DB_LOG.info("extractOrder() starts");
         Order temp = new Order();
@@ -285,6 +291,12 @@ public class OrderDao implements IDao  {
 
     }
 
+    /**
+     * Method for extracting extracting part of Order(particular purchase) values from respond
+     * @param rs ResultSet from db respond
+     * @return new OrderItem
+     * @throws SQLException if rs null
+     */
     private OrderItem extractOrderItem(ResultSet rs) throws SQLException {
         DB_LOG.info("extractOrderItem() starts");
         OrderItem ordIt = new OrderItem();

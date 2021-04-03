@@ -123,6 +123,10 @@ public class User extends Entity {
         this.accountStatus = accountStatus;
     }
 
+    /**
+     * Method for converting string of Size we have from db to the exact enum value
+     * @param value AccountStatus with String type
+     */
     public void extractAccountStatus(String value){
         AccountStatus as = AccountStatus.valueOf(value.toUpperCase());
         this.setAccountStatus(as);

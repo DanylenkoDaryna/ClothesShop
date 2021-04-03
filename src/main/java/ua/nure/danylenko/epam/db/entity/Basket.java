@@ -17,6 +17,10 @@ public class Basket extends Entity {
         basketElements=new LinkedList<>();
     }
 
+    /**
+     * Method to generate total sum of cost all the purchases from basket for ordering them
+     * @return round double sum
+     */
     public double sumCosts(){
 
         double result=45.0;
