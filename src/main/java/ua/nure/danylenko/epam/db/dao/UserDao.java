@@ -326,10 +326,8 @@ public class UserDao implements IDao {
     }
 
     /**
-     * Extracts a user entity from the result set.
-     *
-     * @param rs
-     *            Result set from which a user entity will be extracted.
+     * Method extracts a user entity from the result set.
+     * @param rs Result set from which a user entity will be extracted.
      * @return User entity
      */
     private User extractUser(ResultSet rs) throws SQLException {
@@ -344,6 +342,13 @@ public class UserDao implements IDao {
         return user;
     }
 
+    /**
+     * Method extracts an additional user info and added it to user entity from the result set.
+     * @param rs ResultSet
+     * @param user User
+     * @return updated User
+     * @throws SQLException rs is null
+     */
     private User addUserInfo(ResultSet rs, User user) throws SQLException {
 
         user.setCountry(rs.getString(Fields.USER_INFO_COUNTRY));

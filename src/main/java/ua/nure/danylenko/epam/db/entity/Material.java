@@ -13,16 +13,17 @@ public class Material extends Entity{
 
     private static final Logger DB_LOG = Logger.getLogger("jdbc");
 
-
     private String name;
 
     private int percent;
     private long itemId;
 
    public Material(String material, int p, long id){
+
        name=material;
        percent=p;
        itemId = id;
+
    }
 
     public Material(){ }
@@ -45,28 +46,17 @@ public class Material extends Entity{
     }
 
     public void setPercent(int percent) {
-        if(percent>0&&percent<=100) {
-            this.percent = percent;
+
+       if(percent>0&&percent<=100) {
+
+           this.percent = percent;
+
         }else{
+
             DB_LOG.error("value percent is out of range");
         }
 
     }
-
-//    public static List<Material> extractItems(String[] materials, String[] percents, long itemId){
-//        List<Material> materialsList = new ArrayList<>();
-//        for(int i=0; i<materials.length; i++){
-//            Material material= new Material();
-//            material.setName(materials[i]);
-//            material.setPercent(Integer.parseInt(percents[i]));
-//            material.setItemId(itemId);
-//            DB_LOG.info("material - " + materials[i] );
-//            DB_LOG.info("percents - " + percents[i] );
-//            DB_LOG.info("itemId - " + itemId );
-//            materialsList.add(material);
-//        }
-//        return materialsList;
-//    }
 
     public long getItemId() {
         return itemId;

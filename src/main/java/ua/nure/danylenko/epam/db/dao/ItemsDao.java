@@ -307,10 +307,12 @@ public class ItemsDao implements IDao {
                 item = extractItem(rs);
                 }
         } catch (SQLException ex) {
+
             ConnectionFactory.rollback(con);
             DB_LOG.error("In getItemById() SQLException! Trouble with commit -> ", ex);
             ConnectionFactory.close(con, ps, rs);
         }finally {
+
             ConnectionFactory.close(ps);
             ConnectionFactory.close(rs);
         }
@@ -326,10 +328,12 @@ public class ItemsDao implements IDao {
                 ps.setLong(1, itemId);
                 ps.execute();
         } catch (SQLException ex) {
+
             ConnectionFactory.rollback(con);
             DB_LOG.error("In deleteItem() SQLException! Trouble with commit: ", ex);
             ConnectionFactory.close(con,ps);
         }finally {
+
             ConnectionFactory.close(ps);
         }
 
@@ -357,14 +361,18 @@ public class ItemsDao implements IDao {
 
             getProductsByItem(con, items);
             con.commit();
+
         } catch (SQLException ex) {
+
             ConnectionFactory.rollback(con);
             DB_LOG.error("in getItemsByCategory()", ex);
             throw new DBException("in getItemsByCategory()", ex);
         }catch (DBException dbex) {
+
             DB_LOG.error("in getItemsByCategory()", dbex);
             throw new DBException("in getItemsByCategory()", dbex);
         } finally {
+
             ConnectionFactory.close(con, pst, rs);
         }
 
@@ -372,9 +380,10 @@ public class ItemsDao implements IDao {
     }
 
     /**
-     * @param con
-     * @param items
-     * @throws DBException
+     * Method that gets particular products from db
+     * @param con Connection
+     * @param items List<Item>
+     * @throws DBException if trouble with connection
      */
     private void getProductsByItem(Connection con, List<Item> items) throws DBException {
 
@@ -406,10 +415,11 @@ public class ItemsDao implements IDao {
 
 
     /**
-     * @param con
-     * @param productId
-     * @return
-     * @throws DBException
+     * Method that gets particular product from db
+     * @param con Connection
+     * @param productId id of Product
+     * @return new Product
+     * @throws DBException if trouble with connection
      */
     private Product getProductById(Connection con, long productId) throws DBException {
 
@@ -437,10 +447,11 @@ public class ItemsDao implements IDao {
 
 
     /**
-     * @param con
-     * @param product
-     * @return
-     * @throws DBException
+     * Method that gets particular image of particular product
+     * @param con Connection
+     * @param product Product
+     * @return product
+     * @throws DBException if trouble with connection
      */
     private Product getProductImages(Connection con, Product product)throws DBException {
        // DB_LOG.info("getProductImages() started!");
@@ -463,9 +474,10 @@ public class ItemsDao implements IDao {
     }
 
     /**
-     * @param con
-     * @param item
-     * @throws DBException
+     * Method that gets particular materials of particular Item
+     * @param con Connection
+     * @param item Item with list of products
+     * @throws DBException trouble with connection
      */
     private void getMaterialsByItem(Connection con, Item item) throws DBException {
 

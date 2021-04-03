@@ -20,21 +20,35 @@ public class OrderItem extends Entity implements Serializable {
     private long orderId;
 
     public OrderItem(){
+
         name="empty";
         brand="empty";
         productSize=BodySize.S;
         colour=Colour.WHITE;
+
     }
 
 
+    /**
+     * Method for converting string of Size we have from db to the exact enum value
+     * @param value Size with String type
+     */
     public void extractProductSize(String value){
+
         BodySize size = BodySize.valueOf(value.toUpperCase());
         this.setProductSize(size);
+
     }
 
+    /**
+     * Method for converting string of color we have from db to the exact enum value
+     * @param value Colour with String type
+     */
     public void extractColour(String value){
-        Colour colour = Colour.valueOf(value.toUpperCase());
-        this.setColour(colour);
+
+        Colour prodColour = Colour.valueOf(value.toUpperCase());
+        this.setColour(prodColour);
+
     }
 
     public long getProductId() {

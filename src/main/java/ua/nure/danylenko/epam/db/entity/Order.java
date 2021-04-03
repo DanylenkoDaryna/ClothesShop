@@ -21,8 +21,10 @@ public class Order implements Serializable {
     private List<OrderItem> orderItems;
 
     public Order(){
+
         orderItems = new LinkedList<>();
         orderStatus=OrderStatus.CANCELED;
+
     }
 
     /**
@@ -38,11 +40,18 @@ public class Order implements Serializable {
             result=result+basketElements.get(i).getBasketItem().getPrice()*purchases.get(i).getAmount();
         }
         return Math.round(result);
+
     }
 
+    /**
+     * Method for converting string of OrderStatus we have from db to the exact enum value
+     * @param value OrderStatus with String type
+     */
     public void extractOrderStatus(String value){
+
         OrderStatus os = OrderStatus.valueOf(value.toUpperCase());
         this.setOrderStatus(os);
+
     }
 
     public long getOrderNumber() {
