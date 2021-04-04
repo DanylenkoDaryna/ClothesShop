@@ -53,6 +53,12 @@ public class UpdatingUPOCommand extends Command {
     }
 
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param users
+     * @return
+     */
     private ArrayList<User> lockUser(HttpServletRequest req, ArrayList<User> users) {
 
         WEB_LOG.info("lock User");
@@ -62,6 +68,12 @@ public class UpdatingUPOCommand extends Command {
         return updateLockedUser(users,idToLock);
     }
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param users
+     * @param idToLock
+     * @return
+     */
     private ArrayList<User> updateLockedUser(ArrayList<User> users, int idToLock){
 
         for(User user:users){
@@ -72,6 +84,12 @@ public class UpdatingUPOCommand extends Command {
         return users;
     }
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param users
+     * @return
+     */
     private ArrayList<User> unlockUser(HttpServletRequest req, ArrayList<User> users) {
 
         WEB_LOG.info("unlock User");
@@ -81,6 +99,12 @@ public class UpdatingUPOCommand extends Command {
         return updateUnlockedUser(users,idToUnlock);
     }
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param users
+     * @param idToUnlock
+     * @return
+     */
     private ArrayList<User> updateUnlockedUser(ArrayList<User> users, int idToUnlock){
 
         for(User user:users){

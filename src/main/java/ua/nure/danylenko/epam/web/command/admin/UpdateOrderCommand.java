@@ -6,14 +6,11 @@ import ua.nure.danylenko.epam.db.entity.Order;
 import ua.nure.danylenko.epam.db.entity.OrderStatus;
 import ua.nure.danylenko.epam.db.service.ItemsService;
 import ua.nure.danylenko.epam.db.service.OrderService;
-import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,7 +24,7 @@ public class UpdateOrderCommand extends Command {
     private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         WEB_LOG.info("UpdateOrderCommand starts");
         HttpSession session = request.getSession();
         List<Order> orders=(List<Order>)session.getAttribute("listOfOrders");
