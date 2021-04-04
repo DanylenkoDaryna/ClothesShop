@@ -5,14 +5,11 @@ import ua.nure.danylenko.epam.Path;
 import ua.nure.danylenko.epam.db.entity.*;
 import ua.nure.danylenko.epam.db.service.CatalogueService;
 import ua.nure.danylenko.epam.db.service.ItemsService;
-import ua.nure.danylenko.epam.exception.AppException;
 import ua.nure.danylenko.epam.web.command.Command;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,8 @@ public class AddNewProductCommand extends Command {
     private static final Logger WEB_LOG = Logger.getLogger("servlets");
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response){
+
         WEB_LOG.info("AddNewProductCommand starts");
         HttpSession session = request.getSession();
         List<Item> items = (ArrayList<Item>)session.getAttribute("items");
@@ -102,10 +100,17 @@ public class AddNewProductCommand extends Command {
         WEB_LOG.info("AddNewProductCommand finished");
 
         return forward;
+
     }
 
 
-    public void extractBodySizes(ArrayList<Product> products, String[] sizes){
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param products ArrayList<Product>
+     * @param sizes String[] - array from request
+     */
+    private void extractBodySizes(ArrayList<Product> products, String[] sizes){
+
         for (int j=0; j<products.size(); j++){
             products.get(j).setBodySize(BodySize.valueOf(sizes[j]));
             WEB_LOG.info(sizes[j] + " ");
@@ -113,22 +118,42 @@ public class AddNewProductCommand extends Command {
 
     }
 
-    public void extractColours(Item item, String[] colours){
-            //check later
-            item.setColour(Colour.valueOf(colours[0]));
-            WEB_LOG.info(item.getColour() + " ");
+    /**
+     * Method for extracting colours from incoming array of Strings to particular item
+     * @param item Item
+     * @param colours String[] - array from request
+     */
+    private void extractColours(Item item, String[] colours){
 
+        //check later
+        item.setColour(Colour.valueOf(colours[0]));
+        WEB_LOG.info(item.getColour() + " ");
 
     }
 
-    public void extractImages(ArrayList<Product> products, String[] images){
+    /**
+     * Method for extracting images from incoming array of Strings to particular products
+     * @param products ArrayList<Product>
+     * @param images String[] - array from request
+     */
+    private void extractImages(ArrayList<Product> products, String[] images){
+
         for (int m=0; m<products.size(); m++){
             products.get(m).setImage(images[m]);
             WEB_LOG.info("Image path - " + products.get(m).getImage());
         }
+
     }
 
-    public List<Material> extractItems(String[] materials, String[] percents){
+    /**
+     * Method for extracting material positions(name and persentage) from incoming arrays of Strings
+     * to particular Material
+     * @param materials String[] - array from request
+     * @param percents String[] - array from request
+     * @return ArrayList <Material>
+     */
+    private List<Material> extractItems(String[] materials, String[] percents){
+
         List<Material> materialsList = new ArrayList<>();
         for(int i=0; i<materials.length; i++){
             Material material= new Material();
@@ -139,5 +164,6 @@ public class AddNewProductCommand extends Command {
             materialsList.add(material);
         }
         return materialsList;
+
     }
 }

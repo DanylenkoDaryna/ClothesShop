@@ -77,7 +77,14 @@ public class UpdateCatalogueCommand extends Command {
         return forward;
     }
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param cat
+     * @return
+     */
     private Catalogue addItem(HttpServletRequest req, Catalogue cat) {
+
         WEB_LOG.info("add item to catalogue");
         String itemName = req.getParameter("catalogueName");
         cat.getContainer().put(itemName,new ArrayList<Category>());
@@ -87,8 +94,15 @@ public class UpdateCatalogueCommand extends Command {
     }
 
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param cat
+     * @return
+     */
      private Catalogue removeItem(HttpServletRequest req, Catalogue cat) {
-        WEB_LOG.info("delete item from catalogue");
+
+         WEB_LOG.info("delete item from catalogue");
         String itemToDelete = req.getParameter("itemToDelete");
         cat.getContainer().remove(itemToDelete);
         CatalogueService catalogueService = new CatalogueService();
@@ -96,7 +110,14 @@ public class UpdateCatalogueCommand extends Command {
         return cat;
         }
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param cat
+     * @return
+     */
     private Catalogue editItem(HttpServletRequest req, Catalogue cat) {
+
         WEB_LOG.info("edit item from catalogue");
         String itemToEdit = req.getParameter("itemToEdit");
         String editedName = req.getParameter("editedItem");
@@ -108,6 +129,12 @@ public class UpdateCatalogueCommand extends Command {
         return cat;
     }
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param cat
+     * @return
+     */
      private Catalogue addCategory(HttpServletRequest req, Catalogue cat) {
 
         WEB_LOG.info("add new Category");
@@ -122,8 +149,15 @@ public class UpdateCatalogueCommand extends Command {
         }
 
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param cat
+     * @return
+     */
      private Catalogue removeCategory(HttpServletRequest req, Catalogue cat) {
-        WEB_LOG.info("delete Category from catalogue");
+
+         WEB_LOG.info("delete Category from catalogue");
          String catalogueToDeleteFrom = req.getParameter("CatalogueToDeleteFrom");
          String itemNameToDelete = req.getParameter("itemToDelete");
          for (int i=0; i<cat.getContainer().get(catalogueToDeleteFrom).size(); i++){
@@ -136,7 +170,14 @@ public class UpdateCatalogueCommand extends Command {
         return cat;
         }
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param cat
+     * @return
+     */
     private Catalogue editCategory(HttpServletRequest req, Catalogue cat) {
+
         WEB_LOG.info("edit Category from catalogue");
         String catalogue = req.getParameter("CatalogueToEditFrom");
         String oldCategory = req.getParameter("itemToEdit");
@@ -155,7 +196,14 @@ public class UpdateCatalogueCommand extends Command {
     }
 
 
+    /**
+     * Method for extracting sizes from incoming array of Strings to particular products
+     * @param req
+     * @param session
+     * @return
+     */
     private List<Item> deleteProduct(HttpServletRequest req, HttpSession session) {
+
         WEB_LOG.info("delete Product from catalogue");
         long idToDelete = Long.parseLong(req.getParameter("productToDelete"));
         List<Item> items = (List<Item>)session.getAttribute("items");
@@ -168,6 +216,7 @@ public class UpdateCatalogueCommand extends Command {
         CatalogueService catalogueService = new CatalogueService();
         catalogueService.getDao().removeProduct(idToDelete);
         return items;
+
     }
 
 }
