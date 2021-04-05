@@ -54,10 +54,10 @@ public class UpdatingUPOCommand extends Command {
 
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param users
-     * @return
+     * Method for updating locked User by id in db
+     * @param req HttpServletRequest
+     * @param users ArrayList<User>
+     * @return updated ArrayList<User> users
      */
     private ArrayList<User> lockUser(HttpServletRequest req, ArrayList<User> users) {
 
@@ -69,10 +69,10 @@ public class UpdatingUPOCommand extends Command {
     }
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param users
-     * @param idToLock
-     * @return
+     * Method for updating locked User in list of users
+     * @param users ArrayList<User>
+     * @param idToLock id of user to find in list and lock
+     * @return updated ArrayList<User> users
      */
     private ArrayList<User> updateLockedUser(ArrayList<User> users, int idToLock){
 
@@ -85,10 +85,10 @@ public class UpdatingUPOCommand extends Command {
     }
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param users
-     * @return
+     * Method for updating Unlocked User by id in db
+     * @param req HttpServletRequest
+     * @param users ArrayList<User>
+     * @return updated ArrayList<User> users
      */
     private ArrayList<User> unlockUser(HttpServletRequest req, ArrayList<User> users) {
 
@@ -100,10 +100,10 @@ public class UpdatingUPOCommand extends Command {
     }
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param users
-     * @param idToUnlock
-     * @return
+     * Method for updating Unlocked User in list of users
+     * @param users ArrayList<User>
+     * @param idToUnlock id of user to find and unlock
+     * @return updated ArrayList<User> users
      */
     private ArrayList<User> updateUnlockedUser(ArrayList<User> users, int idToUnlock){
 

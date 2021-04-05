@@ -78,6 +78,12 @@ public class HardFilterServlet extends HttpServlet {
         rd.forward(req, resp);
     }
 
+    /**
+     * Method to sort items by chosen brands
+     * @param brands chosen brands
+     * @param container list of purchases
+     * @return updated list of items
+     */
     private List<Item> sortByBrands(String[] brands,List<Item> container){
         List<Item> itemsNew = new ArrayList<>();
         for(Item i:container){
@@ -94,6 +100,13 @@ public class HardFilterServlet extends HttpServlet {
         return itemsNew;
     }
 
+    /**
+     * Method to sort items by chosen max-min price
+     * @param priceFrom first border value
+     * @param priceTo second border value
+     * @param container list of purchases
+     * @return updated list of items
+     */
     private List<Item>  sortByPrice(int priceFrom,int priceTo,List<Item> container){
         List<Item> itemsNew = new ArrayList<>();
         for(Item i:container){
@@ -104,6 +117,12 @@ public class HardFilterServlet extends HttpServlet {
         return itemsNew;
     }
 
+    /**
+     * Method to sort items by chosen sizes
+     * @param sizes chosen sizes
+     * @param container list of purchases
+     * @return updated list of items
+     */
     private List<Item> sortBySizes(String[] sizes,List<Item> container){
         List<Item> itemsNew = new ArrayList<>();
         for(Item i:container){
@@ -124,6 +143,12 @@ public class HardFilterServlet extends HttpServlet {
         return itemsNew;
     }
 
+    /**
+     * Method to sort items by chosen colours
+     * @param colours chosen colours
+     * @param container list of purchases
+     * @return updated list of items
+     */
     private List<Item> sortByColours(String[] colours,List<Item> container){
         List<Item> itemsNew = new ArrayList<>();
         for(Item item:container){

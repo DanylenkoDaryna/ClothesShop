@@ -41,14 +41,14 @@ public class UpdateCatalogueCommand extends Command {
         String command = request.getParameter("updateCatalogueType");
         switch (command){
             case "add":{
-                cat=addItem(request,cat);
+                cat=addCatalogueItem(request,cat);
                 break;
             }
             case "delete":{
-                cat=removeItem(request,cat);
+                cat=removeCatalogueItem(request,cat);
                 break;
             }case "edit":{
-                cat=editItem(request,cat);
+                cat=editCatalogueItem(request,cat);
                 break;
             } case "addCategory":{
                 cat=addCategory(request,cat);
@@ -78,45 +78,47 @@ public class UpdateCatalogueCommand extends Command {
     }
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param cat
-     * @return
+     * Method for adding new catalogue item in the catalogue menu
+     * @param req HttpServletRequest
+     * @param cat Catalogue
+     * @return updated Catalogue
      */
-    private Catalogue addItem(HttpServletRequest req, Catalogue cat) {
+    private Catalogue addCatalogueItem(HttpServletRequest req, Catalogue cat) {
 
         WEB_LOG.info("add item to catalogue");
-        String itemName = req.getParameter("catalogueName");
-        cat.getContainer().put(itemName,new ArrayList<Category>());
+        String catItemName = req.getParameter("catalogueName");
+        WEB_LOG.info("catItemName="+catItemName);
+
+        cat.getContainer().put(catItemName,new ArrayList<Category>());
         CatalogueService catalogueService = new CatalogueService();
-        catalogueService.getDao().addItem(itemName);
+        catalogueService.getDao().addCatalogueItem(catItemName);
         return cat;
     }
 
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param cat
-     * @return
+     * Method for removing catalogue item from the catalogue menu
+     * @param req HttpServletRequest
+     * @param cat Catalogue
+     * @return updated Catalogue
      */
-     private Catalogue removeItem(HttpServletRequest req, Catalogue cat) {
-
+     private Catalogue removeCatalogueItem(HttpServletRequest req, Catalogue cat) {
          WEB_LOG.info("delete item from catalogue");
-        String itemToDelete = req.getParameter("itemToDelete");
-        cat.getContainer().remove(itemToDelete);
-        CatalogueService catalogueService = new CatalogueService();
-        catalogueService.getDao().removeCatalogueItem(itemToDelete);
-        return cat;
+         String catItemToDelete = req.getParameter("itemToDelete");
+         WEB_LOG.info("catItemToDelete="+catItemToDelete);
+         cat.getContainer().remove(catItemToDelete);
+         CatalogueService catalogueService = new CatalogueService();
+         catalogueService.getDao().removeCatalogueItem(catItemToDelete);
+         return cat;
         }
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param cat
-     * @return
+     * Method for changing name of catalogue item in menu
+     * @param req HttpServletRequest
+     * @param cat Catalogue
+     * @return updated Catalogue
      */
-    private Catalogue editItem(HttpServletRequest req, Catalogue cat) {
+    private Catalogue editCatalogueItem(HttpServletRequest req, Catalogue cat) {
 
         WEB_LOG.info("edit item from catalogue");
         String itemToEdit = req.getParameter("itemToEdit");
@@ -130,10 +132,10 @@ public class UpdateCatalogueCommand extends Command {
     }
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param cat
-     * @return
+     * Method for adding new category in one of the catalogue items in main menu
+     * @param req HttpServletRequest
+     * @param cat Catalogue
+     * @return updated Catalogue
      */
      private Catalogue addCategory(HttpServletRequest req, Catalogue cat) {
 
@@ -150,10 +152,10 @@ public class UpdateCatalogueCommand extends Command {
 
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param cat
-     * @return
+     * Method for removing category in one of the catalogue items in main menu
+     * @param req HttpServletRequest
+     * @param cat Catalogue
+     * @return updated Catalogue
      */
      private Catalogue removeCategory(HttpServletRequest req, Catalogue cat) {
 
@@ -171,10 +173,10 @@ public class UpdateCatalogueCommand extends Command {
         }
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param cat
-     * @return
+     * Method for editing the name of category in one of the catalogue items in main menu
+     * @param req HttpServletRequest
+     * @param cat Catalogue
+     * @return updated Catalogue
      */
     private Catalogue editCategory(HttpServletRequest req, Catalogue cat) {
 
@@ -182,6 +184,7 @@ public class UpdateCatalogueCommand extends Command {
         String catalogue = req.getParameter("CatalogueToEditFrom");
         String oldCategory = req.getParameter("itemToEdit");
         String newCategory = req.getParameter("editedCategory");
+        WEB_LOG.info("catslogue="+catalogue+" oldCategory="+oldCategory+" newCategory="+newCategory);
         for (int i=0; i<cat.getContainer().get(catalogue).size(); i++){
             if(cat.getContainer().get(catalogue).get(i).getName().equals(oldCategory)){
                 cat.getContainer().get(catalogue).remove(i);
@@ -197,10 +200,10 @@ public class UpdateCatalogueCommand extends Command {
 
 
     /**
-     * Method for extracting sizes from incoming array of Strings to particular products
-     * @param req
-     * @param session
-     * @return
+     * Method for deleting item in db throw catalogue Service and in items list
+     * @param req HttpServletRequest
+     * @param session HttpSession
+     * @return updated list of items
      */
     private List<Item> deleteProduct(HttpServletRequest req, HttpSession session) {
 
