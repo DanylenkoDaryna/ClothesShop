@@ -90,7 +90,7 @@ public class CatalogueDao implements IDao {
         return clothes;
     }
 
-    public void addItem(String itemName) {
+    public void addCatalogueItem(String catItemName) {
 
         Connection con = null;
         PreparedStatement  ps = null;
@@ -98,8 +98,8 @@ public class CatalogueDao implements IDao {
             con = getConnection();
             ps = con.prepareStatement(SQL_ADD_NEW_CATALOGUE_ITEM);
             DB_LOG.info(SQL_ADD_NEW_CATALOGUE_ITEM);
-            DB_LOG.info(itemName);
-            ps.setString(1,itemName);
+            DB_LOG.info(catItemName);
+            ps.setString(1,catItemName);
             ps.execute();
             con.commit();
         } catch (SQLException ex) {

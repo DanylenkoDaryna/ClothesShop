@@ -84,6 +84,10 @@ public class SimpleFilterCommand extends Command {
         return forward;
     }
 
+    /**
+     *  Method for filtering purchases by alphabet from a to z
+     * @param itemstoFilter list of items
+     */
     private void filterFromAToZ(List<Item> itemstoFilter) {
         for(int i=itemstoFilter.size()-1; i>=0; i--){
             for(int j=0; j<i; j++){
@@ -96,6 +100,10 @@ public class SimpleFilterCommand extends Command {
         }
     }
 
+    /**
+     * Method for filtering purchases by alphabet from x to a
+     * @param itemstoFilter list of items
+     */
     private void filterFromZToA(List<Item> itemstoFilter) {
         for(int i=itemstoFilter.size()-1; i>=0; i--){
             for(int j=0; j<i; j++){
@@ -108,6 +116,10 @@ public class SimpleFilterCommand extends Command {
         }
     }
 
+    /**
+     * Method for filtering purchases by price from lower to lower higher
+     * @param itemstoFilter list of items
+     */
     private void filterFromLowPrice(List<Item> itemstoFilter) {
         itemstoFilter.sort((o1, o2) -> {
             if (o1.getPrice() > o2.getPrice())
@@ -126,14 +138,26 @@ public class SimpleFilterCommand extends Command {
         });
     }
 
+    /**
+     * Method for filtering purchases by price from higher to lower
+     * @param itemstoFilter list of items
+     */
     private void filterFromHighPrice(List<Item> itemstoFilter) {
         itemstoFilter.sort((o1, o2) -> Double.compare(o1.getPrice(), o2.getPrice()));
     }
 
+    /**
+     * Method for filtering purchases by date from old collection to new
+     * @param itemstoFilter list of items
+     */
     private void filterFromOldProducts(List<Item> itemstoFilter) {
         itemstoFilter.sort(Comparator.comparing(Item::getReleaseDate));
     }
 
+    /**
+     * Method for filtering purchases by date from new collection to old
+     * @param itemstoFilter list of items
+     */
     private void filterFromNewProducts(List<Item> itemstoFilter) {
         itemstoFilter.sort(Comparator.comparing(Item::getReleaseDate).reversed());
     }

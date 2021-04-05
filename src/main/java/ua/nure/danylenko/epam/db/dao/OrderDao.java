@@ -277,7 +277,7 @@ public class OrderDao implements IDao  {
      * @throws SQLException if rs null
      */
     private Order extractOrder(ResultSet rs) throws SQLException {
-        DB_LOG.info("extractOrder() starts");
+
         Order temp = new Order();
 
         temp.setOrderNumber(rs.getLong(Fields.ORDER_NUMBER));
@@ -286,7 +286,7 @@ public class OrderDao implements IDao  {
         temp.setDeliveryType(rs.getString(Fields.ORDER_DELIVERY_TYPE));
         temp.setTotalAmount(rs.getDouble(Fields.ORDER_TOTAL_AMOUNT));
         temp.setUserId(rs.getLong(Fields.ORDER_USER_ID));
-        DB_LOG.info("extractOrder() ends");
+
         return temp;
 
     }
@@ -298,7 +298,7 @@ public class OrderDao implements IDao  {
      * @throws SQLException if rs null
      */
     private OrderItem extractOrderItem(ResultSet rs) throws SQLException {
-        DB_LOG.info("extractOrderItem() starts");
+
         OrderItem ordIt = new OrderItem();
         ordIt.setId(rs.getLong(Fields.ENTITY_ID));
         ordIt.setProductId(rs.getLong(Fields.ORDERITEM_PROD_ID));
@@ -308,7 +308,7 @@ public class OrderDao implements IDao  {
         ordIt.extractColour(rs.getString(Fields.ORDERITEM_COLOUR));
         ordIt.setAmount(rs.getInt(Fields.ORDERITEM_AMOUNT));
         ordIt.setOrderId(rs.getLong(Fields.ORDERITEM_ORDER_ID));
-        DB_LOG.info("extractOrderItem() ends");
+
         return ordIt;
 
     }
